@@ -2,8 +2,8 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Open SynergyMazeAI",
-      "type": "chrome",
+      "name": "Open MazeAI",
+      "type": "pwa-chrome",
       "request": "launch",
       "url": "http://localhost:3000/en",
       "webRoot": "${workspaceFolder}"
