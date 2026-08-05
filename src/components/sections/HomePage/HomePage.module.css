@@ -1,0 +1,123 @@
+.hero {
+  min-block-size: calc(100svh - 73px);
+  display: flex;
+  align-items: flex-end;
+  padding-block: clamp(5rem, 12vw, 9rem) clamp(3.5rem, 8vw, 6rem);
+}
+
+.heroGrid {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.heroGrid > div:first-child {
+  max-inline-size: 46rem;
+  padding: clamp(1rem, 2.5vw, 1.75rem) 0;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.72);
+}
+
+.eyebrow {
+  color: var(--color-primary-hover);
+  font-weight: 850;
+}
+
+.lead {
+  max-inline-size: 44rem;
+  color: var(--color-text-muted);
+  font-size: clamp(1.06rem, 2vw, 1.25rem);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.partnerStrip {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.partner {
+  min-block-size: 4.5rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--color-text-muted);
+  font-weight: 800;
+  text-align: center;
+}
+
+.grid3,
+.gridCards {
+  display: grid;
+  gap: 1rem;
+}
+
+.split {
+  display: grid;
+  gap: 2rem;
+  align-items: center;
+}
+
+.aboutPanel {
+  padding: clamp(1.5rem, 4vw, 2.2rem);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface-violet);
+}
+
+.whyList {
+  display: grid;
+  gap: 0.85rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.whyList li {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  color: var(--color-text-muted);
+}
+
+.whyList svg {
+  flex: 0 0 auto;
+  color: var(--color-success);
+  margin-block-start: 0.2rem;
+}
+
+.cta {
+  padding: clamp(2rem, 5vw, 3rem);
+  border: 1px solid rgba(154, 120, 255, 0.44);
+  border-radius: 0.5rem;
+  background:
+    linear-gradient(135deg, rgba(109, 61, 245, 0.22), rgba(68, 201, 133, 0.08)),
+    var(--color-surface);
+}
+
+@media (min-width: 700px) {
+  .partnerStrip,
+  .grid3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gridCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .split {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  .gridCards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

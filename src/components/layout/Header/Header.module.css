@@ -1,0 +1,32 @@
+.header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 40;
+  border-block-end: 1px solid rgba(44, 44, 56, 0.78);
+  background: rgba(8, 8, 12, 0.86);
+  backdrop-filter: blur(18px);
+}
+
+.inner {
+  min-block-size: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.desktopCta {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .desktopCta {
+    display: inline-flex;
+  }
+}
