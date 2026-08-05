@@ -1,0 +1,43 @@
+.hero {
+  padding-block: clamp(4rem, 8vw, 6rem);
+}
+
+.wrap {
+  display: grid;
+  gap: 2rem;
+}
+
+.lead {
+  max-inline-size: 760px;
+  color: var(--color-text-muted);
+  font-size: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.sectionList {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sectionList li {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: var(--color-surface);
+}
+
+.notice {
+  padding: 1.2rem;
+  border: 1px solid rgba(242, 184, 75, 0.5);
+  border-radius: 0.5rem;
+  background: rgba(242, 184, 75, 0.08);
+  color: #ffe2a1;
+}
