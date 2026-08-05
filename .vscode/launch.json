@@ -7,6 +7,6 @@
       "request": "launch",
       "url": "http://localhost:3000/en",
       "webRoot": "${workspaceFolder}"
-    }
+     }
   ]
 }
