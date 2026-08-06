@@ -228,8 +228,49 @@
       "description": "Yapay zeka stratejisi, araştırma, uygulama ve eğitim üzerine pratik düşünceler okuyun."
     },
     "about": {
-      "title": "Şirket Genel Bakışı",
-      "description": "SynergyMazeAI'nin teknoloji, araştırma ve eğitimi nasıl bağladığını öğrenin."
+      "title": "SynergyMazeAI Hakkında",
+      "description": "SynergyMazeAI'nin sorumlu ve uygulanabilir ilerleme için yapay zeka, araştırma, danışmanlık ve eğitimi nasıl bir araya getirdiğini keşfedin.",
+      "hero": {
+        "eyebrow": "SynergyMazeAI Hakkında",
+        "title": "SynergyMazeAI Hakkında",
+        "lead": "Fikirleri ve gelişmekte olan teknolojileri uygulanabilir, sorumlu ve sürdürülebilir çözümlere dönüştürüyoruz.",
+        "location": "İstanbul, Türkiye",
+        "imageAlt": "İstanbul'daki bir çalışma ortamında yapay zeka araştırması üzerinde birlikte çalışan çok disiplinli ekip"
+      },
+      "overview": {
+        "label": "Biz kimiz",
+        "title": "Anlamlı ilerleme için kurulduk",
+        "paragraphOne": "SynergyMazeAI, Türkiye merkezli bir yapay zeka, araştırma ve geliştirme, danışmanlık ve eğitim partneridir. Fikirleri ve gelişmekte olan teknolojileri uygulanabilir, sorumlu ve sürdürülebilir çözümlere dönüştürmek için işletmeler, üniversiteler, kurumlar, profesyoneller, eğitimciler ve öğrencilerle çalışıyoruz.",
+        "paragraphTwo": "Hizmetlerimiz yapay zeka danışmanlığını, akıllı otomasyonu, araştırma iş birliklerini, profesyonel eğitimi, akademik ortaklıkları ve özelleştirilmiş eğitim programlarını bir araya getirir. Her partnerin ihtiyaçlarını anlayarak başlar, ardından net hedefleri, pratik uygulamayı ve ölçülebilir ilerlemeyi destekleyen bir yaklaşım tasarlarız.",
+        "paragraphThree": "İnovasyonun; teknoloji, araştırma, eğitim ve insan deneyimi birlikte çalıştığında en güçlü haline ulaştığına inanıyoruz. Çok disiplinli iş birliği ve sorumlu yapay zeka uygulamalarıyla partnerlerimizin bilgi üretmesine, anlamlı sorunları çözmesine ve yapay zeka odaklı bir geleceğe hazırlanmasına yardımcı oluyoruz."
+      },
+      "frameworkLabel": "SynergyMazeAI nasıl değer üretir",
+      "connect": {
+        "title": "Neleri birleştiriyoruz",
+        "description": "Güçlü fikirlerin faydalı sonuçlara dönüşebilmesi için araştırma içgörüsünü, teknik yetkinliği, eğitimi ve gerçek dünya bağlamını bir araya getiriyoruz.",
+        "detail": "Araştırma · Teknoloji · Eğitim"
+      },
+      "work": {
+        "title": "Nasıl çalışıyoruz",
+        "description": "Önce dinliyor, öncelikleri birlikte belirliyor ve açık, iş birlikçi bir süreçle stratejiden uygulamaya ilerliyoruz.",
+        "detail": "Anla · Tasarla · Uygula · Ölç"
+      },
+      "support": {
+        "title": "Kimleri destekliyoruz",
+        "description": "Çalışmalarımızı yapay zeka yolculuğunun farklı aşamalarındaki işletmeler, üniversiteler, kurumlar, profesyoneller, eğitimciler ve öğrenciler için şekillendiriyoruz.",
+        "detail": "Sanayi · Akademi · İnsan"
+      },
+      "responsibility": {
+        "title": "Sorumlu inovasyon",
+        "description": "Gizlilik, adalet, şeffaflık, erişilebilirlik ve uzun vadeli değeri çalışmalarımızın tamamında pratik gereklilikler olarak ele alıyoruz.",
+        "detail": "Güvenli · Adil · Hesap Verebilir"
+      },
+      "cta": {
+        "label": "Birlikte üretelim",
+        "title": "Sıradaki adımı birlikte oluşturalım.",
+        "description": "Yapay zeka sorununuzu, araştırma fikrinizi veya eğitim girişiminizi bizimle paylaşın; uygulanabilir bir yol haritası oluşturalım.",
+        "button": "Bir görüşme başlat"
+      }
     },
     "team": {
       "title": "Ekibimiz",

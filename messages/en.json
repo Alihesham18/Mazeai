@@ -228,8 +228,49 @@
       "description": "Read practical thinking on AI strategy, research, implementation, and education."
     },
     "about": {
-      "title": "Company Overview",
-      "description": "Learn how SynergyMazeAI connects technology, research, and education."
+      "title": "About SynergyMazeAI",
+      "description": "Discover how SynergyMazeAI connects artificial intelligence, research, consulting, and education to create responsible, practical progress.",
+      "hero": {
+        "eyebrow": "About SynergyMazeAI",
+        "title": "About SynergyMazeAI",
+        "lead": "We turn ideas and emerging technologies into practical, responsible, and sustainable solutions.",
+        "location": "Istanbul, Türkiye",
+        "imageAlt": "A multidisciplinary team collaborating on artificial intelligence research in an Istanbul workspace"
+      },
+      "overview": {
+        "label": "Who we are",
+        "title": "Built for meaningful progress",
+        "paragraphOne": "SynergyMazeAI is a Türkiye-based artificial intelligence, research and development, consulting, and education partner. We work with businesses, universities, institutions, professionals, educators, and students to transform ideas and emerging technologies into practical, responsible, and sustainable solutions.",
+        "paragraphTwo": "Our services bring together AI consulting, intelligent automation, research collaboration, professional training, academic partnerships, and customized education programs. We begin by understanding each partner’s needs, then design an approach that supports clear objectives, practical implementation, and measurable progress.",
+        "paragraphThree": "We believe innovation is strongest when technology, research, education, and human experience work together. Through multidisciplinary collaboration and responsible AI practices, we help our partners build knowledge, solve meaningful problems, and prepare for an AI-driven future."
+      },
+      "frameworkLabel": "How SynergyMazeAI creates value",
+      "connect": {
+        "title": "What we connect",
+        "description": "We bring together research insight, technical capability, education, and real-world context so promising ideas can become useful outcomes.",
+        "detail": "Research · Technology · Education"
+      },
+      "work": {
+        "title": "How we work",
+        "description": "We listen first, define priorities together, and move from strategy to implementation through a clear and collaborative process.",
+        "detail": "Understand · Design · Build · Measure"
+      },
+      "support": {
+        "title": "Who we support",
+        "description": "Our work is shaped for businesses, universities, institutions, professionals, educators, and students at different stages of their AI journey.",
+        "detail": "Industry · Academia · People"
+      },
+      "responsibility": {
+        "title": "Responsible innovation",
+        "description": "We treat privacy, fairness, transparency, accessibility, and long-term value as practical requirements throughout our work.",
+        "detail": "Safe · Fair · Accountable"
+      },
+      "cta": {
+        "label": "Build with us",
+        "title": "Let’s create what comes next, together.",
+        "description": "Bring us your AI challenge, research idea, or education initiative and we will help shape a practical path forward.",
+        "button": "Start a conversation"
+      }
     },
     "team": {
       "title": "Our Team",
