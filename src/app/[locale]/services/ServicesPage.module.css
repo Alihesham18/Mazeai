@@ -1,0 +1,219 @@
+.hero {
+  padding-block: clamp(4rem, 9vw, 7rem) clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.heading {
+  position: relative;
+  max-inline-size: 52rem;
+  overflow: hidden;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(224, 214, 255, 0.24);
+  border-radius: 0.5rem;
+  background: linear-gradient(
+    145deg,
+    rgba(58, 45, 88, 0.28),
+    rgba(12, 10, 23, 0.48) 52%,
+    rgba(48, 28, 80, 0.22)
+  );
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(154, 120, 255, 0.12);
+  backdrop-filter: blur(24px) saturate(145%);
+  -webkit-backdrop-filter: blur(24px) saturate(145%);
+  isolation: isolate;
+}
+
+.heading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.02) 28%,
+    transparent 48%,
+    rgba(154, 120, 255, 0.08)
+  );
+  pointer-events: none;
+}
+
+.eyebrow {
+  margin-block-end: 0.75rem;
+  color: var(--color-primary-hover);
+  font-size: 0.86rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.heading h1 {
+  margin-block-end: 1.25rem;
+}
+
+.lead {
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.servicesSection {
+  padding-block: 0 clamp(5rem, 10vw, 8rem);
+}
+
+.grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.card {
+  position: relative;
+  min-inline-size: 0;
+  overflow: hidden;
+  border: 1px solid rgba(224, 214, 255, 0.24);
+  border-radius: 0.5rem;
+  background: linear-gradient(
+    145deg,
+    rgba(57, 43, 90, 0.38),
+    rgba(15, 11, 28, 0.52) 48%,
+    rgba(39, 23, 70, 0.34)
+  );
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(154, 120, 255, 0.12);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  isolation: isolate;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.card::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.025) 24%,
+    transparent 46%,
+    rgba(154, 120, 255, 0.08) 100%
+  );
+}
+
+.card::after {
+  inset: 1px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 16px 14px 30px rgba(255, 255, 255, 0.025);
+}
+
+.card:hover {
+  border-color: rgba(210, 194, 255, 0.62);
+  box-shadow:
+    0 32px 90px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(109, 61, 245, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transform: translateY(-4px);
+}
+
+.card:focus-visible {
+  outline: 3px solid var(--color-primary-hover);
+  outline-offset: 4px;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #08080c;
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  block-size: 30%;
+  background: linear-gradient(transparent, rgba(16, 10, 31, 0.58));
+  pointer-events: none;
+}
+
+.image {
+  object-fit: cover;
+  transition: transform 450ms ease;
+}
+
+.card:hover .image {
+  transform: scale(1.025);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.4rem, 4vw, 2rem);
+  background: linear-gradient(135deg, rgba(37, 25, 65, 0.3), rgba(11, 9, 22, 0.12));
+}
+
+.content h2,
+.content p {
+  margin: 0;
+}
+
+.content h2 {
+  color: #d7c8ff;
+  font-size: clamp(1.65rem, 4vw, 2.35rem);
+}
+
+.content p {
+  min-block-size: 3.2em;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+}
+
+.linkLabel {
+  width: fit-content;
+  display: inline-flex;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(219, 207, 255, 0.34);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.055);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #d7c8ff;
+  font-weight: 800;
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .heading,
+  .card {
+    background: rgba(18, 14, 34, 0.96);
+  }
+}
+
+@media (min-width: 800px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .image {
+    transition: none;
+  }
+}

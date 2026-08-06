@@ -7,6 +7,18 @@
       "request": "launch",
       "url": "http://localhost:3000/en",
       "webRoot": "${workspaceFolder}"
-     }
+    },
+    {
+      "name": "Start MazeAI Website",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run dev",
+      "cwd": "${workspaceFolder}",
+      "serverReadyAction": {
+        "pattern": "Local:\\s+(https?://\\S+)",
+        "uriFormat": "%s/en",
+        "action": "debugWithChrome"
+      }
+    }
   ]
 }

@@ -1,4 +1,5 @@
-import { CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import { CheckCircle2, ExternalLink } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { ContentCard, EventCard } from "@/components/cards/ContentCard";
 import { Button } from "@/components/ui/Button";
@@ -16,6 +17,24 @@ import {
 import type { Locale } from "@/i18n/routing";
 import { localizedPath, localize } from "@/lib/utilities/localize";
 import styles from "./HomePage.module.css";
+
+const schools = [
+  {
+    name: "Doğa Koleji",
+    href: "https://www.dogakoleji.k12.tr/",
+    logo: "/images/schools/doga-koleji.png"
+  },
+  {
+    name: "Mektebim Koleji",
+    href: "https://www.mektebim.k12.tr/",
+    logo: "/images/schools/mektebim-koleji.jpg"
+  },
+  {
+    name: "Uğur Okulları",
+    href: "https://ugurokullari.k12.tr/",
+    logo: "/images/schools/ugur-okullari.png"
+  }
+] as const;
 
 export async function HomePage({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale });
@@ -39,18 +58,35 @@ export async function HomePage({ locale }: { locale: Locale }) {
         </Container>
       </section>
 
-      <Section>
+      <Section data-testid="schools-section">
         <Container>
-          <SectionHeading
-            title={t("home.partners")}
-            description={t("home.partnerNote")}
-            align="center"
-          />
-          <div className={styles.partnerStrip} aria-label={t("home.partners")}>
-            {["Research Partner", "Education Partner", "Industry Partner"].map((partner) => (
-              <div className={styles.partner} key={partner}>
-                {partner}
-              </div>
+          <SectionHeading title={t("home.partners")} description={t("home.partnerNote")} />
+          <div className={styles.schoolGrid} aria-label={t("home.partners")}>
+            {schools.map((school) => (
+              <a
+                className={styles.schoolCard}
+                href={school.href}
+                key={school.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${school.name} - ${t("home.schoolVisit")}`}
+              >
+                <span className={styles.schoolLogo}>
+                  <Image
+                    src={school.logo}
+                    alt={`${school.name} logo`}
+                    fill
+                    sizes="(min-width: 700px) 33vw, 100vw"
+                  />
+                </span>
+                <span className={styles.schoolContent}>
+                  <strong>{school.name}</strong>
+                  <span>
+                    {t("home.schoolVisit")}
+                    <ExternalLink size={19} strokeWidth={2} aria-hidden="true" />
+                  </span>
+                </span>
+              </a>
             ))}
           </div>
         </Container>
@@ -136,7 +172,12 @@ export async function HomePage({ locale }: { locale: Locale }) {
           <SectionHeading title={t("home.eventsTitle")} />
           <div className={styles.gridCards}>
             {events.map((event) => (
-              <EventCard key={event.slug} item={event} locale={locale} ctaLabel={t("common.register")} />
+              <EventCard
+                key={event.slug}
+                item={event}
+                locale={locale}
+                ctaLabel={t("common.register")}
+              />
             ))}
           </div>
         </Container>

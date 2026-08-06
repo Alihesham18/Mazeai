@@ -2,22 +2,7 @@ import type { NavItem } from "@/types/content";
 
 export const navigation: NavItem[] = [
   { labelKey: "navigation.home", href: "/" },
-  {
-    labelKey: "navigation.services",
-    href: "/services",
-    children: [
-      { labelKey: "navigation.servicesOverview", href: "/services" },
-      { labelKey: "navigation.aiConsulting", href: "/services/ai-consulting" },
-      {
-        labelKey: "navigation.aiSolutions",
-        href: "/services/ai-solutions-automation"
-      },
-      { labelKey: "navigation.researchDevelopment", href: "/services/research-development" },
-      { labelKey: "navigation.educationTraining", href: "/services/education-training" },
-      { labelKey: "navigation.academicPartnerships", href: "/services/academic-partnerships" },
-      { labelKey: "navigation.customPrograms", href: "/services/custom-programs" }
-    ]
-  },
+  { labelKey: "navigation.services", href: "/services" },
   {
     labelKey: "navigation.research",
     href: "/research",

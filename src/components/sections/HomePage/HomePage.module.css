@@ -34,22 +34,65 @@
   gap: 0.8rem;
 }
 
-.partnerStrip {
+.schoolGrid {
   display: grid;
-  gap: 0.8rem;
-  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
 }
 
-.partner {
-  min-block-size: 4.5rem;
-  display: grid;
-  place-items: center;
+.schoolCard {
+  min-inline-size: 0;
+  overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.035);
-  color: var(--color-text-muted);
-  font-weight: 800;
-  text-align: center;
+  background: rgba(16, 12, 35, 0.88);
+  color: var(--color-text);
+  text-decoration: none;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.schoolCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(169, 139, 255, 0.72);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.32);
+}
+
+.schoolCard:focus-visible {
+  outline: 3px solid var(--color-primary-hover);
+  outline-offset: 4px;
+}
+
+.schoolLogo {
+  position: relative;
+  display: block;
+  block-size: clamp(12rem, 22vw, 16rem);
+  background: #ffffff;
+}
+
+.schoolLogo img {
+  object-fit: contain;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.schoolContent {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 1.65rem);
+}
+
+.schoolContent strong {
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+}
+
+.schoolContent > span {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-primary-hover);
+  font-weight: 750;
 }
 
 .grid3,
@@ -102,13 +145,23 @@
 }
 
 @media (min-width: 700px) {
-  .partnerStrip,
+  .schoolGrid,
   .grid3 {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .gridCards {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .schoolCard {
+    transition: none;
+  }
+
+  .schoolCard:hover {
+    transform: none;
   }
 }
 

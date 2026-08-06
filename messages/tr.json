@@ -27,6 +27,8 @@
     "closeMenu": "Navigasyon menüsünü kapat",
     "language": "Dil",
     "servicesOverview": "Hizmetlere Genel Bakış",
+    "webDevelopment": "Web Geliştirme",
+    "webDesign": "Web Tasarım",
     "aiConsulting": "Yapay Zeka Danışmanlığı",
     "aiSolutions": "Yapay Zeka Çözümleri ve Otomasyon",
     "researchDevelopment": "Araştırma ve Geliştirme",
@@ -54,8 +56,9 @@
     "supporting": "SynergyMazeAI, kurumların akıllı çözümler geliştirmesine, araştırmayı ilerletmesine ve insanları yapay zeka odaklı geleceğe hazırlamasına yardımcı olur.",
     "primaryCta": "Hizmetleri Keşfedin",
     "secondaryCta": "İş Birliği Yapın",
-    "partners": "Güvenilir iş birliği alanları",
-    "partnerNote": "Yer tutucu partner blokları. Gerçek partnerlik ima edilmez.",
+    "partners": "Okullar",
+    "partnerNote": "Eğitim ve danışmanlık hizmetleri sunduğumuz kurumlar.",
+    "schoolVisit": "Resmi web sitesini ziyaret et",
     "coreTitle": "Temel iş birliği alanları",
     "aboutTitle": "Sanayi, akademi, teknoloji ve eğitim arasında bir köprü",
     "aboutText": "SynergyMazeAI, Türkiye ve ötesindeki kurumlarla yapay zeka fırsatlarını netleştirmek, araştırma programlarını şekillendirmek ve bu sistemleri kullanacak kişiler için uygulamalı eğitim yolları oluşturmak üzere çalışır.",
@@ -86,21 +89,179 @@
     "social": "Sosyal medya yer tutucuları",
     "copyright": "© 2026 SynergyMazeAI. Tüm hakları saklıdır."
   },
+  "services": {
+    "common": {
+      "backToServices": "Hizmetlere dön",
+      "startProject": "Proje başlat",
+      "whatWeDo": "Ne yapıyoruz",
+      "included": "Neler dahil",
+      "howItWorks": "Nasıl çalışır",
+      "tools": "Araçlar ve teknoloji"
+    },
+    "overview": {
+      "eyebrow": "Dijital hizmetler",
+      "title": "Hizmetler",
+      "description": "İlk fikirden yayına kadar açık, duyarlı ve büyümeye hazır web siteleri tasarlıyor ve geliştiriyoruz.",
+      "viewDetails": "Detayları görüntüle"
+    },
+    "webDevelopment": {
+      "eyebrow": "Mühendislik ve teslimat",
+      "title": "Web Geliştirme",
+      "shortDescription": "Hedeflerinize göre hızlı, güvenilir web siteleri ve uygulamalar geliştiriyoruz.",
+      "intro": "Fikrinizi açıklık ve uzun vadeli büyüme için oluşturulmuş bir geliştirme süreciyle güvenli, duyarlı ve sürdürülebilir bir dijital ürüne dönüştürün.",
+      "imageAlt": "Kod, uygulama modülleri ve dağıtım araçları içeren web geliştirme çalışma alanı",
+      "overviewTitle": "Tüm ürünü destekleyen geliştirme",
+      "overviewText": "Ön yüz mühendisliği, arka uç entegrasyonu, kalite güvencesi ve dağıtımı tek bir pratik teslimat sürecinde birleştiriyoruz. Her yapı performanslı, sürdürülebilir ve tüm cihazlarda güvenilir olacak şekilde tasarlanır.",
+      "featuresTitle": "Eksiksiz web geliştirme hizmeti",
+      "features": {
+        "one": {
+          "title": "Özel web siteleri",
+          "description": "Markanıza ve hedeflerinize uygun pazarlama, kurumsal, eğitim ve içerik siteleri."
+        },
+        "two": {
+          "title": "Web uygulamaları",
+          "description": "Gerçek iş akışlarına göre etkileşimli portallar, panolar, rezervasyon deneyimleri ve dahili araçlar."
+        },
+        "three": {
+          "title": "Entegrasyonlar",
+          "description": "API, içerik sistemi, analiz, e-posta platformu ve iş hizmetleriyle güvenilir bağlantılar."
+        },
+        "four": {
+          "title": "Performans ve destek",
+          "description": "Duyarlı geliştirme, erişilebilirlik kontrolleri, performans iyileştirme, dağıtım ve sürekli geliştirme."
+        }
+      },
+      "processTitle": "Kapsamdan yayına açık bir yol",
+      "process": {
+        "one": {
+          "title": "Keşif",
+          "description": "Kullanıcıları, gereksinimleri, teknik sınırlamaları ve ölçülebilir öncelikleri netleştiririz."
+        },
+        "two": {
+          "title": "Mimari",
+          "description": "Çözüm yapısını, içerik modelini, entegrasyonları ve teslimat planını tanımlarız."
+        },
+        "three": {
+          "title": "Geliştirme ve test",
+          "description": "Odaklı aşamalarda uygular; duyarlılık, erişilebilirlik, kalite ve performansı test ederiz."
+        },
+        "four": {
+          "title": "Yayın ve iyileştirme",
+          "description": "Güvenli biçimde yayınlar, sürümü izler ve pratik bir iyileştirme yol haritası oluştururuz."
+        }
+      },
+      "technologiesTitle": "Modern ve güvenilir temeller",
+      "ctaTitle": "Web ürününüzü geliştirmeye hazır mısınız?",
+      "ctaText": "Ne oluşturmak istediğinizi anlatın; doğru teknik yolu birlikte şekillendirelim."
+    },
+    "webDesign": {
+      "eyebrow": "Deneyim ve arayüz tasarımı",
+      "title": "Web Tasarım",
+      "shortDescription": "Karmaşık fikirleri kullanımı kolay hale getiren açık ve özgün web deneyimleri tasarlıyoruz.",
+      "intro": "Duyarlı arayüz, düşünülmüş kullanıcı yolculukları ve size özgü bir görsel sistemle güven veren bir dijital varlık oluşturun.",
+      "imageAlt": "Tel kafesler, bileşen düzenleri ve tasarım araçları içeren duyarlı web tasarım çalışma alanı",
+      "overviewTitle": "İnsanlara ve amaca dayalı tasarım",
+      "overviewText": "Bir ekranın nasıl görüneceğine karar vermeden önce kullanıcı ihtiyaçlarını, iş hedeflerini, içeriği ve marka ifadesini birleştiriyoruz. Sonuç, ziyaretçileri doğal biçimde yönlendiren ve geliştirmeye kesin bir plan sunan tutarlı bir deneyimdir.",
+      "featuresTitle": "Eksiksiz web tasarım hizmeti",
+      "features": {
+        "one": {
+          "title": "UX stratejisi",
+          "description": "Net sonuçlara göre hedef kitle, kullanıcı yolculukları, içerik hiyerarşisi ve sayfa mimarisi."
+        },
+        "two": {
+          "title": "Arayüz tasarımı",
+          "description": "Amaca uygun tipografi, renk, görsel, boşluk ve etkileşim durumlarıyla tamamlanmış duyarlı tasarımlar."
+        },
+        "three": {
+          "title": "Tasarım sistemleri",
+          "description": "Ürün büyüdükçe tutarlılığı koruyan tekrar kullanılabilir bileşenler, görsel kurallar ve belgelenmiş kalıplar."
+        },
+        "four": {
+          "title": "Prototip ve doğrulama",
+          "description": "Geliştirme öncesi kullanılabilirlik sorularını çözen tıklanabilir prototipler ve odaklı incelemeler."
+        }
+      },
+      "processTitle": "İş birlikçi bir tasarım süreci",
+      "process": {
+        "one": {
+          "title": "Anlama",
+          "description": "Kitlenizi, teklifinizi, markanızı, içeriğinizi ve ziyaretçilerin vermesi gereken kararları öğreniriz."
+        },
+        "two": {
+          "title": "Yapılandırma",
+          "description": "Görsel stilden önce navigasyonu, sayfa hiyerarşisini, kullanıcı akışlarını ve tel kafesleri düzenleriz."
+        },
+        "three": {
+          "title": "Tasarım",
+          "description": "Odaklı geri bildirim turlarıyla görsel yönü ve duyarlı arayüzü geliştiririz."
+        },
+        "four": {
+          "title": "Geliştirmeye hazırlık",
+          "description": "Bileşenleri, durumları, duyarlı davranışları, varlıkları ve uygulama rehberini tamamlarız."
+        }
+      },
+      "technologiesTitle": "Pratik bir tasarım araç seti",
+      "ctaTitle": "Dijital deneyiminizi şekillendirmeye hazır mısınız?",
+      "ctaText": "Fikrinizi, hedeflerinizi veya mevcut sitenizi paylaşın; doğru tasarım yönünü belirleyelim."
+    }
+  },
   "pages": {
-    "services": { "title": "Hizmetlere Genel Bakış", "description": "Kurumunuz için doğru yapay zeka, Ar-Ge, eğitim veya iş birliği yolunu seçin." },
-    "research": { "title": "Ar-Ge Genel Bakış", "description": "Araştırma alanlarını, güncel projeleri, yayınları ve iş birliği modellerini keşfedin." },
-    "events": { "title": "Etkinlikler", "description": "Yaklaşan atölyeleri, yuvarlak masaları, eğitimleri ve araştırma etkinliklerini bulun." },
-    "caseStudies": { "title": "Vaka Çalışmaları", "description": "Gelecekte gerçek vaka çalışmalarının nasıl sunulacağını gösteren kurgusal örnek sonuçları inceleyin." },
-    "blog": { "title": "Blog", "description": "Yapay zeka stratejisi, araştırma, uygulama ve eğitim üzerine pratik düşünceler okuyun." },
-    "about": { "title": "Şirket Genel Bakışı", "description": "SynergyMazeAI'nin teknoloji, araştırma ve eğitimi nasıl bağladığını öğrenin." },
-    "team": { "title": "Ekibimiz", "description": "Rol filtreleri ve profil sayfaları için hazırlanmış yer tutucu ekip dizini." },
-    "partners": { "title": "Partnerlerimiz", "description": "Gerçek partnerlik ima etmeyen yer tutucu partner mimarisi." },
-    "contact": { "title": "İletişim", "description": "Danışmanlık, iş birliği, eğitim veya araştırma görüşmesi başlatın." },
-    "privacy": { "title": "Gizlilik Politikası", "description": "Yayın öncesi yetkin hukuk danışmanları tarafından incelenmesi gereken yer tutucu gizlilik metni." },
-    "cookies": { "title": "Çerez Politikası", "description": "Gelecekteki onay araçları için hazırlanmış yer tutucu çerez politikası." },
-    "terms": { "title": "Kullanım Şartları", "description": "Gelecekteki hukuki inceleme için yer tutucu kullanım şartları." },
-    "personalData": { "title": "Kişisel Veri Aydınlatma Metni", "description": "Türkiye için yer tutucu kişisel veri aydınlatma metni. Nihai hukuki tavsiye değildir." },
-    "placeholder": { "title": "Sayfa İskeleti", "description": "Bu sayfa yararlı bir başlangıç yapısına sahiptir ve sonraki fazda genişletilecektir." }
+    "services": {
+      "title": "Hizmetler",
+      "description": "Bir sonraki dijital projeniz için web geliştirme ve web tasarım hizmetlerini keşfedin."
+    },
+    "research": {
+      "title": "Ar-Ge Genel Bakış",
+      "description": "Araştırma alanlarını, güncel projeleri, yayınları ve iş birliği modellerini keşfedin."
+    },
+    "events": {
+      "title": "Etkinlikler",
+      "description": "Yaklaşan atölyeleri, yuvarlak masaları, eğitimleri ve araştırma etkinliklerini bulun."
+    },
+    "caseStudies": {
+      "title": "Vaka Çalışmaları",
+      "description": "Gelecekte gerçek vaka çalışmalarının nasıl sunulacağını gösteren kurgusal örnek sonuçları inceleyin."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Yapay zeka stratejisi, araştırma, uygulama ve eğitim üzerine pratik düşünceler okuyun."
+    },
+    "about": {
+      "title": "Şirket Genel Bakışı",
+      "description": "SynergyMazeAI'nin teknoloji, araştırma ve eğitimi nasıl bağladığını öğrenin."
+    },
+    "team": {
+      "title": "Ekibimiz",
+      "description": "Rol filtreleri ve profil sayfaları için hazırlanmış yer tutucu ekip dizini."
+    },
+    "partners": {
+      "title": "Partnerlerimiz",
+      "description": "Gerçek partnerlik ima etmeyen yer tutucu partner mimarisi."
+    },
+    "contact": {
+      "title": "İletişim",
+      "description": "Danışmanlık, iş birliği, eğitim veya araştırma görüşmesi başlatın."
+    },
+    "privacy": {
+      "title": "Gizlilik Politikası",
+      "description": "Yayın öncesi yetkin hukuk danışmanları tarafından incelenmesi gereken yer tutucu gizlilik metni."
+    },
+    "cookies": {
+      "title": "Çerez Politikası",
+      "description": "Gelecekteki onay araçları için hazırlanmış yer tutucu çerez politikası."
+    },
+    "terms": {
+      "title": "Kullanım Şartları",
+      "description": "Gelecekteki hukuki inceleme için yer tutucu kullanım şartları."
+    },
+    "personalData": {
+      "title": "Kişisel Veri Aydınlatma Metni",
+      "description": "Türkiye için yer tutucu kişisel veri aydınlatma metni. Nihai hukuki tavsiye değildir."
+    },
+    "placeholder": {
+      "title": "Sayfa İskeleti",
+      "description": "Bu sayfa yararlı bir başlangıç yapısına sahiptir ve sonraki fazda genişletilecektir."
+    }
   },
   "validation": {
     "required": "Bu alan zorunludur.",

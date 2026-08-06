@@ -27,6 +27,8 @@
     "closeMenu": "Close navigation menu",
     "language": "Language",
     "servicesOverview": "Services Overview",
+    "webDevelopment": "Web Development",
+    "webDesign": "Web Design",
     "aiConsulting": "AI Consulting",
     "aiSolutions": "AI Solutions and Automation",
     "researchDevelopment": "Research and Development",
@@ -50,12 +52,13 @@
   },
   "home": {
     "eyebrow": "AI • Research • Education",
-    "headline": "Building the future through AI, research, and education",
-    "supporting": "SynergyMazeAI helps organizations develop intelligent solutions, advance research, and prepare people for an AI-driven future.",
+    "headline": "Synergy Maze AI",
+    "supporting": "Our organization is a reliable business partner that contributes to the development of individuals and institutions by creating innovative solutions in the fields of education, consulting, and technology.",
     "primaryCta": "Explore Our Services",
     "secondaryCta": "Partner With Us",
-    "partners": "Trusted collaboration spaces",
-    "partnerNote": "Placeholder partner blocks. No real partnerships are implied.",
+    "partners": "Schools",
+    "partnerNote": "Organizations we provide training and consulting services to.",
+    "schoolVisit": "Visit official website",
     "coreTitle": "Core areas of partnership",
     "aboutTitle": "A bridge between industry, academia, technology, and education",
     "aboutText": "SynergyMazeAI works with organizations in Türkiye and beyond to clarify AI opportunities, shape research programs, and build practical education pathways for people who will use these systems.",
@@ -86,21 +89,179 @@
     "social": "Social placeholders",
     "copyright": "© 2026 SynergyMazeAI. All rights reserved."
   },
+  "services": {
+    "common": {
+      "backToServices": "Back to services",
+      "startProject": "Start a project",
+      "whatWeDo": "What we do",
+      "included": "What is included",
+      "howItWorks": "How it works",
+      "tools": "Tools and technology"
+    },
+    "overview": {
+      "eyebrow": "Digital services",
+      "title": "Services",
+      "description": "From first idea to launch, we create thoughtful websites that are clear, responsive, and ready to grow.",
+      "viewDetails": "View details"
+    },
+    "webDevelopment": {
+      "eyebrow": "Engineering and delivery",
+      "title": "Web Development",
+      "shortDescription": "We build fast, reliable websites and web applications designed around your goals.",
+      "intro": "Turn your idea into a secure, responsive, and maintainable digital product with a development process built for clarity and long-term growth.",
+      "imageAlt": "Web development workspace with code, application modules, and deployment tools",
+      "overviewTitle": "Development that supports the whole product",
+      "overviewText": "We combine frontend engineering, backend integration, quality assurance, and deployment into one practical delivery process. Every build is designed to perform well, remain maintainable, and work reliably across devices.",
+      "featuresTitle": "A complete web development service",
+      "features": {
+        "one": {
+          "title": "Custom websites",
+          "description": "Purpose-built marketing, company, education, and content websites aligned with your brand and objectives."
+        },
+        "two": {
+          "title": "Web applications",
+          "description": "Interactive portals, dashboards, booking experiences, and internal tools built around real workflows."
+        },
+        "three": {
+          "title": "Integrations",
+          "description": "Reliable connections to APIs, content systems, analytics, email platforms, and business services."
+        },
+        "four": {
+          "title": "Performance and support",
+          "description": "Responsive implementation, accessibility checks, performance optimization, deployment, and ongoing improvements."
+        }
+      },
+      "processTitle": "A clear path from scope to launch",
+      "process": {
+        "one": {
+          "title": "Discovery",
+          "description": "We clarify users, requirements, technical constraints, and measurable priorities."
+        },
+        "two": {
+          "title": "Architecture",
+          "description": "We define the solution structure, content model, integrations, and delivery plan."
+        },
+        "three": {
+          "title": "Build and test",
+          "description": "We implement in focused stages and test responsiveness, accessibility, quality, and performance."
+        },
+        "four": {
+          "title": "Launch and improve",
+          "description": "We deploy safely, monitor the release, and establish a practical improvement roadmap."
+        }
+      },
+      "technologiesTitle": "Modern, dependable foundations",
+      "ctaTitle": "Ready to build your web product?",
+      "ctaText": "Tell us what you want to create and we will help shape the right technical path."
+    },
+    "webDesign": {
+      "eyebrow": "Experience and interface design",
+      "title": "Web Design",
+      "shortDescription": "We design clear, distinctive web experiences that make complex ideas easy to use.",
+      "intro": "Create a confident digital presence with a responsive interface, thoughtful user journeys, and a visual system that feels unmistakably yours.",
+      "imageAlt": "Responsive web design workspace with wireframes, component layouts, and design tools",
+      "overviewTitle": "Design grounded in people and purpose",
+      "overviewText": "We connect user needs, business goals, content, and brand expression before deciding how a screen should look. The result is a coherent experience that guides visitors naturally and gives development a precise blueprint.",
+      "featuresTitle": "A complete web design service",
+      "features": {
+        "one": {
+          "title": "UX strategy",
+          "description": "Audience definition, user journeys, content hierarchy, and page architecture shaped around clear outcomes."
+        },
+        "two": {
+          "title": "Interface design",
+          "description": "Polished responsive page designs with purposeful typography, color, imagery, spacing, and interaction states."
+        },
+        "three": {
+          "title": "Design systems",
+          "description": "Reusable components, visual rules, and documented patterns that keep the product consistent as it grows."
+        },
+        "four": {
+          "title": "Prototypes and validation",
+          "description": "Clickable prototypes and focused reviews that resolve usability questions before development begins."
+        }
+      },
+      "processTitle": "A collaborative design process",
+      "process": {
+        "one": {
+          "title": "Understand",
+          "description": "We learn about your audience, offer, brand, content, and the decisions visitors need to make."
+        },
+        "two": {
+          "title": "Structure",
+          "description": "We organize navigation, page hierarchy, user flows, and wireframes before visual styling."
+        },
+        "three": {
+          "title": "Design",
+          "description": "We develop the visual direction and responsive interface through focused feedback rounds."
+        },
+        "four": {
+          "title": "Prepare for build",
+          "description": "We finalize components, states, responsive behavior, assets, and implementation guidance."
+        }
+      },
+      "technologiesTitle": "A practical design toolkit",
+      "ctaTitle": "Ready to shape your digital experience?",
+      "ctaText": "Share your idea, goals, or existing website and we will define the right design direction."
+    }
+  },
   "pages": {
-    "services": { "title": "Services Overview", "description": "Choose the right AI, R&D, education, or partnership path for your organization." },
-    "research": { "title": "R&D Overview", "description": "Explore research areas, current projects, publications, and collaboration models." },
-    "events": { "title": "Events", "description": "Find upcoming workshops, roundtables, training sessions, and research events." },
-    "caseStudies": { "title": "Case Studies", "description": "Review fictional sample outcomes that demonstrate how future real case studies will be presented." },
-    "blog": { "title": "Blog", "description": "Read practical thinking on AI strategy, research, implementation, and education." },
-    "about": { "title": "Company Overview", "description": "Learn how SynergyMazeAI connects technology, research, and education." },
-    "team": { "title": "Our Team", "description": "A placeholder team directory prepared for role filters and profile pages." },
-    "partners": { "title": "Our Partners", "description": "A placeholder partner architecture that does not imply real partnerships." },
-    "contact": { "title": "Contact", "description": "Start a consulting, partnership, training, or research conversation." },
-    "privacy": { "title": "Privacy Policy", "description": "Placeholder privacy text for review by qualified legal counsel before launch." },
-    "cookies": { "title": "Cookie Policy", "description": "Placeholder cookie policy prepared for future consent tooling." },
-    "terms": { "title": "Terms of Use", "description": "Placeholder terms of use for future legal review." },
-    "personalData": { "title": "Personal Data Information Notice", "description": "Placeholder Türkiye personal data notice. This is not final legal advice." },
-    "placeholder": { "title": "Page Shell", "description": "This page has useful starter structure and will be expanded in a later phase." }
+    "services": {
+      "title": "Services",
+      "description": "Explore web development and web design services for your next digital project."
+    },
+    "research": {
+      "title": "R&D Overview",
+      "description": "Explore research areas, current projects, publications, and collaboration models."
+    },
+    "events": {
+      "title": "Events",
+      "description": "Find upcoming workshops, roundtables, training sessions, and research events."
+    },
+    "caseStudies": {
+      "title": "Case Studies",
+      "description": "Review fictional sample outcomes that demonstrate how future real case studies will be presented."
+    },
+    "blog": {
+      "title": "Blog",
+      "description": "Read practical thinking on AI strategy, research, implementation, and education."
+    },
+    "about": {
+      "title": "Company Overview",
+      "description": "Learn how SynergyMazeAI connects technology, research, and education."
+    },
+    "team": {
+      "title": "Our Team",
+      "description": "A placeholder team directory prepared for role filters and profile pages."
+    },
+    "partners": {
+      "title": "Our Partners",
+      "description": "A placeholder partner architecture that does not imply real partnerships."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Start a consulting, partnership, training, or research conversation."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "description": "Placeholder privacy text for review by qualified legal counsel before launch."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "description": "Placeholder cookie policy prepared for future consent tooling."
+    },
+    "terms": {
+      "title": "Terms of Use",
+      "description": "Placeholder terms of use for future legal review."
+    },
+    "personalData": {
+      "title": "Personal Data Information Notice",
+      "description": "Placeholder Türkiye personal data notice. This is not final legal advice."
+    },
+    "placeholder": {
+      "title": "Page Shell",
+      "description": "This page has useful starter structure and will be expanded in a later phase."
+    }
   },
   "validation": {
     "required": "This field is required.",
