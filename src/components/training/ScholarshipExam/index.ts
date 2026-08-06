@@ -1,0 +1,1 @@
+export { ScholarshipExam } from "./ScholarshipExam";

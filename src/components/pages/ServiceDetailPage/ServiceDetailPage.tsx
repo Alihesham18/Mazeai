@@ -4,8 +4,10 @@ import { ArrowLeft, Check, MoveUpRight } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import type { WebDevelopmentProject } from "@/data/web-development-projects";
+import { projectPageCopy } from "@/data/web-development-projects";
 import type { Locale } from "@/i18n/routing";
-import { localizedPath } from "@/lib/utilities/localize";
+import { localizedPath, localize } from "@/lib/utilities/localize";
 import styles from "./ServiceDetailPage.module.css";
 
 type ServiceKey = "webDevelopment" | "webDesign";
@@ -15,6 +17,7 @@ interface ServiceDetailPageProps {
   serviceKey: ServiceKey;
   image: string;
   technologies: readonly string[];
+  projects?: readonly WebDevelopmentProject[];
 }
 
 const featureKeys = ["one", "two", "three", "four"] as const;
@@ -24,7 +27,8 @@ export async function ServiceDetailPage({
   locale,
   serviceKey,
   image,
-  technologies
+  technologies,
+  projects
 }: ServiceDetailPageProps) {
   setRequestLocale(locale);
   const t = await getTranslations({ locale, namespace: `services.${serviceKey}` });
@@ -125,6 +129,46 @@ export async function ServiceDetailPage({
           </ul>
         </Container>
       </section>
+
+      {projects?.length ? (
+        <section className={styles.projectsSection} aria-labelledby="selected-projects-title">
+          <Container>
+            <div className={styles.sectionHeading}>
+              <p className={styles.eyebrow}>{common("included")}</p>
+              <h2 id="selected-projects-title">
+                {localize(projectPageCopy.projectsTitle, locale)}
+              </h2>
+              <p>{localize(projectPageCopy.projectsDescription, locale)}</p>
+            </div>
+            <div className={styles.projectGrid}>
+              {projects.map((project) => (
+                <Link
+                  className={styles.projectCard}
+                  href={localizedPath(locale, `/services/web-development/${project.slug}`)}
+                  key={project.slug}
+                >
+                  <span className={styles.projectMedia}>
+                    <Image
+                      src={project.image}
+                      alt={`${localize(project.title, locale)} dashboard`}
+                      fill
+                      sizes="(min-width: 800px) 50vw, 100vw"
+                    />
+                  </span>
+                  <span className={styles.projectContent}>
+                    <strong>{localize(project.title, locale)}</strong>
+                    <span>{localize(project.overview, locale)}</span>
+                    <span className={styles.projectLink}>
+                      {localize(projectPageCopy.viewProject, locale)}
+                      <MoveUpRight size={18} aria-hidden="true" />
+                    </span>
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       <section className={styles.ctaSection}>
         <Container className={styles.cta}>

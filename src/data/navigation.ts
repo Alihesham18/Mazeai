@@ -3,19 +3,8 @@ import type { NavItem } from "@/types/content";
 export const navigation: NavItem[] = [
   { labelKey: "navigation.home", href: "/" },
   { labelKey: "navigation.services", href: "/services" },
-  {
-    labelKey: "navigation.research",
-    href: "/research",
-    children: [
-      { labelKey: "navigation.researchOverview", href: "/research" },
-      { labelKey: "navigation.researchAreas", href: "/research/areas" },
-      { labelKey: "navigation.currentProjects", href: "/research/projects" },
-      { labelKey: "navigation.completedProjects", href: "/research/projects/completed" },
-      { labelKey: "navigation.publications", href: "/research/publications" },
-      { labelKey: "navigation.innovationLab", href: "/research/innovation-lab" },
-      { labelKey: "navigation.researchPartnerships", href: "/research/partnerships" }
-    ]
-  },
+  { labelKey: "navigation.training", href: "/training" },
+  { labelKey: "navigation.research", href: "/research" },
   { labelKey: "navigation.events", href: "/events" },
   { labelKey: "navigation.caseStudies", href: "/case-studies" },
   { labelKey: "navigation.blog", href: "/blog" },

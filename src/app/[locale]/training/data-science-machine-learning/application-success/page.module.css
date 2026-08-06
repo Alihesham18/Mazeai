@@ -1,0 +1,45 @@
+.success {
+  min-block-size: 70svh;
+  display: grid;
+  place-items: center;
+  padding-block: 5rem;
+  background: rgba(5, 6, 11, 0.55);
+}
+
+.wrap {
+  max-inline-size: 52rem;
+  text-align: center;
+}
+
+.wrap svg {
+  margin-block-end: 1.25rem;
+  color: #55d7a8;
+}
+
+.wrap p {
+  color: var(--color-primary-hover);
+  font-size: 0.85rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.wrap h1 {
+  margin-block: 0.6rem 1rem;
+}
+
+.wrap span {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: 1.08rem;
+}
+
+.wrap a {
+  min-block-size: 46px;
+  display: inline-flex;
+  align-items: center;
+  margin-block-start: 2rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.5rem;
+  background: var(--color-primary);
+  font-weight: 800;
+}

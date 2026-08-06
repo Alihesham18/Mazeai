@@ -1,0 +1,71 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid rgba(130, 86, 250, 0.34);
+  border-radius: 0.5rem;
+  background: rgba(29, 22, 59, 0.88);
+}
+
+.field {
+  min-inline-size: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.field label {
+  color: #d9cbff;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.field input,
+.field select,
+.field textarea {
+  inline-size: 100%;
+  min-block-size: 46px;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.45rem;
+  background: rgba(8, 8, 16, 0.72);
+  color: var(--color-text);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--color-primary-hover);
+  outline: 0;
+}
+
+.messageField {
+  grid-column: 1 / -1;
+}
+
+.form > button {
+  width: fit-content;
+  min-block-size: 46px;
+  grid-column: 1 / -1;
+  padding: 0.8rem 1.25rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--color-primary);
+  color: var(--color-text);
+  font-weight: 850;
+}
+
+@media (max-width: 42rem) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .messageField,
+  .form > button {
+    grid-column: auto;
+  }
+}

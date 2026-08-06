@@ -1,0 +1,240 @@
+.hero {
+  padding-block: clamp(5.5rem, 11vw, 8rem) clamp(3.5rem, 7vw, 5rem);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.hero h1 {
+  max-inline-size: 17ch;
+  margin-block-end: 1rem;
+}
+
+.eyebrow {
+  margin-block-end: 0.65rem;
+  color: var(--color-primary-hover);
+  font-size: 0.9rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.heroDescription {
+  max-inline-size: 47rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.catalog {
+  min-block-size: 44rem;
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  background: rgba(8, 8, 14, 0.88);
+}
+
+.segmentedControl {
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  margin-block-end: 2rem;
+  padding: 0.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.segmentedControl button {
+  min-block-size: 44px;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.35rem;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-weight: 800;
+}
+
+.segmentedControl button.selected {
+  background: var(--color-primary);
+  color: var(--color-text);
+}
+
+.programGrid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.programCard {
+  min-inline-size: 0;
+  overflow: hidden;
+  border: 1px solid rgba(112, 64, 240, 0.38);
+  border-radius: 0.5rem;
+  background: rgba(15, 12, 25, 0.97);
+}
+
+.posterLink {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 1110 / 866;
+  display: block;
+  overflow: hidden;
+  background: #050508;
+}
+
+.poster {
+  object-fit: cover;
+}
+
+.posterBadges {
+  position: absolute;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.posterBadges span {
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.3rem;
+  background: rgba(10, 8, 18, 0.9);
+  color: var(--color-text);
+  font-size: 0.7rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.posterBadges span:first-child {
+  background: var(--color-primary);
+}
+
+.cardBody {
+  padding: 1.25rem;
+}
+
+.cardBody h2 {
+  margin-block-end: 0.75rem;
+  font-size: 1.4rem;
+}
+
+.cardBody > p {
+  min-block-size: 5.4rem;
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-block: 1.25rem;
+}
+
+.cardMeta > div:first-child {
+  min-inline-size: 0;
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.initials {
+  inline-size: 2.3rem;
+  block-size: 2.3rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(109, 61, 245, 0.22);
+  color: var(--color-primary-hover);
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.cardMeta p,
+.fee {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+}
+
+.cardMeta p strong {
+  overflow-wrap: anywhere;
+  font-size: 0.78rem;
+}
+
+.cardMeta p span,
+.fee span {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+}
+
+.fee {
+  flex: 0 0 auto;
+  text-align: end;
+}
+
+.fee strong {
+  color: var(--color-primary-hover);
+}
+
+.detailLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-block-size: 44px;
+  color: var(--color-primary-hover);
+  font-weight: 800;
+}
+
+.cardActions {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 0.65rem;
+}
+
+.cardActions > a,
+.cardActions .examButton {
+  min-block-size: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem;
+  border: 1px solid rgba(123, 76, 249, 0.42);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.cardActions .examButton {
+  box-shadow: 0 0 26px rgba(109, 61, 245, 0.2);
+}
+
+.emptyState {
+  max-inline-size: 42rem;
+  margin: 0;
+  padding-block: 3rem;
+  border-block: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 1.15rem;
+}
+
+@media (min-width: 42rem) {
+  .programGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 68rem) {
+  .programGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 26rem) {
+  .segmentedControl,
+  .cardActions {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}

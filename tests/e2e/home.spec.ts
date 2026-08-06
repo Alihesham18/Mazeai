@@ -81,3 +81,34 @@ test("school cards link to the official websites", async ({ page }) => {
     await expect(schoolLink).toHaveAttribute("rel", "noopener noreferrer");
   }
 });
+
+test("web development projects open complete case studies", async ({ page }) => {
+  await page.goto("/en/services/web-development");
+
+  await expect(page.getByRole("heading", { name: "Selected projects" })).toBeVisible();
+
+  const smartVisionLink = page.getByRole("link", { name: /Smart Vision/ });
+  await expect(smartVisionLink).toHaveAttribute(
+    "href",
+    "/en/services/web-development/smart-vision"
+  );
+  await smartVisionLink.click();
+  await expect(page).toHaveURL(/\/en\/services\/web-development\/smart-vision$/);
+  await expect(page.getByRole("heading", { name: "Smart Vision", level: 1 })).toBeVisible();
+  const smartVisionImage = page.getByRole("img", { name: "Smart Vision project dashboard" });
+  await expect(smartVisionImage).toHaveCSS("object-fit", "contain");
+  await expect(page.getByRole("heading", { name: "Technology stack" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Project links" })).toBeVisible();
+
+  await page.goto("/en/services/web-development");
+  const nlpAssistLink = page.getByRole("link", { name: /NLP Assist/ });
+  await expect(nlpAssistLink).toHaveAttribute("href", "/en/services/web-development/nlp-assist");
+  await nlpAssistLink.click();
+  await expect(page).toHaveURL(/\/en\/services\/web-development\/nlp-assist$/);
+  await expect(page.getByRole("heading", { name: "NLP Assist", level: 1 })).toBeVisible();
+  await expect(page.getByRole("img", { name: "NLP Assist project dashboard" })).toHaveCSS(
+    "object-fit",
+    "contain"
+  );
+  await expect(page.getByRole("heading", { name: "Quality evidence" })).toBeVisible();
+});

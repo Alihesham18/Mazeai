@@ -1,8 +1,5 @@
-import {
-  createPageMetadata,
-  StandalonePage,
-  type StandalonePageConfig
-} from "@/components/pages/StandalonePage";
+import { createPageMetadata, type StandalonePageConfig } from "@/components/pages/StandalonePage";
+import { EventsOverviewPage } from "@/components/pages/EventsOverviewPage";
 import type { Locale } from "@/i18n/routing";
 
 const page: StandalonePageConfig = {
@@ -15,5 +12,5 @@ const page: StandalonePageConfig = {
 export const generateMetadata = createPageMetadata(page);
 
 export default function EventsPage({ params }: { params: { locale: Locale } }) {
-  return <StandalonePage locale={params.locale} page={page} />;
+  return <EventsOverviewPage locale={params.locale} />;
 }

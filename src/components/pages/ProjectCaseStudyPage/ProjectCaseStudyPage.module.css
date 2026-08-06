@@ -1,0 +1,209 @@
+.hero {
+  padding-block: clamp(3rem, 7vw, 6rem);
+}
+
+.backLink {
+  width: fit-content;
+  display: inline-flex;
+  gap: 0.55rem;
+  align-items: center;
+  margin-block-end: clamp(2rem, 5vw, 3.5rem);
+  color: var(--color-text-muted);
+  font-weight: 750;
+}
+
+.backLink:hover {
+  color: var(--color-text);
+}
+
+.heroGrid,
+.problemGrid,
+.maintenanceGrid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+
+.heroCopy h1 {
+  margin-block: 1.25rem;
+}
+
+.lead,
+.problemText {
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.status {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  margin-block-start: 2rem;
+  padding: 1rem;
+  border-inline-start: 3px solid #44c985;
+  background: rgba(68, 201, 133, 0.07);
+}
+
+.status svg {
+  flex: 0 0 auto;
+  margin-block-start: 0.15rem;
+  color: #67d89d;
+}
+
+.status p {
+  margin: 0.3rem 0 0;
+  color: var(--color-text-muted);
+}
+
+.heroMedia {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(110, 207, 255, 0.3);
+  border-radius: 0.5rem;
+  background: #080b12;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.4);
+}
+
+.heroImage {
+  object-fit: contain;
+}
+
+.section,
+.problemSection,
+.linksSection {
+  padding-block: clamp(3.5rem, 8vw, 6.5rem);
+  border-block-start: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(8, 8, 12, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.problemSection {
+  background: rgba(12, 18, 26, 0.78);
+}
+
+.section:nth-of-type(even) {
+  background: rgba(16, 11, 29, 0.76);
+}
+
+.sectionHeading {
+  max-inline-size: 48rem;
+  margin-block-end: 2rem;
+}
+
+.sectionHeading > p {
+  margin-block-end: 0.65rem;
+  color: #67d3ff;
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 850;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+}
+
+.problemGrid .sectionHeading,
+.maintenanceGrid .sectionHeading {
+  margin: 0;
+}
+
+.problemText {
+  max-inline-size: 55rem;
+  margin: 0;
+}
+
+.itemGrid,
+.numberedGrid {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itemGrid li,
+.numberedGrid li {
+  min-inline-size: 0;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: 1rem;
+  padding: clamp(1.3rem, 3vw, 1.8rem);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: rgba(20, 20, 29, 0.9);
+}
+
+.itemMarker {
+  color: #67d3ff;
+  font-family: var(--font-heading);
+  font-weight: 850;
+}
+
+.itemGrid h3,
+.numberedGrid h3 {
+  margin-block-end: 0.6rem;
+  color: #d9cbff;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.itemGrid p,
+.numberedGrid p {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.linksSection {
+  background: rgba(10, 19, 26, 0.9);
+}
+
+.linkGrid {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.linkGrid a,
+.linkGrid > div {
+  min-block-size: 5.25rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.linkGrid a:hover {
+  border-color: rgba(103, 211, 255, 0.6);
+}
+
+.linkGrid span {
+  color: var(--color-text-muted);
+  text-align: end;
+}
+
+@media (min-width: 720px) {
+  .itemGrid,
+  .numberedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .linkGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .heroGrid {
+    grid-template-columns: 0.82fr 1.18fr;
+  }
+
+  .problemGrid,
+  .maintenanceGrid {
+    grid-template-columns: 0.65fr 1.35fr;
+  }
+}

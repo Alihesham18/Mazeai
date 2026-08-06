@@ -6,7 +6,7 @@ export function Logo({ locale }: { locale: Locale }) {
   return (
     <Link href={`/${locale}`} className={styles.logo} aria-label="SynergyMazeAI home">
       <span className={styles.mark} aria-hidden="true" />
-      <span>SynergyMazeAI</span>
+      <span className={styles.wordmark}>SynergyMazeAI</span>
     </Link>
   );
 }

@@ -1,0 +1,190 @@
+.hero {
+  min-block-size: min(58svh, 43rem);
+  display: flex;
+  align-items: flex-end;
+  padding-block: clamp(6rem, 12vw, 9rem) clamp(3.5rem, 7vw, 5.5rem);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.hero h1 {
+  max-inline-size: none;
+  margin-block-end: 1.25rem;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  white-space: nowrap;
+}
+
+.eyebrow {
+  margin-block-end: 0.7rem;
+  color: var(--color-primary-hover);
+  font-size: 1.05rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.heroDescription {
+  max-inline-size: 48rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+
+.eventsSection {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(7, 8, 13, 0.9);
+}
+
+.sectionHeading {
+  max-inline-size: 44rem;
+  margin-block-end: 2rem;
+}
+
+.eventGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.eventCard {
+  --event-accent: #a987ff;
+  min-inline-size: 0;
+  min-block-size: 23rem;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid color-mix(in srgb, var(--event-accent) 42%, transparent);
+  border-radius: 0.5rem;
+  background: rgba(16, 14, 25, 0.96);
+  box-shadow: inset 0 3px 0 color-mix(in srgb, var(--event-accent) 75%, transparent);
+}
+
+.eventCard[data-tone="cyan"] {
+  --event-accent: #53d5de;
+}
+
+.eventCard[data-tone="gold"] {
+  --event-accent: #e9bd55;
+}
+
+.cardTopline,
+.cardFooter,
+.eventDate,
+.location,
+.detailsLink {
+  display: flex;
+  align-items: center;
+}
+
+.cardTopline {
+  min-block-size: 2rem;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.eventType {
+  padding: 0.3rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--event-accent) 42%, transparent);
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--event-accent) 9%, transparent);
+  color: var(--event-accent);
+  font-size: 0.72rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.eventDate {
+  gap: 0.45rem;
+  color: var(--event-accent);
+  font-size: 0.9rem;
+  font-weight: 750;
+  text-align: end;
+}
+
+.eventDate svg,
+.location svg,
+.detailsLink svg {
+  flex: 0 0 auto;
+}
+
+.cardContent {
+  flex: 1;
+  padding-block: clamp(2.25rem, 5vw, 3.5rem);
+}
+
+.cardContent h3 {
+  margin-block-end: 1rem;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+}
+
+.cardContent p {
+  max-inline-size: 39rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.cardFooter {
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block-start: 1.25rem;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.location {
+  gap: 0.45rem;
+  color: var(--color-text-muted);
+  font-weight: 750;
+}
+
+.location svg {
+  color: var(--event-accent);
+}
+
+.detailsLink {
+  gap: 0.45rem;
+  color: var(--event-accent);
+  font-weight: 800;
+}
+
+.detailsLink:hover {
+  color: var(--color-text);
+}
+
+.detailsLink:focus-visible {
+  outline: 2px solid var(--event-accent);
+  outline-offset: 5px;
+}
+
+@media (max-width: 48rem) {
+  .hero h1 {
+    font-size: clamp(2.5rem, 12vw, 4.25rem);
+    white-space: normal;
+  }
+
+  .eventGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .eventCard {
+    min-block-size: 21rem;
+  }
+}
+
+@media (max-width: 34rem) {
+  .cardTopline,
+  .cardFooter {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .eventDate {
+    text-align: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detailsLink {
+    scroll-behavior: auto;
+  }
+}

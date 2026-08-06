@@ -1,0 +1,1 @@
+export { TrainingApplicationForm } from "./TrainingApplicationForm";
