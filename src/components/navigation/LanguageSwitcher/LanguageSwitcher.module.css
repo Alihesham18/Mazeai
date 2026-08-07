@@ -9,8 +9,8 @@
 }
 
 .link {
-  min-inline-size: 2.45rem;
-  min-block-size: 2.25rem;
+  min-inline-size: var(--header-language-size, 2.45rem);
+  min-block-size: var(--header-language-size, 2.25rem);
   display: inline-flex;
   align-items: center;
   justify-content: center;

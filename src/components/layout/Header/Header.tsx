@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
@@ -13,9 +14,11 @@ import styles from "./Header.module.css";
 
 export function Header({ locale }: { locale: Locale }) {
   const t = useTranslations();
+  const pathname = usePathname();
+  const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-home={isHome}>
       <Container className={styles.inner}>
         <Logo locale={locale} />
         <DesktopNavigation locale={locale} />

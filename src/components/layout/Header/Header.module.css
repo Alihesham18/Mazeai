@@ -7,8 +7,19 @@
   backdrop-filter: blur(18px);
 }
 
+.header[data-home="true"] {
+  --header-height: 70px;
+  --header-nav-font-size: 0.82rem;
+  --header-nav-padding: 0.58rem;
+  --header-language-size: 2rem;
+  --header-logo-mark-size: 1.8rem;
+  --header-logo-font-size: 0.94rem;
+  background: rgba(5, 6, 13, 0.76);
+  border-block-end-color: rgba(255, 255, 255, 0.055);
+}
+
 .inner {
-  min-block-size: 72px;
+  min-block-size: var(--header-height, 72px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -23,6 +34,13 @@
 
 .actions .desktopCta {
   display: none;
+}
+
+.header[data-home="true"] .desktopCta {
+  min-block-size: 38px;
+  padding-block: 0.58rem;
+  padding-inline: 0.9rem;
+  font-size: 0.82rem;
 }
 
 @media (min-width: 768px) {

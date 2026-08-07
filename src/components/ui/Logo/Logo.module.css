@@ -3,15 +3,15 @@
   align-items: center;
   gap: 0.7rem;
   font-family: var(--font-heading);
-  font-size: 1.02rem;
+  font-size: var(--header-logo-font-size, 1.02rem);
   font-weight: 800;
   letter-spacing: 0;
   white-space: nowrap;
 }
 
 .mark {
-  inline-size: 2rem;
-  block-size: 2rem;
+  inline-size: var(--header-logo-mark-size, 2rem);
+  block-size: var(--header-logo-mark-size, 2rem);
   border: 1px solid rgba(154, 120, 255, 0.56);
   border-radius: 0.45rem;
   background:
