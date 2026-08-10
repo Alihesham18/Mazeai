@@ -156,7 +156,10 @@ export async function HomePage({ locale }: { locale: Locale }) {
               <p className={styles.sectionLabel}>{t("home.featuredEyebrow")}</p>
               <h2>{featuredProject.name}</h2>
               <p>{localize(featuredProject.description, locale)}</p>
-              <Button href={localizedPath(locale, "/research#biopredict")} variant="secondary">
+              <Button
+                href={localizedPath(locale, "/research/projects/biopredict")}
+                variant="secondary"
+              >
                 {t("home.featuredProjectCta")}
                 <ArrowRight size={17} aria-hidden="true" />
               </Button>

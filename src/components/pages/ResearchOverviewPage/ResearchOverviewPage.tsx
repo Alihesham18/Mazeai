@@ -1,5 +1,5 @@
 import {
-  ArrowDown,
+  ArrowUpRight,
   Check,
   Code2,
   Dna,
@@ -9,6 +9,7 @@ import {
   Waves,
   type LucideIcon
 } from "lucide-react";
+import Link from "next/link";
 import { setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import {
@@ -17,7 +18,7 @@ import {
   type ResearchProjectIcon
 } from "@/data/active-research-projects";
 import type { Locale } from "@/i18n/routing";
-import { localize } from "@/lib/utilities/localize";
+import { localize, localizedPath } from "@/lib/utilities/localize";
 import styles from "./ResearchOverviewPage.module.css";
 
 const projectIcons: Record<ResearchProjectIcon, LucideIcon> = {
@@ -54,10 +55,10 @@ export function ResearchOverviewPage({ locale }: { locale: Locale }) {
               const Icon = projectIcons[project.icon];
 
               return (
-                <a
+                <Link
                   className={styles.projectCard}
                   data-tone={project.tone}
-                  href={`#${project.slug}`}
+                  href={localizedPath(locale, `/research/projects/${project.slug}`)}
                   key={project.slug}
                 >
                   <span className={styles.projectVisual} aria-hidden="true">
@@ -74,10 +75,10 @@ export function ResearchOverviewPage({ locale }: { locale: Locale }) {
                     </span>
                     <span className={styles.projectAction}>
                       {localize(researchPageCopy.viewDetails, locale)}
-                      <ArrowDown size={17} aria-hidden="true" />
+                      <ArrowUpRight size={17} aria-hidden="true" />
                     </span>
                   </span>
-                </a>
+                </Link>
               );
             })}
           </div>

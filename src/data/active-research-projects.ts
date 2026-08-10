@@ -242,6 +242,12 @@ export const activeResearchProjects: readonly ActiveResearchProject[] = [
 ];
 
 export const researchPageCopy = {
+  back: {
+    en: "Back to R&D",
+    tr: "Ar-Ge'ye dön",
+    ar: "العودة إلى البحث والتطوير",
+    fa: "بازگشت به تحقیق و توسعه"
+  },
   eyebrow: {
     en: "Active R&D portfolio",
     tr: "Aktif Ar-Ge portföyü",
@@ -310,3 +316,7 @@ export const researchPageCopy = {
   },
   projectLabel: { en: "Project", tr: "Proje", ar: "المشروع", fa: "پروژه" }
 } satisfies Record<string, LocalizedText>;
+
+export function getActiveResearchProject(slug: string): ActiveResearchProject | undefined {
+  return activeResearchProjects.find((project) => project.slug === slug);
+}

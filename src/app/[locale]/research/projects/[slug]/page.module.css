@@ -1,0 +1,242 @@
+.page {
+  --project-accent: #67d3ff;
+}
+
+.page[data-tone="green"] {
+  --project-accent: #44c985;
+}
+
+.page[data-tone="blue"] {
+  --project-accent: #55a7ff;
+}
+
+.page[data-tone="violet"] {
+  --project-accent: #b093ff;
+}
+
+.page[data-tone="gold"] {
+  --project-accent: #f2c14e;
+}
+
+.hero {
+  padding-block: clamp(4rem, 9vw, 7rem);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(0, 0, 0, 0.48);
+}
+
+.backLink {
+  width: fit-content;
+  display: inline-flex;
+  gap: 0.55rem;
+  align-items: center;
+  margin-block-end: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--color-text-muted);
+  font-weight: 750;
+}
+
+.backLink:hover {
+  color: var(--project-accent);
+}
+
+[dir="rtl"] .backLink svg {
+  transform: rotate(180deg);
+}
+
+.heroGrid {
+  display: grid;
+  gap: 2rem;
+  align-items: end;
+}
+
+.status,
+.sectionHeading > p {
+  margin-block-end: 0.7rem;
+  color: var(--project-accent);
+  font-size: 0.84rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  max-inline-size: 18ch;
+  margin-block-end: 1rem;
+}
+
+.metaLine {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 700;
+}
+
+.projectMark {
+  inline-size: clamp(7rem, 15vw, 10rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 52%, transparent);
+  border-radius: 0.5rem;
+  background-color: color-mix(in srgb, var(--project-accent) 8%, #08090e);
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--project-accent) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--project-accent) 12%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--project-accent);
+}
+
+.section,
+.sectionAlt {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(7, 8, 13, 0.88);
+}
+
+.sectionAlt {
+  background: rgba(11, 10, 17, 0.9);
+}
+
+.splitSection {
+  display: grid;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.sectionHeading {
+  max-inline-size: 42rem;
+  margin-block-end: 2rem;
+}
+
+.sectionHeading > span {
+  display: block;
+  margin-block-start: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.description {
+  max-inline-size: 54rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1.08rem, 2vw, 1.25rem);
+  line-height: 1.75;
+}
+
+.metadata {
+  display: grid;
+  gap: 0.75rem;
+  margin-block: 2rem 0;
+}
+
+.metadata div {
+  display: grid;
+  grid-template-columns: minmax(6rem, 0.35fr) 1fr;
+  gap: 1rem;
+  padding-block: 0.8rem;
+  border-block-end: 1px solid var(--color-border);
+}
+
+.metadata dt {
+  color: var(--color-text-muted);
+}
+
+.metadata dd {
+  margin: 0;
+  font-weight: 800;
+}
+
+.objectives,
+.technologies {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.objectives {
+  display: grid;
+  gap: 1rem;
+  max-inline-size: 58rem;
+}
+
+.objectives li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding-block: 1rem;
+  border-block-end: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.objectives svg {
+  flex: 0 0 auto;
+  margin-block-start: 0.2rem;
+  color: var(--project-accent);
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.technologies li {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--project-accent) 36%, var(--color-border));
+  border-radius: 0.35rem;
+  background: color-mix(in srgb, var(--project-accent) 7%, rgba(18, 18, 26, 0.82));
+}
+
+.teamGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.teamSlot {
+  min-block-size: 14rem;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1rem;
+  border: 1px dashed color-mix(in srgb, var(--project-accent) 42%, var(--color-border));
+  border-radius: 0.5rem;
+  background: rgba(14, 14, 20, 0.62);
+}
+
+.emptyAvatar {
+  inline-size: 5rem;
+  block-size: 5rem;
+  display: grid;
+  place-items: center;
+  border: 1px dashed color-mix(in srgb, var(--project-accent) 45%, var(--color-border));
+  border-radius: 50%;
+  color: color-mix(in srgb, var(--project-accent) 58%, var(--color-text-muted));
+}
+
+.emptyName,
+.emptyRole {
+  block-size: 0.55rem;
+  border-radius: 999px;
+  background: rgba(184, 184, 195, 0.18);
+}
+
+.emptyName {
+  inline-size: 8rem;
+}
+
+.emptyRole {
+  inline-size: 5.5rem;
+}
+
+@media (min-width: 46rem) {
+  .heroGrid {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 58rem) {
+  .splitSection {
+    grid-template-columns: 0.7fr 1.3fr;
+  }
+}
