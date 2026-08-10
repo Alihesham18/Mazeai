@@ -1,43 +1,91 @@
 .page {
   position: relative;
   overflow: hidden;
-  color: #fff;
+
+  color: #ffffff;
+
   background:
-    radial-gradient(circle at 80% 10%, rgba(109, 61, 245, 0.14), transparent 30rem),
-    radial-gradient(circle at 16% 56%, rgba(77, 45, 164, 0.08), transparent 26rem), #05060d;
+    radial-gradient(
+      circle at 82% 10%,
+      rgba(124, 58, 237, 0.2),
+      transparent 30rem
+    ),
+    radial-gradient(
+      circle at 18% 58%,
+      rgba(214, 168, 75, 0.06),
+      transparent 26rem
+    ),
+    #0b0712;
 }
 
 .page::before {
   position: absolute;
   inset: 0;
+
   pointer-events: none;
+
   content: "";
-  opacity: 0.12;
+
+  opacity: 0.1;
+
   background-image:
-    linear-gradient(rgba(154, 120, 255, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(154, 120, 255, 0.12) 1px, transparent 1px);
+    linear-gradient(
+      rgba(167, 139, 250, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(167, 139, 250, 0.1) 1px,
+      transparent 1px
+    );
+
   background-size: 72px 72px;
-  mask-image: linear-gradient(to bottom, #000, transparent 38%);
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      #000,
+      transparent 38%
+    );
 }
+
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero {
   position: relative;
-  min-block-size: min(680px, calc(100svh - 78px));
-  border-block-end: 1px solid rgba(154, 120, 255, 0.1);
+
+  min-block-size:
+    min(
+      680px,
+      calc(100svh - 78px)
+    );
+
+  border-block-end:
+    1px solid rgba(214, 168, 75, 0.1);
 }
 
 .heroGrid {
   display: grid;
-  grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+
+  grid-template-columns:
+    minmax(0, 46fr)
+    minmax(0, 54fr);
+
   min-block-size: inherit;
+
   align-items: center;
-  gap: 1.5rem;
+
+  gap: 1.75rem;
 }
 
 .heroCopy {
   position: relative;
   z-index: 2;
+
   max-inline-size: 35rem;
+
   padding-block: 4rem;
 }
 
@@ -45,26 +93,38 @@
 .sectionLabel,
 .trustLabel {
   margin: 0;
-  color: #9a78ff;
+
+  color: #f1c76a;
+
   font-size: 0.75rem;
   font-weight: 800;
   line-height: 1.4;
+
   letter-spacing: 0;
+
   text-transform: uppercase;
 }
 
 .heroCopy h1 {
   max-inline-size: 11ch;
+
   margin: 1rem 0 1.25rem;
+
+  color: #ffffff;
+
   font-size: 4.25rem;
   line-height: 1.02;
+
   letter-spacing: 0;
 }
 
 .lead {
   max-inline-size: 34rem;
+
   margin: 0;
-  color: #aaa8b5;
+
+  color: #aaa5b3;
+
   font-size: 1.05rem;
   line-height: 1.75;
 }
@@ -72,69 +132,172 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
+
   gap: 0.85rem;
+
   margin-block-start: 2rem;
 }
 
+/* =========================================================
+   HERO VISUAL
+   ========================================================= */
+
 .heroVisual {
   position: relative;
-  min-block-size: 36rem;
+
+  min-block-size: 38rem;
+
+  margin-inline-end: -2rem;
+
   isolation: isolate;
 }
 
+ .heroVisual::before {
+  position: absolute;
+
+  inset: 12% 6%;
+
+  z-index: -2;
+
+  content: "";
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(124, 58, 237, 0.26) 0%,
+      rgba(124, 58, 237, 0.12) 42%,
+      transparent 72%
+    );
+
+  filter: blur(70px);
+
+  pointer-events: none;
+}
 .heroVisual::after {
   position: absolute;
-  inset: 14% 8%;
+
+  inset: 24% 22%;
+
   z-index: -1;
+
   content: "";
+
   border-radius: 50%;
-  background: rgba(109, 61, 245, 0.24);
-  filter: blur(68px);
+
+  background:
+    rgba(214, 168, 75, 0.08);
+
+  filter: blur(58px);
+
+  pointer-events: none;
 }
 
 .heroImage {
   object-fit: contain;
-  mix-blend-mode: screen;
-  filter: saturate(0.98) contrast(1.06);
-  mask-image: radial-gradient(ellipse 70% 68% at 51% 51%, #000 46%, transparent 100%);
-}
+  object-position: center;
 
-.pathwaysSection,
-.featuredSection,
-.ctaSection {
-  position: relative;
-  padding-block: 5rem;
-}
+  opacity: 0.98;
 
+  transform: scale(1.12);
+
+  filter:
+    saturate(1.08)
+    contrast(1.06)
+    brightness(1.02)
+    drop-shadow(
+      0 0 28px
+      rgba(124, 58, 237, 0.32)
+    )
+    drop-shadow(
+      0 0 70px
+      rgba(214, 168, 75, 0.08)
+    );
+
+  -webkit-mask-image:
+    radial-gradient(
+      ellipse 72% 72% at center,
+      #000 35%,
+      rgba(0, 0, 0, 0.95) 50%,
+      rgba(0, 0, 0, 0.7) 65%,
+      rgba(0, 0, 0, 0.28) 78%,
+      transparent 94%
+    );
+
+  mask-image:
+    radial-gradient(
+      ellipse 72% 72% at center,
+      #000 35%,
+      rgba(0, 0, 0, 0.95) 50%,
+      rgba(0, 0, 0, 0.7) 65%,
+      rgba(0, 0, 0, 0.28) 78%,
+      transparent 94%
+    );
+}
 .centeredHeader {
   margin-block-end: 2.25rem;
+
   text-align: center;
 }
 
 .centeredHeader h2 {
   margin: 0.55rem 0 0;
+
+  color: #ffffff;
+
   font-size: 2.25rem;
   line-height: 1.15;
+
   letter-spacing: 0;
 }
 
+/* =========================================================
+   PATHWAYS
+   ========================================================= */
+
 .pathwayGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
   gap: 1rem;
 }
 
 .pathwayCard {
   display: flex;
+
   min-block-size: 16.5rem;
+
   flex-direction: column;
   align-items: flex-start;
+
   padding: 1.6rem;
+
   color: inherit;
+
   text-decoration: none;
-  border: 1px solid rgba(154, 120, 255, 0.18);
-  border-radius: 8px;
-  background: linear-gradient(145deg, rgba(17, 14, 35, 0.92), rgba(7, 7, 16, 0.94));
+
+  border:
+    1px solid
+    rgba(167, 139, 250, 0.18);
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22, 14, 37, 0.94),
+      rgba(11, 7, 18, 0.97)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.02);
+
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -143,75 +306,128 @@
 
 .pathwayCard:hover {
   transform: translateY(-4px);
-  border-color: rgba(154, 120, 255, 0.46);
-  box-shadow: 0 18px 42px rgba(46, 22, 112, 0.2);
+
+  border-color:
+    rgba(214, 168, 75, 0.45);
+
+  box-shadow:
+    0 18px 42px
+    rgba(46, 22, 112, 0.2);
 }
 
 .pathwayIcon,
 .ctaIcon {
   display: grid;
+
   inline-size: 3.15rem;
   block-size: 3.15rem;
+
   place-items: center;
-  color: #9a78ff;
-  border: 1px solid rgba(154, 120, 255, 0.3);
-  border-radius: 8px;
-  background: rgba(109, 61, 245, 0.12);
+
+  color: #f1c76a;
+
+  border:
+    1px solid
+    rgba(214, 168, 75, 0.3);
+
+  border-radius: 10px;
+
+  background:
+    rgba(214, 168, 75, 0.07);
 }
 
 .pathwayCard h3 {
-  margin: 1.4rem 0 0.65rem;
+  margin:
+    1.4rem
+    0
+    0.65rem;
+
+  color: #ffffff;
+
   font-size: 1.22rem;
+
   letter-spacing: 0;
 }
 
 .pathwayCard p {
   margin: 0;
-  color: #aaa8b5;
+
+  color: #aaa5b3;
+
   line-height: 1.65;
 }
 
 .textLink {
   display: inline-flex;
+
   align-items: center;
+
   gap: 0.45rem;
+
   margin-block-start: auto;
+
   padding-block-start: 1.2rem;
-  color: #9a78ff;
+
+  color: #f1c76a;
+
   font-size: 0.9rem;
   font-weight: 700;
 }
 
+/* =========================================================
+   TRUST
+   ========================================================= */
+
 .trustSection {
   position: relative;
-  padding-block: 2rem 2.5rem;
-  border-block: 1px solid rgba(154, 120, 255, 0.1);
-  background: rgba(5, 6, 13, 0.5);
+
+  padding-block:
+    2rem
+    2.5rem;
+
+  border-block:
+    1px solid
+    rgba(214, 168, 75, 0.1);
+
+  background:
+    rgba(11, 7, 18, 0.5);
 }
 
 .trustLabel {
   margin-block-end: 1.45rem;
+
   text-align: center;
 }
 
 .schoolGrid {
   display: flex;
+
   max-inline-size: 48rem;
+
   align-items: center;
   justify-content: center;
+
   gap: 3rem;
+
   margin-inline: auto;
 }
 
 .schoolLink {
   display: flex;
+
   min-inline-size: 9rem;
+
   align-items: center;
   justify-content: center;
+
   gap: 0.4rem;
-  color: #aaa8b5;
+
+  color: #aaa5b3;
+
   opacity: 0.68;
-  transition: opacity 160ms ease;
+
+  transition:
+    opacity 160ms ease;
 }
 
 .schoolLink:hover {
@@ -220,52 +436,107 @@
 
 .schoolLogo {
   position: relative;
+
   display: block;
+
   inline-size: 8.2rem;
   block-size: 3rem;
-  filter: grayscale(1);
+
+  filter:
+    grayscale(1)
+    brightness(1.05);
 }
 
 .schoolLogo img {
   object-fit: contain;
 }
 
+/* =========================================================
+   FEATURED
+   ========================================================= */
+
 .featuredSection {
-  border-block-end: 1px solid rgba(154, 120, 255, 0.1);
+  border-block-end:
+    1px solid
+    rgba(214, 168, 75, 0.08);
 }
 
 .featuredGrid {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+
+  grid-template-columns:
+    minmax(0, 0.9fr)
+    minmax(0, 1.1fr);
+
   align-items: center;
+
   gap: 3.5rem;
 }
 
 .featuredCopy h2 {
-  margin: 0.65rem 0 1rem;
+  margin:
+    0.65rem
+    0
+    1rem;
+
+  color: #ffffff;
+
   font-size: 2.4rem;
+
   letter-spacing: 0;
 }
 
 .featuredCopy > p:not(.sectionLabel) {
   max-inline-size: 37rem;
-  margin: 0 0 1.7rem;
-  color: #aaa8b5;
+
+  margin:
+    0
+    0
+    1.7rem;
+
+  color: #aaa5b3;
+
   line-height: 1.75;
 }
 
+/* =========================================================
+   SCIENCE VISUAL
+   ========================================================= */
+
 .scienceVisual {
   position: relative;
+
   display: grid;
+
   min-block-size: 19rem;
+
   overflow: hidden;
+
   place-items: center;
-  border: 1px solid rgba(154, 120, 255, 0.18);
-  border-radius: 8px;
+
+  border:
+    1px solid
+    rgba(167, 139, 250, 0.18);
+
+  border-radius: 12px;
+
   background:
-    linear-gradient(rgba(154, 120, 255, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(154, 120, 255, 0.06) 1px, transparent 1px),
-    radial-gradient(circle at center, rgba(109, 61, 245, 0.2), transparent 58%), #070710;
+    linear-gradient(
+      rgba(167, 139, 250, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(167, 139, 250, 0.055) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at center,
+      rgba(124, 58, 237, 0.22),
+      transparent 58%
+    ),
+    #0d0818;
+
   background-size:
     34px 34px,
     34px 34px,
@@ -275,43 +546,73 @@
 
 .visualOrb {
   position: absolute;
+
   inline-size: 13rem;
   block-size: 13rem;
-  border: 1px solid rgba(154, 120, 255, 0.3);
+
+  border:
+    1px solid
+    rgba(214, 168, 75, 0.26);
+
   border-radius: 50%;
+
   box-shadow:
-    0 0 60px rgba(109, 61, 245, 0.2),
-    inset 0 0 40px rgba(109, 61, 245, 0.14);
+    0 0 60px
+    rgba(124, 58, 237, 0.2),
+    inset 0 0 40px
+    rgba(124, 58, 237, 0.14);
 }
 
 .dnaIcon {
   inline-size: 8rem;
   block-size: 8rem;
-  color: #9a78ff;
-  filter: drop-shadow(0 0 16px rgba(109, 61, 245, 0.7));
+
+  color: #a78bfa;
+
+  filter:
+    drop-shadow(
+      0 0 16px
+      rgba(124, 58, 237, 0.7)
+    );
 }
 
 .dataLineOne,
 .dataLineTwo,
 .dataLineThree {
   position: absolute;
+
   inset-inline-end: 8%;
+
   inline-size: 24%;
   block-size: 1px;
-  background: linear-gradient(90deg, transparent, rgba(154, 120, 255, 0.72));
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(214, 168, 75, 0.7)
+    );
 }
 
 .dataLineOne {
   inset-block-start: 28%;
 }
+
 .dataLineTwo {
   inset-block-start: 48%;
+
   inline-size: 18%;
 }
+
 .dataLineThree {
   inset-block-start: 68%;
+
   inline-size: 29%;
 }
+
+/* =========================================================
+   CTA
+   ========================================================= */
 
 .ctaSection {
   padding-block: 3.75rem;
@@ -319,58 +620,111 @@
 
 .ctaPanel {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
   align-items: center;
+
   gap: 1.25rem;
+
   padding: 1.5rem;
-  border: 1px solid rgba(154, 120, 255, 0.34);
-  border-radius: 8px;
-  background: linear-gradient(105deg, rgba(15, 12, 31, 0.96), rgba(51, 27, 112, 0.54));
+
+  border:
+    1px solid
+    rgba(214, 168, 75, 0.28);
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      105deg,
+      rgba(17, 10, 30, 0.98),
+      rgba(70, 31, 115, 0.5)
+    );
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.025);
 }
 
 .ctaCopy h2 {
   max-inline-size: 34rem;
+
   margin: 0;
+
+  color: #ffffff;
+
   font-size: 1.55rem;
   line-height: 1.2;
+
   letter-spacing: 0;
 }
 
 .ctaCopy p {
-  margin: 0.35rem 0 0;
-  color: #aaa8b5;
+  margin:
+    0.35rem
+    0
+    0;
+
+  color: #aaa5b3;
 }
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
 
 .visuallyHidden {
   position: absolute;
+
   inline-size: 1px;
   block-size: 1px;
+
   overflow: hidden;
+
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+
+  clip-path:
+    inset(50%);
+
   white-space: nowrap;
 }
 
 .page a:focus-visible,
 .page button:focus-visible {
-  outline: 2px solid #bba6ff;
+  outline:
+    2px solid
+    #f1c76a;
+
   outline-offset: 4px;
 }
 
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
 @media (max-width: 960px) {
   .heroGrid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(0, 0.9fr);
   }
+
   .heroCopy h1 {
     font-size: 3.5rem;
   }
+
   .heroVisual {
     min-block-size: 29rem;
   }
+
   .pathwaysSection,
   .featuredSection {
     padding-block: 4rem;
   }
+
   .schoolGrid {
     gap: 1.5rem;
   }
@@ -380,54 +734,78 @@
   .hero {
     min-block-size: auto;
   }
+
   .heroGrid {
     grid-template-columns: 1fr;
-    padding-block: 3.5rem 2.5rem;
+
+    padding-block:
+      3.5rem
+      2.5rem;
   }
+
   .heroCopy {
     max-inline-size: none;
+
     padding-block: 0;
   }
+
   .heroCopy h1 {
     max-inline-size: 12ch;
+
     font-size: 2.75rem;
   }
+
   .heroVisual {
     min-block-size: 23rem;
+
     margin-block-start: -1rem;
   }
+
   .pathwaysSection,
   .featuredSection {
     padding-block: 3rem;
   }
+
   .pathwayGrid,
   .featuredGrid {
     grid-template-columns: 1fr;
   }
+
   .pathwayCard {
     min-block-size: 14.5rem;
   }
+
   .featuredGrid {
     gap: 2rem;
   }
+
   .scienceVisual {
     min-block-size: 16rem;
   }
+
   .schoolGrid {
     flex-wrap: wrap;
+
     gap: 1rem;
   }
+
   .schoolLink {
     min-inline-size: 7.5rem;
   }
+
   .schoolLogo {
     inline-size: 6.5rem;
   }
+
   .ctaPanel {
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
   }
+
   .ctaPanel > a {
     grid-column: 1 / -1;
+
     justify-self: stretch;
   }
 }
@@ -436,47 +814,66 @@
   .heroGrid {
     padding-block-start: 2.75rem;
   }
+
   .heroCopy h1 {
     font-size: 2.35rem;
   }
+
   .lead {
     font-size: 1rem;
   }
+
   .actions {
     flex-direction: column;
   }
+
   .actions a {
     inline-size: 100%;
   }
+
   .heroVisual {
     min-block-size: 18rem;
   }
+
   .centeredHeader h2 {
     font-size: 1.8rem;
   }
+
   .schoolGrid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    grid-template-columns:
+      repeat(
+        3,
+        minmax(0, 1fr)
+      );
   }
+
   .schoolLink {
     min-inline-size: 0;
   }
+
   .schoolLogo {
     inline-size: 100%;
     block-size: 2.5rem;
   }
+
   .schoolLink svg {
     display: none;
   }
+
   .featuredCopy h2 {
     font-size: 2rem;
   }
+
   .ctaPanel {
     grid-template-columns: 1fr;
   }
+
   .ctaIcon {
     display: none;
   }
+
   .ctaPanel > a {
     grid-column: auto;
   }
@@ -487,6 +884,7 @@
   .schoolLink {
     transition: none;
   }
+
   .pathwayCard:hover {
     transform: none;
   }

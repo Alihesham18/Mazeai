@@ -86,7 +86,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
 
           <div className={styles.heroVisual} role="img" aria-label={t("home.visualLabel")}>
             <Image
-              src="/images/hero-maze-network.png"
+             src="/images/hero-ai-chip.png"
               alt=""
               fill
               priority
