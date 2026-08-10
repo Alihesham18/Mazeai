@@ -2,25 +2,55 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, ImageIcon, X } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarDays,
+  ImageIcon,
+  X
+} from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useState
+} from "react";
 import { createPortal } from "react-dom";
 
-import { getLatestCompletedEvent } from "@/data/featured-events";
-import type { Locale } from "@/i18n/routing";
-import { localizedPath, localize } from "@/lib/utilities/localize";
+import {
+  getLatestCompletedEvent
+} from "@/data/featured-events";
+
+import type {
+  Locale
+} from "@/i18n/routing";
+
+import {
+  localizedPath,
+  localize
+} from "@/lib/utilities/localize";
 
 import styles from "./NewsPopup.module.css";
 
-export function NewsPopup({ locale }: { locale: Locale }) {
+export function NewsPopup({
+  locale
+}: {
+  locale: Locale;
+}) {
   const t = useTranslations("home");
 
-  const event = useMemo(() => getLatestCompletedEvent(), []);
+  const event = useMemo(
+    () => getLatestCompletedEvent(),
+    []
+  );
 
-  const [isMounted, setIsMounted] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
+  const [isMounted, setIsMounted] =
+    useState(false);
+
+  const [isVisible, setIsVisible] =
+    useState(false);
+
+  const [isDismissed, setIsDismissed] =
+    useState(false);
 
   const storageKey = event
     ? `synergymazeai-news-dismissed:${event.slug}`
@@ -31,37 +61,54 @@ export function NewsPopup({ locale }: { locale: Locale }) {
   }, []);
 
   useEffect(() => {
-    if (!event || !isMounted) return;
+    if (!event || !isMounted) {
+      return;
+    }
 
     try {
       const dismissed =
-        window.sessionStorage.getItem(storageKey) === "true";
+        window.sessionStorage.getItem(
+          storageKey
+        ) === "true";
 
       if (dismissed) {
         setIsDismissed(true);
         return;
       }
     } catch {
-      // sessionStorage may be unavailable.
+      // sessionStorage may not be available.
     }
 
-    const timer = window.setTimeout(() => {
-      setIsVisible(true);
-    }, 1500);
+    /*
+      Give the visitor time to see the hero first.
+    */
+    const timer =
+      window.setTimeout(() => {
+        setIsVisible(true);
+      }, 2000);
 
     return () => {
       window.clearTimeout(timer);
     };
-  }, [event, storageKey, isMounted]);
+  }, [
+    event,
+    storageKey,
+    isMounted
+  ]);
 
-  if (!event || !isMounted || isDismissed) {
+  if (
+    !event ||
+    !isMounted ||
+    isDismissed
+  ) {
     return null;
   }
 
-  const eventPath = localizedPath(
-    locale,
-    `/events/${event.slug}`
-  );
+  const eventPath =
+    localizedPath(
+      locale,
+      `/events/${event.slug}`
+    );
 
   function dismiss() {
     setIsVisible(false);
@@ -73,33 +120,46 @@ export function NewsPopup({ locale }: { locale: Locale }) {
         "true"
       );
     } catch {
-      // Still dismiss if storage is unavailable.
+      // Still dismiss this render.
     }
   }
 
   const popup = (
     <aside
       className={`${styles.popup} ${
-        isVisible ? styles.visible : ""
+        isVisible
+          ? styles.visible
+          : ""
       }`}
-      aria-label={`${t("newsEyebrow")}: ${event.title}`}
+      aria-label={`${t(
+        "newsEyebrow"
+      )}: ${event.title}`}
       aria-hidden={!isVisible}
     >
       <Link
         href={eventPath}
-        className={styles.stretchedLink}
-        aria-label={`${t("newsCta")}: ${event.title}`}
+        className={
+          styles.stretchedLink
+        }
+        aria-label={`${t(
+          "newsCta"
+        )}: ${event.title}`}
       />
 
       <button
-        className={styles.closeButton}
+        className={
+          styles.closeButton
+        }
         type="button"
         onClick={(clickEvent) => {
           clickEvent.preventDefault();
           clickEvent.stopPropagation();
+
           dismiss();
         }}
-        aria-label={t("newsClose")}
+        aria-label={t(
+          "newsClose"
+        )}
       >
         <X
           size={17}
@@ -107,45 +167,75 @@ export function NewsPopup({ locale }: { locale: Locale }) {
         />
       </button>
 
-      <p className={styles.eyebrow}>
+      <p
+        className={
+          styles.eyebrow
+        }
+      >
         {t("newsEyebrow")}
       </p>
 
-      <div className={styles.imageArea}>
+      <div
+        className={
+          styles.imageArea
+        }
+      >
         {event.eventImage ? (
           <Image
             src={event.eventImage}
             alt={event.title}
             fill
-            sizes="380px"
-            className={styles.eventImage}
+            sizes="340px"
+            className={
+              styles.eventImage
+            }
           />
         ) : (
           <ImageIcon
-            size={20}
+            size={19}
             aria-hidden="true"
           />
         )}
       </div>
 
+      <span
+        className={
+          styles.badge
+        }
+      >
+        Past Event
+      </span>
+
       <h2>
         {event.title}
       </h2>
 
-      <p className={styles.description}>
+      <p
+        className={
+          styles.description
+        }
+      >
         {localize(
           event.description,
           locale
         )}
       </p>
 
-      <div className={styles.meta}>
+      <div
+        className={
+          styles.meta
+        }
+      >
         <CalendarDays
-          size={15}
+          size={14}
           aria-hidden="true"
         />
 
-        <time dateTime={event.dateTime}>
+        <time
+          dateTime={
+            event.dateTime
+          }
+        >
           {localize(
             event.date,
             locale
@@ -153,8 +243,14 @@ export function NewsPopup({ locale }: { locale: Locale }) {
         </time>
       </div>
 
-      <span className={styles.cta}>
-        {t("newsCta")}
+      <span
+        className={
+          styles.cta
+        }
+      >
+        <span>
+          {t("newsCta")}
+        </span>
 
         <ArrowRight
           size={15}
