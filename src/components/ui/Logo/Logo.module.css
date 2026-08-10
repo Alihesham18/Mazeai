@@ -2,6 +2,7 @@
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
+  color: var(--color-gold-soft);
   font-family: var(--font-heading);
   font-size: var(--header-logo-font-size, 1.02rem);
   font-weight: 800;
