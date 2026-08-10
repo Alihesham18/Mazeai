@@ -9,7 +9,8 @@ import styles from "./LanguageSwitcher.module.css";
 const labels: Record<Locale, string> = {
   en: "EN",
   tr: "TR",
-  ar: "AR"
+  ar: "AR",
+  fa: "FA"
 };
 
 function getLocalizedHref(pathname: string, nextLocale: Locale): string {

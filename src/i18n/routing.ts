@@ -1,4 +1,4 @@
-export const locales = ["en", "tr", "ar"] as const;
+export const locales = ["en", "tr", "ar", "fa"] as const;
 export const defaultLocale = "en";
 
 export type Locale = (typeof locales)[number];
@@ -8,5 +8,5 @@ export function isLocale(value: string): value is Locale {
 }
 
 export function getDirection(locale: Locale): "ltr" | "rtl" {
-  return locale === "ar" ? "rtl" : "ltr";
+  return locale === "ar" || locale === "fa" ? "rtl" : "ltr";
 }

@@ -45,11 +45,17 @@ export const coreAreas: CardContent[] = [
 export const services: CardContent[] = [
   {
     slug: "ai-consulting",
-    title: { en: "AI Consulting", tr: "Yapay Zeka Danışmanlığı", ar: "استشارات الذكاء الاصطناعي" },
+    title: {
+      en: "AI Consulting",
+      tr: "Yapay Zeka Danışmanlığı",
+      ar: "استشارات الذكاء الاصطناعي",
+      fa: "مشاوره هوش مصنوعی"
+    },
     description: {
       en: "Assess use cases, risks, data readiness, and implementation roadmaps.",
       tr: "Kullanım senaryolarını, riskleri, veri hazırlığını ve uygulama yol haritalarını değerlendirin.",
-      ar: "تقييم حالات الاستخدام والمخاطر وجاهزية البيانات وخطط التطبيق."
+      ar: "تقييم حالات الاستخدام والمخاطر وجاهزية البيانات وخطط التطبيق.",
+      fa: "ارزیابی موارد کاربرد، ریسک‌ها، آمادگی داده‌ها و نقشه راه پیاده‌سازی."
     }
   },
   {
@@ -57,12 +63,14 @@ export const services: CardContent[] = [
     title: {
       en: "AI Solutions and Automation",
       tr: "Yapay Zeka Çözümleri ve Otomasyon",
-      ar: "حلول وأتمتة الذكاء الاصطناعي"
+      ar: "حلول وأتمتة الذكاء الاصطناعي",
+      fa: "راهکارهای هوش مصنوعی و اتوماسیون"
     },
     description: {
       en: "Build assistants, dashboards, workflow automations, and decision-support tools.",
       tr: "Asistanlar, panolar, iş akışı otomasyonları ve karar destek araçları oluşturun.",
-      ar: "بناء مساعدين ولوحات متابعة وأتمتة سير العمل وأدوات دعم القرار."
+      ar: "بناء مساعدين ولوحات متابعة وأتمتة سير العمل وأدوات دعم القرار.",
+      fa: "ساخت دستیارها، داشبوردها، اتوماسیون فرایندهای کاری و ابزارهای پشتیبان تصمیم‌گیری."
     }
   },
   {
@@ -70,12 +78,14 @@ export const services: CardContent[] = [
     title: {
       en: "Research and Development",
       tr: "Araştırma ve Geliştirme",
-      ar: "البحث والتطوير"
+      ar: "البحث والتطوير",
+      fa: "تحقیق و توسعه"
     },
     description: {
       en: "Move ideas from hypothesis to validated concept with technical documentation.",
       tr: "Fikirleri hipotezden doğrulanmış konsepte teknik dokümantasyonla taşıyın.",
-      ar: "نقل الأفكار من الفرضية إلى مفهوم موثق ومتحقق."
+      ar: "نقل الأفكار من الفرضية إلى مفهوم موثق ومتحقق.",
+      fa: "تبدیل ایده‌ها از فرضیه به مفهومی اعتبارسنجی‌شده همراه با مستندات فنی."
     }
   },
   {
@@ -83,12 +93,14 @@ export const services: CardContent[] = [
     title: {
       en: "Education and Training",
       tr: "Eğitim ve Gelişim",
-      ar: "التعليم والتدريب"
+      ar: "التعليم والتدريب",
+      fa: "آموزش و توانمندسازی"
     },
     description: {
       en: "Deliver AI literacy, Python, data science, and applied innovation programs.",
       tr: "Yapay zeka okuryazarlığı, Python, veri bilimi ve uygulamalı inovasyon programları sunun.",
-      ar: "تقديم برامج محو أمية الذكاء الاصطناعي وبايثون وعلوم البيانات والابتكار العملي."
+      ar: "تقديم برامج محو أمية الذكاء الاصطناعي وبايثون وعلوم البيانات والابتكار العملي.",
+      fa: "ارائه برنامه‌های سواد هوش مصنوعی، Python، علم داده و نوآوری کاربردی."
     }
   },
   {
@@ -96,21 +108,29 @@ export const services: CardContent[] = [
     title: {
       en: "Academic Partnerships",
       tr: "Akademik İş Birlikleri",
-      ar: "الشراكات الأكاديمية"
+      ar: "الشراكات الأكاديمية",
+      fa: "همکاری‌های دانشگاهی"
     },
     description: {
       en: "Co-design research, seminars, workshops, and student-centered innovation projects.",
       tr: "Araştırma, seminer, atölye ve öğrenci odaklı inovasyon projelerini birlikte tasarlayın.",
-      ar: "تصميم الأبحاث والندوات وورش العمل ومشاريع الابتكار الطلابية بشكل مشترك."
+      ar: "تصميم الأبحاث والندوات وورش العمل ومشاريع الابتكار الطلابية بشكل مشترك.",
+      fa: "طراحی مشترک پژوهش‌ها، سمینارها، کارگاه‌ها و پروژه‌های نوآوری دانشجومحور."
     }
   },
   {
     slug: "custom-programs",
-    title: { en: "Custom Programs", tr: "Özel Programlar", ar: "برامج مخصصة" },
+    title: {
+      en: "Custom Programs",
+      tr: "Özel Programlar",
+      ar: "برامج مخصصة",
+      fa: "برنامه‌های سفارشی"
+    },
     description: {
       en: "Create tailored consulting, research, and education programs for specific goals.",
       tr: "Belirli hedefler için özel danışmanlık, araştırma ve eğitim programları oluşturun.",
-      ar: "إنشاء برامج استشارية وبحثية وتعليمية مخصصة لأهداف محددة."
+      ar: "إنشاء برامج استشارية وبحثية وتعليمية مخصصة لأهداف محددة.",
+      fa: "طراحی برنامه‌های سفارشی مشاوره، پژوهش و آموزش برای اهداف مشخص."
     }
   }
 ];
@@ -217,40 +237,65 @@ export const events: EventContent[] = [
 export const caseStudies: CardContent[] = [
   {
     slug: "sample-ai-operations",
-    eyebrow: { en: "Illustrative concept", tr: "Açıklayıcı konsept", ar: "مفهوم توضيحي" },
+    eyebrow: {
+      en: "Illustrative concept",
+      tr: "Açıklayıcı konsept",
+      ar: "مفهوم توضيحي",
+      fa: "نمونه مفهومی"
+    },
     title: {
       en: "AI Operations Pilot",
       tr: "Yapay Zeka Operasyon Pilotu",
-      ar: "تجربة عمليات الذكاء الاصطناعي"
+      ar: "تجربة عمليات الذكاء الاصطناعي",
+      fa: "نمونه آزمایشی عملیات هوش مصنوعی"
     },
     description: {
       en: "A transparent demonstration of how an AI operations pilot can define workflow measures and reporting goals.",
       tr: "Bir yapay zeka operasyon pilotunun iş akışı ölçütlerini ve raporlama hedeflerini nasıl tanımlayabileceğini gösteren şeffaf bir çalışma.",
-      ar: "عرض شفاف لكيفية تحديد مقاييس سير العمل وأهداف التقارير ضمن تجربة عمليات الذكاء الاصطناعي."
+      ar: "عرض شفاف لكيفية تحديد مقاييس سير العمل وأهداف التقارير ضمن تجربة عمليات الذكاء الاصطناعي.",
+      fa: "نمونه‌ای شفاف که نشان می‌دهد یک طرح آزمایشی عملیات هوش مصنوعی چگونه می‌تواند معیارهای گردش کار و اهداف گزارش‌دهی را تعریف کند."
     }
   },
   {
     slug: "sample-training-program",
-    eyebrow: { en: "Illustrative concept", tr: "Açıklayıcı konsept", ar: "مفهوم توضيحي" },
+    eyebrow: {
+      en: "Illustrative concept",
+      tr: "Açıklayıcı konsept",
+      ar: "مفهوم توضيحي",
+      fa: "نمونه مفهومی"
+    },
     title: {
       en: "Applied AI Training",
       tr: "Uygulamalı Yapay Zeka Eğitimi",
-      ar: "تدريب الذكاء الاصطناعي التطبيقي"
+      ar: "تدريب الذكاء الاصطناعي التطبيقي",
+      fa: "آموزش کاربردی هوش مصنوعی"
     },
     description: {
       en: "A program model showing how project-based workshops can connect learning objectives, practice, and assessment.",
       tr: "Proje tabanlı atölyelerin öğrenme hedeflerini, uygulamayı ve değerlendirmeyi nasıl birleştirebileceğini gösteren program modeli.",
-      ar: "نموذج برنامج يوضح كيفية ربط ورش المشاريع بأهداف التعلم والتطبيق والتقييم."
+      ar: "نموذج برنامج يوضح كيفية ربط ورش المشاريع بأهداف التعلم والتطبيق والتقييم.",
+      fa: "مدلی نمونه از یک برنامه که نشان می‌دهد کارگاه‌های پروژه‌محور چگونه می‌توانند اهداف یادگیری، تمرین و ارزیابی را به هم پیوند دهند."
     }
   },
   {
     slug: "sample-research-roadmap",
-    eyebrow: { en: "Illustrative concept", tr: "Açıklayıcı konsept", ar: "مفهوم توضيحي" },
-    title: { en: "Research Roadmap", tr: "Araştırma Yol Haritası", ar: "خارطة طريق بحثية" },
+    eyebrow: {
+      en: "Illustrative concept",
+      tr: "Açıklayıcı konsept",
+      ar: "مفهوم توضيحي",
+      fa: "نمونه مفهومی"
+    },
+    title: {
+      en: "Research Roadmap",
+      tr: "Araştırma Yol Haritası",
+      ar: "خارطة طريق بحثية",
+      fa: "نقشه راه پژوهش"
+    },
     description: {
       en: "A roadmap model for turning a research question into defined work packages, review points, and prototype decisions.",
       tr: "Bir araştırma sorusunu tanımlı iş paketlerine, inceleme noktalarına ve prototip kararlarına dönüştürmeye yönelik yol haritası modeli.",
-      ar: "نموذج خارطة طريق يحول سؤال البحث إلى حزم عمل ونقاط مراجعة وقرارات خاصة بالنموذج الأولي."
+      ar: "نموذج خارطة طريق يحول سؤال البحث إلى حزم عمل ونقاط مراجعة وقرارات خاصة بالنموذج الأولي.",
+      fa: "مدلی نمونه از نقشه راه برای تبدیل یک پرسش پژوهشی به بسته‌های کاری مشخص، نقاط بازبینی و تصمیم‌های مربوط به نمونه اولیه."
     }
   }
 ];
@@ -261,12 +306,14 @@ export const blogPosts: CardContent[] = [
     title: {
       en: "Responsible AI Starting Points",
       tr: "Sorumlu Yapay Zeka Başlangıçları",
-      ar: "نقاط بداية للذكاء الاصطناعي المسؤول"
+      ar: "نقاط بداية للذكاء الاصطناعي المسؤول",
+      fa: "نقاط آغاز هوش مصنوعی مسئولانه"
     },
     description: {
       en: "How teams can frame risk, value, and accountability before building.",
       tr: "Ekipler geliştirmeden önce risk, değer ve hesap verebilirliği nasıl çerçeveleyebilir.",
-      ar: "كيف تؤطر الفرق المخاطر والقيمة والمساءلة قبل البناء."
+      ar: "كيف تؤطر الفرق المخاطر والقيمة والمساءلة قبل البناء.",
+      fa: "تیم‌ها چگونه می‌توانند پیش از شروع ساخت، ریسک، ارزش و پاسخ‌گویی را چارچوب‌بندی کنند."
     }
   },
   {
@@ -274,12 +321,14 @@ export const blogPosts: CardContent[] = [
     title: {
       en: "From Research to Prototype",
       tr: "Araştırmadan Prototipe",
-      ar: "من البحث إلى النموذج الأولي"
+      ar: "من البحث إلى النموذج الأولي",
+      fa: "از پژوهش تا نمونه اولیه"
     },
     description: {
       en: "A practical path for turning early research into a usable proof of concept.",
       tr: "Erken araştırmayı kullanılabilir bir kavram kanıtına dönüştürmek için pratik yol.",
-      ar: "مسار عملي لتحويل البحث المبكر إلى إثبات مفهوم قابل للاستخدام."
+      ar: "مسار عملي لتحويل البحث المبكر إلى إثبات مفهوم قابل للاستخدام.",
+      fa: "مسیری عملی برای تبدیل پژوهش اولیه به اثبات مفهومی قابل استفاده."
     }
   },
   {
@@ -287,12 +336,14 @@ export const blogPosts: CardContent[] = [
     title: {
       en: "AI Literacy for Organizations",
       tr: "Kurumlar İçin Yapay Zeka Okuryazarlığı",
-      ar: "ثقافة الذكاء الاصطناعي للمؤسسات"
+      ar: "ثقافة الذكاء الاصطناعي للمؤسسات",
+      fa: "سواد هوش مصنوعی برای سازمان‌ها"
     },
     description: {
       en: "What non-technical teams need to participate in AI transformation.",
       tr: "Teknik olmayan ekiplerin yapay zeka dönüşümüne katılmak için ihtiyaç duydukları.",
-      ar: "ما تحتاجه الفرق غير التقنية للمشاركة في تحول الذكاء الاصطناعي."
+      ar: "ما تحتاجه الفرق غير التقنية للمشاركة في تحول الذكاء الاصطناعي.",
+      fa: "آنچه تیم‌های غیرفنی برای مشارکت در تحول هوش مصنوعی نیاز دارند."
     }
   }
 ];

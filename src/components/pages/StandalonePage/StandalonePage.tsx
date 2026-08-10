@@ -132,6 +132,34 @@ const labels: Record<
     teamSlot: "مساحة ملف شخصي",
     teamPending: "سيتم نشر الاسم والملف الشخصي بعد التأكيد.",
     directoryTitle: "استكشف المحتوى"
+  },
+  fa: {
+    eyebrow: "SynergyMazeAI",
+    readMore: "مشاهده جزئیات",
+    overview: "هدف و دامنه",
+    overviewText:
+      "این صفحه هدف، مخاطبان و زمینه عملی این بخش از فعالیت‌های ما را توضیح می‌دهد.",
+    approach: "رویکرد ما",
+    approachText:
+      "با اهداف روشن آغاز می‌کنیم، مسئولیت‌ها را مشخص می‌سازیم و در مراحل متمرکز همراه با نقاط بازبینی و نتایج قابل سنجش پیش می‌رویم.",
+    nextStep: "شروع گفت‌وگو",
+    nextStepText:
+      "اهداف، محدودیت‌ها یا پرسش‌های خود را با ما در میان بگذارید تا گام عملی بعدی را مشخص کنیم.",
+    contactTitle: "نقطه شروع مناسب را انتخاب کنید",
+    contactText:
+      "برای مشاوره، همکاری پژوهشی، برنامه‌های آموزشی، دوره‌ها، رویدادها یا یک پروژه دیجیتال جدید با ما تماس بگیرید.",
+    contactButton: "ارسال ایمیل به SynergyMazeAI",
+    legalTitle: "اطلاعات و انتخاب‌ها",
+    legalText:
+      "این صفحه نحوه رسیدگی به این موضوع و مسیر ارسال پرسش‌ها یا درخواست‌ها را خلاصه می‌کند.",
+    legalNotice:
+      "این محتوا خلاصه‌ای اولیه از سیاست‌هاست و باید پیش از انتشار عمومی توسط مشاور حقوقی واجد صلاحیت بررسی شود.",
+    teamTitle: "ساختار تیم",
+    teamText:
+      "این فهرست برای پروفایل‌های تأییدشده در حوزه مدیریت، پژوهش، مهندسی و آموزش آماده شده است.",
+    teamSlot: "جایگاه پروفایل",
+    teamPending: "نام و پروفایل پس از تأیید منتشر خواهد شد.",
+    directoryTitle: "مشاهده مجموعه"
   }
 };
 
@@ -140,7 +168,8 @@ const genericDescriptions: Record<Locale, (title: string) => string> = {
     `Learn how SynergyMazeAI approaches ${title.toLowerCase()} through practical collaboration.`,
   tr: (title) =>
     `SynergyMazeAI'ın ${title} alanına pratik iş birliğiyle nasıl yaklaştığını keşfedin.`,
-  ar: (title) => `تعرف على منهج SynergyMazeAI العملي والتعاوني في مجال ${title}.`
+  ar: (title) => `تعرف على منهج SynergyMazeAI العملي والتعاوني في مجال ${title}.`,
+  fa: (title) => `با رویکرد عملی و مشارکتی SynergyMazeAI به ${title} آشنا شوید.`
 };
 
 function getDirectory(path: string): DirectoryContent | null {

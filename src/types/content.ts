@@ -4,6 +4,7 @@ export interface LocalizedText {
   en: string;
   tr: string;
   ar: string;
+  fa?: string;
 }
 
 export interface NavItem {
