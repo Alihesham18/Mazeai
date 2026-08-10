@@ -1,43 +1,184 @@
-.hero {
-  padding-block: clamp(4rem, 8vw, 6rem);
+.page {
+  min-height: 100vh;
 }
 
-.wrap {
+.hero {
+  min-height: min(58svh, 42rem);
+  display: flex;
+  align-items: flex-end;
+  padding-block: clamp(6rem, 12vw, 9rem) clamp(3.5rem, 7vw, 5rem);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(115deg, rgba(5, 6, 13, 0.88), rgba(10, 8, 25, 0.5));
+}
+
+.hero h1 {
+  max-width: 14ch;
+  margin: 0 0 1.3rem;
+}
+
+.eyebrow,
+.cardEyebrow {
+  margin: 0 0 0.75rem;
+  color: var(--color-primary-hover);
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.lead {
+  max-width: 48rem;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
+}
+
+.contentSection {
+  padding-block: clamp(4rem, 8vw, 7rem);
+  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(7, 8, 14, 0.72);
+}
+
+.sectionIntro {
+  max-width: 48rem;
+  margin-block-end: 2.5rem;
+}
+
+.sectionIntro h2,
+.sectionIntro p,
+.ctaInner h2,
+.ctaInner p {
+  margin-block-end: 0;
+}
+
+.sectionIntro > p:last-child,
+.ctaInner > div > p:last-child {
+  margin-block-start: 1rem;
+  color: var(--color-text-muted);
+}
+
+.directoryGrid,
+.editorialGrid,
+.teamGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.directoryCard,
+.editorialCard,
+.teamCard,
+.contactCard {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-color: rgba(154, 120, 255, 0.24);
+  background: rgba(15, 14, 28, 0.78);
+}
+
+.directoryCard h3,
+.directoryCard p,
+.editorialCard h2,
+.editorialCard p,
+.teamCard h3,
+.teamCard p,
+.contactCard h3,
+.contactCard p {
+  margin-block-end: 0;
+}
+
+.directoryCard > p:not(.cardEyebrow),
+.editorialCard > p,
+.teamCard > p:not(.cardEyebrow),
+.contactCard > p {
+  color: var(--color-text-muted);
+}
+
+.directoryCard :global(a) {
+  margin-block-start: auto;
+}
+
+.editorialCard > svg,
+.contactCard > svg {
+  color: var(--color-primary-hover);
+}
+
+.editorialCard h2 {
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.sectionNumber {
+  color: rgba(215, 200, 255, 0.58);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.notice {
+  margin: 1.5rem 0 0;
+  padding: 1rem 1.2rem;
+  border-inline-start: 3px solid var(--color-warning);
+  background: rgba(242, 184, 75, 0.08);
+  color: #ffe2a1;
+}
+
+.contactGrid {
   display: grid;
   gap: 2rem;
 }
 
-.lead {
-  max-inline-size: 760px;
-  color: var(--color-text-muted);
-  font-size: 1.1rem;
+.contactCard {
+  justify-content: center;
 }
 
-.grid {
+.avatarSlot {
+  width: 4.5rem;
+  aspect-ratio: 1;
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  place-items: center;
+  margin-block-end: 1rem;
+  border: 1px dashed rgba(154, 120, 255, 0.5);
+  color: var(--color-primary-hover);
+  background: rgba(109, 61, 245, 0.08);
 }
 
-.sectionList {
-  display: grid;
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.ctaSection {
+  padding-block: clamp(3.5rem, 7vw, 5.5rem);
+  background: rgba(10, 8, 20, 0.8);
 }
 
-.sectionList li {
-  padding: 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  background: var(--color-surface);
+.ctaInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
 }
 
-.notice {
-  padding: 1.2rem;
-  border: 1px solid rgba(242, 184, 75, 0.5);
-  border-radius: 0.5rem;
-  background: rgba(242, 184, 75, 0.08);
-  color: #ffe2a1;
+.ctaInner > div {
+  max-width: 46rem;
+}
+
+@media (min-width: 720px) {
+  .directoryGrid,
+  .editorialGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contactGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 719px) {
+  .hero {
+    min-height: 30rem;
+  }
+
+  .ctaInner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }

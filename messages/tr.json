@@ -53,8 +53,8 @@
   },
   "home": {
     "eyebrow": "Yapay Zeka • Araştırma • Eğitim",
-    "headline": "Geleceği yapay zeka, araştırma ve eğitimle inşa ediyoruz",
-    "supporting": "SynergyMazeAI, kurumların akıllı çözümler geliştirmesine, araştırmayı ilerletmesine ve insanları yapay zeka odaklı geleceğe hazırlamasına yardımcı olur.",
+    "headline": "Gerçek sorunlar için akıllı çözümler geliştiriyoruz.",
+    "supporting": "SynergyMazeAI; yapay zeka, araştırma, eğitim ve uygulamayı kurumlar ve topluluklar için bir araya getirir.",
     "primaryCta": "Hizmetleri Keşfedin",
     "secondaryCta": "İş Birliği Yapın",
     "researchCta": "Ar-Ge'yi Keşfedin",
@@ -63,6 +63,20 @@
     "partnersEyebrow": "Güvenen ve birlikte çalıştığımız kurumlar",
     "partnerNote": "Eğitim ve danışmanlık hizmetleri sunduğumuz kurumlar.",
     "schoolVisit": "Resmi web sitesini ziyaret et",
+    "choosePathEyebrow": "Yolunuzu seçin",
+    "choosePathTitle": "Sizin için önemli olanı keşfedin",
+    "aiPathTitle": "Yapay Zeka ve Teknoloji",
+    "aiPathDescription": "Pratik ihtiyaçlara göre şekillenen yapay zeka danışmanlığı, akıllı sistemler, otomasyon ve veri odaklı çözümler.",
+    "researchPathTitle": "Araştırma ve Geliştirme",
+    "researchPathDescription": "Sorumlu ve çok disiplinli iş birliğiyle geliştirilen uygulamalı araştırmalar ve prototipler.",
+    "educationPathTitle": "Eğitim ve Öğrenme",
+    "educationPathDescription": "Yapay zeka odaklı gelecek için pratik beceriler kazandıran programlar, bootcamp'ler ve atölyeler.",
+    "explore": "Keşfet",
+    "featuredEyebrow": "Öne çıkan çalışma",
+    "featuredProjectCta": "Bu proje hakkında daha fazla bilgi",
+    "newsEyebrow": "SynergyMazeAI'den son gelişme",
+    "newsCta": "Etkinlik özetini görüntüle",
+    "newsClose": "Etkinlik güncellemesini kapat",
     "coreTitle": "Temel iş birliği alanları",
     "coreEyebrow": "Ne yapıyoruz",
     "coreDescription": "Araştırma, teknoloji ve eğitimi uygulamaya dönük sonuçlar etrafında bir araya getiriyoruz.",
@@ -104,7 +118,7 @@
     "research": "Ar-Ge",
     "legal": "Yasal",
     "contact": "İletişim",
-    "social": "Sosyal medya yer tutucuları",
+    "social": "Sosyal medya kanalları",
     "copyright": "© 2026 SynergyMazeAI. Tüm hakları saklıdır."
   },
   "services": {
@@ -238,7 +252,7 @@
     },
     "caseStudies": {
       "title": "Vaka Çalışmaları",
-      "description": "Gelecekte gerçek vaka çalışmalarının nasıl sunulacağını gösteren kurgusal örnek sonuçları inceleyin."
+      "description": "Yapay zeka, araştırma ve eğitim çalışmalarının nasıl yapılandırılıp değerlendirilebileceğini gösteren şeffaf konsept çalışmalarını inceleyin."
     },
     "blog": {
       "title": "Blog",
@@ -291,11 +305,11 @@
     },
     "team": {
       "title": "Ekibimiz",
-      "description": "Rol filtreleri ve profil sayfaları için hazırlanmış yer tutucu ekip dizini."
+      "description": "SynergyMazeAI'ın çok disiplinli rollerini keşfedin. Kesinleşen isimler ve profiller görevler netleştikçe eklenecektir."
     },
     "partners": {
       "title": "Partnerlerimiz",
-      "description": "Gerçek partnerlik ima etmeyen yer tutucu partner mimarisi."
+      "description": "SynergyMazeAI'ın okullar, üniversiteler, kurumlar ve sektör ekipleri için sunduğu iş birliği modellerini inceleyin."
     },
     "contact": {
       "title": "İletişim",
@@ -303,19 +317,19 @@
     },
     "privacy": {
       "title": "Gizlilik Politikası",
-      "description": "Yayın öncesi yetkin hukuk danışmanları tarafından incelenmesi gereken yer tutucu gizlilik metni."
+      "description": "SynergyMazeAI'ın kişisel bilgiler, gizlilik soruları ve veri taleplerine yaklaşımını inceleyin."
     },
     "cookies": {
       "title": "Çerez Politikası",
-      "description": "Gelecekteki onay araçları için hazırlanmış yer tutucu çerez politikası."
+      "description": "Bu web sitesinde çerezlerin ve benzer teknolojilerin nasıl yönetilmesinin planlandığını inceleyin."
     },
     "terms": {
       "title": "Kullanım Şartları",
-      "description": "Gelecekteki hukuki inceleme için yer tutucu kullanım şartları."
+      "description": "SynergyMazeAI web sitesine erişim ve kullanım için genel koşulları inceleyin."
     },
     "personalData": {
       "title": "Kişisel Veri Aydınlatma Metni",
-      "description": "Türkiye için yer tutucu kişisel veri aydınlatma metni. Nihai hukuki tavsiye değildir."
+      "description": "Türkiye'deki kişisel veri talepleri için çalışma amaçlı bilgilendirme metnini inceleyin."
     },
     "placeholder": {
       "title": "Sayfa İskeleti",

@@ -1,5 +1,5 @@
 :root {
-  --color-background: #000000;
+  --color-background: #05060d;
   --color-surface: #16161e;
   --color-surface-violet: #211238;
   --color-primary: #6d3df5;
@@ -32,7 +32,9 @@ html[dir="rtl"] {
 
 body {
   margin: 0;
-  background: var(--color-background);
+  background:
+    radial-gradient(circle at 72% 14%, rgba(109, 61, 245, 0.12), transparent 34rem),
+    var(--color-background);
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: 1.6;

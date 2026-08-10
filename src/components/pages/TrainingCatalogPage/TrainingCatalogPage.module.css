@@ -27,7 +27,7 @@
 .catalog {
   min-block-size: 44rem;
   padding-block: clamp(3.5rem, 8vw, 6.5rem);
-  background: rgba(8, 8, 14, 0.88);
+  background: rgba(8, 8, 14, 0.74);
 }
 
 .segmentedControl {

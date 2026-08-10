@@ -8,6 +8,7 @@ export interface FeaturedEvent {
   type: LocalizedText;
   date: LocalizedText;
   dateTime?: string;
+  eventImage?: string;
   description: LocalizedText;
   location: LocalizedText;
   tone: EventTone;
@@ -15,6 +16,14 @@ export interface FeaturedEvent {
   program: readonly LocalizedText[];
   audience: readonly LocalizedText[];
   formatDetails: readonly LocalizedText[];
+}
+
+export function getLatestCompletedEvent(referenceDate = new Date()): FeaturedEvent | undefined {
+  return featuredEvents
+    .filter(
+      (event) => event.dateTime && new Date(event.dateTime).getTime() < referenceDate.getTime()
+    )
+    .sort((first, second) => Date.parse(second.dateTime!) - Date.parse(first.dateTime!))[0];
 }
 
 export const featuredEvents: readonly FeaturedEvent[] = [

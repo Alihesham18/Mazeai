@@ -53,8 +53,8 @@
   },
   "home": {
     "eyebrow": "AI • Research • Education",
-    "headline": "Synergy Maze AI",
-    "supporting": "Our organization is a reliable business partner that contributes to the development of individuals and institutions by creating innovative solutions in the fields of education, consulting, and technology.",
+    "headline": "Building intelligent solutions for real challenges.",
+    "supporting": "SynergyMazeAI connects artificial intelligence, research, education, and practical implementation for organizations and communities.",
     "primaryCta": "Explore Our Services",
     "secondaryCta": "Partner With Us",
     "researchCta": "Discover Our R&D",
@@ -63,6 +63,20 @@
     "partnersEyebrow": "Trusted by and working with",
     "partnerNote": "Organizations we provide training and consulting services to.",
     "schoolVisit": "Visit official website",
+    "choosePathEyebrow": "Choose your path",
+    "choosePathTitle": "Explore what matters to you",
+    "aiPathTitle": "AI & Technology",
+    "aiPathDescription": "AI consulting, intelligent systems, automation, and data-driven solutions built around practical needs.",
+    "researchPathTitle": "Research & Development",
+    "researchPathDescription": "Applied research and prototypes developed through responsible, multidisciplinary collaboration.",
+    "educationPathTitle": "Education & Training",
+    "educationPathDescription": "Programs, bootcamps, and workshops designed to build practical skills for an AI-driven future.",
+    "explore": "Explore",
+    "featuredEyebrow": "Featured highlight",
+    "featuredProjectCta": "Learn more about this project",
+    "newsEyebrow": "Latest from SynergyMazeAI",
+    "newsCta": "View event highlights",
+    "newsClose": "Close event update",
     "coreTitle": "Core areas of partnership",
     "coreEyebrow": "What we do",
     "coreDescription": "Research, technology, and education brought together around practical outcomes.",
@@ -104,7 +118,7 @@
     "research": "R&D",
     "legal": "Legal",
     "contact": "Contact",
-    "social": "Social placeholders",
+    "social": "Social channels",
     "copyright": "© 2026 SynergyMazeAI. All rights reserved."
   },
   "services": {
@@ -238,7 +252,7 @@
     },
     "caseStudies": {
       "title": "Case Studies",
-      "description": "Review fictional sample outcomes that demonstrate how future real case studies will be presented."
+      "description": "Explore transparent concept demonstrations showing how AI, research, and education engagements can be structured and evaluated."
     },
     "blog": {
       "title": "Blog",
@@ -291,11 +305,11 @@
     },
     "team": {
       "title": "Our Team",
-      "description": "A placeholder team directory prepared for role filters and profile pages."
+      "description": "Meet the multidisciplinary roles behind SynergyMazeAI. Confirmed names and profiles will be added as assignments are finalized."
     },
     "partners": {
       "title": "Our Partners",
-      "description": "A placeholder partner architecture that does not imply real partnerships."
+      "description": "Explore the collaboration models SynergyMazeAI offers to schools, universities, institutions, and industry teams."
     },
     "contact": {
       "title": "Contact",
@@ -303,19 +317,19 @@
     },
     "privacy": {
       "title": "Privacy Policy",
-      "description": "Placeholder privacy text for review by qualified legal counsel before launch."
+      "description": "Review how SynergyMazeAI approaches personal information, privacy questions, and data requests."
     },
     "cookies": {
       "title": "Cookie Policy",
-      "description": "Placeholder cookie policy prepared for future consent tooling."
+      "description": "Review how cookies and similar technologies are expected to be managed on this website."
     },
     "terms": {
       "title": "Terms of Use",
-      "description": "Placeholder terms of use for future legal review."
+      "description": "Review the general conditions for accessing and using the SynergyMazeAI website."
     },
     "personalData": {
       "title": "Personal Data Information Notice",
-      "description": "Placeholder Türkiye personal data notice. This is not final legal advice."
+      "description": "Review the working information notice for personal data requests in Türkiye."
     },
     "placeholder": {
       "title": "Page Shell",

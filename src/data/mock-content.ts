@@ -118,44 +118,44 @@ export const services: CardContent[] = [
 export const researchProjects: CardContent[] = [
   {
     slug: "learning-analytics-lab",
-    eyebrow: { en: "Sample project", tr: "Örnek proje", ar: "مشروع تجريبي" },
+    eyebrow: { en: "Research concept", tr: "Araştırma konsepti", ar: "مفهوم بحثي" },
     title: {
       en: "Learning Analytics Lab",
       tr: "Öğrenme Analitiği Laboratuvarı",
       ar: "مختبر تحليلات التعلم"
     },
     description: {
-      en: "A fictional dashboard concept for identifying learning patterns and support needs.",
-      tr: "Öğrenme kalıplarını ve destek ihtiyaçlarını belirlemek için kurgusal bir pano konsepti.",
-      ar: "مفهوم لوحة متابعة افتراضي لتحديد أنماط التعلم واحتياجات الدعم."
+      en: "A dashboard concept for identifying aggregate learning patterns and support needs.",
+      tr: "Toplu öğrenme kalıplarını ve destek ihtiyaçlarını belirlemeye yönelik bir pano konsepti.",
+      ar: "مفهوم لوحة متابعة لتحديد أنماط التعلم المجمعة واحتياجات الدعم."
     }
   },
   {
     slug: "responsible-ai-checklist",
-    eyebrow: { en: "Sample project", tr: "Örnek proje", ar: "مشروع تجريبي" },
+    eyebrow: { en: "Research concept", tr: "Araştırma konsepti", ar: "مفهوم بحثي" },
     title: {
       en: "Responsible AI Checklist",
       tr: "Sorumlu Yapay Zeka Kontrol Listesi",
       ar: "قائمة تحقق للذكاء الاصطناعي المسؤول"
     },
     description: {
-      en: "A placeholder research tool for safer AI product planning and review.",
-      tr: "Daha güvenli yapay zeka ürün planlama ve inceleme süreçleri için örnek araştırma aracı.",
-      ar: "أداة بحثية تجريبية لتخطيط ومراجعة منتجات الذكاء الاصطناعي بأمان أكبر."
+      en: "A structured research tool for safer AI product planning and review.",
+      tr: "Daha güvenli yapay zeka ürün planlama ve inceleme süreçleri için yapılandırılmış bir araştırma aracı.",
+      ar: "أداة بحثية منظمة لتخطيط ومراجعة منتجات الذكاء الاصطناعي بأمان أكبر."
     }
   },
   {
     slug: "automation-readiness-index",
-    eyebrow: { en: "Sample project", tr: "Örnek proje", ar: "مشروع تجريبي" },
+    eyebrow: { en: "Research concept", tr: "Araştırma konsepti", ar: "مفهوم بحثي" },
     title: {
       en: "Automation Readiness Index",
       tr: "Otomasyon Hazırlık Endeksi",
       ar: "مؤشر جاهزية الأتمتة"
     },
     description: {
-      en: "A fictional assessment model for prioritizing workflow automation opportunities.",
-      tr: "İş akışı otomasyon fırsatlarını önceliklendirmek için kurgusal değerlendirme modeli.",
-      ar: "نموذج تقييم افتراضي لترتيب فرص أتمتة سير العمل."
+      en: "An assessment model for prioritizing workflow automation opportunities.",
+      tr: "İş akışı otomasyon fırsatlarını önceliklendirmeye yönelik bir değerlendirme modeli.",
+      ar: "نموذج تقييم لترتيب فرص أتمتة سير العمل."
     }
   }
 ];
@@ -163,7 +163,11 @@ export const researchProjects: CardContent[] = [
 export const events: EventContent[] = [
   {
     slug: "ai-strategy-roundtable",
-    title: { en: "AI Strategy Roundtable", tr: "Yapay Zeka Strateji Yuvarlak Masası", ar: "جلسة استراتيجية الذكاء الاصطناعي" },
+    title: {
+      en: "AI Strategy Roundtable",
+      tr: "Yapay Zeka Strateji Yuvarlak Masası",
+      ar: "جلسة استراتيجية الذكاء الاصطناعي"
+    },
     description: {
       en: "A practical session for leaders exploring responsible AI roadmaps.",
       tr: "Sorumlu yapay zeka yol haritalarını keşfeden liderler için uygulamalı oturum.",
@@ -176,7 +180,11 @@ export const events: EventContent[] = [
   },
   {
     slug: "research-prototype-clinic",
-    title: { en: "Research Prototype Clinic", tr: "Araştırma Prototip Kliniği", ar: "عيادة النماذج البحثية" },
+    title: {
+      en: "Research Prototype Clinic",
+      tr: "Araştırma Prototip Kliniği",
+      ar: "عيادة النماذج البحثية"
+    },
     description: {
       en: "Bring an idea and learn how to shape an initial research prototype.",
       tr: "Bir fikir getirin ve ilk araştırma prototipini nasıl şekillendireceğinizi öğrenin.",
@@ -189,7 +197,11 @@ export const events: EventContent[] = [
   },
   {
     slug: "education-ai-lab",
-    title: { en: "Education AI Lab", tr: "Eğitim Yapay Zeka Laboratuvarı", ar: "مختبر الذكاء الاصطناعي للتعليم" },
+    title: {
+      en: "Education AI Lab",
+      tr: "Eğitim Yapay Zeka Laboratuvarı",
+      ar: "مختبر الذكاء الاصطناعي للتعليم"
+    },
     description: {
       en: "A hands-on workshop for educators designing AI-supported learning activities.",
       tr: "Yapay zeka destekli öğrenme etkinlikleri tasarlayan eğitimciler için uygulamalı atölye.",
@@ -205,32 +217,40 @@ export const events: EventContent[] = [
 export const caseStudies: CardContent[] = [
   {
     slug: "sample-ai-operations",
-    eyebrow: { en: "Placeholder metrics", tr: "Yer tutucu metrikler", ar: "مقاييس تجريبية" },
-    title: { en: "AI Operations Pilot", tr: "Yapay Zeka Operasyon Pilotu", ar: "تجربة عمليات الذكاء الاصطناعي" },
+    eyebrow: { en: "Illustrative concept", tr: "Açıklayıcı konsept", ar: "مفهوم توضيحي" },
+    title: {
+      en: "AI Operations Pilot",
+      tr: "Yapay Zeka Operasyon Pilotu",
+      ar: "تجربة عمليات الذكاء الاصطناعي"
+    },
     description: {
-      en: "Sample outcome: 28% faster reporting cycle in a fictional operations workflow.",
-      tr: "Örnek sonuç: Kurgusal bir operasyon akışında %28 daha hızlı raporlama döngüsü.",
-      ar: "نتيجة تجريبية: دورة تقارير أسرع بنسبة 28% في سير عمل افتراضي."
+      en: "A transparent demonstration of how an AI operations pilot can define workflow measures and reporting goals.",
+      tr: "Bir yapay zeka operasyon pilotunun iş akışı ölçütlerini ve raporlama hedeflerini nasıl tanımlayabileceğini gösteren şeffaf bir çalışma.",
+      ar: "عرض شفاف لكيفية تحديد مقاييس سير العمل وأهداف التقارير ضمن تجربة عمليات الذكاء الاصطناعي."
     }
   },
   {
     slug: "sample-training-program",
-    eyebrow: { en: "Placeholder metrics", tr: "Yer tutucu metrikler", ar: "مقاييس تجريبية" },
-    title: { en: "Applied AI Training", tr: "Uygulamalı Yapay Zeka Eğitimi", ar: "تدريب الذكاء الاصطناعي التطبيقي" },
+    eyebrow: { en: "Illustrative concept", tr: "Açıklayıcı konsept", ar: "مفهوم توضيحي" },
+    title: {
+      en: "Applied AI Training",
+      tr: "Uygulamalı Yapay Zeka Eğitimi",
+      ar: "تدريب الذكاء الاصطناعي التطبيقي"
+    },
     description: {
-      en: "Sample outcome: 120 fictional participants completed project-based workshops.",
-      tr: "Örnek sonuç: 120 kurgusal katılımcı proje tabanlı atölyeleri tamamladı.",
-      ar: "نتيجة تجريبية: أكمل 120 مشاركا افتراضيا ورشا قائمة على المشاريع."
+      en: "A program model showing how project-based workshops can connect learning objectives, practice, and assessment.",
+      tr: "Proje tabanlı atölyelerin öğrenme hedeflerini, uygulamayı ve değerlendirmeyi nasıl birleştirebileceğini gösteren program modeli.",
+      ar: "نموذج برنامج يوضح كيفية ربط ورش المشاريع بأهداف التعلم والتطبيق والتقييم."
     }
   },
   {
     slug: "sample-research-roadmap",
-    eyebrow: { en: "Placeholder metrics", tr: "Yer tutucu metrikler", ar: "مقاييس تجريبية" },
+    eyebrow: { en: "Illustrative concept", tr: "Açıklayıcı konsept", ar: "مفهوم توضيحي" },
     title: { en: "Research Roadmap", tr: "Araştırma Yol Haritası", ar: "خارطة طريق بحثية" },
     description: {
-      en: "Sample outcome: 6 fictional work packages clarified before prototype build.",
-      tr: "Örnek sonuç: Prototip öncesinde 6 kurgusal iş paketi netleştirildi.",
-      ar: "نتيجة تجريبية: توضيح 6 حزم عمل افتراضية قبل بناء النموذج."
+      en: "A roadmap model for turning a research question into defined work packages, review points, and prototype decisions.",
+      tr: "Bir araştırma sorusunu tanımlı iş paketlerine, inceleme noktalarına ve prototip kararlarına dönüştürmeye yönelik yol haritası modeli.",
+      ar: "نموذج خارطة طريق يحول سؤال البحث إلى حزم عمل ونقاط مراجعة وقرارات خاصة بالنموذج الأولي."
     }
   }
 ];
@@ -238,7 +258,11 @@ export const caseStudies: CardContent[] = [
 export const blogPosts: CardContent[] = [
   {
     slug: "responsible-ai-starting-points",
-    title: { en: "Responsible AI Starting Points", tr: "Sorumlu Yapay Zeka Başlangıçları", ar: "نقاط بداية للذكاء الاصطناعي المسؤول" },
+    title: {
+      en: "Responsible AI Starting Points",
+      tr: "Sorumlu Yapay Zeka Başlangıçları",
+      ar: "نقاط بداية للذكاء الاصطناعي المسؤول"
+    },
     description: {
       en: "How teams can frame risk, value, and accountability before building.",
       tr: "Ekipler geliştirmeden önce risk, değer ve hesap verebilirliği nasıl çerçeveleyebilir.",
@@ -247,7 +271,11 @@ export const blogPosts: CardContent[] = [
   },
   {
     slug: "from-research-to-prototype",
-    title: { en: "From Research to Prototype", tr: "Araştırmadan Prototipe", ar: "من البحث إلى النموذج الأولي" },
+    title: {
+      en: "From Research to Prototype",
+      tr: "Araştırmadan Prototipe",
+      ar: "من البحث إلى النموذج الأولي"
+    },
     description: {
       en: "A practical path for turning early research into a usable proof of concept.",
       tr: "Erken araştırmayı kullanılabilir bir kavram kanıtına dönüştürmek için pratik yol.",
@@ -256,7 +284,11 @@ export const blogPosts: CardContent[] = [
   },
   {
     slug: "ai-literacy-for-organizations",
-    title: { en: "AI Literacy for Organizations", tr: "Kurumlar İçin Yapay Zeka Okuryazarlığı", ar: "ثقافة الذكاء الاصطناعي للمؤسسات" },
+    title: {
+      en: "AI Literacy for Organizations",
+      tr: "Kurumlar İçin Yapay Zeka Okuryazarlığı",
+      ar: "ثقافة الذكاء الاصطناعي للمؤسسات"
+    },
     description: {
       en: "What non-technical teams need to participate in AI transformation.",
       tr: "Teknik olmayan ekiplerin yapay zeka dönüşümüne katılmak için ihtiyaç duydukları.",
@@ -268,7 +300,11 @@ export const blogPosts: CardContent[] = [
 export const publications: PublicationContent[] = [
   {
     slug: "mock-responsible-ai-framework",
-    title: { en: "Responsible AI Framework Notes", tr: "Sorumlu Yapay Zeka Çerçeve Notları", ar: "ملاحظات إطار الذكاء الاصطناعي المسؤول" },
+    title: {
+      en: "Responsible AI Framework Notes",
+      tr: "Sorumlu Yapay Zeka Çerçeve Notları",
+      ar: "ملاحظات إطار الذكاء الاصطناعي المسؤول"
+    },
     description: {
       en: "Mock PDF metadata for a future downloadable publication.",
       tr: "Gelecekte indirilebilir bir yayın için örnek PDF metaverisi.",

@@ -4,6 +4,7 @@ import { getMessages, getTranslations, setRequestLocale } from "next-intl/server
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 //import { InteractiveBackground } from "@/components/effects/InteractiveBackground";
+import { PageBackground } from "@/components/effects/PageBackground";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { siteConfig } from "@/config/site";
@@ -74,6 +75,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {/* <InteractiveBackground /> */}
+          <PageBackground />
           <a className="skip-link" href="#main-content">
             {t("skip")}
           </a>

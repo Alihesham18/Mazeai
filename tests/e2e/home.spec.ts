@@ -2,44 +2,57 @@ import { expect, test } from "@playwright/test";
 
 test("localized homepages render with expected direction", async ({ page }) => {
   await page.goto("/en");
-  await expect(page.getByRole("heading", { name: "Synergy Maze AI" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Building intelligent solutions for real challenges." })
+  ).toBeVisible();
   await expect(page.locator("html")).toHaveAttribute("dir", "ltr");
 
   await page.goto("/ar");
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
 });
 
-test("interactive background remains inert behind navigation", async ({ page }, testInfo) => {
+test("latest completed event popup opens its localized detail page and stays dismissed", async ({
+  page
+}) => {
   await page.goto("/en");
 
-  const background = page.getByTestId("interactive-background");
-  const imageLayer = page.getByTestId("background-image-layer");
-  await expect(background).toHaveCSS("pointer-events", "none");
-  await expect(background.locator("canvas")).toHaveCount(1);
-
-  const initialTransform = await imageLayer.evaluate(
-    (element) => getComputedStyle(element).transform
+  const popup = page.getByLabel("Latest from SynergyMazeAI: Synergy Science 2026");
+  await expect(popup).toBeVisible({ timeout: 4_000 });
+  await expect(popup.getByRole("link", { name: "Synergy Science 2026" })).toHaveAttribute(
+    "href",
+    "/en/events/synergy-science-2026"
   );
-  if (testInfo.project.name === "mobile") {
-    await page.evaluate(() => window.scrollTo(0, 500));
-  } else {
-    await page.mouse.move(900, 260);
-  }
-  await expect
-    .poll(() => imageLayer.evaluate((element) => getComputedStyle(element).transform))
-    .not.toBe(initialTransform);
+
+  await popup.getByRole("button", { name: "Close event update" }).click();
+  await expect(popup).toHaveCount(0);
+  await page.reload();
+  await page.waitForTimeout(1_800);
+  await expect(popup).toHaveCount(0);
+});
+
+test("interior page background remains inert behind navigation", async ({ page }, testInfo) => {
+  await page.goto("/en");
+  await expect(page.getByTestId("page-background")).toHaveCount(0);
+
+  await page.goto("/en/services");
+  const background = page.getByTestId("page-background");
+  await expect(background).toHaveCSS("pointer-events", "none");
+  await expect(background).toHaveAttribute("aria-hidden", "true");
+  await expect(background).toHaveAttribute("data-variant", "services");
 
   if (testInfo.project.name === "mobile") {
     await page.getByRole("button", { name: "Open navigation menu" }).click();
     const mobileNavigation = page.getByRole("navigation", { name: "Mobile navigation" });
     await expect(mobileNavigation).toBeVisible();
+    await mobileNavigation.locator("summary").filter({ hasText: "Services" }).click();
     await expect(
-      mobileNavigation.getByRole("link", { name: "Services", exact: true })
+      mobileNavigation.getByRole("link", { name: "Services Overview", exact: true })
     ).toHaveAttribute("href", "/en/services");
   } else {
     const mainNavigation = page.getByRole("navigation", { name: "Main navigation" });
+    await mainNavigation.getByRole("button", { name: "Services", exact: true }).click();
     await expect(
-      mainNavigation.getByRole("link", { name: "Services", exact: true })
+      mainNavigation.getByRole("link", { name: "Services Overview", exact: true })
     ).toHaveAttribute("href", "/en/services");
   }
 });
@@ -111,4 +124,15 @@ test("web development projects open complete case studies", async ({ page }) => 
     "contain"
   );
   await expect(page.getByRole("heading", { name: "Quality evidence" })).toBeVisible();
+});
+
+test("primary content routes do not render placeholder shells", async ({ page }) => {
+  test.setTimeout(90_000);
+
+  for (const path of ["/en/case-studies", "/en/blog", "/en/about/mission-vision", "/en/contact"]) {
+    await page.goto(path, { waitUntil: "domcontentloaded" });
+    await expect(page.locator("main")).not.toContainText("Sample placeholder content");
+    await expect(page.locator("main")).not.toContainText("Included in this page shell");
+    await expect(page.locator("main").getByRole("heading", { level: 1 })).toBeVisible();
+  }
 });
