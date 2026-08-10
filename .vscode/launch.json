@@ -5,7 +5,7 @@
       "name": "Open MazeAI",
       "type": "chrome",
       "request": "launch",
-      "url": "http://localhost:3000/en",
+      "url": "http://localhost:3003/en",
       "webRoot": "${workspaceFolder}"
     },
     {
