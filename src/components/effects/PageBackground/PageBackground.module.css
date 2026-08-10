@@ -1,10 +1,10 @@
 .background {
-  --accent: 118, 72, 255;
-  --secondary: 48, 170, 220;
-  --glow-x: 78%;
-  --glow-y: 18%;
-  --secondary-x: 14%;
-  --secondary-y: 76%;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
+  --glow-x: 80%;
+  --glow-y: 12%;
+  --secondary-x: 20%;
+  --secondary-y: 70%;
   --pattern-angle: 0deg;
   position: fixed;
   inset: 0;
@@ -13,12 +13,12 @@
   pointer-events: none;
   user-select: none;
   contain: strict;
-  background: #05060d;
+  background: #0b0712;
 }
 
 .background[data-variant="services"] {
-  --accent: 114, 69, 255;
-  --secondary: 41, 139, 255;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 80%;
   --glow-y: 22%;
   --secondary-x: 18%;
@@ -26,8 +26,8 @@
 }
 
 .background[data-variant="training"] {
-  --accent: 150, 91, 255;
-  --secondary: 241, 183, 75;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 24%;
   --glow-y: 20%;
   --secondary-x: 82%;
@@ -36,8 +36,8 @@
 }
 
 .background[data-variant="research"] {
-  --accent: 100, 75, 255;
-  --secondary: 56, 211, 211;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 68%;
   --glow-y: 18%;
   --secondary-x: 16%;
@@ -46,8 +46,8 @@
 }
 
 .background[data-variant="events"] {
-  --accent: 146, 82, 255;
-  --secondary: 51, 201, 220;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 50%;
   --glow-y: 12%;
   --secondary-x: 86%;
@@ -56,8 +56,8 @@
 }
 
 .background[data-variant="case-studies"] {
-  --accent: 87, 105, 255;
-  --secondary: 63, 203, 188;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 82%;
   --glow-y: 34%;
   --secondary-x: 20%;
@@ -66,8 +66,8 @@
 }
 
 .background[data-variant="blog"] {
-  --accent: 124, 86, 246;
-  --secondary: 201, 91, 255;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 22%;
   --glow-y: 30%;
   --secondary-x: 78%;
@@ -75,8 +75,8 @@
 }
 
 .background[data-variant="about"] {
-  --accent: 107, 77, 224;
-  --secondary: 47, 173, 201;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 76%;
   --glow-y: 22%;
   --secondary-x: 20%;
@@ -85,8 +85,8 @@
 }
 
 .background[data-variant="contact"] {
-  --accent: 124, 80, 255;
-  --secondary: 51, 197, 207;
+  --accent: 124, 58, 237;
+  --secondary: 214, 168, 75;
   --glow-x: 34%;
   --glow-y: 30%;
   --secondary-x: 82%;
@@ -107,20 +107,20 @@
   background:
     radial-gradient(
       circle at var(--glow-x) var(--glow-y),
-      rgba(var(--accent), 0.2),
-      rgba(var(--accent), 0.055) 24%,
+      rgba(var(--accent), 0.12),
+      rgba(var(--accent), 0.035) 24%,
       transparent 48%
     ),
     radial-gradient(
       circle at var(--secondary-x) var(--secondary-y),
-      rgba(var(--secondary), 0.09),
+      rgba(var(--secondary), 0.035),
       transparent 38%
     ),
-    linear-gradient(145deg, #05060d 0%, #080817 54%, #05060d 100%);
+    linear-gradient(180deg, #0d0818 0%, #0b0712 100%);
 }
 
 .grid {
-  opacity: 0.22;
+  opacity: 0.09;
   background-image:
     linear-gradient(rgba(var(--accent), 0.105) 1px, transparent 1px),
     linear-gradient(90deg, rgba(var(--accent), 0.105) 1px, transparent 1px);
@@ -136,7 +136,7 @@
 
 .circuit {
   inset: -12%;
-  opacity: 0.22;
+  opacity: 0.06;
   background-image:
     linear-gradient(90deg, transparent 49.7%, rgba(var(--accent), 0.32) 50%, transparent 50.3%),
     linear-gradient(0deg, transparent 49.7%, rgba(var(--secondary), 0.18) 50%, transparent 50.3%);
@@ -147,7 +147,7 @@
 }
 
 .nodes {
-  opacity: 0.55;
+  opacity: 0.18;
   background-image: radial-gradient(circle, rgba(190, 164, 255, 0.75) 0 1px, transparent 2px);
   background-size: 118px 118px;
   mask-image: radial-gradient(ellipse at var(--glow-x) var(--glow-y), black 0 18%, transparent 62%);
@@ -162,12 +162,12 @@
   background:
     linear-gradient(
       180deg,
-      rgba(0, 0, 0, 0.22),
+      rgba(11, 7, 18, 0.2),
       transparent 18%,
       transparent 72%,
-      rgba(0, 0, 0, 0.34)
+      rgba(11, 7, 18, 0.34)
     ),
-    radial-gradient(ellipse at center, transparent 46%, rgba(0, 0, 0, 0.34) 100%);
+    radial-gradient(ellipse at center, transparent 46%, rgba(11, 7, 18, 0.34) 100%);
 }
 
 @media (max-width: 700px) {

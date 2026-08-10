@@ -7,7 +7,7 @@
   padding-block: 0.78rem;
   padding-inline: 1.05rem;
   border: 1px solid transparent;
-  border-radius: 0.5rem;
+  border-radius: 0.55rem;
   font-weight: 750;
   line-height: 1.2;
   transition:
@@ -27,17 +27,18 @@
 }
 
 .primary:hover {
-  background: var(--color-primary-hover);
+  background: #8b5cf6;
 }
 
 .secondary {
-  border-color: var(--color-border);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--color-border-gold);
+  background: rgba(26, 19, 38, 0.82);
   color: var(--color-text);
 }
 
 .secondary:hover {
-  border-color: var(--color-primary-hover);
+  border-color: rgba(214, 168, 75, 0.5);
+  color: var(--color-gold-soft);
 }
 
 .ghost {

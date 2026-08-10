@@ -3,7 +3,7 @@
 }
 
 .page[data-tone="cyan"] {
-  --event-accent: #53d5de;
+  --event-accent: var(--color-primary-hover);
 }
 
 .page[data-tone="gold"] {
@@ -12,8 +12,8 @@
 
 .hero {
   padding-block: clamp(4rem, 9vw, 7.5rem);
-  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(0, 0, 0, 0.48);
+  border-block-end: 1px solid var(--color-border);
+  background: rgba(13, 8, 24, 0.78);
 }
 
 .backLink {
@@ -57,13 +57,13 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  background: var(--color-border);
+  background: rgba(167, 139, 250, 0.16);
 }
 
 .heroMeta div {
   min-inline-size: 0;
   padding: 1.2rem;
-  background: rgba(13, 13, 20, 0.98);
+  background: rgba(20, 16, 29, 0.98);
 }
 
 .heroMeta dt {
@@ -87,16 +87,16 @@
 .section,
 .logistics {
   padding-block: clamp(4rem, 8vw, 7rem);
-  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(7, 8, 13, 0.88);
+  border-block-end: 1px solid var(--color-border);
+  background: rgba(11, 7, 18, 0.86);
 }
 
 .section {
-  background: rgba(11, 10, 17, 0.9);
+  background: rgba(20, 16, 29, 0.78);
 }
 
 .logistics {
-  background: rgba(7, 12, 16, 0.92);
+  background: rgba(13, 8, 24, 0.86);
 }
 
 .splitSection,

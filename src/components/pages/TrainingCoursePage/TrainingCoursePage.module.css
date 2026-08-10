@@ -1,6 +1,7 @@
 .hero {
   padding-block: clamp(3rem, 7vw, 6.5rem);
-  background: rgba(11, 7, 18, 0.84);
+  border-block-end: 1px solid var(--color-border);
+  background: rgba(13, 8, 24, 0.78);
 }
 
 .backLink {
@@ -22,7 +23,7 @@
 .eyebrow,
 .sectionHeading > p {
   margin-block-end: 0.7rem;
-  color: var(--color-primary-hover);
+  color: var(--color-gold-soft);
   font-size: 0.85rem;
   font-weight: 850;
   text-transform: uppercase;
@@ -30,7 +31,7 @@
 
 .hero h1 {
   max-inline-size: 13ch;
-  color: #d5c0ff;
+  color: #ffffff;
 }
 
 .lead {
@@ -50,9 +51,9 @@
 .facts div {
   min-inline-size: 0;
   padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.045);
-  border-radius: 0.75rem;
-  background: rgba(20, 16, 29, 0.86);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--gradient-card);
 }
 
 .facts dt {
@@ -73,7 +74,7 @@
 .facts dd {
   margin: 0;
   overflow-wrap: anywhere;
-  color: #d7c6ff;
+  color: #ffffff;
   font-weight: 800;
 }
 
@@ -108,13 +109,13 @@
 
 .primaryAction {
   border-color: transparent;
-  background: #d6a84b;
-  color: #0b0712;
+  background: var(--color-primary);
+  color: #ffffff;
 }
 
 .secondaryAction,
 .heroActions .examAction {
-  background: rgba(255, 255, 255, 0.035);
+  background: rgba(26, 19, 38, 0.82);
   color: var(--color-text);
 }
 
@@ -124,7 +125,7 @@
   aspect-ratio: 1110 / 866;
   overflow: hidden;
   border: 1px solid rgba(123, 77, 246, 0.3);
-  border-radius: 0.875rem;
+  border-radius: 12px;
   background: #0b0712;
 }
 
@@ -161,12 +162,12 @@
 .applicationSection {
   scroll-margin-block-start: 5rem;
   padding-block: clamp(4rem, 9vw, 7rem);
-  border-block-start: 1px solid rgba(255, 255, 255, 0.08);
+  border-block-start: 1px solid var(--color-border);
   background: rgba(11, 7, 18, 0.9);
 }
 
 .applicationSection {
-  background: rgba(20, 16, 29, 0.78);
+  background: rgba(20, 16, 29, 0.82);
 }
 
 .sectionHeading {
@@ -185,8 +186,8 @@
   margin: 0;
   padding: clamp(1.25rem, 4vw, 2rem);
   border: 1px solid rgba(167, 139, 250, 0.12);
-  border-radius: 0.875rem;
-  background: rgba(20, 16, 29, 0.78);
+  border-radius: 12px;
+  background: var(--gradient-card);
   color: var(--color-text-muted);
   font-size: clamp(1.05rem, 2vw, 1.2rem);
   line-height: 1.75;

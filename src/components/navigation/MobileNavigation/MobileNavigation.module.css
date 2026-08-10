@@ -6,7 +6,7 @@
   justify-content: center;
   border: 1px solid var(--color-border);
   border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(26, 19, 38, 0.82);
   color: var(--color-text);
 }
 
@@ -16,7 +16,7 @@
   z-index: 50;
   display: grid;
   grid-template-rows: auto 1fr;
-  background: rgba(8, 8, 12, 0.98);
+  background: rgba(11, 7, 18, 0.99);
 }
 
 .top {
@@ -81,7 +81,7 @@
 .link:hover,
 .summary:hover,
 .childLink:hover {
-  background: rgba(109, 61, 245, 0.16);
+  background: rgba(124, 58, 237, 0.16);
 }
 
 @media (min-width: 1100px) {

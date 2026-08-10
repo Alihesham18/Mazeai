@@ -7,18 +7,10 @@
   max-inline-size: 52rem;
   overflow: hidden;
   padding: clamp(1.5rem, 4vw, 2.5rem);
-  border: 1px solid rgba(224, 214, 255, 0.24);
-  border-radius: 0.5rem;
-  background: linear-gradient(
-    145deg,
-    rgba(58, 45, 88, 0.28),
-    rgba(12, 10, 23, 0.48) 52%,
-    rgba(48, 28, 80, 0.22)
-  );
-  box-shadow:
-    0 24px 70px rgba(0, 0, 0, 0.34),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(154, 120, 255, 0.12);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--gradient-card);
+  box-shadow: var(--shadow-soft);
   backdrop-filter: blur(24px) saturate(145%);
   -webkit-backdrop-filter: blur(24px) saturate(145%);
   isolation: isolate;
@@ -42,7 +34,7 @@
 
 .eyebrow {
   margin-block-end: 0.75rem;
-  color: var(--color-primary-hover);
+  color: var(--color-gold-soft);
   font-size: 0.86rem;
   font-weight: 850;
   text-transform: uppercase;
@@ -70,18 +62,10 @@
   position: relative;
   min-inline-size: 0;
   overflow: hidden;
-  border: 1px solid rgba(224, 214, 255, 0.24);
-  border-radius: 0.5rem;
-  background: linear-gradient(
-    145deg,
-    rgba(57, 43, 90, 0.38),
-    rgba(15, 11, 28, 0.52) 48%,
-    rgba(39, 23, 70, 0.34)
-  );
-  box-shadow:
-    0 28px 80px rgba(0, 0, 0, 0.38),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16),
-    inset 0 -1px 0 rgba(154, 120, 255, 0.12);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--gradient-card);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(22px) saturate(145%);
   -webkit-backdrop-filter: blur(22px) saturate(145%);
   isolation: isolate;
@@ -118,12 +102,9 @@
 }
 
 .card:hover {
-  border-color: rgba(210, 194, 255, 0.62);
-  box-shadow:
-    0 32px 90px rgba(0, 0, 0, 0.48),
-    0 0 0 1px rgba(109, 61, 245, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
-  transform: translateY(-4px);
+  border-color: rgba(214, 168, 75, 0.4);
+  box-shadow: var(--shadow-soft);
+  transform: translateY(-3px);
 }
 
 .card:focus-visible {
@@ -172,7 +153,7 @@
 }
 
 .content h2 {
-  color: #d7c8ff;
+  color: #ffffff;
   font-size: clamp(1.65rem, 4vw, 2.35rem);
 }
 
@@ -188,13 +169,13 @@
   gap: 0.55rem;
   align-items: center;
   padding: 0.7rem 0.9rem;
-  border: 1px solid rgba(219, 207, 255, 0.34);
+  border: 1px solid var(--color-border-gold);
   border-radius: 0.5rem;
   background: rgba(255, 255, 255, 0.055);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: #d7c8ff;
+  color: var(--color-gold-soft);
   font-weight: 800;
 }
 

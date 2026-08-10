@@ -31,7 +31,7 @@
 
 .eyebrow {
   margin-block-end: 0.75rem;
-  color: var(--color-primary-hover);
+  color: var(--color-gold-soft);
   font-size: 0.86rem;
   font-weight: 850;
   text-transform: uppercase;
@@ -52,8 +52,8 @@
   position: relative;
   min-block-size: 24rem;
   overflow: hidden;
-  border: 1px solid rgba(154, 120, 255, 0.32);
-  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
   box-shadow: var(--shadow-soft);
 }
 
@@ -63,8 +63,8 @@
 
 .section {
   padding-block: clamp(3.5rem, 7vw, 6rem);
-  border-block-start: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(8, 8, 12, 0.72);
+  border-block-start: 1px solid var(--color-border);
+  background: rgba(11, 7, 18, 0.72);
   backdrop-filter: blur(10px);
 }
 
@@ -95,8 +95,8 @@
 .feature {
   padding: clamp(1.4rem, 3vw, 2rem);
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  background: rgba(22, 22, 30, 0.92);
+  border-radius: 12px;
+  background: var(--gradient-card);
 }
 
 .feature h3 {
@@ -116,8 +116,8 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(109, 61, 245, 0.2);
-  color: var(--color-primary-hover);
+  background: rgba(214, 168, 75, 0.08);
+  color: var(--color-gold-soft);
 }
 
 .processList {
@@ -157,7 +157,7 @@
 
 .technologyList li {
   padding: 0.65rem 0.9rem;
-  border: 1px solid rgba(154, 120, 255, 0.4);
+  border: 1px solid var(--color-border-gold);
   border-radius: 0.5rem;
   background: rgba(109, 61, 245, 0.1);
   font-weight: 750;
@@ -165,8 +165,8 @@
 
 .projectsSection {
   padding-block: clamp(3.5rem, 7vw, 6rem);
-  border-block-start: 1px solid rgba(103, 211, 255, 0.18);
-  background: rgba(10, 17, 24, 0.82);
+  border-block-start: 1px solid var(--color-border);
+  background: rgba(13, 8, 24, 0.82);
 }
 
 .projectGrid {
@@ -178,8 +178,8 @@
   min-inline-size: 0;
   overflow: hidden;
   border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  background: rgba(18, 16, 29, 0.94);
+  border-radius: 12px;
+  background: var(--gradient-card);
   color: var(--color-text);
   text-decoration: none;
   transition:
@@ -202,7 +202,7 @@
   display: block;
   aspect-ratio: 16 / 9;
   overflow: hidden;
-  background: #080b12;
+  background: #14101d;
 }
 
 .projectMedia img {
@@ -221,7 +221,7 @@
 }
 
 .projectContent > strong {
-  color: #d9cbff;
+  color: #ffffff;
   font-size: clamp(1.35rem, 3vw, 1.7rem);
 }
 
@@ -233,13 +233,13 @@
   display: inline-flex;
   gap: 0.5rem;
   align-items: center;
-  color: #67d3ff;
+  color: var(--color-gold-soft);
   font-weight: 800;
 }
 
 .ctaSection {
   padding-block: clamp(3.5rem, 8vw, 6rem);
-  border-block-start: 1px solid rgba(154, 120, 255, 0.3);
+  border-block-start: 1px solid var(--color-border);
   background: rgba(20, 10, 38, 0.88);
 }
 

@@ -3,12 +3,14 @@
 }
 
 .hero {
-  min-height: min(58svh, 42rem);
+  min-height: min(42svh, 32rem);
   display: flex;
   align-items: flex-end;
-  padding-block: clamp(6rem, 12vw, 9rem) clamp(3.5rem, 7vw, 5rem);
-  border-block-end: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(115deg, rgba(5, 6, 13, 0.88), rgba(10, 8, 25, 0.5));
+  padding-block: clamp(4.75rem, 9vw, 7rem) clamp(3rem, 6vw, 4.5rem);
+  border-block-end: 1px solid var(--color-border);
+  background:
+    radial-gradient(circle at 82% 20%, rgba(124, 58, 237, 0.1), transparent 24rem),
+    rgba(13, 8, 24, 0.72);
 }
 
 .hero h1 {
@@ -19,7 +21,7 @@
 .eyebrow,
 .cardEyebrow {
   margin: 0 0 0.75rem;
-  color: var(--color-primary-hover);
+  color: var(--color-gold-soft);
   font-size: 0.82rem;
   font-weight: 850;
   text-transform: uppercase;
@@ -34,8 +36,8 @@
 
 .contentSection {
   padding-block: clamp(4rem, 8vw, 7rem);
-  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(7, 8, 14, 0.72);
+  border-block-end: 1px solid var(--color-border);
+  background: rgba(11, 7, 18, 0.72);
 }
 
 .sectionIntro {
@@ -71,8 +73,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-color: rgba(154, 120, 255, 0.24);
-  background: rgba(15, 14, 28, 0.78);
+  border-color: var(--color-border);
+  background: var(--gradient-card);
 }
 
 .directoryCard h3,
@@ -99,7 +101,7 @@
 
 .editorialCard > svg,
 .contactCard > svg {
-  color: var(--color-primary-hover);
+  color: var(--color-gold-soft);
 }
 
 .editorialCard h2 {
@@ -135,14 +137,14 @@
   display: grid;
   place-items: center;
   margin-block-end: 1rem;
-  border: 1px dashed rgba(154, 120, 255, 0.5);
-  color: var(--color-primary-hover);
-  background: rgba(109, 61, 245, 0.08);
+  border: 1px dashed var(--color-border-gold);
+  color: var(--color-gold-soft);
+  background: rgba(214, 168, 75, 0.08);
 }
 
 .ctaSection {
   padding-block: clamp(3.5rem, 7vw, 5.5rem);
-  background: rgba(10, 8, 20, 0.8);
+  background: rgba(20, 16, 29, 0.8);
 }
 
 .ctaInner {
@@ -174,7 +176,7 @@
 
 @media (max-width: 719px) {
   .hero {
-    min-height: 30rem;
+    min-height: 25rem;
   }
 
   .ctaInner {

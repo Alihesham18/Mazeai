@@ -3,7 +3,7 @@
   z-index: 2;
   min-height: 100vh;
   color: #ffffff;
-  background: rgba(8, 9, 12, 0.58);
+  background: rgba(11, 7, 18, 0.58);
 }
 
 .container {
@@ -13,13 +13,13 @@
 
 .hero {
   position: relative;
-  min-height: min(650px, calc(100vh - 180px));
+  min-height: min(560px, calc(100vh - 180px));
   display: flex;
   align-items: flex-end;
   isolation: isolate;
   overflow: hidden;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.13);
-  background: #11151a;
+  border-bottom: 1px solid var(--color-border);
+  background: #0d0818;
 }
 
 .heroImage {
@@ -34,10 +34,10 @@
   z-index: -1;
   background: linear-gradient(
     90deg,
-    rgba(5, 7, 10, 0.94) 0%,
-    rgba(5, 7, 10, 0.78) 34%,
-    rgba(5, 7, 10, 0.24) 68%,
-    rgba(5, 7, 10, 0.12) 100%
+    rgba(11, 7, 18, 0.94) 0%,
+    rgba(11, 7, 18, 0.78) 34%,
+    rgba(11, 7, 18, 0.28) 68%,
+    rgba(11, 7, 18, 0.14) 100%
   );
 }
 
@@ -57,7 +57,7 @@
 .eyebrow,
 .sectionLabel {
   margin: 0 0 0.9rem;
-  color: #a78bfa;
+  color: var(--color-gold-soft);
   font-size: 0.78rem;
   font-weight: 750;
   letter-spacing: 0.12em;
@@ -77,7 +77,7 @@
 .lead {
   max-width: 650px;
   margin: 1.6rem 0 0;
-  color: #e1e3e7;
+  color: var(--color-text-muted);
   font-size: clamp(1.06rem, 1.8vw, 1.32rem);
   line-height: 1.65;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
@@ -88,15 +88,15 @@
   align-items: center;
   gap: 0.55rem;
   margin: 0;
-  color: #f4c35b;
+  color: var(--color-gold-soft);
   font-weight: 650;
   white-space: nowrap;
 }
 
 .introduction {
   padding-block: clamp(2.75rem, 5vw, 5rem);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(11, 13, 17, 0.82);
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(11, 7, 18, 0.82);
 }
 
 .introGrid {
@@ -116,7 +116,7 @@
   flex: 0 0 auto;
   width: 34px;
   height: 34px;
-  color: #a78bfa;
+  color: var(--color-primary-hover);
   stroke-width: 1.5;
 }
 
@@ -137,7 +137,7 @@
 
 .copy p {
   margin: 0;
-  color: #c0c4cc;
+  color: var(--color-text-muted);
   font-size: clamp(1rem, 1.35vw, 1.12rem);
   line-height: 1.82;
 }
@@ -147,8 +147,8 @@
 }
 
 .framework {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(8, 9, 12, 0.72);
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(20, 16, 29, 0.72);
 }
 
 .frameworkRow {
@@ -158,7 +158,7 @@
   align-items: center;
   min-height: 178px;
   padding-block: 2.4rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .frameworkRow:last-child {
@@ -193,12 +193,12 @@
 
 .rowHeading[data-accent="violet"] .iconFrame,
 .rowHeading[data-accent="violet"] + .rowDescription + .rowDetail {
-  color: #a78bfa;
+  color: var(--color-primary-hover);
 }
 
 .rowHeading[data-accent="cyan"] .iconFrame,
 .rowHeading[data-accent="cyan"] + .rowDescription + .rowDetail {
-  color: #58d2df;
+  color: var(--color-primary-hover);
 }
 
 .rowHeading[data-accent="gold"] .iconFrame,
@@ -213,7 +213,7 @@
 }
 
 .rowDescription {
-  color: #bec2ca;
+  color: var(--color-text-muted);
   font-size: 1rem;
 }
 
@@ -223,7 +223,7 @@
 }
 
 .ctaSection {
-  background: rgba(13, 16, 20, 0.82);
+  background: rgba(13, 8, 24, 0.82);
 }
 
 .ctaSection .container {
@@ -239,8 +239,8 @@
   height: 58px;
   display: grid;
   place-items: center;
-  color: #a78bfa;
-  border-inline-end: 2px solid #a78bfa;
+  color: var(--color-primary-hover);
+  border-inline-end: 2px solid var(--color-primary-hover);
 }
 
 .ctaMark svg {
@@ -256,7 +256,7 @@
 .ctaCopy > p:last-child {
   max-width: 720px;
   margin: 1rem 0 0;
-  color: #bfc3cb;
+  color: var(--color-text-muted);
   line-height: 1.7;
 }
 
@@ -270,16 +270,16 @@
   padding-inline: 1.4rem;
   color: #ffffff;
   font-weight: 750;
-  border: 1px solid #8056f5;
-  border-radius: 6px;
-  background: #6d3df5;
+  border: 1px solid var(--color-primary);
+  border-radius: 0.55rem;
+  background: var(--color-primary);
   transition:
     background-color 180ms ease,
     transform 180ms ease;
 }
 
 .ctaButton:hover {
-  background: #8056f5;
+  background: #8b5cf6;
   transform: translateY(-2px);
 }
 
@@ -297,7 +297,7 @@
   }
 
   .heroShade {
-    background: rgba(5, 7, 10, 0.67);
+    background: rgba(11, 7, 18, 0.72);
   }
 
   .hero .container {
@@ -354,7 +354,7 @@
   }
 
   .heroShade {
-    background: rgba(4, 6, 9, 0.7);
+    background: rgba(11, 7, 18, 0.74);
   }
 
   .hero .container {

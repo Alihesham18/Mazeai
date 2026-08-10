@@ -2,8 +2,8 @@
   position: sticky;
   inset-block-start: 0;
   z-index: 40;
-  border-block-end: 1px solid rgba(44, 44, 56, 0.78);
-  background: rgba(8, 8, 12, 0.86);
+  border-block-end: 1px solid rgba(167, 139, 250, 0.14);
+  background: rgba(13, 8, 24, 0.86);
   backdrop-filter: blur(18px);
 }
 
@@ -14,8 +14,8 @@
   --header-language-size: 2rem;
   --header-logo-mark-size: 1.8rem;
   --header-logo-font-size: 0.94rem;
-  background: rgba(5, 6, 13, 0.76);
-  border-block-end-color: rgba(255, 255, 255, 0.055);
+  background: rgba(13, 8, 24, 0.76);
+  border-block-end-color: rgba(214, 168, 75, 0.08);
 }
 
 .inner {

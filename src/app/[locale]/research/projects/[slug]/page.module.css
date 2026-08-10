@@ -1,5 +1,5 @@
 .page {
-  --project-accent: #67d3ff;
+  --project-accent: var(--color-primary-hover);
 }
 
 .page[data-tone="green"] {
@@ -7,7 +7,7 @@
 }
 
 .page[data-tone="blue"] {
-  --project-accent: #55a7ff;
+  --project-accent: var(--color-primary-hover);
 }
 
 .page[data-tone="violet"] {
@@ -20,8 +20,8 @@
 
 .hero {
   padding-block: clamp(4rem, 9vw, 7rem);
-  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(0, 0, 0, 0.48);
+  border-block-end: 1px solid var(--color-border);
+  background: rgba(13, 8, 24, 0.78);
 }
 
 .backLink {
@@ -75,8 +75,8 @@
   display: grid;
   place-items: center;
   border: 1px solid color-mix(in srgb, var(--project-accent) 52%, transparent);
-  border-radius: 0.5rem;
-  background-color: color-mix(in srgb, var(--project-accent) 8%, #08090e);
+  border-radius: 12px;
+  background-color: color-mix(in srgb, var(--project-accent) 8%, #14101d);
   background-image:
     linear-gradient(color-mix(in srgb, var(--project-accent) 12%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in srgb, var(--project-accent) 12%, transparent) 1px, transparent 1px);
@@ -87,12 +87,12 @@
 .section,
 .sectionAlt {
   padding-block: clamp(4rem, 8vw, 7rem);
-  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(7, 8, 13, 0.88);
+  border-block-end: 1px solid var(--color-border);
+  background: rgba(11, 7, 18, 0.86);
 }
 
 .sectionAlt {
-  background: rgba(11, 10, 17, 0.9);
+  background: rgba(20, 16, 29, 0.78);
 }
 
 .splitSection {
@@ -196,8 +196,8 @@
   align-content: center;
   gap: 1rem;
   border: 1px dashed color-mix(in srgb, var(--project-accent) 42%, var(--color-border));
-  border-radius: 0.5rem;
-  background: rgba(14, 14, 20, 0.62);
+  border-radius: 12px;
+  background: var(--gradient-card);
 }
 
 .emptyAvatar {
