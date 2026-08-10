@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { ScholarshipExam } from "@/components/training/ScholarshipExam";
+import { TrainingProgramImage } from "@/components/training/TrainingProgramImage";
 import { formatTrainingFee, trainingCopy, trainingPrograms } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
@@ -44,14 +44,22 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
 
             return (
               <article className={styles.programCard} key={program.slug}>
-                <Link className={styles.posterLink} href={detailPath}>
-                  <Image
+                <Link
+                  className={styles.posterLink}
+                  href={detailPath}
+                  aria-label={localize(program.title, locale)}
+                >
+                  <TrainingProgramImage
                     className={styles.poster}
                     src={program.image}
                     alt={localize(program.imageAlt, locale)}
-                    fill
                     sizes="(min-width: 800px) 33vw, 100vw"
-                  />
+                  >
+                    <span className={styles.posterFallback} aria-hidden="true">
+                      <strong>{localize(program.title, locale)}</strong>
+                      <span>{program.instructor}</span>
+                    </span>
+                  </TrainingProgramImage>
                   <span className={styles.posterBadges} aria-hidden="true">
                     <span>{localize(program.format, locale)}</span>
                     <span>{localize(program.duration, locale)}</span>
@@ -85,15 +93,24 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
                     <ArrowUpRight size={17} aria-hidden="true" />
                   </Link>
 
-                  <div className={styles.cardActions}>
+                  <div
+                    className={[
+                      styles.cardActions,
+                      program.scholarshipQuestions.length === 0 ? styles.singleAction : ""
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                  >
                     <Link href={`${detailPath}#application`}>
                       {localize(trainingCopy.preregister, locale)}
                     </Link>
-                    <ScholarshipExam
-                      locale={locale}
-                      program={program}
-                      className={styles.examButton}
-                    />
+                    {program.scholarshipQuestions.length > 0 ? (
+                      <ScholarshipExam
+                        locale={locale}
+                        program={program}
+                        className={styles.examButton}
+                      />
+                    ) : null}
                   </div>
                 </div>
               </article>

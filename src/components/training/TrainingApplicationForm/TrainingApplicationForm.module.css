@@ -4,8 +4,8 @@
   gap: 1rem;
   padding: clamp(1.25rem, 4vw, 2rem);
   border: 1px solid rgba(130, 86, 250, 0.34);
-  border-radius: 0.5rem;
-  background: rgba(29, 22, 59, 0.88);
+  border-radius: 0.875rem;
+  background: rgba(30, 23, 59, 0.88);
 }
 
 .field {
@@ -53,10 +53,20 @@
   grid-column: 1 / -1;
   padding: 0.8rem 1.25rem;
   border: 0;
-  border-radius: 0.5rem;
-  background: var(--color-primary);
-  color: var(--color-text);
+  border-radius: 0.65rem;
+  background: #d6a84b;
+  color: #0b0712;
   font-weight: 850;
+}
+
+.developmentNotice {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(241, 199, 106, 0.32);
+  border-radius: 0.65rem;
+  background: rgba(214, 168, 75, 0.09);
+  color: #f1c76a;
 }
 
 @media (max-width: 42rem) {
@@ -65,7 +75,8 @@
   }
 
   .messageField,
-  .form > button {
+  .form > button,
+  .developmentNotice {
     grid-column: auto;
   }
 }

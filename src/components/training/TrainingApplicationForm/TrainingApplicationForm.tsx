@@ -1,10 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState, type FormEvent } from "react";
 import { trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
-import { localize, localizedPath } from "@/lib/utilities/localize";
+import { localize } from "@/lib/utilities/localize";
 import styles from "./TrainingApplicationForm.module.css";
 
 export function TrainingApplicationForm({
@@ -14,8 +13,8 @@ export function TrainingApplicationForm({
   locale: Locale;
   program: TrainingProgram;
 }) {
-  const router = useRouter();
   const [scholarshipCode, setScholarshipCode] = useState("");
+  const [showDevelopmentNotice, setShowDevelopmentNotice] = useState(false);
 
   useEffect(() => {
     setScholarshipCode(new URLSearchParams(window.location.search).get("scholarship") ?? "");
@@ -23,7 +22,7 @@ export function TrainingApplicationForm({
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    router.push(localizedPath(locale, `/training/${program.slug}/application-success`));
+    setShowDevelopmentNotice(true);
   };
 
   return (
@@ -53,23 +52,30 @@ export function TrainingApplicationForm({
           <option value={program.slug}>{localize(program.title, locale)}</option>
         </select>
       </div>
-      <div className={styles.field}>
-        <label htmlFor="training-scholarship">
-          {localize(trainingCopy.scholarshipCode, locale)}
-        </label>
-        <input
-          id="training-scholarship"
-          name="scholarshipCode"
-          autoCapitalize="characters"
-          value={scholarshipCode}
-          onChange={(event) => setScholarshipCode(event.target.value)}
-        />
-      </div>
+      {program.scholarshipQuestions.length > 0 ? (
+        <div className={styles.field}>
+          <label htmlFor="training-scholarship">
+            {localize(trainingCopy.scholarshipCode, locale)}
+          </label>
+          <input
+            id="training-scholarship"
+            name="scholarshipCode"
+            autoCapitalize="characters"
+            value={scholarshipCode}
+            onChange={(event) => setScholarshipCode(event.target.value)}
+          />
+        </div>
+      ) : null}
       <div className={[styles.field, styles.messageField].join(" ")}>
         <label htmlFor="training-message">{localize(trainingCopy.message, locale)}</label>
         <textarea id="training-message" name="message" rows={4} />
       </div>
       <button type="submit">{localize(trainingCopy.submit, locale)}</button>
+      {showDevelopmentNotice ? (
+        <p className={styles.developmentNotice} role="status" tabIndex={-1}>
+          {localize(trainingCopy.developmentNotice, locale)}
+        </p>
+      ) : null}
     </form>
   );
 }

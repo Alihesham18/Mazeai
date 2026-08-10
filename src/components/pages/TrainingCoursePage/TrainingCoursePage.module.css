@@ -1,6 +1,6 @@
 .hero {
   padding-block: clamp(3rem, 7vw, 6.5rem);
-  background: rgba(5, 5, 11, 0.56);
+  background: rgba(11, 7, 18, 0.84);
 }
 
 .backLink {
@@ -51,8 +51,8 @@
   min-inline-size: 0;
   padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.045);
-  border-radius: 0.5rem;
-  background: rgba(9, 8, 17, 0.74);
+  border-radius: 0.75rem;
+  background: rgba(20, 16, 29, 0.86);
 }
 
 .facts dt {
@@ -75,6 +75,10 @@
   overflow-wrap: anywhere;
   color: #d7c6ff;
   font-weight: 800;
+}
+
+.facts div:nth-child(5) dd {
+  color: #f1c76a;
 }
 
 .hours {
@@ -104,7 +108,8 @@
 
 .primaryAction {
   border-color: transparent;
-  background: var(--color-primary);
+  background: #d6a84b;
+  color: #0b0712;
 }
 
 .secondaryAction,
@@ -119,31 +124,49 @@
   aspect-ratio: 1110 / 866;
   overflow: hidden;
   border: 1px solid rgba(123, 77, 246, 0.3);
-  border-radius: 0.5rem;
-  background: #050508;
+  border-radius: 0.875rem;
+  background: #0b0712;
 }
 
 .heroMedia img {
+  z-index: 1;
   object-fit: cover;
 }
 
+.mediaFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.65rem;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at 65% 35%, rgba(214, 168, 75, 0.18), transparent 28%),
+    radial-gradient(circle at 35% 65%, rgba(124, 58, 237, 0.28), transparent 38%),
+    #0b0712;
+  color: #ffffff;
+  text-align: center;
+}
+
+.mediaFallback strong {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 4vw, 2.5rem);
+}
+
+.mediaFallback span {
+  color: #aaa5b3;
+}
+
 .aboutSection,
-.section,
-.weekSection,
 .applicationSection {
   scroll-margin-block-start: 5rem;
   padding-block: clamp(4rem, 9vw, 7rem);
   border-block-start: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(9, 8, 16, 0.88);
+  background: rgba(11, 7, 18, 0.9);
 }
 
-.section,
 .applicationSection {
-  background: rgba(12, 9, 22, 0.9);
-}
-
-.weekSection {
-  background: rgba(8, 8, 15, 0.92);
+  background: rgba(20, 16, 29, 0.78);
 }
 
 .sectionHeading {
@@ -160,102 +183,18 @@
 .aboutText {
   max-inline-size: 66rem;
   margin: 0;
-  padding-inline-start: 1.25rem;
-  border-inline-start: 3px solid var(--color-primary);
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid rgba(167, 139, 250, 0.12);
+  border-radius: 0.875rem;
+  background: rgba(20, 16, 29, 0.78);
   color: var(--color-text-muted);
   font-size: clamp(1.05rem, 2vw, 1.2rem);
   line-height: 1.75;
 }
 
-.curriculumGrid,
-.weekList {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.curriculumGrid {
-  display: grid;
-  gap: 0.8rem;
-}
-
-.curriculumGrid li {
-  min-inline-size: 0;
-  display: grid;
-  grid-template-columns: 3.25rem 1fr;
-  gap: 1rem;
-  align-items: center;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.045);
-  border-radius: 0.5rem;
-  background: rgba(7, 7, 13, 0.62);
-}
-
-.curriculumGrid span,
-.weekNumber {
-  color: var(--color-primary-hover);
-  font-weight: 850;
-}
-
-.weekList {
-  position: relative;
-  display: grid;
-  gap: 0.75rem;
-}
-
-.weekList::before {
-  position: absolute;
-  inset-block: 1.5rem;
-  inset-inline-start: 1.5rem;
-  inline-size: 1px;
-  background: rgba(116, 65, 245, 0.5);
-  content: "";
-}
-
-.weekList li {
-  position: relative;
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1rem;
-  align-items: center;
-}
-
-.weekNumber {
-  inline-size: 3rem;
-  block-size: 3rem;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(117, 62, 249, 0.52);
-  border-radius: 50%;
-  background: #0d0a17;
-}
-
-.weekList li > div {
-  min-inline-size: 0;
-  display: grid;
-  gap: 0.3rem;
-  padding: 1rem 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 0.5rem;
-  background: rgba(7, 7, 13, 0.68);
-}
-
-.weekList small {
-  color: var(--color-text-muted);
-  font-size: 0.68rem;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
 @media (min-width: 46rem) {
-  .facts,
-  .curriculumGrid {
+  .facts {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .curriculumGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

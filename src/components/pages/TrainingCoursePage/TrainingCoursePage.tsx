@@ -1,10 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Award, Banknote, Clock3, GraduationCap, MapPin, Monitor, MoveLeft } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { ScholarshipExam } from "@/components/training/ScholarshipExam";
 import { TrainingApplicationForm } from "@/components/training/TrainingApplicationForm";
+import { TrainingCurriculum } from "@/components/training/TrainingCurriculum";
+import { TrainingProgramImage } from "@/components/training/TrainingProgramImage";
+import { TrainingTimeline } from "@/components/training/TrainingTimeline";
 import { formatTrainingFee, trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
@@ -26,7 +28,12 @@ export function TrainingCoursePage({
     {
       icon: GraduationCap,
       label: trainingCopy.instructor,
-      value: { en: program.instructor, tr: program.instructor, ar: program.instructor }
+      value: {
+        en: program.instructor,
+        tr: program.instructor,
+        ar: program.instructor,
+        fa: program.instructor
+      }
     },
     {
       icon: Banknote,
@@ -34,7 +41,8 @@ export function TrainingCoursePage({
       value: {
         en: formatTrainingFee(program.fee),
         tr: formatTrainingFee(program.fee),
-        ar: formatTrainingFee(program.fee)
+        ar: formatTrainingFee(program.fee),
+        fa: formatTrainingFee(program.fee)
       }
     },
     {
@@ -76,21 +84,34 @@ export function TrainingCoursePage({
                 <Link className={styles.primaryAction} href="#application">
                   {localize(trainingCopy.apply, locale)}
                 </Link>
-                <Link className={styles.secondaryAction} href="#about-program">
+                <Link
+                  className={styles.secondaryAction}
+                  href={localizedPath(locale, "/contact")}
+                >
                   {localize(trainingCopy.getInfo, locale)}
                 </Link>
-                <ScholarshipExam locale={locale} program={program} className={styles.examAction} />
+                {program.scholarshipQuestions.length > 0 ? (
+                  <ScholarshipExam
+                    locale={locale}
+                    program={program}
+                    className={styles.examAction}
+                  />
+                ) : null}
               </div>
             </div>
 
             <div className={styles.heroMedia}>
-              <Image
+              <TrainingProgramImage
                 src={program.image}
                 alt={localize(program.imageAlt, locale)}
-                fill
                 priority
                 sizes="(min-width: 980px) 46vw, 100vw"
-              />
+              >
+                <span className={styles.mediaFallback} aria-hidden="true">
+                  <strong>{localize(program.title, locale)}</strong>
+                  <span>{program.instructor}</span>
+                </span>
+              </TrainingProgramImage>
             </div>
           </div>
         </Container>
@@ -110,44 +131,8 @@ export function TrainingCoursePage({
         </Container>
       </section>
 
-      <section className={styles.section} aria-labelledby="curriculum-heading">
-        <Container>
-          <div className={styles.sectionHeading}>
-            <p>{localize(trainingCopy.curriculum, locale)}</p>
-            <h2 id="curriculum-heading">{localize(trainingCopy.learn, locale)}</h2>
-          </div>
-          <ol className={styles.curriculumGrid}>
-            {program.curriculum.map((module, index) => (
-              <li key={module.title.en}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <strong>{localize(module.title, locale)}</strong>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
-      <section className={styles.weekSection} aria-labelledby="weekly-plan-heading">
-        <Container>
-          <div className={styles.sectionHeading}>
-            <p>{localize(trainingCopy.weeklyPlan, locale)}</p>
-            <h2 id="weekly-plan-heading">{localize(trainingCopy.weeklyProgress, locale)}</h2>
-          </div>
-          <ol className={styles.weekList}>
-            {program.weeks.map((week, index) => (
-              <li key={week.title.en}>
-                <span className={styles.weekNumber}>{index + 1}</span>
-                <div>
-                  <small>
-                    {localize(trainingCopy.week, locale)} {index + 1}
-                  </small>
-                  <strong>{localize(week.title, locale)}</strong>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </section>
+      <TrainingCurriculum locale={locale} program={program} />
+      <TrainingTimeline locale={locale} program={program} />
 
       <section
         className={styles.applicationSection}

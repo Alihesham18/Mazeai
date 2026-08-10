@@ -18,41 +18,81 @@ const copy = {
   exam: {
     en: "Academy scholarship exam",
     tr: "Akademi bursluluk sınavı",
-    ar: "اختبار منحة الأكاديمية"
+    ar: "اختبار منحة الأكاديمية",
+    fa: "آزمون بورسیه آکادمی"
   },
-  open: { en: "Take the scholarship exam", tr: "Bursluluk sınavına gir", ar: "ابدأ اختبار المنحة" },
+  open: {
+    en: "Take the scholarship exam",
+    tr: "Bursluluk sınavına gir",
+    ar: "ابدأ اختبار المنحة",
+    fa: "شرکت در آزمون بورسیه"
+  },
   close: {
     en: "Close scholarship exam",
     tr: "Bursluluk sınavını kapat",
-    ar: "إغلاق اختبار المنحة"
+    ar: "إغلاق اختبار المنحة",
+    fa: "بستن آزمون بورسیه"
   },
-  progress: { en: "Progress", tr: "İlerleme", ar: "التقدم" },
-  question: { en: "Question", tr: "Soru", ar: "السؤال" },
-  completed: { en: "completed", tr: "tamamlandı", ar: "مكتمل" },
-  next: { en: "Next question", tr: "Sonraki soru", ar: "السؤال التالي" },
-  finish: { en: "See my result", tr: "Sonucumu gör", ar: "عرض النتيجة" },
-  resultTitle: { en: "Exam completed", tr: "Sınav tamamlandı", ar: "اكتمل الاختبار" },
-  correct: { en: "correct answers", tr: "doğru cevap", ar: "إجابات صحيحة" },
+  progress: { en: "Progress", tr: "İlerleme", ar: "التقدم", fa: "پیشرفت" },
+  question: { en: "Question", tr: "Soru", ar: "السؤال", fa: "پرسش" },
+  completed: { en: "completed", tr: "tamamlandı", ar: "مكتمل", fa: "تکمیل‌شده" },
+  next: { en: "Next question", tr: "Sonraki soru", ar: "السؤال التالي", fa: "پرسش بعدی" },
+  finish: { en: "See my result", tr: "Sonucumu gör", ar: "عرض النتيجة", fa: "مشاهده نتیجه" },
+  resultTitle: {
+    en: "Exam completed",
+    tr: "Sınav tamamlandı",
+    ar: "اكتمل الاختبار",
+    fa: "آزمون تکمیل شد"
+  },
+  correct: {
+    en: "correct answers",
+    tr: "doğru cevap",
+    ar: "إجابات صحيحة",
+    fa: "پاسخ صحیح"
+  },
   discountAwarded: {
     en: "Scholarship discount awarded",
     tr: "Kazanılan burs indirimi",
-    ar: "خصم المنحة الممنوح"
+    ar: "خصم المنحة الممنوح",
+    fa: "تخفیف بورسیه اعطاشده"
   },
   originalFee: {
     en: "Original tuition fee",
     tr: "Orijinal eğitim ücreti",
-    ar: "رسوم التدريب الأصلية"
+    ar: "رسوم التدريب الأصلية",
+    fa: "شهریه اصلی"
   },
-  reduction: { en: "Scholarship reduction", tr: "Burs indirimi", ar: "قيمة خصم المنحة" },
-  finalFee: { en: "Tuition with scholarship", tr: "Burslu eğitim ücreti", ar: "الرسوم بعد المنحة" },
-  code: { en: "Scholarship code awarded", tr: "Kazanılan burs kodu", ar: "رمز المنحة الممنوح" },
-  copyCode: { en: "Copy scholarship code", tr: "Burs kodunu kopyala", ar: "نسخ رمز المنحة" },
-  copied: { en: "Copied", tr: "Kopyalandı", ar: "تم النسخ" },
-  closeButton: { en: "Close", tr: "Kapat", ar: "إغلاق" },
+  reduction: {
+    en: "Scholarship reduction",
+    tr: "Burs indirimi",
+    ar: "قيمة خصم المنحة",
+    fa: "مبلغ تخفیف بورسیه"
+  },
+  finalFee: {
+    en: "Tuition with scholarship",
+    tr: "Burslu eğitim ücreti",
+    ar: "الرسوم بعد المنحة",
+    fa: "شهریه با بورسیه"
+  },
+  code: {
+    en: "Scholarship code awarded",
+    tr: "Kazanılan burs kodu",
+    ar: "رمز المنحة الممنوح",
+    fa: "کد بورسیه اعطاشده"
+  },
+  copyCode: {
+    en: "Copy scholarship code",
+    tr: "Burs kodunu kopyala",
+    ar: "نسخ رمز المنحة",
+    fa: "کپی کد بورسیه"
+  },
+  copied: { en: "Copied", tr: "Kopyalandı", ar: "تم النسخ", fa: "کپی شد" },
+  closeButton: { en: "Close", tr: "Kapat", ar: "إغلاق", fa: "بستن" },
   useCode: {
     en: "Use code in application",
     tr: "Kodu başvuruda kullan",
-    ar: "استخدم الرمز في الطلب"
+    ar: "استخدم الرمز في الطلب",
+    fa: "استفاده از کد در درخواست"
   }
 } as const;
 
@@ -69,7 +109,7 @@ export function ScholarshipExam({ locale, program, className }: ScholarshipExamP
   const discount = score * 10;
   const reduction = Math.round(program.fee * (discount / 100));
   const finalFee = program.fee - reduction;
-  const scholarshipCode = `SYNERGY-DSML-${discount || 0}`;
+  const scholarshipCode = `SYNERGY-${program.scholarshipCodePrefix}-${discount || 0}`;
 
   useEffect(() => {
     if (!isOpen) return;

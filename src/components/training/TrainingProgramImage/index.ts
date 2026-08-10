@@ -1,0 +1,1 @@
+export { TrainingProgramImage } from "./TrainingProgramImage";

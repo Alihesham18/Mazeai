@@ -32,6 +32,7 @@ export interface TrainingProgram {
   hoursBreakdown: LocalizedText;
   curriculum: readonly TrainingModule[];
   weeks: readonly TrainingWeek[];
+  scholarshipCodePrefix: string;
   scholarshipQuestions: readonly ScholarshipQuestion[];
 }
 
@@ -230,6 +231,7 @@ export const trainingPrograms: readonly TrainingProgram[] = [
       },
       { title: option("Final Project", "Final Projesi", "المشروع النهائي", "پروژه نهایی") }
     ],
+    scholarshipCodePrefix: "DSML",
     scholarshipQuestions: [
       {
         prompt: option(
@@ -332,6 +334,286 @@ export const trainingPrograms: readonly TrainingProgram[] = [
         answer: 0
       }
     ]
+  },
+  {
+    slug: "mobile-programming",
+    category: "bootcamp",
+    title: option(
+      "Mobile Programming",
+      "Mobil Programlama",
+      "برمجة تطبيقات الهاتف المحمول",
+      "برنامه‌نویسی موبایل"
+    ),
+    shortDescription: option(
+      "Modern mobile application development through a project-oriented program covering everything from UI/UX to store launch.",
+      "UI/UX'ten mağaza yayınına kadar tüm süreci kapsayan proje odaklı modern mobil uygulama geliştirme programı.",
+      "تطوير حديث لتطبيقات الهاتف المحمول ضمن برنامج عملي قائم على المشاريع، من UI/UX حتى النشر في المتاجر.",
+      "توسعه مدرن اپلیکیشن موبایل در قالب برنامه‌ای پروژه‌محور، از UI/UX تا انتشار در فروشگاه‌ها."
+    ),
+    description: option(
+      "This intensive 9-week Mobile Programming Bootcamp is designed to take participants from a basic level to a professional level where they can develop real-world mobile applications. Led by Dr. Mahyar Teymournezhad, the program combines theory, practice, and real-world project experience. React Native is the main technology, with Android and iOS applications developed from one shared codebase. Participants cover API integration, device hardware such as camera and GPS, and publishing applications on Google Play and the App Store.",
+      "Bu yoğun 9 haftalık Mobil Programlama Bootcamp'i, katılımcıları temel seviyeden gerçek dünya mobil uygulamaları geliştirebilecekleri profesyonel bir seviyeye taşımak için tasarlanmıştır. Dr. Mahyar Teymournezhad liderliğindeki program; teori, uygulama ve gerçek proje deneyimini bir araya getirir. Ana teknoloji React Native'dir ve Android ile iOS uygulamaları tek bir ortak kod tabanından geliştirilir. Katılımcılar API entegrasyonu, kamera ve GPS gibi cihaz donanımlarının kullanımı ile uygulamaların Google Play ve App Store'da yayınlanması konularını ele alır.",
+      "صُمم معسكر برمجة تطبيقات الهاتف المحمول المكثف الممتد لتسعة أسابيع لنقل المشاركين من المستوى الأساسي إلى مستوى مهني يتيح لهم تطوير تطبيقات عملية. يجمع البرنامج، بإشراف Dr. Mahyar Teymournezhad، بين الجانب النظري والتطبيق العملي وتجربة المشاريع الواقعية. تُستخدم React Native بوصفها التقنية الأساسية لتطوير تطبيقات Android وiOS من قاعدة شيفرة مشتركة واحدة. ويتناول المشاركون تكامل API واستخدام مكونات الجهاز مثل الكاميرا وGPS ونشر التطبيقات على Google Play وApp Store.",
+      "این بوت‌کمپ فشرده ۹ هفته‌ای برنامه‌نویسی موبایل برای رساندن شرکت‌کنندگان از سطح مقدماتی به سطح حرفه‌ای و توانایی توسعه اپلیکیشن‌های واقعی طراحی شده است. برنامه با هدایت Dr. Mahyar Teymournezhad، آموزش نظری، تمرین عملی و تجربه پروژه واقعی را ترکیب می‌کند. فناوری اصلی React Native است و اپلیکیشن‌های Android و iOS با یک پایگاه کد مشترک توسعه می‌یابند. شرکت‌کنندگان با یکپارچه‌سازی API، استفاده از سخت‌افزار دستگاه مانند دوربین و GPS و انتشار اپلیکیشن در Google Play و App Store آشنا می‌شوند."
+    ),
+    image: "/images/training/mobile-programming.png",
+    imageAlt: option(
+      "Mobile Programming bootcamp with instructor Dr. Mahyar Teymournezhad",
+      "Dr. Mahyar Teymournezhad ile Mobil Programlama bootcamp programı",
+      "معسكر برمجة تطبيقات الهاتف المحمول مع Dr. Mahyar Teymournezhad",
+      "بوت‌کمپ برنامه‌نویسی موبایل با تدریس Dr. Mahyar Teymournezhad"
+    ),
+    duration: option("120 hours", "120 saat", "120 ساعة", "۱۲۰ ساعت"),
+    location: option(
+      "Istanbul + Online",
+      "İstanbul + Çevrim içi",
+      "إسطنبول + عبر الإنترنت",
+      "استانبول + آنلاین"
+    ),
+    format: option("Hybrid", "Hibrit", "هجين", "ترکیبی"),
+    instructor: "Dr. Mahyar Teymournezhad",
+    instructorRole: option(
+      "Founder / CEO",
+      "Kurucu / CEO",
+      "المؤسس / الرئيس التنفيذي",
+      "بنیان‌گذار / مدیرعامل"
+    ),
+    fee: 90000,
+    certificate: true,
+    hoursBreakdown: option(
+      "54 hours of theoretical training + 45 hours of practical training + 20 hours of industry activities",
+      "54 saat teorik eğitim + 45 saat uygulamalı eğitim + 20 saat sektör etkinliği",
+      "54 ساعة تدريب نظري + 45 ساعة تدريب عملي + 20 ساعة أنشطة مهنية",
+      "۵۴ ساعت آموزش نظری + ۴۵ ساعت آموزش عملی + ۲۰ ساعت فعالیت حرفه‌ای"
+    ),
+    curriculum: [
+      {
+        title: option(
+          "Fundamentals of mobile architecture",
+          "Mobil mimarinin temelleri",
+          "أساسيات معمارية تطبيقات الهاتف المحمول",
+          "مبانی معماری موبایل"
+        )
+      },
+      {
+        title: option(
+          "Interface and state management",
+          "Arayüz ve durum yönetimi",
+          "إدارة الواجهات والحالة",
+          "مدیریت رابط کاربری و وضعیت"
+        )
+      },
+      { title: option("API integration", "API entegrasyonu", "تكامل API", "یکپارچه‌سازی API") },
+      {
+        title: option(
+          "Testing and debugging",
+          "Test ve hata ayıklama",
+          "الاختبار وتصحيح الأخطاء",
+          "آزمایش و اشکال‌زدایی"
+        )
+      },
+      {
+        title: option(
+          "Store publishing processes",
+          "Mağaza yayın süreçleri",
+          "عمليات النشر في المتاجر",
+          "فرایند انتشار در فروشگاه‌ها"
+        )
+      },
+      { title: option("Capstone project", "Bitirme projesi", "المشروع الختامي", "پروژه نهایی") }
+    ],
+    weeks: [
+      {
+        title: option(
+          "Fundamentals: Introduction to the Mobile World and JavaScript Fundamentals",
+          "Temeller: Mobil Dünyaya Giriş ve JavaScript Temelleri",
+          "الأساسيات: مقدمة إلى عالم الهاتف المحمول وأساسيات JavaScript",
+          "مبانی: آشنایی با دنیای موبایل و مبانی JavaScript"
+        )
+      },
+      {
+        title: option(
+          "Fundamentals: React Native Logic and First Implementation",
+          "Temeller: React Native Mantığı ve İlk Uygulama",
+          "الأساسيات: منطق React Native والتطبيق الأول",
+          "مبانی: منطق React Native و نخستین پیاده‌سازی"
+        )
+      },
+      {
+        title: option(
+          "Basic Development: Components, State, Props, and Hooks",
+          "Temel Geliştirme: Bileşenler, State, Props ve Hooks",
+          "التطوير الأساسي: المكونات والحالة وProps وHooks",
+          "توسعه پایه: Components، State، Props و Hooks"
+        )
+      },
+      {
+        title: option(
+          "Basic Development: Interface Design and Forms",
+          "Temel Geliştirme: Arayüz Tasarımı ve Formlar",
+          "التطوير الأساسي: تصميم الواجهات والنماذج",
+          "توسعه پایه: طراحی رابط کاربری و فرم‌ها"
+        )
+      },
+      {
+        title: option(
+          "Navigation and Multi-Screen Applications",
+          "Navigasyon ve Çok Ekranlı Uygulamalar",
+          "التنقل والتطبيقات متعددة الشاشات",
+          "مسیریابی و اپلیکیشن‌های چندصفحه‌ای"
+        )
+      },
+      {
+        title: option(
+          "API Usage and Real-Time Data Management",
+          "API Kullanımı ve Gerçek Zamanlı Veri Yönetimi",
+          "استخدام API وإدارة البيانات في الوقت الفعلي",
+          "استفاده از API و مدیریت داده بلادرنگ"
+        )
+      },
+      {
+        title: option(
+          "Data Storage: Local Storage and State Management",
+          "Veri Depolama: Yerel Depolama ve Durum Yönetimi",
+          "تخزين البيانات: التخزين المحلي وإدارة الحالة",
+          "ذخیره‌سازی داده: ذخیره محلی و مدیریت وضعیت"
+        )
+      },
+      {
+        title: option(
+          "Advanced Features: Hardware Usage and UI/UX",
+          "İleri Özellikler: Donanım Kullanımı ve UI/UX",
+          "الميزات المتقدمة: استخدام العتاد وUI/UX",
+          "قابلیت‌های پیشرفته: استفاده از سخت‌افزار و UI/UX"
+        )
+      },
+      {
+        title: option(
+          "Testing, Publication Processes, and Final Project",
+          "Test, Yayın Süreçleri ve Final Projesi",
+          "الاختبار وعمليات النشر والمشروع النهائي",
+          "آزمایش، فرایند انتشار و پروژه نهایی"
+        )
+      }
+    ],
+    scholarshipCodePrefix: "MOBILE",
+    scholarshipQuestions: [
+      {
+        prompt: option(
+          "Which framework in this program is used to build Android and iOS applications from one shared codebase?",
+          "Bu programda Android ve iOS uygulamalarını tek bir ortak kod tabanından geliştirmek için hangi framework kullanılır?",
+          "ما إطار العمل المستخدم في هذا البرنامج لتطوير تطبيقات Android وiOS من قاعدة شيفرة مشتركة واحدة؟",
+          "در این برنامه از کدام فریم‌ورک برای ساخت اپلیکیشن‌های Android و iOS با یک پایگاه کد مشترک استفاده می‌شود؟"
+        ),
+        options: [
+          option("React Native", "React Native", "React Native", "React Native"),
+          option("Django", "Django", "Django", "Django"),
+          option("Laravel", "Laravel", "Laravel", "Laravel"),
+          option("TensorFlow", "TensorFlow", "TensorFlow", "TensorFlow")
+        ],
+        answer: 0
+      },
+      {
+        prompt: option(
+          "What is commonly used to store data that changes while a mobile interface is running?",
+          "Bir mobil arayüz çalışırken değişen verileri saklamak için yaygın olarak ne kullanılır?",
+          "ما الذي يُستخدم عادة لحفظ البيانات التي تتغير أثناء تشغيل واجهة تطبيق الهاتف؟",
+          "برای نگهداری داده‌هایی که هنگام اجرای رابط موبایل تغییر می‌کنند معمولاً از چه چیزی استفاده می‌شود؟"
+        ),
+        options: [
+          option("State", "State", "State", "State"),
+          option("Image file", "Görsel dosyası", "ملف صورة", "فایل تصویر"),
+          option("App icon", "Uygulama ikonu", "أيقونة التطبيق", "آیکون برنامه"),
+          option("Store listing", "Mağaza kaydı", "صفحة المتجر", "صفحه فروشگاه")
+        ],
+        answer: 0
+      },
+      {
+        prompt: option(
+          "What is the primary purpose of API integration in a mobile application?",
+          "Bir mobil uygulamada API entegrasyonunun temel amacı nedir?",
+          "ما الغرض الأساسي من تكامل API في تطبيق الهاتف المحمول؟",
+          "هدف اصلی یکپارچه‌سازی API در اپلیکیشن موبایل چیست؟"
+        ),
+        options: [
+          option(
+            "Connect the application to external data or services",
+            "Uygulamayı harici veri veya servislere bağlamak",
+            "ربط التطبيق ببيانات أو خدمات خارجية",
+            "اتصال برنامه به داده‌ها یا سرویس‌های خارجی"
+          ),
+          option(
+            "Change the device screen size",
+            "Cihazın ekran boyutunu değiştirmek",
+            "تغيير حجم شاشة الجهاز",
+            "تغییر اندازه صفحه دستگاه"
+          ),
+          option(
+            "Replace application testing",
+            "Uygulama testinin yerini almak",
+            "الاستغناء عن اختبار التطبيق",
+            "جایگزین کردن آزمایش برنامه"
+          ),
+          option(
+            "Create a store logo",
+            "Mağaza logosu oluşturmak",
+            "إنشاء شعار للمتجر",
+            "ساخت لوگوی فروشگاه"
+          )
+        ],
+        answer: 0
+      },
+      {
+        prompt: option(
+          "Which device feature provides location information to a mobile application?",
+          "Hangi cihaz özelliği bir mobil uygulamaya konum bilgisi sağlar?",
+          "أي ميزة في الجهاز توفر معلومات الموقع لتطبيق الهاتف المحمول؟",
+          "کدام قابلیت دستگاه اطلاعات موقعیت مکانی را در اختیار اپلیکیشن موبایل قرار می‌دهد؟"
+        ),
+        options: [
+          option("GPS", "GPS", "GPS", "GPS"),
+          option("Speaker", "Hoparlör", "مكبر الصوت", "بلندگو"),
+          option("Brightness", "Parlaklık", "سطوع الشاشة", "روشنایی صفحه"),
+          option("Wallpaper", "Duvar kağıdı", "خلفية الشاشة", "پس‌زمینه صفحه")
+        ],
+        answer: 0
+      },
+      {
+        prompt: option(
+          "What should be completed before publishing an application to Google Play or the App Store?",
+          "Bir uygulama Google Play veya App Store'da yayınlanmadan önce ne tamamlanmalıdır?",
+          "ما الذي ينبغي إكماله قبل نشر التطبيق على Google Play أو App Store؟",
+          "پیش از انتشار اپلیکیشن در Google Play یا App Store چه کاری باید تکمیل شود؟"
+        ),
+        options: [
+          option(
+            "Testing and debugging",
+            "Test ve hata ayıklama",
+            "الاختبار وتصحيح الأخطاء",
+            "آزمایش و اشکال‌زدایی"
+          ),
+          option(
+            "Removing all navigation",
+            "Tüm navigasyonu kaldırmak",
+            "إزالة جميع عناصر التنقل",
+            "حذف تمام مسیریابی‌ها"
+          ),
+          option(
+            "Deleting API integration",
+            "API entegrasyonunu silmek",
+            "حذف تكامل API",
+            "حذف یکپارچه‌سازی API"
+          ),
+          option(
+            "Disabling the user interface",
+            "Kullanıcı arayüzünü devre dışı bırakmak",
+            "تعطيل واجهة المستخدم",
+            "غیرفعال کردن رابط کاربری"
+          )
+        ],
+        answer: 0
+      }
+    ]
   }
 ];
 
@@ -401,10 +683,10 @@ export const trainingCopy = {
     "پیش‌ثبت‌نام در این برنامه"
   ),
   preRegisterDescription: option(
-    "Complete the form to continue to the temporary confirmation page. No data will be transmitted.",
-    "Geçici onay sayfasına devam etmek için formu doldurun. Hiçbir veri gönderilmeyecektir.",
-    "أكمل النموذج للانتقال إلى صفحة التأكيد المؤقتة. لن يتم إرسال أي بيانات.",
-    "برای ادامه و مشاهده صفحه تأیید موقت، فرم را تکمیل کنید. هیچ داده‌ای ارسال نخواهد شد."
+    "Submit the form and we'll contact you to discuss the program schedule and available options.",
+    "Formu gönderin; program takvimini ve mevcut seçenekleri görüşmek için sizinle iletişime geçelim.",
+    "أرسل النموذج وسنتواصل معك لمناقشة جدول البرنامج والخيارات المتاحة.",
+    "فرم را ارسال کنید تا برای گفت‌وگو درباره زمان‌بندی برنامه و گزینه‌های موجود با شما تماس بگیریم."
   ),
   fullName: option("Full name", "Ad soyad", "الاسم الكامل", "نام و نام خانوادگی"),
   email: option("Email", "E-posta", "البريد الإلكتروني", "ایمیل"),
@@ -418,10 +700,16 @@ export const trainingCopy = {
     "کد بورسیه (اختیاری)"
   ),
   submit: option(
-    "Complete pre-registration",
-    "Ön kaydı tamamla",
-    "أكمل التسجيل المسبق",
-    "تکمیل پیش‌ثبت‌نام"
+    "Submit pre-registration application",
+    "Ön kayıt başvurusunu gönder",
+    "إرسال طلب التسجيل المسبق",
+    "ارسال درخواست پیش‌ثبت‌نام"
+  ),
+  developmentNotice: option(
+    "This form is not connected to a server yet. Your information was validated in this browser but was not sent or stored.",
+    "Bu form henüz bir sunucuya bağlı değildir. Bilgileriniz bu tarayıcıda doğrulandı ancak gönderilmedi veya saklanmadı.",
+    "هذا النموذج غير متصل بخادم بعد. تم التحقق من معلوماتك في هذا المتصفح، لكنها لم تُرسل أو تُحفظ.",
+    "این فرم هنوز به سرور متصل نیست. اطلاعات شما در این مرورگر اعتبارسنجی شد، اما ارسال یا ذخیره نشد."
   ),
   successTitle: option(
     "Pre-registration form completed",

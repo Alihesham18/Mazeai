@@ -66,8 +66,8 @@
   min-inline-size: 0;
   overflow: hidden;
   border: 1px solid rgba(112, 64, 240, 0.38);
-  border-radius: 0.5rem;
-  background: rgba(15, 12, 25, 0.97);
+  border-radius: 0.875rem;
+  background: rgba(20, 16, 29, 0.97);
 }
 
 .posterLink {
@@ -80,13 +80,40 @@
 }
 
 .poster {
+  z-index: 1;
   object-fit: cover;
+}
+
+.posterFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background:
+    radial-gradient(circle at 68% 32%, rgba(214, 168, 75, 0.17), transparent 28%),
+    radial-gradient(circle at 34% 68%, rgba(124, 58, 237, 0.28), transparent 40%),
+    #0b0712;
+  color: #ffffff;
+  text-align: center;
+}
+
+.posterFallback strong {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+}
+
+.posterFallback span {
+  color: #aaa5b3;
+  font-size: 0.85rem;
 }
 
 .posterBadges {
   position: absolute;
   inset-block-start: 0.75rem;
   inset-inline-start: 0.75rem;
+  z-index: 2;
   display: flex;
   gap: 0.4rem;
 }
@@ -172,7 +199,7 @@
 }
 
 .fee strong {
-  color: var(--color-primary-hover);
+  color: #f1c76a;
 }
 
 .detailLink {
@@ -189,6 +216,10 @@
   display: grid;
   grid-template-columns: 0.75fr 1.25fr;
   gap: 0.65rem;
+}
+
+.cardActions.singleAction {
+  grid-template-columns: 1fr;
 }
 
 .cardActions > a,

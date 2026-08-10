@@ -1,0 +1,54 @@
+.section {
+  padding-block: clamp(4.5rem, 9vw, 7rem);
+  border-block-start: 1px solid rgba(167, 139, 250, 0.12);
+  background: rgba(20, 16, 29, 0.72);
+}
+
+.heading {
+  max-inline-size: 48rem;
+  margin-block-end: 2rem;
+}
+
+.heading p {
+  margin-block-end: 0.7rem;
+  color: #a78bfa;
+  font-size: 0.85rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.grid {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.grid li {
+  min-inline-size: 0;
+  display: grid;
+  grid-template-columns: 3.25rem 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid rgba(167, 139, 250, 0.12);
+  border-radius: 0.75rem;
+  background: rgba(11, 7, 18, 0.76);
+}
+
+.grid span {
+  display: grid;
+  place-items: center;
+  block-size: 3rem;
+  border-radius: 0.65rem;
+  background: rgba(124, 58, 237, 0.18);
+  color: #a78bfa;
+  font-weight: 850;
+}
+
+@media (min-width: 46rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
