@@ -1,21 +1,38 @@
 .popup {
   position: fixed;
-  z-index: 35;
+  z-index: 50;
+
   inset-inline-end: 1.5rem;
   inset-block-end: 1.5rem;
+
   inline-size: min(23rem, calc(100vw - 3rem));
+  max-block-size: calc(100vh - 7rem);
+
   padding: 1.05rem;
-  overflow: hidden;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
   color: #fff;
+
   border: 1px solid rgba(154, 120, 255, 0.46);
-  border-radius: 8px;
-  background: rgba(8, 7, 18, 0.98);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 17, 39, 0.98),
+      rgba(8, 7, 18, 0.98)
+    );
+
   box-shadow:
     0 24px 70px rgba(0, 0, 0, 0.56),
     0 0 36px rgba(109, 61, 245, 0.17);
+
   opacity: 0;
   transform: translateY(1.25rem);
   pointer-events: none;
+
   transition:
     opacity 280ms ease,
     transform 280ms ease;
@@ -41,17 +58,26 @@
 .closeButton {
   position: absolute;
   z-index: 3;
+
   inset-block-start: 0.7rem;
   inset-inline-end: 0.7rem;
+
   display: grid;
+
   inline-size: 2rem;
   block-size: 2rem;
+
   padding: 0;
+
   place-items: center;
+
   color: #aaa8b5;
+
   border: 0;
   border-radius: 50%;
+
   background: rgba(7, 7, 16, 0.82);
+
   cursor: pointer;
 }
 
@@ -67,13 +93,18 @@
 .eyebrow {
   position: relative;
   z-index: 2;
+
   margin: 0 2.25rem 0.8rem 0;
+
   color: #9a78ff;
+
   font-size: 0.66rem;
   font-weight: 800;
   line-height: 1.4;
+
   letter-spacing: 0;
   text-transform: uppercase;
+
   pointer-events: none;
 }
 
@@ -84,15 +115,28 @@
 .imageArea {
   position: relative;
   z-index: 2;
+
   display: grid;
+
   inline-size: 100%;
   aspect-ratio: 16 / 9;
+
   place-items: center;
+
   overflow: hidden;
+
   color: rgba(170, 168, 181, 0.32);
+
   border: 1px solid rgba(154, 120, 255, 0.12);
   border-radius: 8px;
-  background: linear-gradient(145deg, rgba(20, 17, 39, 0.8), rgba(7, 7, 16, 0.95));
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(20, 17, 39, 0.8),
+      rgba(7, 7, 16, 0.95)
+    );
+
   pointer-events: none;
 }
 
@@ -103,24 +147,35 @@
 .popup h2 {
   position: relative;
   z-index: 2;
+
   margin: 1rem 0 0.5rem;
+
   font-size: 1.2rem;
   line-height: 1.25;
+
   letter-spacing: 0;
+
   pointer-events: none;
 }
 
 .description {
   position: relative;
   z-index: 2;
+
   display: -webkit-box;
+
   overflow: hidden;
+
   margin: 0;
+
   color: #aaa8b5;
+
   font-size: 0.88rem;
   line-height: 1.55;
+
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+
   pointer-events: none;
 }
 
@@ -128,32 +183,54 @@
 .cta {
   position: relative;
   z-index: 2;
+
   display: flex;
   align-items: center;
+
   gap: 0.45rem;
+
   pointer-events: none;
 }
 
 .meta {
   margin-block-start: 0.9rem;
+
   color: #aaa8b5;
+
   font-size: 0.8rem;
 }
 
 .cta {
   margin-block-start: 0.95rem;
+
   color: #9a78ff;
+
   font-size: 0.82rem;
   font-weight: 750;
 }
 
-@media (max-width: 560px) {
+.popup::-webkit-scrollbar {
+  width: 5px;
+}
+
+.popup::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.popup::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(154, 120, 255, 0.28);
+}
+
+@media (max-width: 600px) {
   .popup {
     inset-inline: 1rem;
     inset-block-end: 1rem;
+
     inline-size: auto;
-    max-block-size: calc(100svh - 2rem);
-    overflow-y: auto;
+    max-block-size: calc(100svh - 5rem);
+
+    padding: 0.9rem;
   }
 }
 
