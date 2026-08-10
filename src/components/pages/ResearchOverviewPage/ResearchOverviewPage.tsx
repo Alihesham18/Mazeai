@@ -1,11 +1,9 @@
 import {
   ArrowUpRight,
-  Check,
   Code2,
   Dna,
   Navigation,
   Route,
-  UserRound,
   Waves,
   type LucideIcon
 } from "lucide-react";
@@ -84,112 +82,6 @@ export function ResearchOverviewPage({ locale }: { locale: Locale }) {
           </div>
         </Container>
       </nav>
-
-      {activeResearchProjects.map((project, index) => {
-        const Icon = projectIcons[project.icon];
-
-        return (
-          <article
-            className={styles.projectDetail}
-            data-tone={project.tone}
-            id={project.slug}
-            key={project.slug}
-          >
-            <Container>
-              <header className={styles.projectHeader}>
-                <div className={styles.detailMark} aria-hidden="true">
-                  <Icon size={44} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className={styles.projectNumber}>
-                    {localize(researchPageCopy.projectLabel, locale)}{" "}
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h2>{project.name}</h2>
-                  <span className={styles.status}>{localize(researchPageCopy.active, locale)}</span>
-                </div>
-              </header>
-
-              <div className={styles.projectBody}>
-                <section aria-labelledby={`${project.slug}-description`}>
-                  <h3 id={`${project.slug}-description`}>
-                    {localize(researchPageCopy.descriptionTitle, locale)}
-                  </h3>
-                  <p className={styles.projectDescription}>
-                    {localize(project.description, locale)}
-                  </p>
-                  <dl className={styles.metadata}>
-                    <div>
-                      <dt>{localize(researchPageCopy.category, locale)}</dt>
-                      <dd>{localize(project.category, locale)}</dd>
-                    </div>
-                    <div>
-                      <dt>{localize(researchPageCopy.type, locale)}</dt>
-                      <dd>{project.type}</dd>
-                    </div>
-                  </dl>
-                </section>
-
-                <section aria-labelledby={`${project.slug}-objectives`}>
-                  <h3 id={`${project.slug}-objectives`}>
-                    {localize(researchPageCopy.objectivesTitle, locale)}
-                  </h3>
-                  <ul className={styles.objectives}>
-                    {project.objectives.map((objective) => (
-                      <li key={objective.en}>
-                        <Check size={18} aria-hidden="true" />
-                        <span>{localize(objective, locale)}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              </div>
-
-              <section
-                className={styles.technologySection}
-                aria-labelledby={`${project.slug}-technologies`}
-              >
-                <h3 id={`${project.slug}-technologies`}>
-                  {localize(researchPageCopy.technologiesTitle, locale)}
-                </h3>
-                <ul className={styles.technologies}>
-                  {project.technologies.map((technology) => (
-                    <li key={technology}>{technology}</li>
-                  ))}
-                </ul>
-              </section>
-
-              <section className={styles.teamSection} aria-labelledby={`${project.slug}-team`}>
-                <div className={styles.teamHeading}>
-                  <p className={styles.eyebrow}>{localize(researchPageCopy.teamEyebrow, locale)}</p>
-                  <h3 id={`${project.slug}-team`}>
-                    {localize(researchPageCopy.teamTitle, locale)}
-                  </h3>
-                  <p>{localize(researchPageCopy.teamDescription, locale)}</p>
-                </div>
-                <div className={styles.teamGrid}>
-                  {Array.from({ length: project.teamSlots }, (_, slotIndex) => (
-                    <div
-                      className={styles.teamSlot}
-                      aria-label={`${localize(researchPageCopy.unassigned, locale)} ${slotIndex + 1}`}
-                      key={slotIndex}
-                    >
-                      <span className={styles.emptyAvatar} aria-hidden="true">
-                        <UserRound size={32} strokeWidth={1.4} />
-                      </span>
-                      <span className={styles.emptyName} aria-hidden="true" />
-                      <span className={styles.emptyRole} aria-hidden="true" />
-                      <span className={styles.visuallyHidden}>
-                        {localize(researchPageCopy.unassigned, locale)}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            </Container>
-          </article>
-        );
-      })}
     </>
   );
 }

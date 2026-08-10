@@ -19,8 +19,7 @@
   font-size: clamp(1.05rem, 2vw, 1.28rem);
 }
 
-.eyebrow,
-.projectNumber {
+.eyebrow {
   margin-block-end: 0.65rem;
   color: var(--color-primary-hover);
   font-size: 0.84rem;
@@ -44,28 +43,23 @@
   gap: 1rem;
 }
 
-.projectCard,
-.projectDetail {
+.projectCard {
   --project-accent: #67d3ff;
 }
 
-.projectCard[data-tone="green"],
-.projectDetail[data-tone="green"] {
+.projectCard[data-tone="green"] {
   --project-accent: #44c985;
 }
 
-.projectCard[data-tone="blue"],
-.projectDetail[data-tone="blue"] {
+.projectCard[data-tone="blue"] {
   --project-accent: #55a7ff;
 }
 
-.projectCard[data-tone="violet"],
-.projectDetail[data-tone="violet"] {
+.projectCard[data-tone="violet"] {
   --project-accent: #b093ff;
 }
 
-.projectCard[data-tone="gold"],
-.projectDetail[data-tone="gold"] {
+.projectCard[data-tone="gold"] {
   --project-accent: #f2c14e;
 }
 
@@ -149,203 +143,14 @@
   font-weight: 800;
 }
 
-.projectDetail {
-  scroll-margin-block-start: 5.5rem;
-  padding-block: clamp(4.5rem, 9vw, 8rem);
-  border-block-end: 1px solid rgba(255, 255, 255, 0.09);
-  background: rgba(0, 0, 0, 0.72);
-}
-
-.projectDetail:nth-of-type(even) {
-  background: rgba(10, 11, 16, 0.82);
-}
-
-.projectHeader {
-  display: flex;
-  gap: 1.25rem;
-  align-items: center;
-  margin-block-end: clamp(2.5rem, 6vw, 4.5rem);
-}
-
-.projectHeader h2 {
-  margin-block-end: 0.8rem;
-}
-
-.detailMark {
-  inline-size: 5rem;
-  block-size: 5rem;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border: 1px solid color-mix(in srgb, var(--project-accent) 52%, transparent);
-  border-radius: 0.5rem;
-  background: color-mix(in srgb, var(--project-accent) 9%, #08090e);
-  color: var(--project-accent);
-}
-
-.projectBody {
-  display: grid;
-  gap: clamp(2.5rem, 6vw, 5rem);
-}
-
-.projectBody h3,
-.technologySection h3 {
-  margin-block-end: 1.25rem;
-}
-
-.projectDescription {
-  max-inline-size: 48rem;
-  color: var(--color-text-muted);
-  font-size: 1.08rem;
-}
-
-.metadata {
-  display: grid;
-  gap: 0.8rem;
-  margin-block: 2rem 0;
-}
-
-.metadata div {
-  display: grid;
-  grid-template-columns: minmax(6rem, 0.35fr) 1fr;
-  gap: 1rem;
-  padding-block: 0.8rem;
-  border-block-end: 1px solid var(--color-border);
-}
-
-.metadata dt {
-  color: var(--color-text-muted);
-}
-
-.metadata dd {
-  margin: 0;
-  font-weight: 800;
-}
-
-.objectives,
-.technologies {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.objectives {
-  display: grid;
-  gap: 1rem;
-}
-
-.objectives li {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  color: var(--color-text-muted);
-}
-
-.objectives svg {
-  flex: 0 0 auto;
-  margin-block-start: 0.25rem;
-  color: var(--project-accent);
-}
-
-.technologySection {
-  margin-block-start: clamp(3rem, 6vw, 5rem);
-}
-
-.technologies {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.65rem;
-}
-
-.technologies li {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid color-mix(in srgb, var(--project-accent) 34%, var(--color-border));
-  border-radius: 0.35rem;
-  background: rgba(18, 18, 26, 0.78);
-}
-
-.teamSection {
-  margin-block-start: clamp(3.5rem, 7vw, 6rem);
-  padding-block-start: clamp(2.5rem, 5vw, 4rem);
-  border-block-start: 1px solid color-mix(in srgb, var(--project-accent) 28%, transparent);
-}
-
-.teamHeading {
-  max-inline-size: 48rem;
-  margin-block-end: 2rem;
-}
-
-.teamHeading p:last-child {
-  color: var(--color-text-muted);
-}
-
-.teamGrid {
-  display: grid;
-  gap: 1rem;
-}
-
-.teamSlot {
-  min-block-size: 15rem;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 1.1rem;
-  border: 1px dashed color-mix(in srgb, var(--project-accent) 42%, var(--color-border));
-  border-radius: 0.5rem;
-  background: rgba(14, 14, 20, 0.62);
-}
-
-.emptyAvatar {
-  inline-size: 5.25rem;
-  block-size: 5.25rem;
-  display: grid;
-  place-items: center;
-  border: 1px dashed color-mix(in srgb, var(--project-accent) 45%, var(--color-border));
-  border-radius: 50%;
-  color: color-mix(in srgb, var(--project-accent) 58%, var(--color-text-muted));
-}
-
-.emptyName,
-.emptyRole {
-  block-size: 0.55rem;
-  border-radius: 999px;
-  background: rgba(184, 184, 195, 0.18);
-}
-
-.emptyName {
-  inline-size: 8rem;
-}
-
-.emptyRole {
-  inline-size: 5.5rem;
-}
-
-.visuallyHidden {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
 @media (min-width: 620px) {
-  .projectGrid,
-  .teamGrid {
+  .projectGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (min-width: 900px) {
   .projectGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .projectBody {
-    grid-template-columns: 1.1fr 0.9fr;
-  }
-
-  .teamGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
