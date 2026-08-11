@@ -32,6 +32,23 @@
   color: var(--color-on-primary);
 }
 
+@media (max-width: 480px) {
+  .switcher {
+    gap: 0.05rem;
+    padding: 0.1rem;
+  }
+
+  .switcher > svg {
+    display: none;
+  }
+
+  .link {
+    min-inline-size: 1.6rem;
+    min-block-size: 1.9rem;
+    font-size: 0.65rem;
+  }
+}
+
 @media (min-width: 768px) {
   .switcher {
     min-block-size: 52px;

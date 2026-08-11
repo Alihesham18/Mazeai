@@ -13,16 +13,29 @@
 .mark {
   inline-size: var(--header-logo-mark-size, 2rem);
   block-size: var(--header-logo-mark-size, 2rem);
-  border: 1px solid rgba(154, 120, 255, 0.56);
+  flex: 0 0 var(--header-logo-mark-size, 2rem);
+  overflow: hidden;
   border-radius: 0.45rem;
-  background:
-    linear-gradient(90deg, transparent 45%, rgba(255, 255, 255, 0.22) 45% 55%, transparent 55%),
-    linear-gradient(0deg, transparent 45%, rgba(255, 255, 255, 0.18) 45% 55%, transparent 55%),
-    var(--color-surface-violet);
-  box-shadow: inset 0 0 0 6px rgba(109, 61, 245, 0.18);
+  background: #21052e;
+}
+
+.image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
 }
 
 @media (max-width: 480px) {
+  .logo {
+    gap: 0.45rem;
+  }
+
+  .wordmark {
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 340px) {
   .wordmark {
     display: none;
   }

@@ -75,7 +75,7 @@
     --header-nav-font-size: 0.75rem;
     --header-nav-padding: 0.35rem;
     --header-language-size: 1.9rem;
-    --header-logo-mark-size: 2.25rem;
+    --header-logo-mark-size: 2.625rem;
     --header-logo-font-size: 0.98rem;
   }
 
@@ -107,7 +107,7 @@
     --header-nav-font-size: 0.84rem;
     --header-nav-padding: 0.5rem;
     --header-language-size: 2.2rem;
-    --header-logo-mark-size: 2.5rem;
+    --header-logo-mark-size: 2.75rem;
     --header-logo-font-size: 1.05rem;
   }
 
@@ -138,7 +138,7 @@
   .header {
     --header-height: 72px;
     --header-language-size: 2.1rem;
-    --header-logo-mark-size: 2rem;
+    --header-logo-mark-size: 2.25rem;
     --header-logo-font-size: 1rem;
   }
 
