@@ -25,7 +25,7 @@ export function Header({ locale }: { locale: Locale }) {
         <DesktopNavigation locale={locale} />
         <div className={styles.actions}>
           <ThemeToggle className={styles.desktopThemeToggle} />
-          <LanguageSwitcher locale={locale} label={t("navigation.language")} />
+          <LanguageSwitcher locale={locale} />
           <Button
             href={localizedPath(locale, "/contact")}
             className={styles.desktopCta}
