@@ -214,8 +214,9 @@
 
 .cardActions {
   display: grid;
-  grid-template-columns: 0.75fr 1.25fr;
-  gap: 0.65rem;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  gap: 0.75rem;
 }
 
 .cardActions.singleAction {
@@ -224,17 +225,19 @@
 
 .cardActions > a,
 .cardActions .examButton {
-  min-block-size: 48px;
+  min-block-size: 3.75rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.65rem;
+  padding: 0.75rem 1rem;
   border: 1px solid var(--color-border-gold);
-  border-radius: 0.5rem;
+  border-radius: 10px;
   background: transparent;
   color: var(--color-text);
   font-size: 0.8rem;
+  line-height: 1.25;
   text-align: center;
+  white-space: normal;
 }
 
 .cardActions .examButton {
@@ -263,7 +266,13 @@
 }
 
 @media (max-width: 26rem) {
-  .segmentedControl,
+  .segmentedControl {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 32.5rem) {
   .cardActions {
     width: 100%;
     grid-template-columns: 1fr;
