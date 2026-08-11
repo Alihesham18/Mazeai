@@ -20,7 +20,7 @@
   border: 1px solid transparent;
   border-radius: 0.45rem;
   background: transparent;
-  color: var(--color-gold-soft);
+  color: var(--color-nav-text);
   cursor: pointer;
   font-size: var(--header-nav-font-size, 0.92rem);
   font-weight: 750;
@@ -34,13 +34,12 @@
 .trigger:hover,
 .link:hover {
   color: var(--color-text);
-  text-shadow: 0 0 10px rgba(214, 168, 75, 0.12);
 }
 
 .current {
-  border-color: rgba(214, 168, 75, 0.12);
-  color: var(--color-gold-soft);
-  background: #191127;
+  border-color: var(--color-border-gold);
+  color: var(--color-nav-text);
+  background: var(--color-surface-violet);
 }
 
 .current::after {
@@ -60,9 +59,9 @@
   z-index: 20;
   min-inline-size: 17rem;
   padding: 0.45rem;
-  border: 1px solid rgba(214, 168, 75, 0.12);
+  border: 1px solid var(--color-border-gold);
   border-radius: 0.5rem;
-  background: rgba(20, 16, 29, 0.98);
+  background: var(--color-surface-98);
   box-shadow: var(--shadow-soft);
 }
 
@@ -78,11 +77,11 @@
 .menuLink:hover,
 .menuLink:focus-visible {
   color: var(--color-text);
-  background: rgba(124, 58, 237, 0.18);
+  background: var(--color-primary-subtle);
 }
 
 .trigger svg {
-  color: rgba(241, 199, 106, 0.78);
+  color: var(--color-gold-soft);
   transition: color 160ms ease;
 }
 
@@ -91,7 +90,7 @@
   color: var(--color-text);
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1340px) {
   .nav {
     display: flex;
   }

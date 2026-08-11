@@ -8,6 +8,7 @@ import { Logo } from "@/components/ui/Logo";
 import { DesktopNavigation } from "@/components/navigation/DesktopNavigation";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { MobileNavigation } from "@/components/navigation/MobileNavigation";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import type { Locale } from "@/i18n/routing";
 import { localizedPath } from "@/lib/utilities/localize";
 import styles from "./Header.module.css";
@@ -23,6 +24,7 @@ export function Header({ locale }: { locale: Locale }) {
         <Logo locale={locale} />
         <DesktopNavigation locale={locale} />
         <div className={styles.actions}>
+          <ThemeToggle className={styles.desktopThemeToggle} />
           <LanguageSwitcher locale={locale} label={t("navigation.language")} />
           <Button
             href={localizedPath(locale, "/contact")}

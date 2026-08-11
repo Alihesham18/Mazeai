@@ -2,8 +2,8 @@
   position: sticky;
   inset-block-start: 0;
   z-index: 40;
-  border-block-end: 1px solid #d6a84b;
-  background: #100b1a;
+  border-block-end: 1px solid var(--color-gold);
+  background: var(--color-header);
   box-shadow: 0 1px 8px rgba(214, 168, 75, 0.18);
   backdrop-filter: blur(18px);
 }
@@ -15,11 +15,12 @@
   --header-language-size: 2rem;
   --header-logo-mark-size: 1.8rem;
   --header-logo-font-size: 0.94rem;
-  background: #100b1a;
-  border-block-end-color: #d6a84b;
+  background: var(--color-header);
+  border-block-end-color: var(--color-gold);
 }
 
-.inner {
+.header .inner {
+  width: min(1500px, calc(100% - 2rem));
   min-block-size: var(--header-height, 72px);
   display: flex;
   align-items: center;
@@ -35,6 +36,11 @@
 
 .actions .desktopCta {
   display: none;
+  white-space: nowrap;
+}
+
+.desktopThemeToggle {
+  display: none;
 }
 
 .header[data-home="true"] .desktopCta {
@@ -44,7 +50,17 @@
   font-size: 0.82rem;
 }
 
+@media (min-width: 1340px) {
+  .desktopThemeToggle {
+    display: inline-flex;
+  }
+}
+
 @media (min-width: 768px) {
+  .header .inner {
+    width: min(1500px, calc(100% - 4rem));
+  }
+
   .actions .desktopCta {
     display: inline-flex;
   }

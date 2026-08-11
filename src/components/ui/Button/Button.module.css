@@ -23,21 +23,21 @@
 
 .primary {
   background: var(--color-primary);
-  color: var(--color-text);
+  color: var(--color-on-primary);
 }
 
 .primary:hover {
-  background: #8b5cf6;
+  background: var(--color-primary-hover);
 }
 
 .secondary {
   border-color: var(--color-border-gold);
-  background: rgba(26, 19, 38, 0.82);
+  background: var(--color-surface-raised-82);
   color: var(--color-text);
 }
 
 .secondary:hover {
-  border-color: rgba(214, 168, 75, 0.5);
+  border-color: var(--color-gold);
   color: var(--color-gold-soft);
 }
 
@@ -47,5 +47,5 @@
 
 .ghost:hover {
   color: var(--color-text);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-primary-soft-subtle);
 }

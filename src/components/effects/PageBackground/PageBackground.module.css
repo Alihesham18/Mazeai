@@ -13,7 +13,7 @@
   pointer-events: none;
   user-select: none;
   contain: strict;
-  background: #0b0712;
+  background: var(--color-background);
 }
 
 .background[data-variant="services"] {
@@ -116,7 +116,7 @@
       rgba(var(--secondary), 0.035),
       transparent 38%
     ),
-    linear-gradient(180deg, #0d0818 0%, #0b0712 100%);
+    linear-gradient(180deg, var(--color-background-secondary) 0%, var(--color-background) 100%);
 }
 
 .grid {
@@ -168,6 +168,17 @@
       rgba(11, 7, 18, 0.34)
     ),
     radial-gradient(ellipse at center, transparent 46%, rgba(11, 7, 18, 0.34) 100%);
+}
+
+:global([data-theme="light"]) .background {
+  --accent: 109, 61, 245;
+  --secondary: 184, 135, 32;
+}
+
+:global([data-theme="light"]) .vignette {
+  background:
+    linear-gradient(180deg, rgba(247, 244, 252, 0.12), transparent 20%, transparent 76%, rgba(239, 233, 248, 0.32)),
+    radial-gradient(ellipse at center, transparent 54%, rgba(239, 233, 248, 0.28) 100%);
 }
 
 @media (max-width: 700px) {

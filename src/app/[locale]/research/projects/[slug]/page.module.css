@@ -21,7 +21,7 @@
 .hero {
   padding-block: clamp(4rem, 9vw, 7rem);
   border-block-end: 1px solid var(--color-border);
-  background: rgba(13, 8, 24, 0.78);
+  background: var(--color-background-secondary-78);
 }
 
 .backLink {
@@ -76,7 +76,7 @@
   place-items: center;
   border: 1px solid color-mix(in srgb, var(--project-accent) 52%, transparent);
   border-radius: 12px;
-  background-color: color-mix(in srgb, var(--project-accent) 8%, #14101d);
+  background-color: color-mix(in srgb, var(--project-accent) 8%, var(--color-surface));
   background-image:
     linear-gradient(color-mix(in srgb, var(--project-accent) 12%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in srgb, var(--project-accent) 12%, transparent) 1px, transparent 1px);
@@ -88,11 +88,11 @@
 .sectionAlt {
   padding-block: clamp(4rem, 8vw, 7rem);
   border-block-end: 1px solid var(--color-border);
-  background: rgba(11, 7, 18, 0.86);
+  background: var(--color-background-86);
 }
 
 .sectionAlt {
-  background: rgba(20, 16, 29, 0.78);
+  background: var(--color-surface-78);
 }
 
 .splitSection {
@@ -181,7 +181,7 @@
   padding: 0.7rem 0.9rem;
   border: 1px solid color-mix(in srgb, var(--project-accent) 36%, var(--color-border));
   border-radius: 0.35rem;
-  background: color-mix(in srgb, var(--project-accent) 7%, rgba(18, 18, 26, 0.82));
+  background: color-mix(in srgb, var(--project-accent) 7%, var(--color-surface-raised-82));
 }
 
 .teamGrid {

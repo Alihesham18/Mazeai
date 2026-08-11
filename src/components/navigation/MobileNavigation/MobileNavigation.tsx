@@ -8,6 +8,7 @@ import { navigation } from "@/data/navigation";
 import type { Locale } from "@/i18n/routing";
 import { localizedPath } from "@/lib/utilities/localize";
 import { Logo } from "@/components/ui/Logo";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import styles from "./MobileNavigation.module.css";
 
 interface MobileNavigationProps {
@@ -55,15 +56,18 @@ export function MobileNavigation({ locale }: MobileNavigationProps) {
         <div className={styles.panel} id={panelId} role="dialog" aria-modal="true">
           <div className={styles.top}>
             <Logo locale={locale} />
-            <button
-              ref={closeRef}
-              type="button"
-              className={styles.closeButton}
-              aria-label={translate("navigation.closeMenu")}
-              onClick={() => setIsOpen(false)}
-            >
-              <X aria-hidden="true" />
-            </button>
+            <div className={styles.topActions}>
+              <ThemeToggle />
+              <button
+                ref={closeRef}
+                type="button"
+                className={styles.closeButton}
+                aria-label={translate("navigation.closeMenu")}
+                onClick={() => setIsOpen(false)}
+              >
+                <X aria-hidden="true" />
+              </button>
+            </div>
           </div>
           <nav className={styles.list} aria-label="Mobile navigation">
             {navigation.map((item) =>

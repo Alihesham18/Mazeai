@@ -2,8 +2,8 @@
   position: relative;
   z-index: 2;
   min-height: 100vh;
-  color: #ffffff;
-  background: rgba(11, 7, 18, 0.58);
+  color: var(--color-text);
+  background: var(--color-background-72);
 }
 
 .container {
@@ -19,7 +19,7 @@
   isolation: isolate;
   overflow: hidden;
   border-bottom: 1px solid var(--color-border);
-  background: #0d0818;
+  background: var(--color-background-secondary);
 }
 
 .heroImage {
@@ -52,6 +52,15 @@
 
 .heroContent {
   max-width: 690px;
+}
+
+.heroContent,
+.heroContent .lead {
+  color: #ffffff;
+}
+
+.heroContent .lead {
+  opacity: 0.82;
 }
 
 .eyebrow,
@@ -96,7 +105,7 @@
 .introduction {
   padding-block: clamp(2.75rem, 5vw, 5rem);
   border-bottom: 1px solid var(--color-border);
-  background: rgba(11, 7, 18, 0.82);
+  background: var(--color-background-86);
 }
 
 .introGrid {
@@ -148,7 +157,7 @@
 
 .framework {
   border-bottom: 1px solid var(--color-border);
-  background: rgba(20, 16, 29, 0.72);
+  background: var(--color-surface-72);
 }
 
 .frameworkRow {
@@ -203,7 +212,7 @@
 
 .rowHeading[data-accent="gold"] .iconFrame,
 .rowHeading[data-accent="gold"] + .rowDescription + .rowDetail {
-  color: #f2bd4f;
+  color: var(--color-gold-soft);
 }
 
 .rowDescription,
@@ -223,7 +232,7 @@
 }
 
 .ctaSection {
-  background: rgba(13, 8, 24, 0.82);
+  background: var(--color-background-secondary-82);
 }
 
 .ctaSection .container {
@@ -268,7 +277,7 @@
   justify-content: center;
   gap: 0.7rem;
   padding-inline: 1.4rem;
-  color: #ffffff;
+  color: var(--color-on-primary);
   font-weight: 750;
   border: 1px solid var(--color-primary);
   border-radius: 0.55rem;
@@ -279,7 +288,7 @@
 }
 
 .ctaButton:hover {
-  background: #8b5cf6;
+  background: var(--color-primary-hover);
   transform: translateY(-2px);
 }
 
@@ -297,7 +306,7 @@
   }
 
   .heroShade {
-    background: rgba(11, 7, 18, 0.72);
+    background: var(--color-background-72);
   }
 
   .hero .container {
@@ -354,7 +363,7 @@
   }
 
   .heroShade {
-    background: rgba(11, 7, 18, 0.74);
+    background: var(--color-background-76);
   }
 
   .hero .container {

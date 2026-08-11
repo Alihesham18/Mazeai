@@ -42,7 +42,7 @@
   margin-block-start: 2rem;
   padding: 1rem;
   border-inline-start: 3px solid var(--color-gold);
-  background: rgba(214, 168, 75, 0.08);
+  background: var(--color-gold-subtle);
 }
 
 .status svg {
@@ -63,8 +63,8 @@
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  background: #14101d;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.4);
+  background: var(--color-surface);
+  box-shadow: 0 28px 80px var(--color-deep-shadow);
 }
 
 .heroImage {
@@ -76,16 +76,16 @@
 .linksSection {
   padding-block: clamp(3.5rem, 8vw, 6.5rem);
   border-block-start: 1px solid var(--color-border);
-  background: rgba(11, 7, 18, 0.72);
+  background: var(--color-background-72);
   backdrop-filter: blur(10px);
 }
 
 .problemSection {
-  background: rgba(20, 16, 29, 0.78);
+  background: var(--color-surface-78);
 }
 
 .section:nth-of-type(even) {
-  background: rgba(16, 11, 29, 0.76);
+  background: var(--color-background-secondary-78);
 }
 
 .sectionHeading {
@@ -145,7 +145,7 @@
 .itemGrid h3,
 .numberedGrid h3 {
   margin-block-end: 0.6rem;
-  color: #ffffff;
+  color: var(--color-text);
   font-size: clamp(1.05rem, 2vw, 1.25rem);
 }
 
@@ -156,7 +156,7 @@
 }
 
 .linksSection {
-  background: rgba(13, 8, 24, 0.86);
+  background: var(--color-background-secondary-86);
 }
 
 .linkGrid {
@@ -174,11 +174,11 @@
   padding: 1.25rem;
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  background: rgba(26, 19, 38, 0.82);
+  background: var(--color-surface-raised-82);
 }
 
 .linkGrid a:hover {
-  border-color: rgba(214, 168, 75, 0.4);
+  border-color: var(--color-border-gold);
 }
 
 .linkGrid span {

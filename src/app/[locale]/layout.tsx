@@ -7,6 +7,7 @@ import type { ReactNode } from "react";
 import { PageBackground } from "@/components/effects/PageBackground";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { siteConfig } from "@/config/site";
 import { getDirection, isLocale, locales, type Locale } from "@/i18n/routing";
 
@@ -70,18 +71,25 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const t = await getTranslations({ locale, namespace: "common" });
   const direction = getDirection(locale);
 
+  const themeScript = `(() => { try { const saved = localStorage.getItem("synergymazeai-theme"); const theme = saved === "light" || saved === "dark" ? saved : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); document.documentElement.dataset.theme = theme; } catch { document.documentElement.dataset.theme = "dark"; } })();`;
+
   return (
-    <html lang={locale} dir={direction}>
+    <html lang={locale} dir={direction} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {/* <InteractiveBackground /> */}
-          <PageBackground />
-          <a className="skip-link" href="#main-content">
-            {t("skip")}
-          </a>
-          <Header locale={locale} />
-          <main id="main-content">{children}</main>
-          <Footer locale={locale} />
+          <ThemeProvider>
+            {/* <InteractiveBackground /> */}
+            <PageBackground />
+            <a className="skip-link" href="#main-content">
+              {t("skip")}
+            </a>
+            <Header locale={locale} />
+            <main id="main-content">{children}</main>
+            <Footer locale={locale} />
+          </ThemeProvider>
         </NextIntlClientProvider>
       </body>
     </html>

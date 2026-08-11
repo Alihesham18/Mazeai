@@ -75,7 +75,7 @@
 .fields label {
   display: grid;
   gap: 0.45rem;
-  color: #ffffff;
+  color: var(--color-text);
   font-weight: 750;
 }
 
@@ -83,9 +83,9 @@
   inline-size: 100%;
   min-block-size: 46px;
   padding: 0.8rem 1rem;
-  border: 1px solid rgba(167, 139, 250, 0.16);
+  border: 1px solid var(--color-border);
   border-radius: 0.55rem;
-  background: rgba(11, 7, 18, 0.72);
+  background: var(--color-input);
   color: var(--color-text);
 }
 
@@ -111,7 +111,7 @@
   margin-block: 0.7rem 1.75rem;
   overflow: hidden;
   border-radius: 999px;
-  background: rgba(167, 139, 250, 0.12);
+  background: var(--color-primary-soft-subtle);
 }
 
 .progressTrack span {
@@ -124,7 +124,7 @@
 
 .question {
   margin-block-end: 1.25rem;
-  color: #ffffff;
+  color: var(--color-text);
   font-size: clamp(1.25rem, 3vw, 1.7rem);
   line-height: 1.35;
 }
@@ -139,7 +139,7 @@
   padding: 0.9rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
-  background: rgba(11, 7, 18, 0.62);
+  background: var(--color-input);
   color: var(--color-text-muted);
   cursor: pointer;
   font-weight: 750;
@@ -148,9 +148,9 @@
 
 .options button:hover,
 .options button.selected {
-  border-color: rgba(214, 168, 75, 0.4);
-  color: #ffffff;
-  background: rgba(124, 58, 237, 0.16);
+  border-color: var(--color-border-gold);
+  color: var(--color-text);
+  background: var(--color-primary-subtle);
 }
 
 .validation {
@@ -179,12 +179,12 @@
 
 .primaryAction {
   background: var(--color-primary);
-  color: #ffffff;
+  color: var(--color-on-primary);
 }
 
 .secondaryAction {
   border-color: var(--color-border-gold);
-  background: rgba(26, 19, 38, 0.82);
+  background: var(--color-surface-raised-82);
   color: var(--color-gold-soft);
 }
 
@@ -217,7 +217,7 @@
 .result strong {
   display: block;
   margin-block-end: 1rem;
-  color: #ffffff;
+  color: var(--color-text);
   font-size: clamp(2rem, 6vw, 3.5rem);
   line-height: 1;
 }

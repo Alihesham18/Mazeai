@@ -4,7 +4,7 @@
   align-items: flex-end;
   padding-block: clamp(6rem, 12vw, 9rem) clamp(3.5rem, 7vw, 5.5rem);
   border-block-end: 1px solid var(--color-border);
-  background: rgba(13, 8, 24, 0.74);
+  background: var(--color-background-secondary-74);
 }
 
 .hero h1 {
@@ -32,7 +32,7 @@
 .eventsSection {
   padding-block: clamp(4rem, 8vw, 7rem);
   border-block-end: 1px solid var(--color-border);
-  background: rgba(11, 7, 18, 0.76);
+  background: var(--color-background-76);
 }
 
 .sectionHeading {

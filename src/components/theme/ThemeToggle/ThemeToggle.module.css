@@ -1,0 +1,31 @@
+.toggle {
+  inline-size: 42px;
+  block-size: 42px;
+  flex: 0 0 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--color-border-gold);
+  border-radius: 10px;
+  color: var(--color-gold-soft);
+  background: var(--color-control);
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.toggle:hover {
+  border-color: color-mix(in srgb, var(--color-gold) 45%, transparent);
+  background: var(--color-control-hover);
+}
+
+:global([data-theme="light"]) .toggle {
+  border-color: var(--color-border);
+  color: var(--color-primary);
+  box-shadow: 0 4px 14px rgba(42, 24, 69, 0.08);
+}
