@@ -4,14 +4,17 @@ import { useEffect, useState, type FormEvent } from "react";
 import { trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
+import type { AuthProfile } from "@/lib/auth/types";
 import styles from "./TrainingApplicationForm.module.css";
 
 export function TrainingApplicationForm({
   locale,
-  program
+  program,
+  user
 }: {
   locale: Locale;
   program: TrainingProgram;
+  user: AuthProfile | null;
 }) {
   const [scholarshipCode, setScholarshipCode] = useState("");
   const [showDevelopmentNotice, setShowDevelopmentNotice] = useState(false);
@@ -29,11 +32,25 @@ export function TrainingApplicationForm({
     <form className={styles.form} onSubmit={submit}>
       <div className={styles.field}>
         <label htmlFor="training-full-name">{localize(trainingCopy.fullName, locale)} *</label>
-        <input id="training-full-name" name="fullName" autoComplete="name" minLength={2} required />
+        <input
+          id="training-full-name"
+          name="fullName"
+          autoComplete="name"
+          minLength={2}
+          defaultValue={user?.fullName ?? ""}
+          required
+        />
       </div>
       <div className={styles.field}>
         <label htmlFor="training-email">{localize(trainingCopy.email, locale)} *</label>
-        <input id="training-email" name="email" type="email" autoComplete="email" required />
+        <input
+          id="training-email"
+          name="email"
+          type="email"
+          autoComplete="email"
+          defaultValue={user?.email ?? ""}
+          required
+        />
       </div>
       <div className={styles.field}>
         <label htmlFor="training-phone">{localize(trainingCopy.phone, locale)} *</label>
@@ -43,6 +60,7 @@ export function TrainingApplicationForm({
           type="tel"
           autoComplete="tel"
           minLength={6}
+          defaultValue={user?.telephone ?? ""}
           required
         />
       </div>

@@ -1,0 +1,223 @@
+"use client";
+
+import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { useFormState, useFormStatus } from "react-dom";
+import {
+  loginAction,
+  registerAction,
+  requestPasswordResetAction,
+  updatePasswordAction,
+  updateProfileAction
+} from "@/lib/auth/actions";
+import {
+  initialAuthActionState,
+  type AuthActionState,
+  type AuthMessageCode,
+  type AuthProfile
+} from "@/lib/auth/types";
+import type { Locale } from "@/i18n/routing";
+import { localizedPath } from "@/lib/utilities/localize";
+import styles from "./AuthForms.module.css";
+
+function SubmitButton({ idle, pending }: { idle: string; pending: string }) {
+  const { pending: isPending } = useFormStatus();
+
+  return (
+    <button type="submit" className={styles.submit} disabled={isPending}>
+      {isPending ? pending : idle}
+    </button>
+  );
+}
+
+function StateMessage({ state }: { state: AuthActionState }) {
+  const t = useTranslations("auth.messages");
+
+  if (!state.message) return null;
+
+  return (
+    <p
+      className={state.status === "error" ? styles.error : styles.success}
+      role={state.status === "error" ? "alert" : "status"}
+    >
+      {t(state.message)}
+    </p>
+  );
+}
+
+export function LoginForm({
+  locale,
+  next,
+  initialMessage
+}: {
+  locale: Locale;
+  next?: string;
+  initialMessage?: AuthMessageCode;
+}) {
+  const t = useTranslations("auth");
+  const [state, formAction] = useFormState(loginAction.bind(null, locale), {
+    ...initialAuthActionState,
+    ...(initialMessage ? { status: "error" as const, message: initialMessage } : {})
+  });
+
+  return (
+    <form className={styles.form} action={formAction}>
+      <input type="hidden" name="next" value={next ?? localizedPath(locale, "/account")} />
+      <label className={styles.field}>
+        <span>{t("email")}</span>
+        <input name="email" type="email" autoComplete="email" required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("password")}</span>
+        <input name="password" type="password" autoComplete="current-password" required />
+      </label>
+      <div className={styles.formOptions}>
+        <label className={styles.checkbox}>
+          <input name="remember" type="checkbox" defaultChecked />
+          <span>{t("rememberMe")}</span>
+        </label>
+        <Link href={localizedPath(locale, "/forgot-password")}>{t("forgotPassword")}</Link>
+      </div>
+      <StateMessage state={state} />
+      <SubmitButton idle={t("logIn")} pending={t("signingIn")} />
+      <p className={styles.alternate}>
+        {t("noAccount")} <Link href={localizedPath(locale, "/register")}>{t("createAccount")}</Link>
+      </p>
+    </form>
+  );
+}
+
+export function RegisterForm({ locale }: { locale: Locale }) {
+  const t = useTranslations("auth");
+  const [state, formAction] = useFormState(registerAction.bind(null, locale), initialAuthActionState);
+
+  return (
+    <form className={[styles.form, styles.twoColumns].join(" ")} action={formAction}>
+      <label className={styles.field}>
+        <span>{t("firstName")}</span>
+        <input name="firstName" autoComplete="given-name" required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("lastName")}</span>
+        <input name="lastName" autoComplete="family-name" required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("email")}</span>
+        <input name="email" type="email" autoComplete="email" required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("telephone")}</span>
+        <input name="telephone" type="tel" autoComplete="tel" minLength={6} required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("password")}</span>
+        <input name="password" type="password" autoComplete="new-password" minLength={8} required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("confirmPassword")}</span>
+        <input name="confirmPassword" type="password" autoComplete="new-password" minLength={8} required />
+      </label>
+      <label className={[styles.checkbox, styles.fullWidth].join(" ")}>
+        <input name="consent" type="checkbox" required />
+        <span>
+          {t("consentPrefix")} <Link href={localizedPath(locale, "/terms")}>{t("terms")}</Link>{" "}
+          {t("and")} <Link href={localizedPath(locale, "/privacy")}>{t("privacy")}</Link>.
+        </span>
+      </label>
+      <div className={styles.fullWidth}>
+        <StateMessage state={state} />
+      </div>
+      <div className={styles.fullWidth}>
+        <SubmitButton idle={t("createAccount")} pending={t("creatingAccount")} />
+      </div>
+      <p className={[styles.alternate, styles.fullWidth].join(" ")}>
+        {t("alreadyAccount")} <Link href={localizedPath(locale, "/login")}>{t("logIn")}</Link>
+      </p>
+    </form>
+  );
+}
+
+export function ForgotPasswordForm({ locale }: { locale: Locale }) {
+  const t = useTranslations("auth");
+  const [state, formAction] = useFormState(
+    requestPasswordResetAction.bind(null, locale),
+    initialAuthActionState
+  );
+
+  return (
+    <form className={styles.form} action={formAction}>
+      <label className={styles.field}>
+        <span>{t("email")}</span>
+        <input name="email" type="email" autoComplete="email" required />
+      </label>
+      <StateMessage state={state} />
+      <SubmitButton idle={t("sendResetLink")} pending={t("sendingResetLink")} />
+      <p className={styles.alternate}>
+        <Link href={localizedPath(locale, "/login")}>{t("backToLogin")}</Link>
+      </p>
+    </form>
+  );
+}
+
+export function UpdatePasswordForm({ locale }: { locale: Locale }) {
+  const t = useTranslations("auth");
+  const [state, formAction] = useFormState(
+    updatePasswordAction.bind(null, locale),
+    initialAuthActionState
+  );
+
+  return (
+    <form className={styles.form} action={formAction}>
+      <label className={styles.field}>
+        <span>{t("newPassword")}</span>
+        <input name="password" type="password" autoComplete="new-password" minLength={8} required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("confirmPassword")}</span>
+        <input name="confirmPassword" type="password" autoComplete="new-password" minLength={8} required />
+      </label>
+      <StateMessage state={state} />
+      <SubmitButton idle={t("updatePassword")} pending={t("updatingPassword")} />
+      {state.status === "success" ? (
+        <p className={styles.alternate}>
+          <Link href={localizedPath(locale, "/account")}>{t("myAccount")}</Link>
+        </p>
+      ) : null}
+    </form>
+  );
+}
+
+export function ProfileForm({ locale, profile }: { locale: Locale; profile: AuthProfile }) {
+  const t = useTranslations("auth");
+  const [state, formAction] = useFormState(
+    updateProfileAction.bind(null, locale),
+    initialAuthActionState
+  );
+
+  return (
+    <form className={[styles.form, styles.twoColumns].join(" ")} action={formAction}>
+      <label className={styles.field}>
+        <span>{t("firstName")}</span>
+        <input name="firstName" defaultValue={profile.firstName} autoComplete="given-name" required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("lastName")}</span>
+        <input name="lastName" defaultValue={profile.lastName} autoComplete="family-name" required />
+      </label>
+      <label className={styles.field}>
+        <span>{t("email")}</span>
+        <input value={profile.email} type="email" autoComplete="email" readOnly />
+      </label>
+      <label className={styles.field}>
+        <span>{t("telephone")}</span>
+        <input name="telephone" defaultValue={profile.telephone} type="tel" autoComplete="tel" required />
+      </label>
+      <div className={styles.fullWidth}>
+        <StateMessage state={state} />
+      </div>
+      <div className={styles.fullWidth}>
+        <SubmitButton idle={t("saveChanges")} pending={t("savingChanges")} />
+      </div>
+    </form>
+  );
+}

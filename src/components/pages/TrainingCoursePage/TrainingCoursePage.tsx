@@ -10,14 +10,17 @@ import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exam
 import { formatTrainingFee, trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
+import type { AuthProfile } from "@/lib/auth/types";
 import styles from "./TrainingCoursePage.module.css";
 
 export function TrainingCoursePage({
   locale,
-  program
+  program,
+  user
 }: {
   locale: Locale;
   program: TrainingProgram;
+  user: AuthProfile | null;
 }) {
   setRequestLocale(locale);
   const scholarshipPath = localizedPath(locale, `/training/${program.slug}/scholarship`);
@@ -145,7 +148,7 @@ export function TrainingCoursePage({
             <h2 id="application-heading">{localize(trainingCopy.preRegisterTitle, locale)}</h2>
             <span>{localize(trainingCopy.preRegisterDescription, locale)}</span>
           </div>
-          <TrainingApplicationForm locale={locale} program={program} />
+          <TrainingApplicationForm locale={locale} program={program} user={user} />
         </Container>
       </section>
     </article>

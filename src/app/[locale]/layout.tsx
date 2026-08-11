@@ -10,6 +10,7 @@ import { Header } from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { siteConfig } from "@/config/site";
 import { getDirection, isLocale, locales, type Locale } from "@/i18n/routing";
+import { getCurrentUserProfile } from "@/lib/auth/user";
 
 interface LocaleLayoutProps {
   children: ReactNode;
@@ -17,6 +18,8 @@ interface LocaleLayoutProps {
     locale: string;
   };
 }
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -70,6 +73,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages({ locale });
   const t = await getTranslations({ locale, namespace: "common" });
   const direction = getDirection(locale);
+  const user = await getCurrentUserProfile();
 
   const themeScript = `(() => { try { const saved = localStorage.getItem("synergymazeai-theme"); const theme = saved === "light" || saved === "dark" ? saved : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); document.documentElement.dataset.theme = theme; } catch { document.documentElement.dataset.theme = "dark"; } })();`;
 
@@ -86,7 +90,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             <a className="skip-link" href="#main-content">
               {t("skip")}
             </a>
-            <Header locale={locale} />
+            <Header locale={locale} user={user} />
             <main id="main-content">{children}</main>
             <Footer locale={locale} />
           </ThemeProvider>

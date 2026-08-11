@@ -4,6 +4,7 @@ import { TrainingCoursePage } from "@/components/pages/TrainingCoursePage";
 import { getTrainingProgram, trainingPrograms } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
+import { getCurrentUserProfile } from "@/lib/auth/user";
 
 export function generateStaticParams() {
   return trainingPrograms.map((program) => ({ slug: program.slug }));
@@ -24,7 +25,7 @@ export function generateMetadata({
   };
 }
 
-export default function TrainingProgramPage({
+export default async function TrainingProgramPage({
   params
 }: {
   params: { locale: Locale; slug: string };
@@ -33,5 +34,6 @@ export default function TrainingProgramPage({
 
   if (!program) notFound();
 
-  return <TrainingCoursePage locale={params.locale} program={program} />;
+  const user = await getCurrentUserProfile();
+  return <TrainingCoursePage locale={params.locale} program={program} user={user} />;
 }

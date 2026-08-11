@@ -7,6 +7,7 @@ import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exam
 import { getTrainingProgram, trainingPrograms } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
+import { getCurrentUserProfile } from "@/lib/auth/user";
 
 export function generateStaticParams() {
   return trainingPrograms
@@ -33,7 +34,7 @@ export function generateMetadata({
   };
 }
 
-export default function TrainingScholarshipPage({
+export default async function TrainingScholarshipPage({
   params
 }: {
   params: { locale: Locale; slug: string };
@@ -46,9 +47,11 @@ export default function TrainingScholarshipPage({
     notFound();
   }
 
+  const user = await getCurrentUserProfile();
+
   return (
     <Container>
-      <ScholarshipExam locale={params.locale} program={program} exam={exam} />
+      <ScholarshipExam locale={params.locale} program={program} exam={exam} user={user} />
     </Container>
   );
 }

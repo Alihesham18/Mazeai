@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, UserRound, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useId, useRef, useState } from "react";
 import { navigation } from "@/data/navigation";
@@ -9,13 +9,16 @@ import type { Locale } from "@/i18n/routing";
 import { localizedPath } from "@/lib/utilities/localize";
 import { Logo } from "@/components/ui/Logo";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import type { AuthProfile } from "@/lib/auth/types";
+import { logoutAction } from "@/lib/auth/actions";
 import styles from "./MobileNavigation.module.css";
 
 interface MobileNavigationProps {
   locale: Locale;
+  profile?: AuthProfile | null;
 }
 
-export function MobileNavigation({ locale }: MobileNavigationProps) {
+export function MobileNavigation({ locale, profile = null }: MobileNavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const translate = useTranslations();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -101,6 +104,45 @@ export function MobileNavigation({ locale }: MobileNavigationProps) {
                 </Link>
               )
             )}
+            <div className={styles.accountSection}>
+              {profile ? (
+                <>
+                  <p className={styles.accountName}>
+                    <UserRound size={18} aria-hidden="true" />
+                    {profile.firstName || translate("auth.accountFallback")}
+                  </p>
+                  <Link
+                    href={localizedPath(locale, "/account")}
+                    className={styles.link}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {translate("auth.myAccount")}
+                  </Link>
+                  <Link
+                    href={`${localizedPath(locale, "/account")}#applications`}
+                    className={styles.link}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {translate("auth.applications")}
+                  </Link>
+                  <form action={logoutAction.bind(null, locale)}>
+                    <button type="submit" className={[styles.link, styles.logout].join(" ")}>
+                      <LogOut size={18} aria-hidden="true" />
+                      {translate("auth.logOut")}
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <Link
+                  href={localizedPath(locale, "/login")}
+                  className={[styles.link, styles.login].join(" ")}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <UserRound size={18} aria-hidden="true" />
+                  {translate("auth.logIn")}
+                </Link>
+              )}
+            </div>
           </nav>
         </div>
       ) : null}

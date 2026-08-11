@@ -8,12 +8,14 @@ import { Logo } from "@/components/ui/Logo";
 import { DesktopNavigation } from "@/components/navigation/DesktopNavigation";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { MobileNavigation } from "@/components/navigation/MobileNavigation";
+import { AccountNavigation } from "@/components/navigation/AccountNavigation";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import type { Locale } from "@/i18n/routing";
+import type { AuthProfile } from "@/lib/auth/types";
 import { localizedPath } from "@/lib/utilities/localize";
 import styles from "./Header.module.css";
 
-export function Header({ locale }: { locale: Locale }) {
+export function Header({ locale, user }: { locale: Locale; user: AuthProfile | null }) {
   const t = useTranslations();
   const pathname = usePathname();
   const isHome = pathname === `/${locale}` || pathname === `/${locale}/`;
@@ -26,6 +28,7 @@ export function Header({ locale }: { locale: Locale }) {
         <div className={styles.actions}>
           <ThemeToggle className={styles.desktopThemeToggle} />
           <LanguageSwitcher locale={locale} />
+          <AccountNavigation locale={locale} profile={user} className={styles.desktopAccount} />
           <Button
             href={localizedPath(locale, "/contact")}
             className={styles.desktopCta}
@@ -33,7 +36,7 @@ export function Header({ locale }: { locale: Locale }) {
           >
             {t("navigation.partner")}
           </Button>
-          <MobileNavigation locale={locale} />
+          <MobileNavigation locale={locale} profile={user} />
         </div>
       </Container>
     </header>

@@ -46,6 +46,10 @@
   display: none;
 }
 
+.desktopAccount {
+  display: none;
+}
+
 @media (min-width: 1200px) {
   .header .inner {
     display: grid;
@@ -54,6 +58,10 @@
 
   .desktopThemeToggle {
     display: inline-flex;
+  }
+
+  .desktopAccount {
+    display: block;
   }
 }
 

@@ -4,6 +4,7 @@ import { TrainingCoursePage } from "@/components/pages/TrainingCoursePage";
 import { getTrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
+import { getCurrentUserProfile } from "@/lib/auth/user";
 
 const program = getTrainingProgram("data-science-machine-learning");
 
@@ -15,7 +16,8 @@ export function generateMetadata({ params }: { params: { locale: Locale } }): Me
   };
 }
 
-export default function DataScienceMachineLearningPage({ params }: { params: { locale: Locale } }) {
+export default async function DataScienceMachineLearningPage({ params }: { params: { locale: Locale } }) {
   if (!program) notFound();
-  return <TrainingCoursePage locale={params.locale} program={program} />;
+  const user = await getCurrentUserProfile();
+  return <TrainingCoursePage locale={params.locale} program={program} user={user} />;
 }

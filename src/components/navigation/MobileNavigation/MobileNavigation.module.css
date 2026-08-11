@@ -19,6 +19,8 @@
 .panel {
   position: fixed;
   inset: 0;
+  inline-size: 100vw;
+  block-size: 100dvh;
   z-index: 50;
   display: grid;
   grid-template-rows: auto 1fr;
@@ -89,6 +91,35 @@
   border-radius: 0.45rem;
   color: var(--color-nav-text);
   font-weight: 700;
+}
+
+.accountSection {
+  margin-block-start: 1rem;
+  padding-block-start: 1rem;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.accountName {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-block: 0 0.35rem;
+  padding-inline: 0.85rem;
+  color: var(--color-gold-soft);
+  font-weight: 850;
+}
+
+.accountSection form {
+  margin: 0;
+}
+
+.logout,
+.login {
+  gap: 0.65rem;
+}
+
+.logout {
+  cursor: pointer;
 }
 
 .link:hover,

@@ -3,6 +3,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { describe, expect, it, vi } from "vitest";
 import en from "../../messages/en.json";
 import { MobileNavigation } from "@/components/navigation/MobileNavigation";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 vi.mock("next/navigation", () => ({
   usePathname: () => "/en"
@@ -10,9 +11,20 @@ vi.mock("next/navigation", () => ({
 
 describe("MobileNavigation", () => {
   it("opens and closes the accessible mobile menu", () => {
+    vi.stubGlobal(
+      "matchMedia",
+      vi.fn().mockReturnValue({
+        matches: false,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn()
+      })
+    );
+
     render(
       <NextIntlClientProvider locale="en" messages={en}>
-        <MobileNavigation locale="en" />
+        <ThemeProvider>
+          <MobileNavigation locale="en" />
+        </ThemeProvider>
       </NextIntlClientProvider>
     );
 

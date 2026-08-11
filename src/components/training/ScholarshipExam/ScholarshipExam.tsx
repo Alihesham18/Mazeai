@@ -8,12 +8,14 @@ import { scholarshipExamCopy } from "@/data/scholarship-exams";
 import type { TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
+import type { AuthProfile } from "@/lib/auth/types";
 import styles from "./ScholarshipExam.module.css";
 
 interface ScholarshipExamProps {
   locale: Locale;
   program: TrainingProgram;
   exam: ScholarshipExamData;
+  user: AuthProfile | null;
 }
 
 interface ApplicantInfo {
@@ -22,11 +24,11 @@ interface ApplicantInfo {
   telephone: string;
 }
 
-export function ScholarshipExam({ locale, program, exam }: ScholarshipExamProps) {
+export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExamProps) {
   const [applicant, setApplicant] = useState<ApplicantInfo>({
-    fullName: "",
-    email: "",
-    telephone: ""
+    fullName: user?.fullName ?? "",
+    email: user?.email ?? "",
+    telephone: user?.telephone ?? ""
   });
   const [answers, setAnswers] = useState<Array<number | null>>(
     () => Array.from({ length: exam.questions.length }, () => null)
