@@ -87,43 +87,45 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
                   </h2>
                   <p>{localize(program.shortDescription, locale)}</p>
 
-                  <div className={styles.cardMeta}>
-                    <div>
-                      <span className={styles.initials} aria-hidden="true">
-                        {getInstructorInitials(program.instructor)}
-                      </span>
-                      <p>
-                        <strong>{program.instructor}</strong>
-                        <span>{localize(program.instructorRole, locale)}</span>
-                      </p>
+                  <div className={styles.cardBottom}>
+                    <div className={styles.cardMeta}>
+                      <div>
+                        <span className={styles.initials} aria-hidden="true">
+                          {getInstructorInitials(program.instructor)}
+                        </span>
+                        <p>
+                          <strong>{program.instructor}</strong>
+                          <span>{localize(program.instructorRole, locale)}</span>
+                        </p>
+                      </div>
+                      <div className={styles.fee}>
+                        <span>{localize(trainingCopy.tuition, locale)}</span>
+                        <strong>{formatTrainingFee(program.fee)}</strong>
+                      </div>
                     </div>
-                    <div className={styles.fee}>
-                      <span>{localize(trainingCopy.tuition, locale)}</span>
-                      <strong>{formatTrainingFee(program.fee)}</strong>
-                    </div>
-                  </div>
 
-                  <Link className={styles.detailLink} href={detailPath}>
-                    {localize(trainingCopy.review, locale)}
-                    <ArrowUpRight size={17} aria-hidden="true" />
-                  </Link>
-
-                  <div
-                    className={[
-                      styles.cardActions,
-                      !hasScholarshipExam ? styles.singleAction : ""
-                    ]
-                      .filter(Boolean)
-                      .join(" ")}
-                  >
-                    <Link href={`${detailPath}#application`}>
-                      {localize(trainingCopy.preregister, locale)}
+                    <Link className={styles.detailLink} href={detailPath}>
+                      {localize(trainingCopy.review, locale)}
+                      <ArrowUpRight size={17} aria-hidden="true" />
                     </Link>
-                    {hasScholarshipExam ? (
-                      <Link className={styles.examButton} href={scholarshipPath}>
-                        {localize(scholarshipExamCopy.takeTest, locale)}
+
+                    <div
+                      className={[
+                        styles.cardActions,
+                        !hasScholarshipExam ? styles.singleAction : ""
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    >
+                      <Link href={`${detailPath}#application`}>
+                        {localize(trainingCopy.preregister, locale)}
                       </Link>
-                    ) : null}
+                      {hasScholarshipExam ? (
+                        <Link className={styles.examButton} href={scholarshipPath}>
+                          {localize(scholarshipExamCopy.takeTest, locale)}
+                        </Link>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </article>
