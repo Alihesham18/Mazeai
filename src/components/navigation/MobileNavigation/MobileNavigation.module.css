@@ -102,7 +102,7 @@
   color: var(--color-text);
 }
 
-@media (min-width: 1340px) {
+@media (min-width: 1200px) {
   .openButton {
     display: none;
   }

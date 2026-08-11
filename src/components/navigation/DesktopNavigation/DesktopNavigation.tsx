@@ -67,12 +67,15 @@ function NavigationItem({
   const menuId = useId();
   const href = localizedPath(locale, item.href);
   const isCurrent = pathname === href || (item.href !== "/" && pathname.startsWith(href));
+  const shouldWrap = item.href === "/case-studies" || item.href === "/about";
 
   if (!item.children?.length) {
     return (
       <Link
         href={href}
-        className={[styles.link, isCurrent ? styles.current : ""].filter(Boolean).join(" ")}
+        className={[styles.link, shouldWrap ? styles.wrapped : "", isCurrent ? styles.current : ""]
+          .filter(Boolean)
+          .join(" ")}
         aria-current={isCurrent ? "page" : undefined}
       >
           {translate(item.labelKey)}
@@ -86,7 +89,13 @@ function NavigationItem({
     <div className={styles.item} onMouseEnter={() => setOpenHref(item.href)}>
       <button
         type="button"
-        className={[styles.trigger, isCurrent ? styles.current : ""].filter(Boolean).join(" ")}
+        className={[
+          styles.trigger,
+          shouldWrap ? styles.wrapped : "",
+          isCurrent ? styles.current : ""
+        ]
+          .filter(Boolean)
+          .join(" ")}
         aria-expanded={isOpen}
         aria-controls={menuId}
         onClick={() => setOpenHref(isOpen ? null : item.href)}

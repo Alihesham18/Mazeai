@@ -31,3 +31,55 @@
   background: var(--color-primary);
   color: var(--color-on-primary);
 }
+
+@media (min-width: 768px) {
+  .switcher {
+    min-block-size: 52px;
+    gap: 0.45rem;
+    padding-block: 0.25rem;
+    padding-inline: 0.35rem;
+  }
+
+  .switcher > svg {
+    inline-size: 18px;
+    block-size: 18px;
+  }
+
+  .link {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .switcher {
+    min-block-size: 44px;
+    gap: 0.15rem;
+    padding: 0.2rem;
+  }
+
+  .switcher > svg {
+    inline-size: 14px;
+    block-size: 14px;
+  }
+
+  .link {
+    font-size: 0.72rem;
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .switcher {
+    min-block-size: 48px;
+    gap: 0.25rem;
+    padding: 0.2rem;
+  }
+
+  .switcher > svg {
+    inline-size: 16px;
+    block-size: 16px;
+  }
+
+  .link {
+    font-size: 0.8rem;
+  }
+}
