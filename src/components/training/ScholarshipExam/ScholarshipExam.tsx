@@ -1,350 +1,198 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
-import { createPortal } from "react-dom";
-import { Check, Copy, X } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, CheckCircle2 } from "lucide-react";
+import { useMemo, useState } from "react";
+import type { ScholarshipExam as ScholarshipExamData } from "@/data/scholarship-exams";
+import { scholarshipExamCopy } from "@/data/scholarship-exams";
+import type { TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
-import { formatTrainingFee, type TrainingProgram } from "@/data/training-programs";
 import styles from "./ScholarshipExam.module.css";
 
 interface ScholarshipExamProps {
   locale: Locale;
   program: TrainingProgram;
-  className?: string;
+  exam: ScholarshipExamData;
 }
 
-const copy = {
-  exam: {
-    en: "Academy scholarship exam",
-    tr: "Akademi bursluluk sınavı",
-    ar: "اختبار منحة الأكاديمية",
-    fa: "آزمون بورسیه آکادمی"
-  },
-  open: {
-    en: "Take the scholarship exam",
-    tr: "Bursluluk sınavına gir",
-    ar: "ابدأ اختبار المنحة",
-    fa: "شرکت در آزمون بورسیه"
-  },
-  close: {
-    en: "Close scholarship exam",
-    tr: "Bursluluk sınavını kapat",
-    ar: "إغلاق اختبار المنحة",
-    fa: "بستن آزمون بورسیه"
-  },
-  progress: { en: "Progress", tr: "İlerleme", ar: "التقدم", fa: "پیشرفت" },
-  question: { en: "Question", tr: "Soru", ar: "السؤال", fa: "پرسش" },
-  completed: { en: "completed", tr: "tamamlandı", ar: "مكتمل", fa: "تکمیل‌شده" },
-  next: { en: "Next question", tr: "Sonraki soru", ar: "السؤال التالي", fa: "پرسش بعدی" },
-  finish: { en: "See my result", tr: "Sonucumu gör", ar: "عرض النتيجة", fa: "مشاهده نتیجه" },
-  resultTitle: {
-    en: "Exam completed",
-    tr: "Sınav tamamlandı",
-    ar: "اكتمل الاختبار",
-    fa: "آزمون تکمیل شد"
-  },
-  correct: {
-    en: "correct answers",
-    tr: "doğru cevap",
-    ar: "إجابات صحيحة",
-    fa: "پاسخ صحیح"
-  },
-  discountAwarded: {
-    en: "Scholarship discount awarded",
-    tr: "Kazanılan burs indirimi",
-    ar: "خصم المنحة الممنوح",
-    fa: "تخفیف بورسیه اعطاشده"
-  },
-  originalFee: {
-    en: "Original tuition fee",
-    tr: "Orijinal eğitim ücreti",
-    ar: "رسوم التدريب الأصلية",
-    fa: "شهریه اصلی"
-  },
-  reduction: {
-    en: "Scholarship reduction",
-    tr: "Burs indirimi",
-    ar: "قيمة خصم المنحة",
-    fa: "مبلغ تخفیف بورسیه"
-  },
-  finalFee: {
-    en: "Tuition with scholarship",
-    tr: "Burslu eğitim ücreti",
-    ar: "الرسوم بعد المنحة",
-    fa: "شهریه با بورسیه"
-  },
-  code: {
-    en: "Scholarship code awarded",
-    tr: "Kazanılan burs kodu",
-    ar: "رمز المنحة الممنوح",
-    fa: "کد بورسیه اعطاشده"
-  },
-  copyCode: {
-    en: "Copy scholarship code",
-    tr: "Burs kodunu kopyala",
-    ar: "نسخ رمز المنحة",
-    fa: "کپی کد بورسیه"
-  },
-  copied: { en: "Copied", tr: "Kopyalandı", ar: "تم النسخ", fa: "کپی شد" },
-  closeButton: { en: "Close", tr: "Kapat", ar: "إغلاق", fa: "بستن" },
-  useCode: {
-    en: "Use code in application",
-    tr: "Kodu başvuruda kullan",
-    ar: "استخدم الرمز في الطلب",
-    fa: "استفاده از کد در درخواست"
-  }
-} as const;
+interface ApplicantInfo {
+  fullName: string;
+  email: string;
+  telephone: string;
+}
 
-export function ScholarshipExam({ locale, program, className }: ScholarshipExamProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export function ScholarshipExam({ locale, program, exam }: ScholarshipExamProps) {
+  const [applicant, setApplicant] = useState<ApplicantInfo>({
+    fullName: "",
+    email: "",
+    telephone: ""
+  });
+  const [answers, setAnswers] = useState<Array<number | null>>(
+    () => Array.from({ length: exam.questions.length }, () => null)
+  );
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
-  const [score, setScore] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const titleId = useId();
-  const question = program.scholarshipQuestions[questionIndex];
-  const discount = score * 10;
-  const reduction = Math.round(program.fee * (discount / 100));
-  const finalFee = program.fee - reduction;
-  const scholarshipCode = `SYNERGY-${program.scholarshipCodePrefix}-${discount || 0}`;
+  const [validationMessage, setValidationMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (!isOpen) return;
+  const answeredCount = answers.filter((answer) => answer !== null).length;
+  const score = useMemo(
+    () =>
+      answers.reduce<number>(
+        (total, answer, index) => total + (answer === exam.questions[index].answer ? 1 : 0),
+        0
+      ),
+    [answers, exam.questions]
+  );
+  const percentage = Math.round((score / exam.questions.length) * 100);
+  const question = exam.questions[questionIndex];
+  const isApplicantComplete =
+    applicant.fullName.trim() && applicant.email.trim() && applicant.telephone.trim();
+  const canSubmit = isApplicantComplete && answeredCount === exam.questions.length;
 
-    closeRef.current?.focus();
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setIsOpen(false);
-    };
-    window.addEventListener("keydown", closeOnEscape);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
-    };
-  }, [isOpen]);
-
-  const resetExam = () => {
-    setQuestionIndex(0);
-    setSelectedAnswer(null);
-    setScore(0);
-    setIsComplete(false);
-    setCopied(false);
-  };
-
-  const openExam = () => {
-    resetExam();
-    setIsOpen(true);
+  const setApplicantField = (field: keyof ApplicantInfo, value: string) => {
+    setApplicant((current) => ({ ...current, [field]: value }));
+    setValidationMessage("");
   };
 
   const selectAnswer = (answerIndex: number) => {
-    if (selectedAnswer !== null) return;
-    setSelectedAnswer(answerIndex);
-    if (answerIndex === question.answer) setScore((current) => current + 1);
+    setAnswers((current) =>
+      current.map((answer, index) => (index === questionIndex ? answerIndex : answer))
+    );
+    setValidationMessage("");
   };
 
-  const advance = () => {
-    if (selectedAnswer === null) return;
-    if (questionIndex === program.scholarshipQuestions.length - 1) {
-      setIsComplete(true);
+  const submitExam = () => {
+    if (!canSubmit) {
+      setValidationMessage(localize(scholarshipExamCopy.validation, locale));
       return;
     }
-    setQuestionIndex((current) => current + 1);
-    setSelectedAnswer(null);
-  };
 
-  const copyScholarshipCode = async () => {
-    await navigator.clipboard.writeText(scholarshipCode);
-    setCopied(true);
+    setIsSubmitted(true);
   };
-
-  const useCode = () => {
-    void navigator.clipboard.writeText(scholarshipCode);
-    setIsOpen(false);
-    const applicationPath = localizedPath(locale, `/training/${program.slug}`);
-    window.location.assign(
-      `${applicationPath}?scholarship=${encodeURIComponent(scholarshipCode)}#application`
-    );
-  };
-
-  const answeredProgress = isComplete
-    ? 100
-    : Math.round((questionIndex / program.scholarshipQuestions.length) * 100);
 
   return (
-    <>
-      <button
-        type="button"
-        className={[styles.trigger, className].filter(Boolean).join(" ")}
-        onClick={openExam}
-      >
-        {localize(copy.open, locale)}
-      </button>
+    <article className={styles.page}>
+      <Link className={styles.backLink} href={localizedPath(locale, `/training/${program.slug}`)}>
+        <ArrowLeft size={18} aria-hidden="true" />
+        {localize(scholarshipExamCopy.back, locale)}
+      </Link>
 
-      {isOpen
-        ? createPortal(
-            <div
-              className={styles.backdrop}
-              role="presentation"
-              onMouseDown={(event) => {
-                if (event.target === event.currentTarget) setIsOpen(false);
-              }}
-            >
-              <section
-                className={styles.dialog}
-                role="dialog"
-                aria-modal="true"
-                aria-labelledby={titleId}
+      <header className={styles.header}>
+        <p>{localize(scholarshipExamCopy.label, locale)}</p>
+        <h1>{localize(program.title, locale)}</h1>
+        <span>{localize(scholarshipExamCopy.intro, locale)}</span>
+      </header>
+
+      {isSubmitted ? (
+        <section className={styles.result} aria-live="polite">
+          <CheckCircle2 size={44} aria-hidden="true" />
+          <p>{localize(scholarshipExamCopy.completed, locale)}</p>
+          <h2>
+            {localize(scholarshipExamCopy.score, locale)}: {score} / {exam.questions.length}
+          </h2>
+          <strong>{percentage}%</strong>
+          <span>{localize(scholarshipExamCopy.resultMessage, locale)}</span>
+          <em>{localize(scholarshipExamCopy.localOnly, locale)}</em>
+        </section>
+      ) : (
+        <div className={styles.examGrid}>
+          <section className={styles.panel} aria-labelledby="applicant-heading">
+            <h2 id="applicant-heading">{localize(scholarshipExamCopy.applicant, locale)}</h2>
+            <div className={styles.fields}>
+              <label>
+                <span>{localize(scholarshipExamCopy.fullName, locale)} *</span>
+                <input
+                  value={applicant.fullName}
+                  onChange={(event) => setApplicantField("fullName", event.target.value)}
+                  autoComplete="name"
+                />
+              </label>
+              <label>
+                <span>{localize(scholarshipExamCopy.email, locale)} *</span>
+                <input
+                  type="email"
+                  value={applicant.email}
+                  onChange={(event) => setApplicantField("email", event.target.value)}
+                  autoComplete="email"
+                />
+              </label>
+              <label>
+                <span>{localize(scholarshipExamCopy.telephone, locale)} *</span>
+                <input
+                  value={applicant.telephone}
+                  onChange={(event) => setApplicantField("telephone", event.target.value)}
+                  autoComplete="tel"
+                />
+              </label>
+            </div>
+          </section>
+
+          <section className={styles.panel} aria-labelledby="question-heading">
+            <div className={styles.progress}>
+              <span>{localize(scholarshipExamCopy.progress, locale)}</span>
+              <strong>
+                {answeredCount} / {exam.questions.length}
+              </strong>
+            </div>
+            <div className={styles.progressTrack} aria-hidden="true">
+              <span style={{ inlineSize: `${(answeredCount / exam.questions.length) * 100}%` }} />
+            </div>
+
+            <p className={styles.questionCount}>
+              {localize(scholarshipExamCopy.question, locale)} {questionIndex + 1}
+            </p>
+            <h2 id="question-heading" className={styles.question}>
+              {localize(question.prompt, locale)}
+            </h2>
+
+            <div className={styles.options}>
+              {question.options.map((option, answerIndex) => (
+                <button
+                  type="button"
+                  key={option.en}
+                  className={answers[questionIndex] === answerIndex ? styles.selected : ""}
+                  onClick={() => selectAnswer(answerIndex)}
+                >
+                  {localize(option, locale)}
+                </button>
+              ))}
+            </div>
+
+            {validationMessage ? (
+              <p className={styles.validation} role="alert">
+                {validationMessage}
+              </p>
+            ) : null}
+
+            <div className={styles.actions}>
+              <button
+                type="button"
+                className={styles.secondaryAction}
+                disabled={questionIndex === 0}
+                onClick={() => setQuestionIndex((current) => Math.max(0, current - 1))}
               >
-                <header className={styles.dialogHeader}>
-                  <div>
-                    <p>{localize(copy.exam, locale)}</p>
-                    <h2 id={titleId}>{localize(program.title, locale)}</h2>
-                  </div>
-                  <button
-                    ref={closeRef}
-                    type="button"
-                    className={styles.close}
-                    aria-label={localize(copy.close, locale)}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <X aria-hidden="true" />
-                  </button>
-                </header>
-
-                {isComplete ? (
-                  <div className={styles.result}>
-                    <span className={styles.resultIcon} aria-hidden="true">
-                      <Check />
-                    </span>
-                    <h3>{localize(copy.resultTitle, locale)}</h3>
-                    <p>
-                      {score} / {program.scholarshipQuestions.length}{" "}
-                      {localize(copy.correct, locale)}
-                    </p>
-
-                    <dl className={styles.feeSummary}>
-                      <div className={styles.discountRow}>
-                        <dt>{localize(copy.discountAwarded, locale)}</dt>
-                        <dd>{discount}%</dd>
-                      </div>
-                      <div>
-                        <dt>{localize(copy.originalFee, locale)}</dt>
-                        <dd>{formatTrainingFee(program.fee)}</dd>
-                      </div>
-                      <div>
-                        <dt>{localize(copy.reduction, locale)}</dt>
-                        <dd>- {formatTrainingFee(reduction)}</dd>
-                      </div>
-                      <div className={styles.finalRow}>
-                        <dt>{localize(copy.finalFee, locale)}</dt>
-                        <dd>{formatTrainingFee(finalFee)}</dd>
-                      </div>
-                    </dl>
-
-                    <div className={styles.codeBlock}>
-                      <p>{localize(copy.code, locale)}</p>
-                      <div>
-                        <code>{scholarshipCode}</code>
-                        <button
-                          type="button"
-                          onClick={copyScholarshipCode}
-                          aria-label={localize(copy.copyCode, locale)}
-                        >
-                          {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
-                          <span>
-                            {copied
-                              ? localize(copy.copied, locale)
-                              : localize(copy.copyCode, locale)}
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className={styles.resultActions}>
-                      <button
-                        type="button"
-                        className={styles.secondaryButton}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        {localize(copy.closeButton, locale)}
-                      </button>
-                      <button type="button" className={styles.primaryButton} onClick={useCode}>
-                        {localize(copy.useCode, locale)}
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div className={styles.examBody}>
-                    <div className={styles.progressLabel}>
-                      <span>
-                        {localize(copy.progress, locale)}: {localize(copy.question, locale)}{" "}
-                        {questionIndex + 1} / {program.scholarshipQuestions.length}
-                      </span>
-                      <strong>
-                        {answeredProgress}% {localize(copy.completed, locale)}
-                      </strong>
-                    </div>
-                    <div className={styles.progressTrack} aria-hidden="true">
-                      <span style={{ inlineSize: `${Math.max(answeredProgress, 8)}%` }} />
-                    </div>
-
-                    <h3 className={styles.question}>{localize(question.prompt, locale)}</h3>
-                    <div className={styles.options}>
-                      {question.options.map((answer, answerIndex) => {
-                        const isSelected = selectedAnswer === answerIndex;
-                        const isCorrect =
-                          selectedAnswer !== null && answerIndex === question.answer;
-                        const isWrong = isSelected && answerIndex !== question.answer;
-
-                        return (
-                          <button
-                            type="button"
-                            className={[
-                              styles.option,
-                              isCorrect ? styles.correct : "",
-                              isWrong ? styles.wrong : ""
-                            ]
-                              .filter(Boolean)
-                              .join(" ")}
-                            disabled={selectedAnswer !== null}
-                            onClick={() => selectAnswer(answerIndex)}
-                            key={answer.en}
-                          >
-                            <span>{localize(answer, locale)}</span>
-                            {isCorrect ? (
-                              <Check aria-hidden="true" />
-                            ) : isWrong ? (
-                              <X aria-hidden="true" />
-                            ) : null}
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <button
-                      type="button"
-                      className={styles.nextButton}
-                      disabled={selectedAnswer === null}
-                      onClick={advance}
-                    >
-                      {localize(
-                        questionIndex === program.scholarshipQuestions.length - 1
-                          ? copy.finish
-                          : copy.next,
-                        locale
-                      )}
-                    </button>
-                  </div>
-                )}
-              </section>
-            </div>,
-            document.body
-          )
-        : null}
-    </>
+                {localize(scholarshipExamCopy.previous, locale)}
+              </button>
+              {questionIndex === exam.questions.length - 1 ? (
+                <button type="button" className={styles.primaryAction} onClick={submitExam}>
+                  {localize(scholarshipExamCopy.submit, locale)}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className={styles.primaryAction}
+                  onClick={() =>
+                    setQuestionIndex((current) => Math.min(exam.questions.length - 1, current + 1))
+                  }
+                >
+                  {localize(scholarshipExamCopy.next, locale)}
+                </button>
+              )}
+            </div>
+          </section>
+        </div>
+      )}
+    </article>
   );
 }

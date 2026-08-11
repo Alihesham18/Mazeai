@@ -614,6 +614,146 @@ export const trainingPrograms: readonly TrainingProgram[] = [
         answer: 0
       }
     ]
+  },
+  {
+    slug: "web-development-dotnet",
+    category: "bootcamp",
+    title: option(
+      "Web Development with .NET",
+      ".NET ile Web Geliştirme",
+      "تطوير الويب باستخدام .NET",
+      "توسعه وب با .NET"
+    ),
+    shortDescription: option(
+      "ASP.NET Core, database, and modern web architecture for developing enterprise applications.",
+      "Kurumsal uygulamalar geliştirmek için ASP.NET Core, veritabanı ve modern web mimarisi.",
+      "ASP.NET Core وقواعد البيانات ومعمارية الويب الحديثة لتطوير تطبيقات مؤسسية.",
+      "ASP.NET Core، پایگاه داده و معماری مدرن وب برای توسعه برنامه‌های سازمانی."
+    ),
+    description: option(
+      "Participants learn scalable, secure, and high-performance web application development using modern software architectures. The program covers .NET Core, MVC, Entity Framework Core, database management, API development, layered architecture, and theoretical and practical project development.",
+      "Katılımcılar modern yazılım mimarileri kullanarak ölçeklenebilir, güvenli ve yüksek performanslı web uygulamaları geliştirmeyi öğrenir. Program .NET Core, MVC, Entity Framework Core, veritabanı yönetimi, API geliştirme, katmanlı mimari ve teorik ile uygulamalı proje geliştirmeyi kapsar.",
+      "يتعلم المشاركون تطوير تطبيقات ويب قابلة للتوسع وآمنة وعالية الأداء باستخدام معماريات برمجية حديثة. يغطي البرنامج .NET Core وMVC وEntity Framework Core وإدارة قواعد البيانات وتطوير API والمعمارية متعددة الطبقات والتطوير النظري والعملي للمشاريع.",
+      "شرکت‌کنندگان توسعه برنامه‌های وب مقیاس‌پذیر، امن و پربازده را با معماری‌های نرم‌افزاری مدرن می‌آموزند. این برنامه .NET Core، MVC، Entity Framework Core، مدیریت پایگاه داده، توسعه API، معماری لایه‌ای و توسعه پروژه نظری و عملی را پوشش می‌دهد."
+    ),
+    image: "/images/training/web-development-dotnet.png",
+    imageAlt: option(
+      "Web Development with .NET bootcamp with instructor Yiğit Ataman",
+      "Yiğit Ataman ile .NET ile Web Geliştirme bootcamp programı",
+      "معسكر تطوير الويب باستخدام .NET مع المدرب Yiğit Ataman",
+      "بوت‌کمپ توسعه وب با .NET با تدریس Yiğit Ataman"
+    ),
+    duration: option("100 hours", "100 saat", "100 ساعة", "۱۰۰ ساعت"),
+    location: option(
+      "Istanbul + Online",
+      "İstanbul + Çevrim içi",
+      "إسطنبول + عبر الإنترنت",
+      "استانبول + آنلاین"
+    ),
+    format: option("Hybrid", "Hibrit", "هجين", "ترکیبی"),
+    instructor: "Yiğit Ataman",
+    instructorRole: option(
+      "Instructor / Software Developer",
+      "Eğitmen / Yazılım Geliştirici",
+      "مدرب / مطور برمجيات",
+      "مدرس / توسعه‌دهنده نرم‌افزار"
+    ),
+    fee: 90000,
+    certificate: true,
+    hoursBreakdown: option(
+      "36 hours of theoretical training + 45 hours of practical training + 19 hours of industry activities",
+      "36 saat teorik eğitim + 45 saat uygulamalı eğitim + 19 saat sektör etkinliği",
+      "36 ساعة تدريب نظري + 45 ساعة تدريب عملي + 19 ساعة أنشطة مهنية",
+      "۳۶ ساعت آموزش نظری + ۴۵ ساعت آموزش عملی + ۱۹ ساعت فعالیت حرفه‌ای"
+    ),
+    curriculum: [
+      { title: option("C# and .NET fundamentals", "C# ve .NET temelleri", "أساسيات C# و.NET", "مبانی C# و .NET") },
+      { title: option("ASP.NET Core MVC / API", "ASP.NET Core MVC / API", "ASP.NET Core MVC / API", "ASP.NET Core MVC / API") },
+      { title: option("Entity Framework and database", "Entity Framework ve veritabanı", "Entity Framework وقواعد البيانات", "Entity Framework و پایگاه داده") },
+      { title: option("Authentication and authorization", "Kimlik doğrulama ve yetkilendirme", "المصادقة والتفويض", "احراز هویت و مجوزدهی") },
+      { title: option("Distribution and monitoring", "Dağıtım ve izleme", "النشر والمراقبة", "توزیع و پایش") },
+      { title: option("Final project", "Final projesi", "المشروع النهائي", "پروژه نهایی") }
+    ],
+    weeks: [
+      { title: option("Orientation", "Oryantasyon", "التهيئة", "آشنایی و آماده‌سازی") },
+      { title: option("Project #1 - Portfolio", "Proje #1 - Portfolyo", "المشروع #1 - ملف الأعمال", "پروژه #۱ - پورتفولیو") },
+      { title: option("Project #1 - Portfolio", "Proje #1 - Portfolyo", "المشروع #1 - ملف الأعمال", "پروژه #۱ - پورتفولیو") },
+      { title: option("Project #2 - Cafe", "Proje #2 - Cafe", "المشروع #2 - مقهى", "پروژه #۲ - کافه") },
+      { title: option("Project #2 - Cafe", "Proje #2 - Cafe", "المشروع #2 - مقهى", "پروژه #۲ - کافه") },
+      { title: option("Project #3 - HotelAPI", "Proje #3 - HotelAPI", "المشروع #3 - HotelAPI", "پروژه #۳ - HotelAPI") },
+      { title: option("Project #3 - HotelAPI", "Proje #3 - HotelAPI", "المشروع #3 - HotelAPI", "پروژه #۳ - HotelAPI") },
+      { title: option("Project #3 - HotelAPI", "Proje #3 - HotelAPI", "المشروع #3 - HotelAPI", "پروژه #۳ - HotelAPI") },
+      { title: option("Project #4 - DashboardRapidAPI", "Proje #4 - DashboardRapidAPI", "المشروع #4 - DashboardRapidAPI", "پروژه #۴ - DashboardRapidAPI") }
+    ],
+    scholarshipCodePrefix: "DOTNET",
+    scholarshipQuestions: []
+  },
+  {
+    slug: "cybersecurity",
+    category: "bootcamp",
+    title: option("Cybersecurity", "Siber Güvenlik", "الأمن السيبراني", "امنیت سایبری"),
+    shortDescription: option(
+      "Network security, vulnerability analysis, and defense strategies in applied cybersecurity.",
+      "Uygulamalı siber güvenlikte ağ güvenliği, zafiyet analizi ve savunma stratejileri.",
+      "أمن الشبكات وتحليل الثغرات واستراتيجيات الدفاع في الأمن السيبراني التطبيقي.",
+      "امنیت شبکه، تحلیل آسیب‌پذیری و راهبردهای دفاعی در امنیت سایبری کاربردی."
+    ),
+    description: option(
+      "The Cybersecurity Basic Training improves participants' cybersecurity knowledge from fundamental concepts to professional-level practical topics. The program covers network security, system security, cryptography, mobile application security, web application security, IoT security, cloud computing security, and database security.",
+      "Siber Güvenlik Temel Eğitimi, katılımcıların siber güvenlik bilgisini temel kavramlardan profesyonel düzeyde uygulamalı konulara taşır. Program ağ güvenliği, sistem güvenliği, kriptografi, mobil uygulama güvenliği, web uygulama güvenliği, IoT güvenliği, bulut bilişim güvenliği ve veritabanı güvenliğini kapsar.",
+      "يرفع تدريب الأمن السيبراني الأساسي معرفة المشاركين من المفاهيم الأساسية إلى موضوعات عملية بمستوى مهني. يغطي البرنامج أمن الشبكات وأمن الأنظمة والتشفير وأمن تطبيقات الهاتف وأمن تطبيقات الويب وأمن إنترنت الأشياء وأمن الحوسبة السحابية وأمن قواعد البيانات.",
+      "آموزش پایه امنیت سایبری دانش شرکت‌کنندگان را از مفاهیم بنیادی تا موضوعات عملی در سطح حرفه‌ای ارتقا می‌دهد. این برنامه امنیت شبکه، امنیت سیستم، رمزنگاری، امنیت برنامه‌های موبایل، امنیت برنامه‌های وب، امنیت IoT، امنیت رایانش ابری و امنیت پایگاه داده را پوشش می‌دهد."
+    ),
+    image: "/images/training/cybersecurity.png",
+    imageAlt: option(
+      "Cybersecurity bootcamp with instructor Sercan Bayram",
+      "Sercan Bayram ile Siber Güvenlik bootcamp programı",
+      "معسكر الأمن السيبراني مع المدرب Sercan Bayram",
+      "بوت‌کمپ امنیت سایبری با تدریس Sercan Bayram"
+    ),
+    duration: option("100 hours", "100 saat", "100 ساعة", "۱۰۰ ساعت"),
+    location: option(
+      "Istanbul + Online",
+      "İstanbul + Çevrim içi",
+      "إسطنبول + عبر الإنترنت",
+      "استانبول + آنلاین"
+    ),
+    format: option("Hybrid", "Hibrit", "هجين", "ترکیبی"),
+    instructor: "Sercan Bayram",
+    instructorRole: option(
+      "Cybersecurity Expert",
+      "Siber Güvenlik Uzmanı",
+      "خبير أمن سيبراني",
+      "کارشناس امنیت سایبری"
+    ),
+    fee: 90000,
+    certificate: true,
+    hoursBreakdown: option(
+      "36 hours of theoretical training + 45 hours of practical training + 19 hours of industry activities",
+      "36 saat teorik eğitim + 45 saat uygulamalı eğitim + 19 saat sektör etkinliği",
+      "36 ساعة تدريب نظري + 45 ساعة تدريب عملي + 19 ساعة أنشطة مهنية",
+      "۳۶ ساعت آموزش نظری + ۴۵ ساعت آموزش عملی + ۱۹ ساعت فعالیت حرفه‌ای"
+    ),
+    curriculum: [
+      { title: option("Cybersecurity ecosystem", "Siber güvenlik ekosistemi", "منظومة الأمن السيبراني", "زیست‌بوم امنیت سایبری") },
+      { title: option("Network and system security", "Ağ ve sistem güvenliği", "أمن الشبكات والأنظمة", "امنیت شبکه و سیستم") },
+      { title: option("Vulnerability scanning", "Zafiyet taraması", "فحص الثغرات", "اسکن آسیب‌پذیری") },
+      { title: option("Fundamentals of Incident Response", "Olay Müdahalesinin Temelleri", "أساسيات الاستجابة للحوادث", "مبانی پاسخ‌گویی به رخداد") },
+      { title: option("Secure code and DevSecOps", "Güvenli kod ve DevSecOps", "الكود الآمن وDevSecOps", "کدنویسی امن و DevSecOps") },
+      { title: option("Laboratory projects", "Laboratuvar projeleri", "مشاريع مختبرية", "پروژه‌های آزمایشگاهی") }
+    ],
+    weeks: [
+      { title: option("Introduction to Cybersecurity (Ethical principles, digital archiving, and digital forensics)", "Siber Güvenliğe Giriş (Etik ilkeler, dijital arşivleme ve dijital adli bilişim)", "مقدمة في الأمن السيبراني (المبادئ الأخلاقية والأرشفة الرقمية والأدلة الجنائية الرقمية)", "مقدمه‌ای بر امنیت سایبری (اصول اخلاقی، آرشیو دیجیتال و جرم‌شناسی دیجیتال)") },
+      { title: option("Network and System Security (Network architectures, attack types, and hardware security)", "Ağ ve Sistem Güvenliği (Ağ mimarileri, saldırı türleri ve donanım güvenliği)", "أمن الشبكات والأنظمة (معماريات الشبكات وأنواع الهجمات وأمن العتاد)", "امنیت شبکه و سیستم (معماری‌های شبکه، انواع حمله و امنیت سخت‌افزار)") },
+      { title: option("Cryptography (Symmetric/Asymmetric encryption, Hash functions, and Steganography)", "Kriptografi (Simetrik/Asimetrik şifreleme, Hash fonksiyonları ve Steganografi)", "التشفير (التشفير المتماثل/غير المتماثل ودوال Hash والإخفاء)", "رمزنگاری (رمزگذاری متقارن/نامتقارن، توابع Hash و نهان‌نگاری)") },
+      { title: option("Mobile Application Security (Malware analysis and code audits)", "Mobil Uygulama Güvenliği (Zararlı yazılım analizi ve kod denetimleri)", "أمن تطبيقات الهاتف (تحليل البرمجيات الخبيثة وتدقيق الكود)", "امنیت اپلیکیشن موبایل (تحلیل بدافزار و بازبینی کد)") },
+      { title: option("Web Application Security (Creating secure web architectures)", "Web Uygulama Güvenliği (Güvenli web mimarileri oluşturma)", "أمن تطبيقات الويب (إنشاء معماريات ويب آمنة)", "امنیت برنامه‌های وب (ایجاد معماری‌های وب امن)") },
+      { title: option("IoT Security (Threat detection and IoT security testing)", "IoT Güvenliği (Tehdit tespiti ve IoT güvenlik testleri)", "أمن إنترنت الأشياء (اكتشاف التهديدات واختبار أمن IoT)", "امنیت IoT (تشخیص تهدید و آزمون امنیت IoT)") },
+      { title: option("Cloud Computing Security (Infrastructure security, data and identity management)", "Bulut Bilişim Güvenliği (Altyapı güvenliği, veri ve kimlik yönetimi)", "أمن الحوسبة السحابية (أمن البنية التحتية وإدارة البيانات والهوية)", "امنیت رایانش ابری (امنیت زیرساخت، مدیریت داده و هویت)") },
+      { title: option("Database Systems and Security (SQL/NoSQL applications and system security)", "Veritabanı Sistemleri ve Güvenliği (SQL/NoSQL uygulamaları ve sistem güvenliği)", "أنظمة قواعد البيانات وأمنها (تطبيقات SQL/NoSQL وأمن الأنظمة)", "سیستم‌های پایگاه داده و امنیت (کاربردهای SQL/NoSQL و امنیت سیستم)") }
+    ],
+    scholarshipCodePrefix: "CYBER",
+    scholarshipQuestions: []
   }
 ];
 

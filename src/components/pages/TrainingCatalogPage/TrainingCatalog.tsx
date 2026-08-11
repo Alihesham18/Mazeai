@@ -3,14 +3,27 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
-import { ScholarshipExam } from "@/components/training/ScholarshipExam";
 import { TrainingProgramImage } from "@/components/training/TrainingProgramImage";
+import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exams";
 import { formatTrainingFee, trainingCopy, trainingPrograms } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import styles from "./TrainingCatalogPage.module.css";
 
 type TrainingCategory = "bootcamp" | "short-course";
+
+function getInstructorInitials(instructor: string) {
+  const parts = instructor
+    .replace(/^Dr\.\s+/i, "")
+    .split(/\s+/)
+    .filter(Boolean);
+
+  return parts
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
 
 export function TrainingCatalog({ locale }: { locale: Locale }) {
   const [category, setCategory] = useState<TrainingCategory>("bootcamp");
@@ -41,6 +54,8 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
         <div className={styles.programGrid} aria-live="polite">
           {programs.map((program) => {
             const detailPath = localizedPath(locale, `/training/${program.slug}`);
+            const scholarshipPath = localizedPath(locale, `/training/${program.slug}/scholarship`);
+            const hasScholarshipExam = program.category === "bootcamp" && getScholarshipExam(program.slug);
 
             return (
               <article className={styles.programCard} key={program.slug}>
@@ -75,7 +90,7 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
                   <div className={styles.cardMeta}>
                     <div>
                       <span className={styles.initials} aria-hidden="true">
-                        MT
+                        {getInstructorInitials(program.instructor)}
                       </span>
                       <p>
                         <strong>{program.instructor}</strong>
@@ -96,7 +111,7 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
                   <div
                     className={[
                       styles.cardActions,
-                      program.scholarshipQuestions.length === 0 ? styles.singleAction : ""
+                      !hasScholarshipExam ? styles.singleAction : ""
                     ]
                       .filter(Boolean)
                       .join(" ")}
@@ -104,12 +119,10 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
                     <Link href={`${detailPath}#application`}>
                       {localize(trainingCopy.preregister, locale)}
                     </Link>
-                    {program.scholarshipQuestions.length > 0 ? (
-                      <ScholarshipExam
-                        locale={locale}
-                        program={program}
-                        className={styles.examButton}
-                      />
+                    {hasScholarshipExam ? (
+                      <Link className={styles.examButton} href={scholarshipPath}>
+                        {localize(scholarshipExamCopy.takeTest, locale)}
+                      </Link>
                     ) : null}
                   </div>
                 </div>

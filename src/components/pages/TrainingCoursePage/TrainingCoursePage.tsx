@@ -2,11 +2,11 @@ import Link from "next/link";
 import { Award, Banknote, Clock3, GraduationCap, MapPin, Monitor, MoveLeft } from "lucide-react";
 import { setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
-import { ScholarshipExam } from "@/components/training/ScholarshipExam";
 import { TrainingApplicationForm } from "@/components/training/TrainingApplicationForm";
 import { TrainingCurriculum } from "@/components/training/TrainingCurriculum";
 import { TrainingProgramImage } from "@/components/training/TrainingProgramImage";
 import { TrainingTimeline } from "@/components/training/TrainingTimeline";
+import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exams";
 import { formatTrainingFee, trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
@@ -20,6 +20,8 @@ export function TrainingCoursePage({
   program: TrainingProgram;
 }) {
   setRequestLocale(locale);
+  const scholarshipPath = localizedPath(locale, `/training/${program.slug}/scholarship`);
+  const hasScholarshipExam = program.category === "bootcamp" && getScholarshipExam(program.slug);
 
   const facts = [
     { icon: Clock3, label: trainingCopy.duration, value: program.duration },
@@ -90,12 +92,10 @@ export function TrainingCoursePage({
                 >
                   {localize(trainingCopy.getInfo, locale)}
                 </Link>
-                {program.scholarshipQuestions.length > 0 ? (
-                  <ScholarshipExam
-                    locale={locale}
-                    program={program}
-                    className={styles.examAction}
-                  />
+                {hasScholarshipExam ? (
+                  <Link className={styles.examAction} href={scholarshipPath}>
+                    {localize(scholarshipExamCopy.takeTest, locale)}
+                  </Link>
                 ) : null}
               </div>
             </div>
