@@ -1,4 +1,11 @@
 import { z } from "zod";
+import { isValidInternationalPhone, normalizeInternationalPhone } from "@/lib/phone/normalize";
+
+const internationalPhone = z
+  .string()
+  .trim()
+  .transform(normalizeInternationalPhone)
+  .refine(isValidInternationalPhone, "validation.required");
 
 export const consentSchema = z.object({
   privacyConsent: z.literal(true, {
@@ -10,7 +17,7 @@ export const consentSchema = z.object({
 export const eventRegistrationSchema = consentSchema.extend({
   fullName: z.string().min(2, "validation.required"),
   email: z.string().email("validation.email"),
-  phone: z.string().min(6, "validation.required"),
+  phone: internationalPhone,
   organization: z.string().min(2, "validation.required"),
   role: z.string().min(2, "validation.required"),
   country: z.string().min(2, "validation.required"),
@@ -21,7 +28,7 @@ export const eventRegistrationSchema = consentSchema.extend({
 export const trainingApplicationSchema = consentSchema.extend({
   fullName: z.string().min(2, "validation.required"),
   email: z.string().email("validation.email"),
-  phone: z.string().min(6, "validation.required"),
+  phone: internationalPhone,
   country: z.string().min(2, "validation.required"),
   organization: z.string().min(2, "validation.required"),
   currentRole: z.string().min(2, "validation.required"),

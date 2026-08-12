@@ -9,6 +9,7 @@ import type { TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import type { AuthProfile } from "@/lib/auth/types";
+import { PhoneInput } from "@/components/forms/PhoneInput";
 import styles from "./ScholarshipExam.module.css";
 
 interface ScholarshipExamProps {
@@ -121,10 +122,12 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
               </label>
               <label>
                 <span>{localize(scholarshipExamCopy.telephone, locale)} *</span>
-                <input
+                <PhoneInput
+                  name="telephone"
                   value={applicant.telephone}
-                  onChange={(event) => setApplicantField("telephone", event.target.value)}
-                  autoComplete="tel"
+                  onChange={(telephone) => setApplicantField("telephone", telephone)}
+                  locale={locale}
+                  required
                 />
               </label>
             </div>

@@ -5,6 +5,7 @@ import { trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
 import type { AuthProfile } from "@/lib/auth/types";
+import { PhoneInput } from "@/components/forms/PhoneInput";
 import styles from "./TrainingApplicationForm.module.css";
 
 export function TrainingApplicationForm({
@@ -54,13 +55,11 @@ export function TrainingApplicationForm({
       </div>
       <div className={styles.field}>
         <label htmlFor="training-phone">{localize(trainingCopy.phone, locale)} *</label>
-        <input
+        <PhoneInput
           id="training-phone"
           name="phone"
-          type="tel"
-          autoComplete="tel"
-          minLength={6}
           defaultValue={user?.telephone ?? ""}
+          locale={locale}
           required
         />
       </div>

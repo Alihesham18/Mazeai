@@ -1,7 +1,13 @@
 import { z } from "zod";
+import { isValidInternationalPhone, normalizeInternationalPhone } from "@/lib/phone/normalize";
 
 const email = z.string().trim().email();
 const password = z.string().min(8).max(128);
+const internationalPhone = z
+  .string()
+  .trim()
+  .transform(normalizeInternationalPhone)
+  .refine(isValidInternationalPhone);
 
 export const loginSchema = z.object({
   email,
@@ -13,7 +19,7 @@ export const registrationSchema = z
     firstName: z.string().trim().min(1).max(80),
     lastName: z.string().trim().min(1).max(80),
     email,
-    telephone: z.string().trim().min(6).max(30),
+    telephone: internationalPhone,
     password,
     confirmPassword: z.string().min(8).max(128),
     consent: z.literal("on")
@@ -36,5 +42,5 @@ export const updatePasswordSchema = z
 export const profileSchema = z.object({
   firstName: z.string().trim().min(1).max(80),
   lastName: z.string().trim().min(1).max(80),
-  telephone: z.string().trim().min(6).max(30)
+  telephone: internationalPhone
 });

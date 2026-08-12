@@ -18,6 +18,7 @@ import {
 } from "@/lib/auth/types";
 import type { Locale } from "@/i18n/routing";
 import { localizedPath } from "@/lib/utilities/localize";
+import { PhoneInput } from "@/components/forms/PhoneInput";
 import styles from "./AuthForms.module.css";
 
 function SubmitButton({ idle, pending }: { idle: string; pending: string }) {
@@ -107,7 +108,7 @@ export function RegisterForm({ locale }: { locale: Locale }) {
       </label>
       <label className={styles.field}>
         <span>{t("telephone")}</span>
-        <input name="telephone" type="tel" autoComplete="tel" minLength={6} required />
+        <PhoneInput name="telephone" locale={locale} required />
       </label>
       <label className={styles.field}>
         <span>{t("password")}</span>
@@ -210,7 +211,7 @@ export function ProfileForm({ locale, profile }: { locale: Locale; profile: Auth
       </label>
       <label className={styles.field}>
         <span>{t("telephone")}</span>
-        <input name="telephone" defaultValue={profile.telephone} type="tel" autoComplete="tel" required />
+        <PhoneInput name="telephone" locale={locale} defaultValue={profile.telephone} required />
       </label>
       <div className={styles.fullWidth}>
         <StateMessage state={state} />
