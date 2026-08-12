@@ -345,6 +345,8 @@
     "updatePasswordSupport": "En az sekiz karakterden oluşan yeni bir parola seçin.",
     "email": "E-posta",
     "password": "Parola",
+    "showPassword": "Parolayı göster",
+    "hidePassword": "Parolayı gizle",
     "newPassword": "Yeni parola",
     "confirmPassword": "Parolayı doğrulayın",
     "rememberMe": "Beni hatırla",

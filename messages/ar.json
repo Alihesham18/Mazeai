@@ -345,6 +345,8 @@
     "updatePasswordSupport": "اختر كلمة مرور جديدة لا تقل عن ثمانية أحرف.",
     "email": "البريد الإلكتروني",
     "password": "كلمة المرور",
+    "showPassword": "إظهار كلمة المرور",
+    "hidePassword": "إخفاء كلمة المرور",
     "newPassword": "كلمة المرور الجديدة",
     "confirmPassword": "تأكيد كلمة المرور",
     "rememberMe": "تذكرني",

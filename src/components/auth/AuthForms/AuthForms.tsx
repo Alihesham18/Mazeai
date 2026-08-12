@@ -18,6 +18,7 @@ import {
 } from "@/lib/auth/types";
 import type { Locale } from "@/i18n/routing";
 import { localizedPath } from "@/lib/utilities/localize";
+import { PasswordInput } from "@/components/forms/PasswordInput";
 import { PhoneInput } from "@/components/forms/PhoneInput";
 import styles from "./AuthForms.module.css";
 
@@ -68,10 +69,15 @@ export function LoginForm({
         <span>{t("email")}</span>
         <input name="email" type="email" autoComplete="email" required />
       </label>
-      <label className={styles.field}>
-        <span>{t("password")}</span>
-        <input name="password" type="password" autoComplete="current-password" required />
-      </label>
+      <div className={styles.field}>
+        <label htmlFor="login-password">{t("password")}</label>
+        <PasswordInput
+          id="login-password"
+          name="password"
+          autoComplete="current-password"
+          required
+        />
+      </div>
       <div className={styles.formOptions}>
         <label className={styles.checkbox}>
           <input name="remember" type="checkbox" defaultChecked />
@@ -110,14 +116,26 @@ export function RegisterForm({ locale }: { locale: Locale }) {
         <span>{t("telephone")}</span>
         <PhoneInput name="telephone" locale={locale} required />
       </label>
-      <label className={styles.field}>
-        <span>{t("password")}</span>
-        <input name="password" type="password" autoComplete="new-password" minLength={8} required />
-      </label>
-      <label className={styles.field}>
-        <span>{t("confirmPassword")}</span>
-        <input name="confirmPassword" type="password" autoComplete="new-password" minLength={8} required />
-      </label>
+      <div className={styles.field}>
+        <label htmlFor="register-password">{t("password")}</label>
+        <PasswordInput
+          id="register-password"
+          name="password"
+          autoComplete="new-password"
+          minLength={8}
+          required
+        />
+      </div>
+      <div className={styles.field}>
+        <label htmlFor="register-confirm-password">{t("confirmPassword")}</label>
+        <PasswordInput
+          id="register-confirm-password"
+          name="confirmPassword"
+          autoComplete="new-password"
+          minLength={8}
+          required
+        />
+      </div>
       <label className={[styles.checkbox, styles.fullWidth].join(" ")}>
         <input name="consent" type="checkbox" required />
         <span>

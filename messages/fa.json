@@ -345,6 +345,8 @@
     "updatePasswordSupport": "یک رمز عبور جدید با حداقل هشت نویسه انتخاب کنید.",
     "email": "ایمیل",
     "password": "رمز عبور",
+    "showPassword": "نمایش رمز عبور",
+    "hidePassword": "پنهان کردن رمز عبور",
     "newPassword": "رمز عبور جدید",
     "confirmPassword": "تأیید رمز عبور",
     "rememberMe": "مرا به خاطر بسپار",

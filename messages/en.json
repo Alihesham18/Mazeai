@@ -345,6 +345,8 @@
     "updatePasswordSupport": "Choose a new password with at least eight characters.",
     "email": "Email",
     "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
     "newPassword": "New password",
     "confirmPassword": "Confirm password",
     "rememberMe": "Remember me",
