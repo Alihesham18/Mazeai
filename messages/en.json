@@ -396,6 +396,17 @@
       "rejected": "Rejected"
     },
     "noScholarshipExams": "No saved scholarship exam attempts yet.",
+    "scholarshipAttemptsUnavailable": "Unable to load scholarship exam attempts. Please try again.",
+    "scholarshipScore": "Score",
+    "scholarshipPercentage": "Percentage",
+    "scholarshipAward": "Scholarship Award",
+    "discountCode": "Discount Code",
+    "scholarshipStatus": {
+      "eligible": "Eligible",
+      "notEligible": "Not Eligible",
+      "underReview": "Under Review",
+      "completed": "Completed"
+    },
     "noEventRegistrations": "No event registrations yet.",
     "messages": {
       "accountExists": "An account may already exist for this email. Try logging in or resetting your password.",

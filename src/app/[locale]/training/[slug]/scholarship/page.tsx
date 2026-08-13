@@ -7,7 +7,8 @@ import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exam
 import { getTrainingProgram, trainingPrograms } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
-import { getCurrentUserProfile } from "@/lib/auth/user";
+import { getCurrentUserProfile, withDirectusProfilePhone } from "@/lib/auth/user";
+import { getCurrentUserDirectusProfile } from "@/lib/directus/profile";
 
 export function generateStaticParams() {
   return trainingPrograms
@@ -47,7 +48,11 @@ export default async function TrainingScholarshipPage({
     notFound();
   }
 
-  const user = await getCurrentUserProfile();
+  const currentUser = await getCurrentUserProfile();
+  const directusProfile = currentUser ? await getCurrentUserDirectusProfile() : null;
+  const user = currentUser
+    ? withDirectusProfilePhone(currentUser, directusProfile?.ok ? directusProfile.profile : null)
+    : null;
 
   return (
     <Container>

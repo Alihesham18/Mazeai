@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { getCurrentUserProfile, withDirectusProfilePhone } from "@/lib/auth/user";
 import { getCurrentUserDirectusProfile } from "@/lib/directus/profile";
 import { getCurrentUserTrainingApplications } from "@/lib/directus/training";
+import { getCurrentUserScholarshipAttempts } from "@/lib/directus/scholarship";
 import Link from "next/link";
 import { localizedPath } from "@/lib/utilities/localize";
 import type { Locale } from "@/i18n/routing";
@@ -14,7 +15,11 @@ import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
 
-export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+export async function generateMetadata({
+  params
+}: {
+  params: { locale: Locale };
+}): Promise<Metadata> {
   const t = await getTranslations({ locale: params.locale, namespace: "auth" });
   return { title: `${t("myAccount")} | SynergyMazeAI` };
 }
@@ -27,9 +32,10 @@ export default async function AccountPage({ params }: { params: { locale: Locale
     redirect(`/${params.locale}/login?next=/${params.locale}/account`);
   }
 
-  const [directusProfile, applicationResult] = await Promise.all([
+  const [directusProfile, applicationResult, scholarshipResult] = await Promise.all([
     getCurrentUserDirectusProfile(),
-    getCurrentUserTrainingApplications()
+    getCurrentUserTrainingApplications(),
+    getCurrentUserScholarshipAttempts()
   ]);
   const profile = withDirectusProfilePhone(
     currentUser,
@@ -45,12 +51,6 @@ export default async function AccountPage({ params }: { params: { locale: Locale
       empty: t("noTrainings")
     },
     {
-      id: "scholarship-exams",
-      icon: Medal,
-      title: t("scholarshipExams"),
-      empty: t("noScholarshipExams")
-    },
-    {
       id: "event-registrations",
       icon: CalendarCheck,
       title: t("eventRegistrations"),
@@ -58,6 +58,7 @@ export default async function AccountPage({ params }: { params: { locale: Locale
     }
   ];
   const applications = applicationResult.ok ? applicationResult.data : [];
+  const scholarshipAttempts = scholarshipResult.ok ? scholarshipResult.data : [];
   const statusLabel = (status: (typeof applications)[number]["status"]) => {
     switch (status) {
       case "under_review":
@@ -68,6 +69,18 @@ export default async function AccountPage({ params }: { params: { locale: Locale
         return t("trainingStatus.rejected");
       default:
         return t("trainingStatus.submitted");
+    }
+  };
+  const scholarshipStatusLabel = (status: (typeof scholarshipAttempts)[number]["status"]) => {
+    switch (status) {
+      case "eligible":
+        return t("scholarshipStatus.eligible");
+      case "not_eligible":
+        return t("scholarshipStatus.notEligible");
+      case "under_review":
+        return t("scholarshipStatus.underReview");
+      default:
+        return t("scholarshipStatus.completed");
     }
   };
 
@@ -93,7 +106,11 @@ export default async function AccountPage({ params }: { params: { locale: Locale
         </section>
 
         <div className={styles.sections}>
-          <section id="applications" className={styles.emptySection} aria-labelledby="applications-heading">
+          <section
+            id="applications"
+            className={styles.emptySection}
+            aria-labelledby="applications-heading"
+          >
             <ClipboardList size={22} aria-hidden="true" />
             <div className={styles.applicationContent}>
               <h2 id="applications-heading">{t("trainingApplications")}</h2>
@@ -107,7 +124,12 @@ export default async function AccountPage({ params }: { params: { locale: Locale
                     <li key={application.id}>
                       <div>
                         {application.program ? (
-                          <Link href={localizedPath(params.locale, `/training/${application.program.slug}`)}>
+                          <Link
+                            href={localizedPath(
+                              params.locale,
+                              `/training/${application.program.slug}`
+                            )}
+                          >
                             {application.program.title}
                           </Link>
                         ) : (
@@ -121,7 +143,67 @@ export default async function AccountPage({ params }: { params: { locale: Locale
                           </time>
                         ) : null}
                       </div>
-                      <span className={styles.applicationStatus}>{statusLabel(application.status)}</span>
+                      <span className={styles.applicationStatus}>
+                        {statusLabel(application.status)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </section>
+          <section
+            id="scholarship-exams"
+            className={styles.emptySection}
+            aria-labelledby="scholarship-exams-heading"
+          >
+            <Medal size={22} aria-hidden="true" />
+            <div className={styles.applicationContent}>
+              <h2 id="scholarship-exams-heading">{t("scholarshipExams")}</h2>
+              {!scholarshipResult.ok ? (
+                <p>{t("scholarshipAttemptsUnavailable")}</p>
+              ) : scholarshipAttempts.length === 0 ? (
+                <p>{t("noScholarshipExams")}</p>
+              ) : (
+                <ul className={styles.applicationList}>
+                  {scholarshipAttempts.map((attempt) => (
+                    <li key={attempt.id}>
+                      <div>
+                        {attempt.program ? (
+                          <Link
+                            href={localizedPath(params.locale, `/training/${attempt.program.slug}`)}
+                          >
+                            {attempt.program.title}
+                          </Link>
+                        ) : (
+                          <strong>{t("trainingProgram")}</strong>
+                        )}
+                        <span>
+                          {t("scholarshipScore")}: {attempt.score} / {attempt.totalQuestions}
+                          {" · "}
+                          {t("scholarshipPercentage")}: {attempt.percentage}%
+                        </span>
+                        {attempt.scholarshipPercentage !== null ? (
+                          <span>
+                            {t("scholarshipAward")}: {attempt.scholarshipPercentage}%
+                          </span>
+                        ) : null}
+                        {attempt.discountCode ? (
+                          <code className={styles.attemptCode}>
+                            {t("discountCode")}: {attempt.discountCode}
+                          </code>
+                        ) : null}
+                        {attempt.dateCreated ? (
+                          <time dateTime={attempt.dateCreated}>
+                            {new Intl.DateTimeFormat(params.locale, { dateStyle: "medium" }).format(
+                              new Date(attempt.dateCreated)
+                            )}
+                          </time>
+                        ) : null}
+                      </div>
+                      <span className={styles.applicationStatus}>
+                        {scholarshipStatusLabel(attempt.status)}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -129,7 +211,12 @@ export default async function AccountPage({ params }: { params: { locale: Locale
             </div>
           </section>
           {sections.map(({ id, icon: Icon, title, empty }) => (
-            <section key={id} id={id} className={styles.emptySection} aria-labelledby={`${id}-heading`}>
+            <section
+              key={id}
+              id={id}
+              className={styles.emptySection}
+              aria-labelledby={`${id}-heading`}
+            >
               <Icon size={22} aria-hidden="true" />
               <div>
                 <h2 id={`${id}-heading`}>{title}</h2>

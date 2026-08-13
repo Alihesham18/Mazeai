@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState, type FormEvent } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import type { ScholarshipExam as ScholarshipExamData } from "@/data/scholarship-exams";
 import { scholarshipExamCopy } from "@/data/scholarship-exams";
 import type { TrainingProgram } from "@/data/training-programs";
@@ -10,6 +11,8 @@ import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import type { AuthProfile } from "@/lib/auth/types";
 import { PhoneInput } from "@/components/forms/PhoneInput";
+import { submitScholarshipExamAction } from "@/lib/scholarship/actions";
+import type { ScholarshipSubmissionState } from "@/lib/scholarship/types";
 import styles from "./ScholarshipExam.module.css";
 
 interface ScholarshipExamProps {
@@ -19,44 +22,34 @@ interface ScholarshipExamProps {
   user: AuthProfile | null;
 }
 
-interface ApplicantInfo {
-  fullName: string;
-  email: string;
-  telephone: string;
+const initialSubmissionState: ScholarshipSubmissionState = { status: "idle" };
+
+function SubmitButton({ canSubmit, locale }: { canSubmit: boolean; locale: Locale }) {
+  const { pending } = useFormStatus();
+  return (
+    <button type="submit" className={styles.primaryAction} disabled={!canSubmit || pending}>
+      {localize(pending ? scholarshipExamCopy.submitting : scholarshipExamCopy.submit, locale)}
+    </button>
+  );
 }
 
 export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExamProps) {
-  const [applicant, setApplicant] = useState<ApplicantInfo>({
-    fullName: user?.fullName ?? "",
-    email: user?.email ?? "",
-    telephone: user?.telephone ?? ""
-  });
-  const [answers, setAnswers] = useState<Array<number | null>>(
-    () => Array.from({ length: exam.questions.length }, () => null)
+  const [answers, setAnswers] = useState<Array<number | null>>(() =>
+    Array.from({ length: exam.questions.length }, () => null)
   );
   const [questionIndex, setQuestionIndex] = useState(0);
   const [validationMessage, setValidationMessage] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [state, formAction] = useFormState(
+    submitScholarshipExamAction.bind(null, program.slug),
+    initialSubmissionState
+  );
 
   const answeredCount = answers.filter((answer) => answer !== null).length;
-  const score = useMemo(
-    () =>
-      answers.reduce<number>(
-        (total, answer, index) => total + (answer === exam.questions[index].answer ? 1 : 0),
-        0
-      ),
-    [answers, exam.questions]
-  );
-  const percentage = Math.round((score / exam.questions.length) * 100);
   const question = exam.questions[questionIndex];
-  const isApplicantComplete =
-    applicant.fullName.trim() && applicant.email.trim() && applicant.telephone.trim();
-  const canSubmit = isApplicantComplete && answeredCount === exam.questions.length;
-
-  const setApplicantField = (field: keyof ApplicantInfo, value: string) => {
-    setApplicant((current) => ({ ...current, [field]: value }));
-    setValidationMessage("");
-  };
+  const canSubmit = answeredCount === exam.questions.length;
+  const loginPath = `${localizedPath(locale, "/login")}?next=${encodeURIComponent(
+    localizedPath(locale, `/training/${program.slug}/scholarship`)
+  )}`;
 
   const selectAnswer = (answerIndex: number) => {
     setAnswers((current) =>
@@ -65,14 +58,33 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
     setValidationMessage("");
   };
 
-  const submitExam = () => {
+  const validateSubmission = (event: FormEvent<HTMLFormElement>) => {
     if (!canSubmit) {
+      event.preventDefault();
       setValidationMessage(localize(scholarshipExamCopy.validation, locale));
-      return;
     }
-
-    setIsSubmitted(true);
   };
+
+  const submittedAnswers = JSON.stringify(
+    exam.questions.flatMap((examQuestion, index) => {
+      const selectedOption = answers[index];
+      return selectedOption === null ? [] : [{ questionId: examQuestion.id, selectedOption }];
+    })
+  );
+  const actionError = state.message ? localize(scholarshipExamCopy[state.message], locale) : "";
+  const result = state.status === "success" ? state.result : undefined;
+  const resultStatus = result
+    ? localize(
+        result.status === "eligible"
+          ? scholarshipExamCopy.eligible
+          : result.status === "not_eligible"
+            ? scholarshipExamCopy.notEligible
+            : result.status === "under_review"
+              ? scholarshipExamCopy.underReview
+              : scholarshipExamCopy.completedStatus,
+        locale
+      )
+    : "";
 
   return (
     <article className={styles.page}>
@@ -87,16 +99,36 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
         <span>{localize(scholarshipExamCopy.intro, locale)}</span>
       </header>
 
-      {isSubmitted ? (
+      {result ? (
         <section className={styles.result} aria-live="polite">
           <CheckCircle2 size={44} aria-hidden="true" />
           <p>{localize(scholarshipExamCopy.completed, locale)}</p>
           <h2>
-            {localize(scholarshipExamCopy.score, locale)}: {score} / {exam.questions.length}
+            {localize(scholarshipExamCopy.score, locale)}: {result.score} / {result.totalQuestions}
           </h2>
-          <strong>{percentage}%</strong>
+          <strong>
+            {localize(scholarshipExamCopy.percentage, locale)}: {result.percentage}%
+          </strong>
+          <span>{resultStatus}</span>
+          {result.scholarshipPercentage !== null ? (
+            <span>
+              {localize(scholarshipExamCopy.scholarshipAward, locale)}:{" "}
+              {result.scholarshipPercentage}%
+            </span>
+          ) : null}
+          {result.discountCode ? (
+            <code className={styles.discountCode}>
+              {localize(scholarshipExamCopy.discountCode, locale)}: {result.discountCode}
+            </code>
+          ) : null}
           <span>{localize(scholarshipExamCopy.resultMessage, locale)}</span>
-          <em>{localize(scholarshipExamCopy.localOnly, locale)}</em>
+          <em>{localize(scholarshipExamCopy.resultSaved, locale)}</em>
+        </section>
+      ) : !user ? (
+        <section className={styles.panel}>
+          <Link className={styles.primaryAction} href={loginPath}>
+            {localize(scholarshipExamCopy.loginToTakeExam, locale)}
+          </Link>
         </section>
       ) : (
         <div className={styles.examGrid}>
@@ -105,35 +137,31 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
             <div className={styles.fields}>
               <label>
                 <span>{localize(scholarshipExamCopy.fullName, locale)} *</span>
-                <input
-                  value={applicant.fullName}
-                  onChange={(event) => setApplicantField("fullName", event.target.value)}
-                  autoComplete="name"
-                />
+                <input value={user.fullName} autoComplete="name" readOnly />
               </label>
               <label>
                 <span>{localize(scholarshipExamCopy.email, locale)} *</span>
-                <input
-                  type="email"
-                  value={applicant.email}
-                  onChange={(event) => setApplicantField("email", event.target.value)}
-                  autoComplete="email"
-                />
+                <input type="email" value={user.email} autoComplete="email" readOnly />
               </label>
               <label>
                 <span>{localize(scholarshipExamCopy.telephone, locale)} *</span>
                 <PhoneInput
-                  name="telephone"
-                  value={applicant.telephone}
-                  onChange={(telephone) => setApplicantField("telephone", telephone)}
+                  name="profileTelephone"
+                  value={user.telephone}
                   locale={locale}
-                  required
+                  disabled
                 />
               </label>
             </div>
           </section>
 
-          <section className={styles.panel} aria-labelledby="question-heading">
+          <form
+            className={styles.panel}
+            aria-labelledby="question-heading"
+            action={formAction}
+            onSubmit={validateSubmission}
+          >
+            <input type="hidden" name="answers" value={submittedAnswers} />
             <div className={styles.progress}>
               <span>{localize(scholarshipExamCopy.progress, locale)}</span>
               <strong>
@@ -155,7 +183,7 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
               {question.options.map((option, answerIndex) => (
                 <button
                   type="button"
-                  key={option.en}
+                  key={`${question.id}-${answerIndex}`}
                   className={answers[questionIndex] === answerIndex ? styles.selected : ""}
                   onClick={() => selectAnswer(answerIndex)}
                 >
@@ -164,9 +192,9 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
               ))}
             </div>
 
-            {validationMessage ? (
+            {validationMessage || actionError ? (
               <p className={styles.validation} role="alert">
-                {validationMessage}
+                {validationMessage || actionError}
               </p>
             ) : null}
 
@@ -180,9 +208,7 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
                 {localize(scholarshipExamCopy.previous, locale)}
               </button>
               {questionIndex === exam.questions.length - 1 ? (
-                <button type="button" className={styles.primaryAction} onClick={submitExam}>
-                  {localize(scholarshipExamCopy.submit, locale)}
-                </button>
+                <SubmitButton canSubmit={canSubmit} locale={locale} />
               ) : (
                 <button
                   type="button"
@@ -195,7 +221,7 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
                 </button>
               )}
             </div>
-          </section>
+          </form>
         </div>
       )}
     </article>

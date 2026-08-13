@@ -396,6 +396,17 @@
       "rejected": "رد شده"
     },
     "noScholarshipExams": "هنوز تلاش ذخیره‌شده‌ای برای آزمون بورسیه ندارید.",
+    "scholarshipAttemptsUnavailable": "بارگیری تلاش‌های آزمون بورسیه ممکن نشد. دوباره تلاش کنید.",
+    "scholarshipScore": "امتیاز",
+    "scholarshipPercentage": "درصد",
+    "scholarshipAward": "میزان بورسیه",
+    "discountCode": "کد تخفیف",
+    "scholarshipStatus": {
+      "eligible": "واجد شرایط",
+      "notEligible": "واجد شرایط نیست",
+      "underReview": "در حال بررسی",
+      "completed": "تکمیل شده"
+    },
     "noEventRegistrations": "هنوز ثبت‌نام رویدادی ندارید.",
     "messages": {
       "accountExists": "ممکن است حسابی با این ایمیل وجود داشته باشد. ورود یا بازنشانی رمز عبور را امتحان کنید.",

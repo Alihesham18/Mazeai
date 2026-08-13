@@ -45,11 +45,7 @@ export interface DirectusTrainingProgram {
   date_updated?: string | null;
 }
 
-export type TrainingApplicationStatus =
-  | "submitted"
-  | "under_review"
-  | "accepted"
-  | "rejected";
+export type TrainingApplicationStatus = "submitted" | "under_review" | "accepted" | "rejected";
 
 export interface DirectusTrainingApplication {
   id: string;
@@ -63,11 +59,35 @@ export interface DirectusTrainingApplication {
   date_updated: string | null;
 }
 
+export interface DirectusScholarshipRule {
+  id: string;
+  training_program: string | Pick<DirectusTrainingProgram, "id"> | null;
+  minimum_percentage: number;
+  discount_percentage: number;
+  active: boolean;
+}
+
+export interface DirectusScholarshipExamAttempt {
+  id: string;
+  user: string | DirectusWebsiteUser;
+  training_program: string | Pick<DirectusTrainingProgram, "id" | "slug" | "title">;
+  score: number;
+  total_questions: number;
+  percentage: number;
+  scholarship_percentage: number | null;
+  discount_code: string | null;
+  status: import("@/lib/scholarship/types").ScholarshipAttemptStatus;
+  date_created: string | null;
+  date_updated?: string | null;
+}
+
 export interface DirectusSchema {
   directus_users: DirectusWebsiteUser[];
   user_profiles: DirectusUserProfile[];
   training_programs: DirectusTrainingProgram[];
   training_applications: DirectusTrainingApplication[];
+  scholarship_rules: DirectusScholarshipRule[];
+  scholarship_exam_attempts: DirectusScholarshipExamAttempt[];
 }
 
 export interface DirectusSession {

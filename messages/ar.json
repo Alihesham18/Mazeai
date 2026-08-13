@@ -396,6 +396,17 @@
       "rejected": "مرفوض"
     },
     "noScholarshipExams": "لا توجد محاولات اختبار منح محفوظة بعد.",
+    "scholarshipAttemptsUnavailable": "تعذر تحميل محاولات اختبار المنحة. يرجى المحاولة مرة أخرى.",
+    "scholarshipScore": "النتيجة",
+    "scholarshipPercentage": "النسبة المئوية",
+    "scholarshipAward": "قيمة المنحة",
+    "discountCode": "رمز الخصم",
+    "scholarshipStatus": {
+      "eligible": "مؤهل",
+      "notEligible": "غير مؤهل",
+      "underReview": "قيد المراجعة",
+      "completed": "مكتمل"
+    },
     "noEventRegistrations": "لا توجد تسجيلات فعاليات بعد.",
     "messages": {
       "accountExists": "قد يكون هناك حساب بهذا البريد. جرب تسجيل الدخول أو إعادة تعيين كلمة المرور.",

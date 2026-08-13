@@ -396,6 +396,17 @@
       "rejected": "Reddedildi"
     },
     "noScholarshipExams": "Henüz kaydedilmiş burs sınavı denemesi yok.",
+    "scholarshipAttemptsUnavailable": "Burs sınavı denemeleri yüklenemedi. Lütfen tekrar deneyin.",
+    "scholarshipScore": "Puan",
+    "scholarshipPercentage": "Yüzde",
+    "scholarshipAward": "Burs İndirimi",
+    "discountCode": "İndirim Kodu",
+    "scholarshipStatus": {
+      "eligible": "Uygun",
+      "notEligible": "Uygun Değil",
+      "underReview": "İnceleniyor",
+      "completed": "Tamamlandı"
+    },
     "noEventRegistrations": "Henüz etkinlik kaydı yok.",
     "messages": {
       "accountExists": "Bu e-posta için bir hesap zaten mevcut olabilir. Giriş yapmayı veya parolanızı sıfırlamayı deneyin.",

@@ -59,5 +59,15 @@ the current user and `submitted` status; neither is accepted from browser form
 state. The account page reads the current user's applications and displays the
 related program, status, and application date.
 
-Event registrations and scholarship exam attempts are not persisted by the
-current website, so those account sections keep honest empty states.
+Scholarship exams submit only question IDs and selected option indexes to a
+server action. The server identifies the current Directus user from the
+HttpOnly session, resolves the published training program by slug, scores
+against a server-only answer key, applies active `scholarship_rules`, and saves
+the trusted result to `scholarship_exam_attempts`. Creation uses the dedicated,
+server-only `DIRECTUS_SCHOLARSHIP_TOKEN`; Website Users retain read-only access
+to their own attempts. Eligible discount codes use cryptographic randomness and
+the database uniqueness constraint. My Account reads saved attempts through the
+current Website User session.
+
+Event registrations are not persisted by the current website, so that account
+section keeps an honest empty state.
