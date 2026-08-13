@@ -10,12 +10,23 @@ export interface DirectusWebsiteUser {
   email?: string | null;
   role?: string | DirectusUserRole | null;
   status?: string | null;
-  telephone?: string | null;
-  phone?: string | null;
 }
+
+export interface DirectusUserProfile {
+  id: string;
+  user: string | DirectusWebsiteUser;
+  phone_country_code: string | null;
+  phone_number: string | null;
+}
+
+export type DirectusPhoneProfile = Pick<
+  DirectusUserProfile,
+  "id" | "phone_country_code" | "phone_number"
+>;
 
 export interface DirectusSchema {
   directus_users: DirectusWebsiteUser[];
+  user_profiles: DirectusUserProfile[];
 }
 
 export interface DirectusSession {

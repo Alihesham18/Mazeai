@@ -61,3 +61,16 @@ export function splitInternationalPhone(value: string): {
 
   return { country, localNumber };
 }
+
+export function splitPhoneForStorage(value: string) {
+  const { country, localNumber } = splitInternationalPhone(value);
+  return {
+    phone_country_code: country.callingCode,
+    phone_number: localNumber
+  };
+}
+
+export function combineStoredPhone(countryCode: string | null, phoneNumber: string | null) {
+  if (!phoneNumber?.trim()) return "";
+  return normalizePhoneNumber(countryCode || defaultCallingCode, phoneNumber);
+}

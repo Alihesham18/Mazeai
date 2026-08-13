@@ -4,7 +4,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
 import { ProfileForm } from "@/components/auth/AuthForms";
 import { Container } from "@/components/ui/Container";
-import { getCurrentUserProfile } from "@/lib/auth/user";
+import { getCurrentUserProfile, withDirectusProfilePhone } from "@/lib/auth/user";
+import { getCurrentUserDirectusProfile } from "@/lib/directus/profile";
 import type { Locale } from "@/i18n/routing";
 import styles from "./page.module.css";
 
@@ -15,11 +16,17 @@ export async function generateMetadata({ params }: { params: { locale: Locale } 
 
 export default async function AccountPage({ params }: { params: { locale: Locale } }) {
   setRequestLocale(params.locale);
-  const profile = await getCurrentUserProfile();
+  const currentUser = await getCurrentUserProfile();
 
-  if (!profile) {
+  if (!currentUser) {
     redirect(`/${params.locale}/login?next=/${params.locale}/account`);
   }
+
+  const directusProfile = await getCurrentUserDirectusProfile();
+  const profile = withDirectusProfilePhone(
+    currentUser,
+    directusProfile.ok ? directusProfile.profile : null
+  );
 
   const t = await getTranslations({ locale: params.locale, namespace: "auth" });
   const sections = [
@@ -63,7 +70,11 @@ export default async function AccountPage({ params }: { params: { locale: Locale
             <h2 id="profile-heading">{t("profile")}</h2>
             <p>{t("profileSupport")}</p>
           </div>
-          <ProfileForm locale={params.locale} profile={profile} />
+          <ProfileForm
+            locale={params.locale}
+            profile={profile}
+            initialMessage={directusProfile.ok ? undefined : "profileLoadFailed"}
+          />
         </section>
 
         <div className={styles.sections}>

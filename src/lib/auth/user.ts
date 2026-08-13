@@ -1,14 +1,10 @@
 import { getCurrentDirectusUser } from "@/lib/directus/auth";
-import type { DirectusWebsiteUser } from "@/lib/directus/types";
+import type { DirectusPhoneProfile, DirectusWebsiteUser } from "@/lib/directus/types";
+import { combineStoredPhone } from "@/lib/phone/normalize";
 import type { AuthProfile } from "./types";
 
 function directusString(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
-}
-
-function directusRoleName(role: DirectusWebsiteUser["role"]) {
-  if (!role) return undefined;
-  return typeof role === "string" ? role : directusString(role.name) || role.id;
 }
 
 export function toAuthProfile(user: DirectusWebsiteUser): AuthProfile {
@@ -22,9 +18,19 @@ export function toAuthProfile(user: DirectusWebsiteUser): AuthProfile {
     firstName,
     lastName,
     fullName,
-    telephone: directusString(user.telephone) || directusString(user.phone),
-    role: directusRoleName(user.role),
-    status: directusString(user.status) || undefined
+    telephone: ""
+  };
+}
+
+export function withDirectusProfilePhone(
+  profile: AuthProfile,
+  directusProfile: DirectusPhoneProfile | null
+): AuthProfile {
+  return {
+    ...profile,
+    telephone: directusProfile
+      ? combineStoredPhone(directusProfile.phone_country_code, directusProfile.phone_number)
+      : ""
   };
 }
 

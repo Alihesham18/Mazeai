@@ -8,7 +8,9 @@ export type AuthMessageCode =
   | "passwordMismatch"
   | "passwordUpdated"
   | "passwordWeak"
-  | "phoneNotPersisted"
+  | "invalidPhone"
+  | "profileLoadFailed"
+  | "profileUpdateFailed"
   | "profileUpdated"
   | "resetRequested"
   | "registrationSuccessful"
@@ -30,6 +32,4 @@ export interface AuthProfile {
   lastName: string;
   fullName: string;
   telephone: string;
-  role?: string;
-  status?: string;
 }

@@ -37,12 +37,19 @@ https://your-production-domain.example/fa/auth/callback
 7. Review Directus rate limits, password policy, and user status handling before
    public registration opens.
 
-## Current persistence boundary
+## Account profile persistence
 
 Directus system users store account identity fields: first name, last name, and
-email. Telephone is attempted only when a compatible custom `telephone` field
-exists on `directus_users`; otherwise the UI reports that phone persistence
-requires the profile schema step.
+email. Email remains read-only in the account form. First and last name updates
+use the authenticated `/users/me` endpoint and require the Website User policy
+to permit only those two fields for the current user.
+
+Telephone data is stored in the `user_profiles` collection as separate
+`phone_country_code` and `phone_number` fields. Profile reads rely on the
+collection policy's `$CURRENT_USER` filter. Creates omit the `user` field so the
+Directus preset assigns ownership, and updates use only an ID obtained from that
+policy-scoped read. A uniqueness conflict during creation is handled by reading
+the current user's row again and updating it.
 
 Existing training applications, event registrations, and scholarship exam
 attempts are not persisted by the current website, so the account page shows

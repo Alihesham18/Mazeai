@@ -1,6 +1,6 @@
 "use server";
 
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { isLocale, type Locale } from "@/i18n/routing";
@@ -14,6 +14,8 @@ import {
   setRememberPreference,
   updateCurrentDirectusUser
 } from "@/lib/directus/auth";
+import { upsertCurrentUserDirectusProfile } from "@/lib/directus/profile";
+import { splitPhoneForStorage } from "@/lib/phone/normalize";
 import { registerDirectusUser } from "@/lib/directus/auth";
 import type { AuthActionState } from "./types";
 import {
@@ -182,16 +184,32 @@ export async function updateProfileAction(
     telephone: value(formData, "telephone")
   });
 
-  if (!parsed.success) return error("requiredFields");
+  if (!parsed.success) {
+    return error(
+      parsed.error.issues.some((issue) => issue.path[0] === "telephone")
+        ? "invalidPhone"
+        : "requiredFields"
+    );
+  }
 
   const { firstName, lastName, telephone } = parsed.data;
-  const result = await updateCurrentDirectusUser({ firstName, lastName, telephone });
+  const userResult = await updateCurrentDirectusUser({ firstName, lastName });
 
-  if (!result.ok) return error(result.error);
+  if (!userResult.ok) return error(userResult.error);
+
+  const profileResult = await upsertCurrentUserDirectusProfile(splitPhoneForStorage(telephone));
+  if (!profileResult.ok) {
+    return error(
+      profileResult.error === "sessionExpired" ||
+        profileResult.error === "backendUnavailable" ||
+        profileResult.error === "configuration"
+        ? profileResult.error
+        : "profileUpdateFailed"
+    );
+  }
 
   revalidatePath(`/${locale}`, "layout");
   revalidatePath(`/${locale}/account`);
-  if (result.phonePersisted === false) return success("phoneNotPersisted");
   return success("profileUpdated");
 }
 

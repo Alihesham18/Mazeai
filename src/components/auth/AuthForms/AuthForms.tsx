@@ -22,11 +22,19 @@ import { PasswordInput } from "@/components/forms/PasswordInput";
 import { PhoneInput } from "@/components/forms/PhoneInput";
 import styles from "./AuthForms.module.css";
 
-function SubmitButton({ idle, pending }: { idle: string; pending: string }) {
+function SubmitButton({
+  idle,
+  pending,
+  disabled = false
+}: {
+  idle: string;
+  pending: string;
+  disabled?: boolean;
+}) {
   const { pending: isPending } = useFormStatus();
 
   return (
-    <button type="submit" className={styles.submit} disabled={isPending}>
+    <button type="submit" className={styles.submit} disabled={disabled || isPending}>
       {isPending ? pending : idle}
     </button>
   );
@@ -221,12 +229,24 @@ export function UpdatePasswordForm({ locale, token }: { locale: Locale; token?: 
   );
 }
 
-export function ProfileForm({ locale, profile }: { locale: Locale; profile: AuthProfile }) {
+export function ProfileForm({
+  locale,
+  profile,
+  initialMessage
+}: {
+  locale: Locale;
+  profile: AuthProfile;
+  initialMessage?: AuthMessageCode;
+}) {
   const t = useTranslations("auth");
+  const initialState: AuthActionState = initialMessage
+    ? { status: "error", message: initialMessage }
+    : initialAuthActionState;
   const [state, formAction] = useFormState(
     updateProfileAction.bind(null, locale),
-    initialAuthActionState
+    initialState
   );
+  const profileUnavailable = initialMessage === "profileLoadFailed";
 
   return (
     <form className={[styles.form, styles.twoColumns].join(" ")} action={formAction}>
@@ -244,13 +264,23 @@ export function ProfileForm({ locale, profile }: { locale: Locale; profile: Auth
       </label>
       <label className={styles.field}>
         <span>{t("telephone")}</span>
-        <PhoneInput name="telephone" locale={locale} defaultValue={profile.telephone} required />
+        <PhoneInput
+          name="telephone"
+          locale={locale}
+          defaultValue={profile.telephone}
+          required
+          disabled={profileUnavailable}
+        />
       </label>
       <div className={styles.fullWidth}>
         <StateMessage state={state} />
       </div>
       <div className={styles.fullWidth}>
-        <SubmitButton idle={t("saveChanges")} pending={t("savingChanges")} />
+        <SubmitButton
+          idle={t("saveChanges")}
+          pending={t("savingChanges")}
+          disabled={profileUnavailable}
+        />
       </div>
     </form>
   );

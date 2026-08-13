@@ -1,9 +1,11 @@
 import { describe, expect, it } from "vitest";
 import {
+  combineStoredPhone,
   isValidInternationalPhone,
   normalizeInternationalPhone,
   normalizePhoneNumber,
-  splitInternationalPhone
+  splitInternationalPhone,
+  splitPhoneForStorage
 } from "@/lib/phone/normalize";
 
 describe("phone number normalization", () => {
@@ -32,5 +34,17 @@ describe("phone number normalization", () => {
 
   it("rejects values that are too short for international format", () => {
     expect(isValidInternationalPhone("+9012")).toBe(false);
+  });
+
+  it("splits the normalized phone into Directus profile fields", () => {
+    expect(splitPhoneForStorage("+905525073889")).toEqual({
+      phone_country_code: "+90",
+      phone_number: "5525073889"
+    });
+  });
+
+  it("combines stored profile fields for the phone input", () => {
+    expect(combineStoredPhone("+90", "0552 507 38 89")).toBe("+905525073889");
+    expect(combineStoredPhone(null, null)).toBe("");
   });
 });

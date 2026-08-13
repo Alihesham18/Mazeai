@@ -104,6 +104,17 @@ export function readDirectusSession(): DirectusSession | null {
   return { accessToken, refreshToken, expiresAt };
 }
 
+export async function getAuthenticatedDirectusSession() {
+  let session = readDirectusSession();
+  if (!session) return null;
+
+  if (session.expiresAt <= Date.now() + 10_000) {
+    session = await refreshDirectusSession(session);
+  }
+
+  return session;
+}
+
 export function directusAuthErrorCode(error: unknown): DirectusAuthErrorCode {
   if (error instanceof TypeError) {
     return "backendUnavailable";
@@ -229,20 +240,15 @@ export async function getCurrentDirectusUser() {
   const client = createDirectusRestClient();
   if (!client) return null;
 
-  let session = readDirectusSession();
+  const session = await getAuthenticatedDirectusSession();
   if (!session) return null;
-
-  if (session.expiresAt <= Date.now() + 10_000) {
-    session = await refreshDirectusSession(session);
-    if (!session) return null;
-  }
 
   try {
     return await client.request(
       withToken(
         session.accessToken,
         readMe({
-          fields: ["id", "first_name", "last_name", "email", "role", "status", "telephone", "phone"]
+          fields: ["id", "first_name", "last_name", "email"]
         })
       )
     ) as DirectusWebsiteUser;
@@ -254,7 +260,6 @@ export async function getCurrentDirectusUser() {
 export async function updateCurrentDirectusUser(input: {
   firstName: string;
   lastName: string;
-  telephone: string;
 }) {
   const client = createDirectusRestClient();
   const session = readDirectusSession();
@@ -266,27 +271,13 @@ export async function updateCurrentDirectusUser(input: {
         session.accessToken,
         updateMe({
           first_name: input.firstName,
-          last_name: input.lastName,
-          telephone: input.telephone
+          last_name: input.lastName
         })
       )
     );
     return { ok: true as const };
   } catch (caught) {
-    try {
-      await client.request(
-        withToken(
-          session.accessToken,
-          updateMe({
-            first_name: input.firstName,
-            last_name: input.lastName
-          })
-        )
-      );
-      return { ok: true as const, phonePersisted: false as const };
-    } catch {
-      return { ok: false as const, error: directusAuthErrorCode(caught) };
-    }
+    return { ok: false as const, error: directusAuthErrorCode(caught) };
   }
 }
 
