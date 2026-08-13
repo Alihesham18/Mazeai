@@ -68,6 +68,55 @@
   color: var(--color-gold-soft);
 }
 
+.applicationContent {
+  min-inline-size: 0;
+  inline-size: 100%;
+}
+
+.applicationList {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.applicationList li {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.applicationList li > div {
+  min-inline-size: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.applicationList a {
+  color: var(--color-text);
+  font-weight: 750;
+}
+
+.applicationList time {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.applicationStatus {
+  flex: 0 0 auto;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--color-border-gold);
+  border-radius: 6px;
+  background: var(--color-gold-subtle);
+  color: var(--color-gold-soft);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
 @media (max-width: 820px) {
   .profile,
   .sections {

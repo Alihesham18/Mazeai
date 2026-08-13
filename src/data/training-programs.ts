@@ -15,6 +15,7 @@ export interface ScholarshipQuestion {
 }
 
 export interface TrainingProgram {
+  directusId?: string;
   slug: string;
   category: "bootcamp" | "short-course";
   title: LocalizedText;
@@ -34,6 +35,8 @@ export interface TrainingProgram {
   weeks: readonly TrainingWeek[];
   scholarshipCodePrefix: string;
   scholarshipQuestions: readonly ScholarshipQuestion[];
+  applicationOpen?: boolean;
+  directusAvailable?: boolean;
 }
 
 const option = (en: string, tr: string, ar: string, fa: string): LocalizedText => ({
@@ -829,6 +832,8 @@ export const trainingCopy = {
     "فرم را ارسال کنید تا برای گفت‌وگو درباره زمان‌بندی برنامه و گزینه‌های موجود با شما تماس بگیریم."
   ),
   fullName: option("Full name", "Ad soyad", "الاسم الكامل", "نام و نام خانوادگی"),
+  firstName: option("First name", "Ad", "الاسم الأول", "نام"),
+  lastName: option("Last name", "Soyad", "اسم العائلة", "نام خانوادگی"),
   email: option("Email", "E-posta", "البريد الإلكتروني", "ایمیل"),
   phone: option("Telephone", "Telefon", "الهاتف", "تلفن"),
   program: option("Program", "Program", "البرنامج", "برنامه"),
@@ -844,6 +849,60 @@ export const trainingCopy = {
     "Ön kayıt başvurusunu gönder",
     "إرسال طلب التسجيل المسبق",
     "ارسال درخواست پیش‌ثبت‌نام"
+  ),
+  submitting: option(
+    "Submitting application...",
+    "Başvuru gönderiliyor...",
+    "جارٍ إرسال الطلب...",
+    "در حال ارسال درخواست..."
+  ),
+  applicationSubmitted: option(
+    "Your training application has been submitted.",
+    "Eğitim başvurunuz gönderildi.",
+    "تم إرسال طلب التدريب الخاص بك.",
+    "درخواست شرکت در دوره شما ارسال شد."
+  ),
+  alreadyApplied: option(
+    "You have already applied for this training program.",
+    "Bu eğitim programına zaten başvurdunuz.",
+    "لقد تقدمت بالفعل لهذا البرنامج التدريبي.",
+    "شما قبلاً برای این برنامه آموزشی درخواست داده‌اید."
+  ),
+  applicationClosed: option(
+    "Applications for this training program are closed.",
+    "Bu eğitim programı için başvurular kapalıdır.",
+    "تم إغلاق التقديم لهذا البرنامج التدريبي.",
+    "درخواست برای این برنامه آموزشی بسته است."
+  ),
+  applicationFailed: option(
+    "Unable to submit your application. Please try again.",
+    "Başvurunuz gönderilemedi. Lütfen tekrar deneyin.",
+    "تعذر إرسال طلبك. يرجى المحاولة مرة أخرى.",
+    "ارسال درخواست شما ممکن نشد. لطفاً دوباره تلاش کنید."
+  ),
+  invalidPhone: option(
+    "Enter a valid telephone number.",
+    "Geçerli bir telefon numarası girin.",
+    "أدخل رقم هاتف صالحًا.",
+    "یک شماره تلفن معتبر وارد کنید."
+  ),
+  sessionExpired: option(
+    "Your session has expired. Please log in again.",
+    "Oturumunuz sona erdi. Lütfen yeniden giriş yapın.",
+    "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.",
+    "نشست شما منقضی شده است. لطفاً دوباره وارد شوید."
+  ),
+  programUnavailable: option(
+    "This training program is currently unavailable.",
+    "Bu eğitim programı şu anda kullanılamıyor.",
+    "هذا البرنامج التدريبي غير متاح حاليًا.",
+    "این برنامه آموزشی در حال حاضر در دسترس نیست."
+  ),
+  loginToApply: option(
+    "Log in to pre-register",
+    "Ön kayıt için giriş yapın",
+    "سجل الدخول للتسجيل المسبق",
+    "برای پیش‌ثبت‌نام وارد شوید"
   ),
   developmentNotice: option(
     "This form is not connected to a server yet. Your information was validated in this browser but was not sent or stored.",

@@ -51,6 +51,13 @@ Directus preset assigns ownership, and updates use only an ID obtained from that
 policy-scoped read. A uniqueness conflict during creation is handled by reading
 the current user's row again and updating it.
 
-Existing training applications, event registrations, and scholarship exam
-attempts are not persisted by the current website, so the account page shows
-honest empty states until those protected backend collections are implemented.
+Training pre-registration uses authenticated server actions and the
+`training_applications` collection. The server resolves a published program by
+route slug, checks for an existing current-user application, and creates only
+the relationship, split phone fields, and optional message. Directus presets
+the current user and `submitted` status; neither is accepted from browser form
+state. The account page reads the current user's applications and displays the
+related program, status, and application date.
+
+Event registrations and scholarship exam attempts are not persisted by the
+current website, so those account sections keep honest empty states.

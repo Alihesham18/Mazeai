@@ -25,6 +25,8 @@ export function TrainingCoursePage({
   setRequestLocale(locale);
   const scholarshipPath = localizedPath(locale, `/training/${program.slug}/scholarship`);
   const hasScholarshipExam = program.category === "bootcamp" && getScholarshipExam(program.slug);
+  const applicationPath = localizedPath(locale, `/training/${program.slug}#application`);
+  const loginPath = `${localizedPath(locale, "/login")}?next=${encodeURIComponent(applicationPath)}`;
 
   const facts = [
     { icon: Clock3, label: trainingCopy.duration, value: program.duration },
@@ -86,9 +88,20 @@ export function TrainingCoursePage({
 
               <p className={styles.hours}>{localize(program.hoursBreakdown, locale)}</p>
               <div className={styles.heroActions}>
-                <Link className={styles.primaryAction} href="#application">
-                  {localize(trainingCopy.apply, locale)}
-                </Link>
+                {program.applicationOpen ? (
+                  <Link className={styles.primaryAction} href={user ? "#application" : loginPath}>
+                    {localize(user ? trainingCopy.apply : trainingCopy.loginToApply, locale)}
+                  </Link>
+                ) : (
+                  <span className={[styles.primaryAction, styles.disabledAction].join(" ")}>
+                    {localize(
+                      program.directusAvailable
+                        ? trainingCopy.applicationClosed
+                        : trainingCopy.programUnavailable,
+                      locale
+                    )}
+                  </span>
+                )}
                 <Link
                   className={styles.secondaryAction}
                   href={localizedPath(locale, "/contact")}

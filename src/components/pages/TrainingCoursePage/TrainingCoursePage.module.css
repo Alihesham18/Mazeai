@@ -113,6 +113,13 @@
   color: var(--color-on-primary);
 }
 
+.disabledAction {
+  border-color: var(--color-border);
+  background: var(--color-surface-82);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+}
+
 .secondaryAction,
 .heroActions .examAction {
   background: var(--color-surface-raised-82);

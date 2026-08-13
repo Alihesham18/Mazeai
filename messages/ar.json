@@ -387,6 +387,14 @@
     "accountMenu": "قائمة الحساب",
     "noTrainings": "لا توجد دورات مسجلة بعد.",
     "noTrainingApplications": "لا توجد طلبات تدريب بعد.",
+    "applicationsUnavailable": "تعذر تحميل طلبات التدريب. يرجى المحاولة مرة أخرى.",
+    "trainingProgram": "البرنامج التدريبي",
+    "trainingStatus": {
+      "submitted": "تم الإرسال",
+      "underReview": "قيد المراجعة",
+      "accepted": "مقبول",
+      "rejected": "مرفوض"
+    },
     "noScholarshipExams": "لا توجد محاولات اختبار منح محفوظة بعد.",
     "noEventRegistrations": "لا توجد تسجيلات فعاليات بعد.",
     "messages": {

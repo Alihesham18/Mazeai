@@ -4,6 +4,8 @@ import { trainingCopy } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
 
+export const dynamic = "force-dynamic";
+
 export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
   return {
     title: `${localize(trainingCopy.academy, params.locale)} | SynergyMazeAI`,

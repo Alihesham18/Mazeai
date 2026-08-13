@@ -387,6 +387,14 @@
     "accountMenu": "Hesap menüsü",
     "noTrainings": "Henüz kayıtlı eğitim yok.",
     "noTrainingApplications": "Henüz eğitim başvurusu yok.",
+    "applicationsUnavailable": "Eğitim başvuruları yüklenemedi. Lütfen tekrar deneyin.",
+    "trainingProgram": "Eğitim programı",
+    "trainingStatus": {
+      "submitted": "Gönderildi",
+      "underReview": "İnceleniyor",
+      "accepted": "Kabul Edildi",
+      "rejected": "Reddedildi"
+    },
     "noScholarshipExams": "Henüz kaydedilmiş burs sınavı denemesi yok.",
     "noEventRegistrations": "Henüz etkinlik kaydı yok.",
     "messages": {

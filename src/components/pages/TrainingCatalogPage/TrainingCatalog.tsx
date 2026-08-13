@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { TrainingProgramImage } from "@/components/training/TrainingProgramImage";
 import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exams";
-import { formatTrainingFee, trainingCopy, trainingPrograms } from "@/data/training-programs";
+import { formatTrainingFee, trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import styles from "./TrainingCatalogPage.module.css";
@@ -25,9 +25,17 @@ function getInstructorInitials(instructor: string) {
     .toUpperCase();
 }
 
-export function TrainingCatalog({ locale }: { locale: Locale }) {
+export function TrainingCatalog({
+  locale,
+  programs: allPrograms,
+  authenticated
+}: {
+  locale: Locale;
+  programs: readonly TrainingProgram[];
+  authenticated: boolean;
+}) {
   const [category, setCategory] = useState<TrainingCategory>("bootcamp");
-  const programs = trainingPrograms.filter((program) => program.category === category);
+  const programs = allPrograms.filter((program) => program.category === category);
 
   return (
     <>
@@ -54,6 +62,10 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
         <div className={styles.programGrid} aria-live="polite">
           {programs.map((program) => {
             const detailPath = localizedPath(locale, `/training/${program.slug}`);
+            const applicationPath = `${detailPath}#application`;
+            const preregistrationPath = authenticated
+              ? applicationPath
+              : `${localizedPath(locale, "/login")}?next=${encodeURIComponent(applicationPath)}`;
             const scholarshipPath = localizedPath(locale, `/training/${program.slug}/scholarship`);
             const hasScholarshipExam = program.category === "bootcamp" && getScholarshipExam(program.slug);
 
@@ -117,9 +129,23 @@ export function TrainingCatalog({ locale }: { locale: Locale }) {
                         .filter(Boolean)
                         .join(" ")}
                     >
-                      <Link href={`${detailPath}#application`}>
-                        {localize(trainingCopy.preregister, locale)}
-                      </Link>
+                      {program.applicationOpen ? (
+                        <Link href={preregistrationPath}>
+                          {localize(
+                            authenticated ? trainingCopy.preregister : trainingCopy.loginToApply,
+                            locale
+                          )}
+                        </Link>
+                      ) : (
+                        <span className={styles.closedAction}>
+                          {localize(
+                            program.directusAvailable
+                              ? trainingCopy.applicationClosed
+                              : trainingCopy.programUnavailable,
+                            locale
+                          )}
+                        </span>
+                      )}
                       {hasScholarshipExam ? (
                         <Link className={styles.examButton} href={scholarshipPath}>
                           {localize(scholarshipExamCopy.takeTest, locale)}

@@ -387,6 +387,14 @@
     "accountMenu": "منوی حساب",
     "noTrainings": "هنوز در آموزشی ثبت‌نام نشده‌اید.",
     "noTrainingApplications": "هنوز درخواست آموزشی ندارید.",
+    "applicationsUnavailable": "بارگیری درخواست‌های آموزشی ممکن نشد. لطفاً دوباره تلاش کنید.",
+    "trainingProgram": "برنامه آموزشی",
+    "trainingStatus": {
+      "submitted": "ارسال شده",
+      "underReview": "در حال بررسی",
+      "accepted": "پذیرفته شده",
+      "rejected": "رد شده"
+    },
     "noScholarshipExams": "هنوز تلاش ذخیره‌شده‌ای برای آزمون بورسیه ندارید.",
     "noEventRegistrations": "هنوز ثبت‌نام رویدادی ندارید.",
     "messages": {

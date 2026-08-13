@@ -387,6 +387,14 @@
     "accountMenu": "Account menu",
     "noTrainings": "No enrolled trainings yet.",
     "noTrainingApplications": "No training applications yet.",
+    "applicationsUnavailable": "Unable to load training applications. Please try again.",
+    "trainingProgram": "Training program",
+    "trainingStatus": {
+      "submitted": "Submitted",
+      "underReview": "Under Review",
+      "accepted": "Accepted",
+      "rejected": "Rejected"
+    },
     "noScholarshipExams": "No saved scholarship exam attempts yet.",
     "noEventRegistrations": "No event registrations yet.",
     "messages": {

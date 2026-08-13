@@ -3,7 +3,7 @@
 Phase 1 adapters are safe placeholders:
 
 - Sanity CMS: `src/lib/cms/adapter.ts`
-- Directus auth: `src/lib/directus`
+- Directus auth, profiles, training programs, and training applications: `src/lib/directus`
 - Supabase database placeholder: `src/lib/database/adapter.ts`
 - Resend email: `src/lib/email/adapter.ts`
 

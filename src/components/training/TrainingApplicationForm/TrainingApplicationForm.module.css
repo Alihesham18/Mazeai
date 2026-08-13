@@ -59,7 +59,25 @@
   font-weight: 850;
 }
 
-.developmentNotice {
+.form > button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.loginAction {
+  min-block-size: 46px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.25rem;
+  border-radius: 0.65rem;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 850;
+}
+
+.developmentNotice,
+.successNotice,
+.errorNotice {
   grid-column: 1 / -1;
   margin: 0;
   padding: 0.9rem 1rem;
@@ -69,6 +87,18 @@
   color: var(--color-gold-soft);
 }
 
+.successNotice {
+  border-color: color-mix(in srgb, var(--color-success) 35%, transparent);
+  background: color-mix(in srgb, var(--color-success) 10%, transparent);
+  color: var(--color-success);
+}
+
+.errorNotice {
+  border-color: color-mix(in srgb, var(--color-error) 40%, transparent);
+  background: color-mix(in srgb, var(--color-error) 10%, transparent);
+  color: var(--color-error);
+}
+
 @media (max-width: 42rem) {
   .form {
     grid-template-columns: 1fr;
@@ -76,7 +106,9 @@
 
   .messageField,
   .form > button,
-  .developmentNotice {
+  .developmentNotice,
+  .successNotice,
+  .errorNotice {
     grid-column: auto;
   }
 }

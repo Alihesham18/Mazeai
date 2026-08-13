@@ -241,7 +241,8 @@
 }
 
 .cardActions > a,
-.cardActions .examButton {
+.cardActions .examButton,
+.closedAction {
   min-block-size: 3.75rem;
   display: inline-flex;
   align-items: center;
@@ -255,6 +256,13 @@
   line-height: 1.25;
   text-align: center;
   white-space: normal;
+}
+
+.closedAction {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-82);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
 }
 
 .cardActions .examButton {

@@ -11,6 +11,17 @@ test("localized homepages render with expected direction", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
 });
 
+test("logged-out training pre-registration preserves the intended program", async ({ page }) => {
+  await page.goto("/en/training/cybersecurity");
+
+  const loginLink = page.getByRole("link", { name: "Log in to pre-register" }).first();
+  await expect(loginLink).toBeVisible();
+  await expect(loginLink).toHaveAttribute(
+    "href",
+    "/en/login?next=%2Fen%2Ftraining%2Fcybersecurity%23application"
+  );
+});
+
 test("latest completed event popup opens its localized detail page and stays dismissed", async ({
   page
 }) => {
