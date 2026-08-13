@@ -17,7 +17,7 @@ export default async function LoginPage({
   searchParams
 }: {
   params: { locale: Locale };
-  searchParams: { next?: string; error?: string; reason?: string };
+  searchParams: { next?: string; error?: string; reason?: string; registered?: string };
 }) {
   setRequestLocale(params.locale);
   const user = await getCurrentUserProfile();
@@ -25,15 +25,23 @@ export default async function LoginPage({
 
   const t = await getTranslations({ locale: params.locale, namespace: "auth" });
   const initialMessage: AuthMessageCode | undefined =
-    searchParams.reason === "session-expired"
+    searchParams.registered === "1"
+      ? "registrationSuccessful"
+      : searchParams.reason === "session-expired"
       ? "sessionExpired"
       : searchParams.error
         ? "serverFailure"
         : undefined;
+  const initialStatus = searchParams.registered === "1" ? "success" : "error";
 
   return (
     <AuthShell eyebrow={t("accountEyebrow")} title={t("welcomeBack")} supporting={t("loginSupport")}>
-      <LoginForm locale={params.locale} next={searchParams.next} initialMessage={initialMessage} />
+      <LoginForm
+        locale={params.locale}
+        next={searchParams.next}
+        initialMessage={initialMessage}
+        initialStatus={initialStatus}
+      />
     </AuthShell>
   );
 }

@@ -1,24 +1,29 @@
 # Authentication setup
 
-SynergyMazeAI uses Supabase Auth with `@supabase/ssr`. Credentials are handled by Supabase Auth, while access and refresh tokens are stored in cookies that are available to both server and browser requests.
+SynergyMazeAI uses Directus authentication through the official `@directus/sdk`.
+Login, registration, logout, password reset, and current-user reads run through
+server-side Next.js actions/utilities; browser components do not call Directus
+directly and do not receive access or refresh tokens.
 
 ## Required environment variables
 
-Create a Supabase project and set these values in the deployment environment:
+Set the Directus project URL in each environment:
 
 ```text
 NEXT_PUBLIC_SITE_URL=https://your-production-domain.example
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your-publishable-key
+NEXT_PUBLIC_DIRECTUS_URL=https://your-directus-domain.example
 ```
 
-`NEXT_PUBLIC_SUPABASE_ANON_KEY` remains supported for older Supabase projects, but the publishable key is preferred. The service-role key is not used by website authentication and must never be exposed to client code.
+Do not add Directus admin tokens, database credentials, or static user tokens to
+the frontend environment.
 
-## Supabase dashboard configuration
+## Directus configuration
 
-1. Enable the Email provider under Authentication > Providers.
-2. Set the production Site URL under Authentication > URL Configuration.
-3. Add these redirect URL patterns for every deployed origin:
+1. Enable public user registration in Directus.
+2. Configure the default registration role as `Website User`.
+3. Keep role assignment backend-controlled; the frontend never submits `role`.
+4. Configure password reset URLs for each localized callback origin if password
+   reset emails are enabled:
 
 ```text
 https://your-production-domain.example/en/auth/callback
@@ -27,11 +32,18 @@ https://your-production-domain.example/ar/auth/callback
 https://your-production-domain.example/fa/auth/callback
 ```
 
-4. Add equivalent localhost callback URLs for development.
-5. Keep email confirmation enabled for production.
-6. Configure custom SMTP before launch. Supabase's trial sender is rate-limited and is not intended for production password-reset or confirmation email delivery.
-7. Review Auth rate limits, password strength, leaked-password protection, and CAPTCHA before public registration opens.
+5. Add equivalent localhost callback URLs for development.
+6. Configure production mail delivery before launch.
+7. Review Directus rate limits, password policy, and user status handling before
+   public registration opens.
 
 ## Current persistence boundary
 
-Supabase Auth stores the account and profile metadata. Existing training applications, event registrations, and scholarship exam attempts are not persisted by the current website, so the account page shows honest empty states and the existing scholarship result remains local-only. Add protected database tables with Row Level Security before presenting these records as saved account activity.
+Directus system users store account identity fields: first name, last name, and
+email. Telephone is attempted only when a compatible custom `telephone` field
+exists on `directus_users`; otherwise the UI reports that phone persistence
+requires the profile schema step.
+
+Existing training applications, event registrations, and scholarship exam
+attempts are not persisted by the current website, so the account page shows
+honest empty states until those protected backend collections are implemented.

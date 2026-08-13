@@ -1,5 +1,6 @@
 export type AuthMessageCode =
   | "accountExists"
+  | "backendUnavailable"
   | "checkEmail"
   | "configuration"
   | "emailInvalid"
@@ -7,8 +8,10 @@ export type AuthMessageCode =
   | "passwordMismatch"
   | "passwordUpdated"
   | "passwordWeak"
+  | "phoneNotPersisted"
   | "profileUpdated"
   | "resetRequested"
+  | "registrationSuccessful"
   | "serverFailure"
   | "sessionExpired"
   | "requiredFields";
@@ -27,4 +30,6 @@ export interface AuthProfile {
   lastName: string;
   fullName: string;
   telephone: string;
+  role?: string;
+  status?: string;
 }

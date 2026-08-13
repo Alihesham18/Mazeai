@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { isLocale } from "@/i18n/routing";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 function safeNext(value: string | null, locale: string) {
   const localeRoot = `/${locale}`;
@@ -9,13 +8,13 @@ function safeNext(value: string | null, locale: string) {
 
 export async function GET(request: NextRequest, { params }: { params: { locale: string } }) {
   const locale = isLocale(params.locale) ? params.locale : "en";
-  const code = request.nextUrl.searchParams.get("code");
+  const token = request.nextUrl.searchParams.get("token");
   const destination = safeNext(request.nextUrl.searchParams.get("next"), locale);
-  const supabase = createSupabaseServerClient();
 
-  if (code && supabase) {
-    const { error } = await supabase.auth.exchangeCodeForSession(code);
-    if (!error) return NextResponse.redirect(new URL(destination, request.url));
+  if (token) {
+    const url = new URL(destination, request.url);
+    url.searchParams.set("token", token);
+    return NextResponse.redirect(url);
   }
 
   return NextResponse.redirect(new URL(`/${locale}/login?error=callback`, request.url));

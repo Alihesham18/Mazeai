@@ -50,16 +50,18 @@ function StateMessage({ state }: { state: AuthActionState }) {
 export function LoginForm({
   locale,
   next,
-  initialMessage
+  initialMessage,
+  initialStatus = "error"
 }: {
   locale: Locale;
   next?: string;
   initialMessage?: AuthMessageCode;
+  initialStatus?: AuthActionState["status"];
 }) {
   const t = useTranslations("auth");
   const [state, formAction] = useFormState(loginAction.bind(null, locale), {
     ...initialAuthActionState,
-    ...(initialMessage ? { status: "error" as const, message: initialMessage } : {})
+    ...(initialMessage ? { status: initialStatus, message: initialMessage } : {})
   });
 
   return (
@@ -178,7 +180,7 @@ export function ForgotPasswordForm({ locale }: { locale: Locale }) {
   );
 }
 
-export function UpdatePasswordForm({ locale }: { locale: Locale }) {
+export function UpdatePasswordForm({ locale, token }: { locale: Locale; token?: string }) {
   const t = useTranslations("auth");
   const [state, formAction] = useFormState(
     updatePasswordAction.bind(null, locale),
@@ -187,13 +189,26 @@ export function UpdatePasswordForm({ locale }: { locale: Locale }) {
 
   return (
     <form className={styles.form} action={formAction}>
+      <input type="hidden" name="token" value={token ?? ""} />
       <label className={styles.field}>
         <span>{t("newPassword")}</span>
-        <input name="password" type="password" autoComplete="new-password" minLength={8} required />
+        <PasswordInput
+          id="update-password"
+          name="password"
+          autoComplete="new-password"
+          minLength={8}
+          required
+        />
       </label>
       <label className={styles.field}>
         <span>{t("confirmPassword")}</span>
-        <input name="confirmPassword" type="password" autoComplete="new-password" minLength={8} required />
+        <PasswordInput
+          id="update-confirm-password"
+          name="confirmPassword"
+          autoComplete="new-password"
+          minLength={8}
+          required
+        />
       </label>
       <StateMessage state={state} />
       <SubmitButton idle={t("updatePassword")} pending={t("updatingPassword")} />

@@ -5,8 +5,16 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { isLocale, type Locale } from "@/i18n/routing";
 import { siteConfig } from "@/config/site";
-import { authPersistenceCookie } from "@/lib/supabase/config";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import {
+  clearDirectusSession,
+  loginDirectusUser,
+  logoutDirectusUser,
+  requestDirectusPasswordReset,
+  resetDirectusPassword,
+  setRememberPreference,
+  updateCurrentDirectusUser
+} from "@/lib/directus/auth";
+import { registerDirectusUser } from "@/lib/directus/auth";
 import type { AuthActionState } from "./types";
 import {
   loginSchema,
@@ -44,30 +52,6 @@ function requestOrigin() {
   return headers().get("origin") ?? siteConfig.url;
 }
 
-function setPersistencePreference(remember: boolean) {
-  cookies().set(authPersistenceCookie, remember ? "true" : "false", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    ...(remember ? { maxAge: 60 * 60 * 24 * 365 } : {})
-  });
-}
-
-function authErrorCode(message: string | undefined): AuthActionState["message"] {
-  const normalized = message?.toLowerCase() ?? "";
-
-  if (normalized.includes("already") || normalized.includes("registered")) {
-    return "accountExists";
-  }
-
-  if (normalized.includes("password") && (normalized.includes("weak") || normalized.includes("short"))) {
-    return "passwordWeak";
-  }
-
-  return "serverFailure";
-}
-
 export async function loginAction(
   localeValue: string,
   _previousState: AuthActionState,
@@ -84,17 +68,10 @@ export async function loginAction(
   }
 
   const remember = value(formData, "remember") === "on";
-  setPersistencePreference(remember);
-  const supabase = createSupabaseServerClient({ remember });
+  const result = await loginDirectusUser({ ...parsed.data, remember });
 
-  if (!supabase) {
-    return error("configuration");
-  }
-
-  const { error: signInError } = await supabase.auth.signInWithPassword(parsed.data);
-
-  if (signInError) {
-    return error("invalidCredentials");
+  if (!result.ok) {
+    return error(result.error);
   }
 
   revalidatePath(`/${locale}`, "layout");
@@ -125,38 +102,20 @@ export async function registerAction(
     return error("requiredFields");
   }
 
-  setPersistencePreference(true);
-  const supabase = createSupabaseServerClient({ remember: true });
-
-  if (!supabase) {
-    return error("configuration");
-  }
-
-  const { firstName, lastName, telephone, email, password } = parsed.data;
-  const { data, error: signUpError } = await supabase.auth.signUp({
+  setRememberPreference(true);
+  const { firstName, lastName, email, password } = parsed.data;
+  const result = await registerDirectusUser({
+    firstName,
+    lastName,
     email,
-    password,
-    options: {
-      emailRedirectTo: `${requestOrigin()}/${locale}/auth/callback?next=/${locale}/account`,
-      data: {
-        first_name: firstName,
-        last_name: lastName,
-        full_name: `${firstName} ${lastName}`.trim(),
-        telephone
-      }
-    }
+    password
   });
 
-  if (signUpError) {
-    return error(authErrorCode(signUpError.message));
+  if (!result.ok) {
+    return error(result.error);
   }
 
-  if (data.session) {
-    revalidatePath(`/${locale}`, "layout");
-    redirect(`/${locale}/account`);
-  }
-
-  return success("checkEmail");
+  redirect(`/${locale}/login?registered=1`);
 }
 
 export async function requestPasswordResetAction(
@@ -171,18 +130,13 @@ export async function requestPasswordResetAction(
     return error("emailInvalid");
   }
 
-  const supabase = createSupabaseServerClient();
+  const result = await requestDirectusPasswordReset(
+    parsed.data.email,
+    `${requestOrigin()}/${locale}/auth/callback?next=/${locale}/update-password`
+  );
 
-  if (!supabase) {
-    return error("configuration");
-  }
-
-  const { error: resetError } = await supabase.auth.resetPasswordForEmail(parsed.data.email, {
-    redirectTo: `${requestOrigin()}/${locale}/auth/callback?next=/${locale}/update-password`
-  });
-
-  if (resetError) {
-    return error("serverFailure");
+  if (!result.ok) {
+    return error(result.error);
   }
 
   return success("resetRequested");
@@ -194,6 +148,7 @@ export async function updatePasswordAction(
   formData: FormData
 ): Promise<AuthActionState> {
   const locale = safeLocale(localeValue);
+  const token = value(formData, "token");
   const raw = {
     password: value(formData, "password"),
     confirmPassword: value(formData, "confirmPassword")
@@ -204,14 +159,13 @@ export async function updatePasswordAction(
     return error(raw.password !== raw.confirmPassword ? "passwordMismatch" : "passwordWeak");
   }
 
-  const supabase = createSupabaseServerClient();
+  if (!token) return error("sessionExpired");
 
-  if (!supabase) return error("configuration");
+  const result = await resetDirectusPassword(token, parsed.data.password);
 
-  const { error: updateError } = await supabase.auth.updateUser({ password: parsed.data.password });
+  if (!result.ok) return error(result.error);
 
-  if (updateError) return error(authErrorCode(updateError.message));
-
+  clearDirectusSession();
   revalidatePath(`/${locale}`, "layout");
   return success("passwordUpdated");
 }
@@ -230,40 +184,20 @@ export async function updateProfileAction(
 
   if (!parsed.success) return error("requiredFields");
 
-  const supabase = createSupabaseServerClient();
-  if (!supabase) return error("configuration");
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-  if (!user) return error("sessionExpired");
-
   const { firstName, lastName, telephone } = parsed.data;
-  const { error: updateError } = await supabase.auth.updateUser({
-    data: {
-      first_name: firstName,
-      last_name: lastName,
-      full_name: `${firstName} ${lastName}`.trim(),
-      telephone
-    }
-  });
+  const result = await updateCurrentDirectusUser({ firstName, lastName, telephone });
 
-  if (updateError) return error("serverFailure");
+  if (!result.ok) return error(result.error);
 
   revalidatePath(`/${locale}`, "layout");
   revalidatePath(`/${locale}/account`);
+  if (result.phonePersisted === false) return success("phoneNotPersisted");
   return success("profileUpdated");
 }
 
 export async function logoutAction(localeValue: string, _formData: FormData) {
   const locale = safeLocale(localeValue);
-  const supabase = createSupabaseServerClient();
-
-  if (supabase) {
-    await supabase.auth.signOut({ scope: "local" });
-  }
-
-  cookies().delete(authPersistenceCookie);
+  await logoutDirectusUser();
   revalidatePath(`/${locale}`, "layout");
   redirect(`/${locale}`);
 }
