@@ -172,7 +172,7 @@ export function PhoneInput({
           disabled={disabled}
           aria-describedby={ariaDescribedBy}
           placeholder={placeholder}
-          pattern="[0-9()+\\-\\.\\s]*"
+          pattern="[0-9+ ]*"
           minLength={4}
           maxLength={24}
           onChange={(event) => updateValue(activeCountry, event.target.value)}
