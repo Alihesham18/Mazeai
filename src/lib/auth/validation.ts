@@ -39,6 +39,19 @@ export const updatePasswordSchema = z
     path: ["confirmPassword"]
   });
 
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1).max(128),
+    newPassword: password,
+    confirmPassword: z.string().min(8).max(128)
+  })
+  .refine((values) => values.newPassword === values.confirmPassword, {
+    path: ["confirmPassword"]
+  })
+  .refine((values) => values.newPassword !== values.currentPassword, {
+    path: ["newPassword"]
+  });
+
 export const profileSchema = z.object({
   firstName: z.string().trim().min(1).max(80),
   lastName: z.string().trim().min(1).max(80),

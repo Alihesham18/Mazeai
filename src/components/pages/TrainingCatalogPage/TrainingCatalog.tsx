@@ -5,8 +5,9 @@ import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import { TrainingProgramImage } from "@/components/training/TrainingProgramImage";
 import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exams";
-import { formatTrainingFee, trainingCopy, type TrainingProgram } from "@/data/training-programs";
+import { trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
+import { formatTrainingFee } from "@/lib/utilities/currency";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import styles from "./TrainingCatalogPage.module.css";
 

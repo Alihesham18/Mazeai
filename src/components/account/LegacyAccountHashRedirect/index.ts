@@ -1,0 +1,1 @@
+export { LegacyAccountHashRedirect } from "./LegacyAccountHashRedirect";

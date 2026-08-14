@@ -2,6 +2,7 @@ import type { DirectusTrainingProgram } from "@/lib/directus/types";
 import { getDirectusUrl } from "@/lib/directus/client";
 import { getTrainingProgram, trainingPrograms, type TrainingProgram } from "@/data/training-programs";
 import type { LocalizedText } from "@/types/content";
+import { toCurrencyNumber } from "@/lib/utilities/currency";
 
 function localized(value: string): LocalizedText {
   return { en: value, tr: value, ar: value, fa: value };
@@ -37,7 +38,7 @@ export function mergeDirectusTrainingProgram(
         : local.category,
     format: directus.format ? localized(directus.format) : local.format,
     duration,
-    fee: directus.fee ?? local.fee,
+    fee: directus.fee === null ? local.fee : (toCurrencyNumber(directus.fee) ?? local.fee),
     location: directus.location ? localized(directus.location) : local.location,
     certificate: directus.certificate_available,
     instructor: directus.instructor_name || local.instructor,

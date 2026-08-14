@@ -8,7 +8,8 @@ import {
   registerAction,
   requestPasswordResetAction,
   updatePasswordAction,
-  updateProfileAction
+  updateProfileAction,
+  changePasswordAction
 } from "@/lib/auth/actions";
 import {
   initialAuthActionState,
@@ -25,16 +26,22 @@ import styles from "./AuthForms.module.css";
 function SubmitButton({
   idle,
   pending,
-  disabled = false
+  disabled = false,
+  className = ""
 }: {
   idle: string;
   pending: string;
   disabled?: boolean;
+  className?: string;
 }) {
   const { pending: isPending } = useFormStatus();
 
   return (
-    <button type="submit" className={styles.submit} disabled={disabled || isPending}>
+    <button
+      type="submit"
+      className={[styles.submit, className].filter(Boolean).join(" ")}
+      disabled={disabled || isPending}
+    >
       {isPending ? pending : idle}
     </button>
   );
@@ -106,7 +113,10 @@ export function LoginForm({
 
 export function RegisterForm({ locale }: { locale: Locale }) {
   const t = useTranslations("auth");
-  const [state, formAction] = useFormState(registerAction.bind(null, locale), initialAuthActionState);
+  const [state, formAction] = useFormState(
+    registerAction.bind(null, locale),
+    initialAuthActionState
+  );
 
   return (
     <form className={[styles.form, styles.twoColumns].join(" ")} action={formAction}>
@@ -242,46 +252,105 @@ export function ProfileForm({
   const initialState: AuthActionState = initialMessage
     ? { status: "error", message: initialMessage }
     : initialAuthActionState;
-  const [state, formAction] = useFormState(
-    updateProfileAction.bind(null, locale),
-    initialState
-  );
+  const [state, formAction] = useFormState(updateProfileAction.bind(null, locale), initialState);
   const profileUnavailable = initialMessage === "profileLoadFailed";
 
   return (
-    <form className={[styles.form, styles.twoColumns].join(" ")} action={formAction}>
-      <label className={styles.field}>
-        <span>{t("firstName")}</span>
-        <input name="firstName" defaultValue={profile.firstName} autoComplete="given-name" required />
-      </label>
-      <label className={styles.field}>
-        <span>{t("lastName")}</span>
-        <input name="lastName" defaultValue={profile.lastName} autoComplete="family-name" required />
-      </label>
-      <label className={styles.field}>
-        <span>{t("email")}</span>
-        <input value={profile.email} type="email" autoComplete="email" readOnly />
-      </label>
-      <label className={styles.field}>
-        <span>{t("telephone")}</span>
-        <PhoneInput
-          name="telephone"
-          locale={locale}
-          defaultValue={profile.telephone}
-          required
-          disabled={profileUnavailable}
-        />
-      </label>
+    <form className={styles.profileForm} action={formAction}>
+      <section className={styles.profileFormSection} aria-label={t("personalInformation")}>
+        <div className={styles.profileFieldGrid}>
+          <label className={styles.field}>
+            <span>{t("firstName")}</span>
+            <input
+              name="firstName"
+              defaultValue={profile.firstName}
+              autoComplete="given-name"
+              required
+            />
+          </label>
+          <label className={styles.field}>
+            <span>{t("lastName")}</span>
+            <input
+              name="lastName"
+              defaultValue={profile.lastName}
+              autoComplete="family-name"
+              required
+            />
+          </label>
+          <label className={[styles.field, styles.fullWidth].join(" ")}>
+            <span>{t("email")}</span>
+            <input value={profile.email} type="email" autoComplete="email" dir="ltr" readOnly />
+          </label>
+        </div>
+      </section>
+      <section className={styles.profileFormSection} aria-labelledby="contact-information-heading">
+        <h3 id="contact-information-heading">{t("contactInformation")}</h3>
+        <label className={styles.field}>
+          <span>{t("telephone")}</span>
+          <PhoneInput
+            name="telephone"
+            locale={locale}
+            defaultValue={profile.telephone}
+            required
+            disabled={profileUnavailable}
+          />
+        </label>
+      </section>
       <div className={styles.fullWidth}>
         <StateMessage state={state} />
       </div>
-      <div className={styles.fullWidth}>
+      <div className={styles.profileActions}>
         <SubmitButton
           idle={t("saveChanges")}
           pending={t("savingChanges")}
           disabled={profileUnavailable}
+          className={styles.profileSubmit}
         />
       </div>
+    </form>
+  );
+}
+
+export function ChangePasswordForm({ locale }: { locale: Locale }) {
+  const t = useTranslations("auth");
+  const [state, formAction] = useFormState(
+    changePasswordAction.bind(null, locale),
+    initialAuthActionState
+  );
+
+  return (
+    <form className={styles.changePasswordForm} action={formAction}>
+      <div className={styles.field}>
+        <label htmlFor="current-password">{t("currentPassword")}</label>
+        <PasswordInput
+          id="current-password"
+          name="currentPassword"
+          autoComplete="current-password"
+          required
+        />
+      </div>
+      <div className={styles.field}>
+        <label htmlFor="new-account-password">{t("newPassword")}</label>
+        <PasswordInput
+          id="new-account-password"
+          name="newPassword"
+          autoComplete="new-password"
+          minLength={8}
+          required
+        />
+      </div>
+      <div className={styles.field}>
+        <label htmlFor="confirm-account-password">{t("confirmNewPassword")}</label>
+        <PasswordInput
+          id="confirm-account-password"
+          name="confirmPassword"
+          autoComplete="new-password"
+          minLength={8}
+          required
+        />
+      </div>
+      <StateMessage state={state} />
+      <SubmitButton idle={t("changePassword")} pending={t("changingPassword")} />
     </form>
   );
 }

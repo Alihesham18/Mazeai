@@ -1,0 +1,106 @@
+.card {
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1.2rem, 3vw, 1.6rem);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--gradient-card);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.avatar {
+  inline-size: 88px;
+  block-size: 88px;
+  display: grid;
+  place-items: center;
+  margin-block-end: 1rem;
+  border: 1px solid var(--color-border-gold);
+  border-radius: 50%;
+  background:
+    linear-gradient(145deg, var(--color-primary-subtle), var(--color-gold-subtle)),
+    var(--color-surface-raised-82);
+  color: var(--color-gold-soft);
+  font-size: 1.45rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+}
+
+.identity {
+  min-inline-size: 0;
+}
+
+.identity h2 {
+  margin-block-end: 0.4rem;
+  font-size: 1.35rem;
+}
+
+.identity p {
+  overflow-wrap: anywhere;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+}
+
+.activeBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-block-start: 1rem;
+  padding-block: 0.32rem;
+  padding-inline: 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--color-success) 38%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-success) 9%, transparent);
+  color: var(--color-success);
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.accountInformation {
+  inline-size: 100%;
+  display: grid;
+  gap: 0.25rem;
+  margin-block-start: 1.4rem;
+  padding-block-start: 1.2rem;
+  border-block-start: 1px solid var(--color-border);
+  text-align: start;
+}
+
+.accountInformation h3 {
+  margin-block-end: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.accountInformation span,
+.accountInformation p {
+  color: var(--color-text-muted);
+  font-size: 0.74rem;
+}
+
+.accountInformation p {
+  margin: 0;
+}
+
+.accountInformation code {
+  overflow-wrap: anywhere;
+  color: var(--color-gold-soft);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+@media (max-width: 840px) {
+  .card {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .avatar {
+    inline-size: 72px;
+    block-size: 72px;
+  }
+}

@@ -7,6 +7,8 @@ import { isLocale, type Locale } from "@/i18n/routing";
 import { siteConfig } from "@/config/site";
 import {
   clearDirectusSession,
+  changeCurrentDirectusPassword,
+  getCurrentDirectusUser,
   loginDirectusUser,
   logoutDirectusUser,
   requestDirectusPasswordReset,
@@ -14,11 +16,16 @@ import {
   setRememberPreference,
   updateCurrentDirectusUser
 } from "@/lib/directus/auth";
+import {
+  ensureRegisteredUserAccountNumber,
+  ensureUserAccountNumber
+} from "@/lib/directus/account-numbers";
 import { upsertCurrentUserDirectusProfile } from "@/lib/directus/profile";
 import { splitPhoneForStorage } from "@/lib/phone/normalize";
 import { registerDirectusUser } from "@/lib/directus/auth";
 import type { AuthActionState } from "./types";
 import {
+  changePasswordSchema,
   loginSchema,
   profileSchema,
   registrationSchema,
@@ -66,7 +73,11 @@ export async function loginAction(
   });
 
   if (!parsed.success) {
-    return error(parsed.error.issues.some((issue) => issue.path[0] === "email") ? "emailInvalid" : "requiredFields");
+    return error(
+      parsed.error.issues.some((issue) => issue.path[0] === "email")
+        ? "emailInvalid"
+        : "requiredFields"
+    );
   }
 
   const remember = value(formData, "remember") === "on";
@@ -74,6 +85,12 @@ export async function loginAction(
 
   if (!result.ok) {
     return error(result.error);
+  }
+
+  const currentUser = await getCurrentDirectusUser();
+  if (currentUser) {
+    // Provisioning is best-effort so account-number service downtime never blocks authentication.
+    await ensureUserAccountNumber(currentUser.id);
   }
 
   revalidatePath(`/${locale}`, "layout");
@@ -99,8 +116,10 @@ export async function registerAction(
 
   if (!parsed.success) {
     if (raw.password !== raw.confirmPassword) return error("passwordMismatch");
-    if (parsed.error.issues.some((issue) => issue.path[0] === "email")) return error("emailInvalid");
-    if (parsed.error.issues.some((issue) => issue.path[0] === "password")) return error("passwordWeak");
+    if (parsed.error.issues.some((issue) => issue.path[0] === "email"))
+      return error("emailInvalid");
+    if (parsed.error.issues.some((issue) => issue.path[0] === "password"))
+      return error("passwordWeak");
     return error("requiredFields");
   }
 
@@ -116,6 +135,9 @@ export async function registerAction(
   if (!result.ok) {
     return error(result.error);
   }
+
+  // Registration never accepts an account number; a narrowly scoped server credential provisions it.
+  await ensureRegisteredUserAccountNumber(email);
 
   redirect(`/${locale}/login?registered=1`);
 }
@@ -168,6 +190,35 @@ export async function updatePasswordAction(
   if (!result.ok) return error(result.error);
 
   clearDirectusSession();
+  revalidatePath(`/${locale}`, "layout");
+  return success("passwordUpdated");
+}
+
+export async function changePasswordAction(
+  localeValue: string,
+  _previousState: AuthActionState,
+  formData: FormData
+): Promise<AuthActionState> {
+  const locale = safeLocale(localeValue);
+  const raw = {
+    currentPassword: value(formData, "currentPassword"),
+    newPassword: value(formData, "newPassword"),
+    confirmPassword: value(formData, "confirmPassword")
+  };
+  const parsed = changePasswordSchema.safeParse(raw);
+
+  if (!parsed.success) {
+    if (raw.newPassword !== raw.confirmPassword) return error("passwordMismatch");
+    if (raw.newPassword === raw.currentPassword && raw.newPassword) return error("newPasswordSame");
+    if (raw.newPassword.length < 8) return error("passwordWeak");
+    return error("requiredFields");
+  }
+
+  const result = await changeCurrentDirectusPassword(parsed.data);
+  if (!result.ok) {
+    return error(result.error === "invalidCredentials" ? "incorrectCurrentPassword" : result.error);
+  }
+
   revalidatePath(`/${locale}`, "layout");
   return success("passwordUpdated");
 }

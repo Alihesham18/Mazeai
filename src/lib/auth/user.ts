@@ -18,7 +18,8 @@ export function toAuthProfile(user: DirectusWebsiteUser): AuthProfile {
     firstName,
     lastName,
     fullName,
-    telephone: ""
+    telephone: "",
+    status: directusString(user.status)
   };
 }
 

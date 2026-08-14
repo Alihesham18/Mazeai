@@ -5,6 +5,8 @@ export type AuthMessageCode =
   | "configuration"
   | "emailInvalid"
   | "invalidCredentials"
+  | "incorrectCurrentPassword"
+  | "newPasswordSame"
   | "passwordMismatch"
   | "passwordUpdated"
   | "passwordWeak"
@@ -32,4 +34,5 @@ export interface AuthProfile {
   lastName: string;
   fullName: string;
   telephone: string;
+  status?: string;
 }

@@ -119,11 +119,39 @@ export function MobileNavigation({ locale, profile = null }: MobileNavigationPro
                     {translate("auth.myAccount")}
                   </Link>
                   <Link
-                    href={`${localizedPath(locale, "/account")}#applications`}
+                    href={localizedPath(locale, "/account/profile")}
                     className={styles.link}
                     onClick={() => setIsOpen(false)}
                   >
-                    {translate("auth.applications")}
+                    {translate("auth.profile")}
+                  </Link>
+                  <Link
+                    href={localizedPath(locale, "/account/training-applications")}
+                    className={styles.link}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {translate("auth.trainingApplications")}
+                  </Link>
+                  <Link
+                    href={localizedPath(locale, "/account/scholarship-exams")}
+                    className={styles.link}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {translate("auth.scholarshipExams")}
+                  </Link>
+                  <Link
+                    href={localizedPath(locale, "/account/my-trainings")}
+                    className={styles.link}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {translate("auth.myTrainings")}
+                  </Link>
+                  <Link
+                    href={localizedPath(locale, "/account/event-registrations")}
+                    className={styles.link}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {translate("auth.eventRegistrations")}
                   </Link>
                   <form action={logoutAction.bind(null, locale)}>
                     <button type="submit" className={[styles.link, styles.logout].join(" ")}>

@@ -79,7 +79,11 @@ export function clearDirectusSession() {
 }
 
 export function setDirectusSession(session: DirectusSession, remember = getRememberPreference()) {
-  cookies().set(directusAccessTokenCookie, session.accessToken, cookieOptions(sessionMaxAge(session)));
+  cookies().set(
+    directusAccessTokenCookie,
+    session.accessToken,
+    cookieOptions(sessionMaxAge(session))
+  );
   cookies().set(
     directusRefreshTokenCookie,
     session.refreshToken,
@@ -131,15 +135,25 @@ export function directusAuthErrorCode(error: unknown): DirectusAuthErrorCode {
     return "invalidCredentials";
   }
 
-  if (normalized.includes("invalid") && (normalized.includes("email") || normalized.includes("password"))) {
+  if (
+    normalized.includes("invalid") &&
+    (normalized.includes("email") || normalized.includes("password"))
+  ) {
     return "invalidCredentials";
   }
 
-  if (normalized.includes("already") || normalized.includes("unique") || normalized.includes("duplicate")) {
+  if (
+    normalized.includes("already") ||
+    normalized.includes("unique") ||
+    normalized.includes("duplicate")
+  ) {
     return "accountExists";
   }
 
-  if (normalized.includes("password") && (normalized.includes("weak") || normalized.includes("short"))) {
+  if (
+    normalized.includes("password") &&
+    (normalized.includes("weak") || normalized.includes("short"))
+  ) {
     return "passwordWeak";
   }
 
@@ -244,23 +258,20 @@ export async function getCurrentDirectusUser() {
   if (!session) return null;
 
   try {
-    return await client.request(
+    return (await client.request(
       withToken(
         session.accessToken,
         readMe({
-          fields: ["id", "first_name", "last_name", "email"]
+          fields: ["id", "first_name", "last_name", "email", "status"]
         })
       )
-    ) as DirectusWebsiteUser;
+    )) as DirectusWebsiteUser;
   } catch {
     return null;
   }
 }
 
-export async function updateCurrentDirectusUser(input: {
-  firstName: string;
-  lastName: string;
-}) {
+export async function updateCurrentDirectusUser(input: { firstName: string; lastName: string }) {
   const client = createDirectusRestClient();
   const session = readDirectusSession();
   if (!client || !session) return { ok: false as const, error: "sessionExpired" as const };
@@ -278,6 +289,49 @@ export async function updateCurrentDirectusUser(input: {
     return { ok: true as const };
   } catch (caught) {
     return { ok: false as const, error: directusAuthErrorCode(caught) };
+  }
+}
+
+export async function changeCurrentDirectusPassword(input: {
+  currentPassword: string;
+  newPassword: string;
+}) {
+  const client = createDirectusRestClient();
+  const session = await getAuthenticatedDirectusSession();
+  if (!client || !session) return { ok: false as const, error: "sessionExpired" as const };
+
+  let verificationSession: DirectusSession | null = null;
+
+  try {
+    const currentUser = await client.request(
+      withToken(session.accessToken, readMe({ fields: ["email"] }))
+    );
+    if (!currentUser.email) return { ok: false as const, error: "serverFailure" as const };
+
+    const authData = await client.request(
+      login({ email: currentUser.email, password: input.currentPassword }, { mode: "json" })
+    );
+    verificationSession = toSession(authData);
+    if (!verificationSession) {
+      return { ok: false as const, error: "invalidCredentials" as const };
+    }
+
+    await client.request(
+      withToken(verificationSession.accessToken, updateMe({ password: input.newPassword }))
+    );
+    return { ok: true as const };
+  } catch (caught) {
+    return { ok: false as const, error: directusAuthErrorCode(caught) };
+  } finally {
+    if (verificationSession?.refreshToken) {
+      try {
+        await client.request(
+          logout({ refresh_token: verificationSession.refreshToken, mode: "json" })
+        );
+      } catch {
+        // The short-lived verification session may already be invalid after the password update.
+      }
+    }
   }
 }
 

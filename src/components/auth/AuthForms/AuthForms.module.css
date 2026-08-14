@@ -126,6 +126,51 @@
   grid-column: 1 / -1;
 }
 
+.profileForm {
+  min-inline-size: 0;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.profileFormSection {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.profileFormSection + .profileFormSection {
+  padding-block-start: 1.2rem;
+  border-block-start: 1px solid var(--color-border);
+}
+
+.profileFormSection h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.profileFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.profileActions {
+  display: flex;
+  justify-content: flex-end;
+  padding-block-start: 0.25rem;
+}
+
+.profileSubmit {
+  inline-size: auto;
+  min-inline-size: 160px;
+}
+
+.changePasswordForm {
+  max-inline-size: 620px;
+  display: grid;
+  gap: 1rem;
+}
+
 @media (max-width: 560px) {
   .twoColumns {
     grid-template-columns: 1fr;
@@ -138,5 +183,14 @@
   .formOptions {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .profileFieldGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .profileActions,
+  .profileSubmit {
+    inline-size: 100%;
   }
 }

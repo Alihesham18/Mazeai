@@ -1,0 +1,66 @@
+.viewport {
+  max-inline-size: 100%;
+  overflow-x: auto;
+  margin-block-end: 1.25rem;
+  padding-block-end: 0.2rem;
+  scrollbar-color: var(--color-border-strong) transparent;
+  scrollbar-width: thin;
+}
+
+.navigation {
+  min-inline-size: max-content;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--color-surface-72);
+  box-shadow: var(--shadow-soft);
+}
+
+.link,
+.active {
+  min-block-size: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding-block: 0.55rem;
+  padding-inline: 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.link {
+  color: var(--color-text-muted);
+}
+
+.link:hover {
+  border-color: var(--color-border-gold);
+  background: var(--color-gold-subtle);
+  color: var(--color-text);
+}
+
+.active {
+  border-color: var(--color-border-strong);
+  background: var(--color-primary-subtle);
+  color: var(--color-text);
+}
+
+.active svg {
+  color: var(--color-gold-soft);
+}
+
+@media (max-width: 600px) {
+  .viewport {
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+  }
+
+  .navigation {
+    padding: 0.4rem;
+  }
+}

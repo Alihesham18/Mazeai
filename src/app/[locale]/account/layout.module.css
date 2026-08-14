@@ -1,0 +1,32 @@
+.page {
+  padding-block: clamp(2.5rem, 6vw, 5rem);
+}
+
+.header {
+  max-inline-size: 760px;
+  margin-block-end: 1.35rem;
+}
+
+.header > p {
+  margin-block-end: 0.55rem;
+  color: var(--color-gold-soft);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  margin-block-end: 0.65rem;
+  font-size: clamp(2.35rem, 5vw, 4rem);
+}
+
+.header span {
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding-block: 2rem 3rem;
+  }
+}

@@ -1,0 +1,30 @@
+.button {
+  min-block-size: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding-block: 0.55rem;
+  padding-inline: 0.75rem;
+  border: 1px solid var(--color-border-gold);
+  border-radius: 8px;
+  background: var(--color-surface-raised-82);
+  color: var(--color-gold-soft);
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.button:hover {
+  border-color: var(--color-gold);
+  background: var(--color-gold-subtle);
+  color: var(--color-text);
+}
+
+.button svg {
+  flex: 0 0 auto;
+}

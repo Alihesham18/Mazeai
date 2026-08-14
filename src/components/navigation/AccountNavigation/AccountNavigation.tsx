@@ -50,7 +50,10 @@ export function AccountNavigation({ locale, profile, className = "" }: AccountNa
 
   if (!profile) {
     return (
-      <Link className={[styles.login, className].filter(Boolean).join(" ")} href={localizedPath(locale, "/login")}>
+      <Link
+        className={[styles.login, className].filter(Boolean).join(" ")}
+        href={localizedPath(locale, "/login")}
+      >
         {t("logIn")}
       </Link>
     );
@@ -58,9 +61,11 @@ export function AccountNavigation({ locale, profile, className = "" }: AccountNa
 
   const links = [
     [t("myAccount"), localizedPath(locale, "/account")],
-    [t("myTrainings"), `${localizedPath(locale, "/account")}#trainings`],
-    [t("scholarshipExams"), `${localizedPath(locale, "/account")}#scholarship-exams`],
-    [t("applications"), `${localizedPath(locale, "/account")}#applications`]
+    [t("profile"), localizedPath(locale, "/account/profile")],
+    [t("trainingApplications"), localizedPath(locale, "/account/training-applications")],
+    [t("scholarshipExams"), localizedPath(locale, "/account/scholarship-exams")],
+    [t("myTrainings"), localizedPath(locale, "/account/my-trainings")],
+    [t("eventRegistrations"), localizedPath(locale, "/account/event-registrations")]
   ] as const;
 
   return (
@@ -83,7 +88,13 @@ export function AccountNavigation({ locale, profile, className = "" }: AccountNa
       {isOpen ? (
         <div id={menuId} className={styles.menu} role="menu" aria-label={t("accountMenu")}>
           {links.map(([label, href]) => (
-            <Link key={href} href={href} role="menuitem" className={styles.menuLink} onClick={() => setIsOpen(false)}>
+            <Link
+              key={href}
+              href={href}
+              role="menuitem"
+              className={styles.menuLink}
+              onClick={() => setIsOpen(false)}
+            >
               {label}
             </Link>
           ))}

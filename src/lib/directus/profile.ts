@@ -8,10 +8,9 @@ import {
 import type { DirectusPhoneProfile } from "./types";
 
 type ProfileResult =
-  | { ok: true; profile: DirectusPhoneProfile | null }
-  | { ok: false; error: DirectusAuthErrorCode };
+  { ok: true; profile: DirectusPhoneProfile | null } | { ok: false; error: DirectusAuthErrorCode };
 
-const profileFields = ["id", "phone_country_code", "phone_number"] as const;
+const profileFields = ["id", "account_number", "phone_country_code", "phone_number"] as const;
 
 function isUniqueConflict(error: unknown) {
   if (!isDirectusError(error)) return false;
@@ -63,7 +62,10 @@ async function updateProfile(
 
   try {
     await client.request(
-      withToken(session.accessToken, updateItem("user_profiles", id, phone, { fields: profileFields }))
+      withToken(
+        session.accessToken,
+        updateItem("user_profiles", id, phone, { fields: profileFields })
+      )
     );
     return { ok: true as const };
   } catch (caught) {

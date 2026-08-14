@@ -15,13 +15,14 @@ export interface DirectusWebsiteUser {
 export interface DirectusUserProfile {
   id: string;
   user: string | DirectusWebsiteUser;
+  account_number: string | null;
   phone_country_code: string | null;
   phone_number: string | null;
 }
 
 export type DirectusPhoneProfile = Pick<
   DirectusUserProfile,
-  "id" | "phone_country_code" | "phone_number"
+  "id" | "account_number" | "phone_country_code" | "phone_number"
 >;
 
 export interface DirectusTrainingProgram {
@@ -31,7 +32,7 @@ export interface DirectusTrainingProgram {
   category: string;
   format: string | null;
   duration_hours: number | null;
-  fee: number | null;
+  fee: number | string | null;
   location: string | null;
   certificate_available: boolean;
   instructor_name: string | null;

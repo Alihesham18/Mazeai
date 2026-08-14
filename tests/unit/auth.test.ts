@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { loginSchema, registrationSchema } from "@/lib/auth/validation";
+import { changePasswordSchema, loginSchema, registrationSchema } from "@/lib/auth/validation";
 
 describe("authentication validation", () => {
   it("rejects invalid login input", () => {
@@ -21,8 +21,28 @@ describe("authentication validation", () => {
     expect(
       registrationSchema.safeParse({ ...base, confirmPassword: base.password, consent: "" }).success
     ).toBe(false);
+    expect(registrationSchema.safeParse({ ...base, confirmPassword: base.password }).success).toBe(
+      true
+    );
+  });
+
+  it("validates authenticated password changes", () => {
+    const valid = {
+      currentPassword: "current-password",
+      newPassword: "different-new-password",
+      confirmPassword: "different-new-password"
+    };
+
+    expect(changePasswordSchema.safeParse(valid).success).toBe(true);
     expect(
-      registrationSchema.safeParse({ ...base, confirmPassword: base.password }).success
-    ).toBe(true);
+      changePasswordSchema.safeParse({ ...valid, confirmPassword: "not-the-same" }).success
+    ).toBe(false);
+    expect(
+      changePasswordSchema.safeParse({
+        ...valid,
+        newPassword: valid.currentPassword,
+        confirmPassword: valid.currentPassword
+      }).success
+    ).toBe(false);
   });
 });

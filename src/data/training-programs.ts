@@ -928,7 +928,3 @@ export const trainingCopy = {
 export function getTrainingProgram(slug: string): TrainingProgram | undefined {
   return trainingPrograms.find((program) => program.slug === slug);
 }
-
-export function formatTrainingFee(fee: number): string {
-  return `₺${fee.toLocaleString("en-US")}`;
-}
