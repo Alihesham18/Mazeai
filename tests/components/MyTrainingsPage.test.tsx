@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { requireAccountUser, getAcceptedTrainings } = vi.hoisted(() => ({
+const { requireAccountUser, getAcceptedTrainings, getDiscountOverview } = vi.hoisted(() => ({
   requireAccountUser: vi.fn(),
-  getAcceptedTrainings: vi.fn()
+  getAcceptedTrainings: vi.fn(),
+  getDiscountOverview: vi.fn()
 }));
 
 vi.mock("next-intl/server", () => ({
@@ -13,6 +14,12 @@ vi.mock("next-intl/server", () => ({
 vi.mock("@/lib/auth/account", () => ({ requireAccountUser }));
 vi.mock("@/lib/directus/training", () => ({
   getCurrentUserAcceptedTrainingApplications: getAcceptedTrainings
+}));
+vi.mock("@/lib/directus/training-discounts", () => ({
+  getTrainingDiscountOverview: getDiscountOverview
+}));
+vi.mock("@/components/account/TrainingDiscountPricing", () => ({
+  TrainingDiscountPricing: () => <div data-testid="training-discount-pricing" />
 }));
 
 import MyTrainingsPage from "@/app/[locale]/account/my-trainings/page";
@@ -29,6 +36,7 @@ const acceptedTraining = {
     format: "Hybrid",
     duration_hours: 24,
     fee: 5000,
+    currency: "TRY",
     location: "Istanbul + Online",
     certificate_available: true,
     instructor_name: "Dr. Ada Example",
@@ -44,6 +52,7 @@ describe("MyTrainingsPage", () => {
   beforeEach(() => {
     requireAccountUser.mockReset();
     getAcceptedTrainings.mockReset();
+    getDiscountOverview.mockReset();
     requireAccountUser.mockResolvedValue({ id: "current-user-uuid" });
   });
 
@@ -62,6 +71,10 @@ describe("MyTrainingsPage", () => {
 
   it("renders accepted training program information and its localized detail link", async () => {
     getAcceptedTrainings.mockResolvedValue({ ok: true, data: [acceptedTraining] });
+    getDiscountOverview.mockResolvedValue({
+      ok: true,
+      data: { "application-1": { available: [], applied: null } }
+    });
 
     render(await MyTrainingsPage({ params: { locale: "en" } }));
 
@@ -79,6 +92,8 @@ describe("MyTrainingsPage", () => {
       "/en/training/ai-foundations"
     );
     expect(screen.queryByText("noTrainings")).not.toBeInTheDocument();
+    expect(getDiscountOverview).toHaveBeenCalledWith("current-user-uuid", [acceptedTraining]);
+    expect(screen.getByTestId("training-discount-pricing")).toBeInTheDocument();
   });
 
   it("shows a safe error state when Directus cannot load trainings", async () => {

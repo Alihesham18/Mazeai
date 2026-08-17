@@ -50,6 +50,7 @@ const programFields = [
   "format",
   "duration_hours",
   "fee",
+  "currency",
   "location",
   "certificate_available",
   "instructor_name",
@@ -77,6 +78,7 @@ const enrolledTrainingProgramFields = [
   "format",
   "duration_hours",
   "fee",
+  "currency",
   "location",
   "certificate_available",
   "instructor_name",
@@ -220,6 +222,7 @@ export type AccountEnrolledProgram = Pick<
   | "format"
   | "duration_hours"
   | "fee"
+  | "currency"
   | "location"
   | "certificate_available"
   | "instructor_name"

@@ -123,6 +123,7 @@ describe("Directus training integration", () => {
           "format",
           "duration_hours",
           "fee",
+          "currency",
           "location",
           "certificate_available",
           "instructor_name",

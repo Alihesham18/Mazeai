@@ -1,0 +1,94 @@
+.pricing {
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.9rem;
+  border: 1px solid var(--color-border-gold);
+  border-radius: 9px;
+  background: var(--color-gold-subtle);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  font-size: 0.82rem;
+}
+
+.row span { color: var(--color-text-muted); }
+.row strong { color: var(--color-text); }
+
+.form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+}
+
+.form label {
+  grid-column: 1 / -1;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  font-weight: 750;
+}
+
+.form select {
+  min-inline-size: 0;
+  min-block-size: 42px;
+  padding-inline: 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: 7px;
+  background: var(--color-input);
+  color: var(--color-text);
+}
+
+.pricing button {
+  min-block-size: 42px;
+  padding-inline: 0.8rem;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.pricing button:hover:not(:disabled) { background: var(--color-primary-hover); }
+.pricing button:disabled { cursor: wait; opacity: 0.7; }
+
+.quote,
+.applied {
+  display: grid;
+  gap: 0.65rem;
+  padding-block-start: 0.75rem;
+  border-block-start: 1px solid var(--color-border-gold);
+}
+
+.quote > p,
+.applied > span {
+  margin: 0;
+  color: var(--color-gold-soft);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.quote form { display: flex; justify-content: flex-end; }
+.total { padding-block-start: 0.55rem; border-block-start: 1px solid var(--color-border); }
+.total strong { color: var(--color-success); font-size: 1rem; }
+.applied > strong { color: var(--color-success); }
+
+.empty,
+.error,
+.success {
+  margin: 0;
+  font-size: 0.78rem;
+}
+
+.empty { color: var(--color-text-muted); }
+.error { color: var(--color-error); }
+.success { color: var(--color-success); }
+
+@media (max-width: 480px) {
+  .form { grid-template-columns: 1fr; }
+  .form label { grid-column: auto; }
+  .pricing button { inline-size: 100%; }
+}

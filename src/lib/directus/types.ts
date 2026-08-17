@@ -33,6 +33,7 @@ export interface DirectusTrainingProgram {
   format: string | null;
   duration_hours: number | null;
   fee: number | string | null;
+  currency: string | null;
   location: string | null;
   certificate_available: boolean;
   instructor_name: string | null;

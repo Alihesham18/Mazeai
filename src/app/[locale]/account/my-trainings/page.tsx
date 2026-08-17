@@ -9,20 +9,25 @@ import {
 } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
+import { TrainingDiscountPricing } from "@/components/account/TrainingDiscountPricing";
 import type { Locale } from "@/i18n/routing";
 import { requireAccountUser } from "@/lib/auth/account";
 import { getCurrentUserAcceptedTrainingApplications } from "@/lib/directus/training";
+import { getTrainingDiscountOverview } from "@/lib/directus/training-discounts";
 import { localizedPath } from "@/lib/utilities/localize";
 import styles from "../page.module.css";
 
 export default async function MyTrainingsPage({ params }: { params: { locale: Locale } }) {
   setRequestLocale(params.locale);
-  await requireAccountUser(params.locale, "/account/my-trainings");
+  const currentUser = await requireAccountUser(params.locale, "/account/my-trainings");
   const [trainingResult, t] = await Promise.all([
     getCurrentUserAcceptedTrainingApplications(),
     getTranslations({ locale: params.locale, namespace: "auth" })
   ]);
   const trainings = trainingResult.ok ? trainingResult.data : [];
+  const discountResult = trainings.length
+    ? await getTrainingDiscountOverview(currentUser.id, trainings)
+    : { ok: true as const, data: {} };
 
   return (
     <section className={styles.panel} aria-labelledby="trainings-heading">
@@ -101,6 +106,21 @@ export default async function MyTrainingsPage({ params }: { params: { locale: Lo
                   </div>
                 ) : null}
               </dl>
+
+              {program.fee !== null ? (
+                <TrainingDiscountPricing
+                  locale={params.locale}
+                  applicationId={applicationId}
+                  originalFee={program.fee}
+                  currency={program.currency}
+                  overview={
+                    discountResult.ok
+                      ? (discountResult.data[applicationId] ?? { available: [], applied: null })
+                      : { available: [], applied: null }
+                  }
+                  unavailable={!discountResult.ok}
+                />
+              ) : null}
 
               <Button
                 href={localizedPath(params.locale, `/training/${program.slug}`)}
