@@ -17,11 +17,13 @@ vi.mock("@/lib/directus/auth", () => ({
     refreshToken: "refresh-token",
     expiresAt: Date.now() + 60_000
   })),
+  getCurrentDirectusUser: vi.fn(async () => ({ id: "current-user-uuid" })),
   directusAuthErrorCode: vi.fn(() => "serverFailure")
 }));
 
 import {
   createCurrentUserTrainingApplication,
+  getCurrentUserAcceptedTrainingApplications,
   getPublishedTrainingProgramBySlug
 } from "@/lib/directus/training";
 
@@ -89,5 +91,71 @@ describe("Directus training integration", () => {
       status: "under_review"
     });
     expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it("loads only accepted applications owned by the authenticated Directus user", async () => {
+    request.mockResolvedValueOnce([]);
+
+    await expect(getCurrentUserAcceptedTrainingApplications()).resolves.toEqual({
+      ok: true,
+      data: []
+    });
+
+    const query = request.mock.calls[0][0].query;
+    expect(request.mock.calls[0][0]).toMatchObject({
+      operation: "read",
+      collection: "training_applications"
+    });
+    expect(query.filter).toEqual({
+      user: { _eq: "current-user-uuid" },
+      status: { _eq: "accepted" }
+    });
+    expect(query.fields).toEqual([
+      "id",
+      "status",
+      "date_created",
+      {
+        training_program: [
+          "id",
+          "slug",
+          "title",
+          "category",
+          "format",
+          "duration_hours",
+          "fee",
+          "location",
+          "certificate_available",
+          "instructor_name",
+          "instructor_role",
+          "short_description",
+          "image_url",
+          "application_open",
+          "status"
+        ]
+      }
+    ]);
+  });
+
+  it("does not return submitted, under-review, or rejected applications", async () => {
+    const program = {
+      id: "program-1",
+      slug: "ai-foundations",
+      title: "AI Foundations"
+    };
+    request.mockResolvedValueOnce([
+      { id: "submitted", status: "submitted", date_created: null, training_program: program },
+      { id: "review", status: "under_review", date_created: null, training_program: program },
+      { id: "rejected", status: "rejected", date_created: null, training_program: program },
+      { id: "accepted", status: "accepted", date_created: null, training_program: program }
+    ]);
+
+    const result = await getCurrentUserAcceptedTrainingApplications();
+
+    expect(result.ok && result.data).toHaveLength(1);
+    expect(result.ok && result.data[0]).toMatchObject({
+      applicationId: "accepted",
+      status: "accepted",
+      program: { id: "program-1" }
+    });
   });
 });

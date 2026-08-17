@@ -427,6 +427,104 @@
   color: var(--color-gold-soft);
 }
 
+.trainingList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trainingCard {
+  min-inline-size: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1rem, 2.5vw, 1.25rem);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  background: var(--color-surface-72);
+}
+
+.trainingCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.trainingCardHeader > div {
+  min-inline-size: 0;
+}
+
+.trainingCardHeader > div > span {
+  display: block;
+  margin-block-end: 0.25rem;
+  color: var(--color-gold-soft);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.trainingCardHeader h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1.08rem;
+}
+
+.trainingDescription {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.trainingDetails {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+  margin: 0;
+  padding-block: 0.9rem;
+  border-block: 1px solid var(--color-border);
+}
+
+.trainingDetails > div {
+  min-inline-size: 0;
+  display: grid;
+  gap: 0.22rem;
+}
+
+.trainingDetails dt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+}
+
+.trainingDetails dd {
+  display: grid;
+  gap: 0.08rem;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.trainingDetails small {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.trainingCard > a {
+  inline-size: fit-content;
+  margin-block-start: auto;
+}
+
 .panelMessage,
 .compactEmpty p {
   margin: 0;
@@ -492,7 +590,8 @@
 }
 
 @media (max-width: 720px) {
-  .summaryGrid {
+  .summaryGrid,
+  .trainingList {
     grid-template-columns: 1fr;
   }
 }
@@ -510,9 +609,14 @@
 
   .attemptHeader,
   .applicationList li,
+  .trainingCardHeader,
   .compactEmpty {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .trainingDetails {
+    grid-template-columns: 1fr;
   }
 
   .attemptSummary {

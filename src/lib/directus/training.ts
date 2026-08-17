@@ -4,6 +4,7 @@ import { createDirectusRestClient } from "./client";
 import {
   directusAuthErrorCode,
   getAuthenticatedDirectusSession,
+  getCurrentDirectusUser,
   type DirectusAuthErrorCode
 } from "./auth";
 import type {
@@ -33,6 +34,14 @@ function logTrainingReadError(operation: string, error: unknown) {
   );
 }
 
+function logAccountTrainingReadError(error: unknown) {
+  const codes = isDirectusError(error)
+    ? error.errors.map((entry) => entry.extensions?.code ?? "DIRECTUS_ERROR")
+    : [error instanceof Error ? error.name : "UNKNOWN_ERROR"];
+  // Keep production diagnostics useful without logging tokens, queries, or user identifiers.
+  console.error("[Directus training] accepted trainings for current user failed", { codes });
+}
+
 const programFields = [
   "id",
   "slug",
@@ -58,6 +67,31 @@ const accountApplicationFields = [
   "date_created",
   "date_updated",
   { training_program: ["id", "slug", "title"] }
+] as const;
+
+const enrolledTrainingProgramFields = [
+  "id",
+  "slug",
+  "title",
+  "category",
+  "format",
+  "duration_hours",
+  "fee",
+  "location",
+  "certificate_available",
+  "instructor_name",
+  "instructor_role",
+  "short_description",
+  "image_url",
+  "application_open",
+  "status"
+] as const;
+
+const acceptedApplicationFields = [
+  "id",
+  "status",
+  "date_created",
+  { training_program: enrolledTrainingProgramFields }
 ] as const;
 
 const applicationSubmissionLocks = new Map<string, Promise<void>>();
@@ -173,6 +207,76 @@ export async function getCurrentUserTrainingApplications(): Promise<
     );
     return { ok: true, data: applications.map(accountApplication) };
   } catch (caught) {
+    return { ok: false, error: directusAuthErrorCode(caught) };
+  }
+}
+
+export type AccountEnrolledProgram = Pick<
+  DirectusTrainingProgram,
+  | "id"
+  | "slug"
+  | "title"
+  | "category"
+  | "format"
+  | "duration_hours"
+  | "fee"
+  | "location"
+  | "certificate_available"
+  | "instructor_name"
+  | "instructor_role"
+  | "short_description"
+  | "image_url"
+  | "application_open"
+  | "status"
+>;
+
+export interface AccountEnrolledTraining {
+  applicationId: string;
+  status: "accepted";
+  dateCreated: string | null;
+  program: AccountEnrolledProgram;
+}
+
+export async function getCurrentUserAcceptedTrainingApplications(): Promise<
+  DirectusResult<AccountEnrolledTraining[]>
+> {
+  noStore();
+  const client = createDirectusRestClient();
+  const currentUser = await getCurrentDirectusUser();
+  const session = currentUser ? await getAuthenticatedDirectusSession() : null;
+  if (!client || !session || !currentUser) return { ok: false, error: "sessionExpired" };
+
+  try {
+    const applications = await client.request(
+      withToken(
+        session.accessToken,
+        readItems("training_applications", {
+          fields: acceptedApplicationFields,
+          filter: {
+            user: { _eq: currentUser.id },
+            status: { _eq: "accepted" }
+          },
+          sort: ["-date_created"]
+        })
+      )
+    );
+
+    return {
+      ok: true,
+      data: applications.flatMap((application) => {
+        if (application.status !== "accepted" || typeof application.training_program === "string") {
+          return [];
+        }
+        return [{
+          applicationId: application.id,
+          status: "accepted" as const,
+          dateCreated: application.date_created,
+          program: application.training_program
+        }];
+      })
+    };
+  } catch (caught) {
+    logAccountTrainingReadError(caught);
     return { ok: false, error: directusAuthErrorCode(caught) };
   }
 }
