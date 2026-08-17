@@ -16,8 +16,10 @@ vi.mock("react-dom", async (importOriginal) => {
   };
 });
 vi.mock("@/lib/discounts/actions", () => ({
-  initialDiscountActionState: { status: "idle" },
   redeemDiscountAction: vi.fn()
+}));
+vi.mock("@/lib/discounts/state", () => ({
+  initialDiscountActionState: { status: "idle" }
 }));
 
 import { Discounts } from "@/components/account/Discounts";

@@ -3,18 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { isLocale, type Locale } from "@/i18n/routing";
 import { getCurrentDirectusUser } from "@/lib/directus/auth";
-import {
-  redeemDiscountCode,
-  type DiscountRedemptionError
-} from "@/lib/directus/discounts";
-
-export type DiscountActionMessage = DiscountRedemptionError | "UNAUTHENTICATED";
-export interface DiscountActionState {
-  status: "idle" | "error" | "success";
-  message?: DiscountActionMessage | "REDEMPTION_SUCCESS";
-}
-
-export const initialDiscountActionState: DiscountActionState = { status: "idle" };
+import { redeemDiscountCode } from "@/lib/directus/discounts";
+import type { DiscountActionState } from "./state";
 
 function formValue(formData: FormData, key: string) {
   const value = formData.get(key);

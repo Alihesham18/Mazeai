@@ -5,10 +5,8 @@ import { BadgePercent, CalendarClock, Tag } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
 import type { Locale } from "@/i18n/routing";
-import {
-  initialDiscountActionState,
-  redeemDiscountAction
-} from "@/lib/discounts/actions";
+import { redeemDiscountAction } from "@/lib/discounts/actions";
+import { initialDiscountActionState } from "@/lib/discounts/state";
 import type { AccountDiscount } from "@/lib/directus/discounts";
 import styles from "./Discounts.module.css";
 

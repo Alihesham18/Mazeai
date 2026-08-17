@@ -8,13 +8,21 @@ vi.mock("next/cache", () => ({ revalidatePath }));
 vi.mock("@/lib/directus/auth", () => ({ getCurrentDirectusUser: getCurrentUser }));
 vi.mock("@/lib/directus/discounts", () => ({ redeemDiscountCode: redeem }));
 
-import { initialDiscountActionState, redeemDiscountAction } from "@/lib/discounts/actions";
+import { redeemDiscountAction } from "@/lib/discounts/actions";
+import { initialDiscountActionState } from "@/lib/discounts/state";
 
 describe("discount redemption action security", () => {
   beforeEach(() => {
     getCurrentUser.mockReset();
     redeem.mockReset();
     revalidatePath.mockReset();
+  });
+
+  it("exports only async server actions from the use-server module", async () => {
+    const actions = await import("@/lib/discounts/actions");
+
+    expect(Object.keys(actions)).toEqual(["redeemDiscountAction"]);
+    expect(actions.redeemDiscountAction.constructor.name).toBe("AsyncFunction");
   });
 
   it("rejects unauthenticated requests", async () => {
