@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { activeResearchProjects } from "@/data/active-research-projects";
 import type { Locale } from "@/i18n/routing";
+import { getPublishedEvents } from "@/lib/directus/events";
 import { localizedPath, localize } from "@/lib/utilities/localize";
 
 import styles from "./HomePage.module.css";
@@ -60,8 +61,18 @@ const pathways = [
 ] as const;
 
 export async function HomePage({ locale }: { locale: Locale }) {
-  const t = await getTranslations({ locale });
+  const [t, eventResult] = await Promise.all([
+    getTranslations({ locale }),
+    getPublishedEvents()
+  ]);
   const featuredProject = activeResearchProjects.find((project) => project.slug === "biopredict");
+  const now = Date.now();
+  const latestCompletedEvent = eventResult.ok
+    ? eventResult.data
+        .filter((event) => Date.parse(event.event_date) < now)
+        .sort((first, second) => Date.parse(second.event_date) - Date.parse(first.event_date))[0] ??
+      null
+    : null;
 
   return (
     <div className={styles.page}>
@@ -97,7 +108,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
         </Container>
       </section>
 
-      <NewsPopup locale={locale} />
+      <NewsPopup event={latestCompletedEvent} locale={locale} />
 
       <section className={styles.pathwaysSection}>
         <Container>

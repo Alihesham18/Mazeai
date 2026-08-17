@@ -1,6 +1,7 @@
-import { createItem, isDirectusError, readItems, withToken } from "@directus/sdk";
+import { createItem, readItems, withToken } from "@directus/sdk";
 import { unstable_noStore as noStore } from "next/cache";
 import { createDirectusRestClient } from "./client";
+import { logDirectusDiagnostic } from "./diagnostics";
 import {
   directusAuthErrorCode,
   getAuthenticatedDirectusSession,
@@ -16,30 +17,11 @@ import type {
 type DirectusResult<T> = { ok: true; data: T } | { ok: false; error: DirectusAuthErrorCode };
 
 function logTrainingReadError(operation: string, error: unknown) {
-  if (process.env.NODE_ENV !== "development") return;
-  if (isDirectusError(error)) {
-    console.error(
-      `[Directus training] ${operation} failed`,
-      error.errors.map((entry) => ({
-        code: entry.extensions?.code,
-        reason: entry.extensions?.reason,
-        message: entry.message
-      }))
-    );
-    return;
-  }
-  console.error(
-    `[Directus training] ${operation} failed`,
-    error instanceof Error ? error.message : "Unknown Directus error"
-  );
+  logDirectusDiagnostic(`training-programs.${operation}`, error);
 }
 
 function logAccountTrainingReadError(error: unknown) {
-  const codes = isDirectusError(error)
-    ? error.errors.map((entry) => entry.extensions?.code ?? "DIRECTUS_ERROR")
-    : [error instanceof Error ? error.name : "UNKNOWN_ERROR"];
-  // Keep production diagnostics useful without logging tokens, queries, or user identifiers.
-  console.error("[Directus training] accepted trainings for current user failed", { codes });
+  logDirectusDiagnostic("training-programs.read-accepted-for-current-user", error);
 }
 
 const programFields = [

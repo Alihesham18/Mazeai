@@ -12,6 +12,7 @@ import {
 } from "@directus/sdk";
 import { cookies } from "next/headers";
 import { createDirectusRestClient } from "./client";
+import { logDirectusDiagnostic } from "./diagnostics";
 import type { DirectusSession, DirectusWebsiteUser } from "./types";
 
 export const directusAccessTokenCookie = "synergymazeai-directus-access-token";
@@ -229,7 +230,8 @@ export async function refreshDirectusSession(session = readDirectusSession()) {
 
     setDirectusSession(nextSession);
     return nextSession;
-  } catch {
+  } catch (caught) {
+    logDirectusDiagnostic("authentication.refresh-session", caught);
     clearDirectusSession();
     return null;
   }
@@ -266,7 +268,8 @@ export async function getCurrentDirectusUser() {
         })
       )
     )) as DirectusWebsiteUser;
-  } catch {
+  } catch (caught) {
+    logDirectusDiagnostic("authentication.read-current-user", caught);
     return null;
   }
 }

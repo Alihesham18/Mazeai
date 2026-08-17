@@ -59,7 +59,8 @@ const code: DirectusDiscountCode = {
   max_redemptions_per_user: 1,
   applies_to: "training",
   is_active: true,
-  stackable: false
+  stackable: false,
+  reserved_for_user: null
 };
 
 const redemption: DirectusDiscountRedemption = {
@@ -195,6 +196,20 @@ describe("training discount validation and persistence", () => {
   it.each(["training", "all"] as const)("accepts applies_to=%s", async (appliesTo) => {
     arrange({ redemption: { ...redemption, discount_code: { ...code, applies_to: appliesTo } } });
     expect((await quoteTrainingDiscount(input)).ok).toBe(true);
+  });
+
+  it("can consume an available redemption created from an owner-reserved scholarship code", async () => {
+    arrange({
+      redemption: {
+        ...redemption,
+        discount_code: { ...code, code: "SYNERGY-ABC234", reserved_for_user: input.userId }
+      }
+    });
+
+    await expect(quoteTrainingDiscount(input)).resolves.toMatchObject({
+      ok: true,
+      data: { discountAmount: "18000.00", finalAmount: "72000.00" }
+    });
   });
 
   it("rejects an event-only discount", async () => {

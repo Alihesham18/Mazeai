@@ -5,6 +5,7 @@ const { cookieGet, request } = vi.hoisted(() => ({
   request: vi.fn()
 }));
 
+vi.mock("server-only", () => ({}));
 vi.mock("next/headers", () => ({
   cookies: () => ({
     get: cookieGet,

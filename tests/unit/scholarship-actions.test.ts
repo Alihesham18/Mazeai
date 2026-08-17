@@ -61,12 +61,21 @@ describe("scholarship submission action", () => {
     getUser.mockResolvedValue({ id: "authenticated-user" });
     getProgram.mockResolvedValue({
       ok: true,
-      data: { id: "program-uuid", slug: "mobile-programming", status: "published" }
+      data: {
+        id: "program-uuid",
+        slug: "mobile-programming",
+        status: "published",
+        currency: "TRY"
+      }
     });
     getRules.mockResolvedValue({ ok: true, data: globalRules });
     createAttempt.mockResolvedValue({
       ok: true,
-      data: { discountCode: "SYNERGY-ABC234" }
+      data: {
+        attemptId: "attempt-uuid",
+        discountCode: "SYNERGY-ABC234",
+        discountReady: true
+      }
     });
   });
 
@@ -107,6 +116,7 @@ describe("scholarship submission action", () => {
         percentage: 100,
         scholarshipPercentage: 40,
         discountCode: "SYNERGY-ABC234",
+        discountReady: true,
         status: "eligible"
       }
     });
@@ -119,12 +129,16 @@ describe("scholarship submission action", () => {
       totalQuestions: 10,
       percentage: 100,
       scholarshipPercentage: 40,
-      status: "eligible"
+      status: "eligible",
+      currency: "TRY"
     });
   });
 
   it("does not award a discount below every configured threshold", async () => {
-    createAttempt.mockResolvedValue({ ok: true, data: { discountCode: null } });
+    createAttempt.mockResolvedValue({
+      ok: true,
+      data: { attemptId: "attempt-uuid", discountCode: null, discountReady: false }
+    });
 
     await expect(
       submitScholarshipExamAction("mobile-programming", initialState, form(1))
@@ -133,6 +147,7 @@ describe("scholarship submission action", () => {
         score: 0,
         scholarshipPercentage: null,
         discountCode: null,
+        discountReady: false,
         status: "not_eligible"
       }
     });
@@ -140,7 +155,10 @@ describe("scholarship submission action", () => {
 
   it("stores an under-review result when Directus has no active applicable rules", async () => {
     getRules.mockResolvedValue({ ok: true, data: [] });
-    createAttempt.mockResolvedValue({ ok: true, data: { discountCode: null } });
+    createAttempt.mockResolvedValue({
+      ok: true,
+      data: { attemptId: "attempt-uuid", discountCode: null, discountReady: false }
+    });
 
     await expect(
       submitScholarshipExamAction("mobile-programming", initialState, form())
@@ -148,6 +166,7 @@ describe("scholarship submission action", () => {
       result: {
         scholarshipPercentage: null,
         discountCode: null,
+        discountReady: false,
         status: "under_review"
       }
     });

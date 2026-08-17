@@ -1,0 +1,50 @@
+.form {
+  max-inline-size: 48rem;
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  background: var(--gradient-card);
+}
+
+.field { display: grid; gap: 0.45rem; }
+.field label { font-size: 0.88rem; font-weight: 750; }
+.field textarea {
+  inline-size: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.45rem;
+  background: var(--color-input);
+  color: var(--color-text);
+  resize: vertical;
+}
+.field textarea:focus { border-color: var(--color-primary-hover); outline: 0; }
+.form > button,
+.loginAction {
+  width: fit-content;
+  min-block-size: 46px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.8rem 1.25rem;
+  border: 0;
+  border-radius: 0.65rem;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 850;
+}
+.form > button:disabled { cursor: wait; opacity: 0.7; }
+.successNotice,
+.errorNotice {
+  margin: 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--color-error) 40%, transparent);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--color-error) 10%, transparent);
+  color: var(--color-error);
+}
+.successNotice {
+  border-color: color-mix(in srgb, var(--color-success) 35%, transparent);
+  background: color-mix(in srgb, var(--color-success) 10%, transparent);
+  color: var(--color-success);
+}

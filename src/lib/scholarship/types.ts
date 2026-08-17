@@ -11,6 +11,7 @@ export interface ScholarshipExamResult {
   percentage: number;
   scholarshipPercentage: number | null;
   discountCode: string | null;
+  discountReady: boolean;
   status: ScholarshipAttemptStatus;
 }
 

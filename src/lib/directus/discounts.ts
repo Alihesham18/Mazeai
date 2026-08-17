@@ -3,6 +3,7 @@ import "server-only";
 import { createItem, isDirectusError, readItems, withToken } from "@directus/sdk";
 import { unstable_noStore as noStore } from "next/cache";
 import { createDirectusRestClient } from "./client";
+import { logDirectusDiagnostic } from "./diagnostics";
 import type {
   DirectusDiscountCode,
   DirectusDiscountRedemption,
@@ -18,6 +19,15 @@ export type DiscountRedemptionError =
   | "CODE_EXPIRED"
   | "REDEMPTION_LIMIT_REACHED"
   | "USER_REDEMPTION_LIMIT_REACHED"
+  | "SCHOLARSHIP_CODE_NOT_OWNED"
+  | "SERVER_ERROR";
+
+export type ScholarshipDiscountSyncError =
+  | "INVALID_CODE"
+  | "INVALID_AWARD"
+  | "INVALID_CURRENCY"
+  | "CONFLICT"
+  | "COLLISION"
   | "SERVER_ERROR";
 
 export type RedeemDiscountResult =
@@ -52,7 +62,8 @@ const discountFields = [
   "max_redemptions_per_user",
   "applies_to",
   "is_active",
-  "stackable"
+  "stackable",
+  "reserved_for_user"
 ] as const;
 
 const accountRedemptionFields = [
@@ -76,6 +87,7 @@ const accountRedemptionFields = [
 ] as const;
 
 const redemptionLocks = new Map<string, Promise<void>>();
+const scholarshipCodeLocks = new Map<string, Promise<void>>();
 
 function discountServiceToken() {
   return process.env.DIRECTUS_DISCOUNT_SERVICE_TOKEN?.trim() || null;
@@ -111,6 +123,12 @@ function validateCodeRecord(code: DirectusDiscountCode, now: Date): DiscountRede
   return null;
 }
 
+export function normalizeReservedUserId(user: DirectusDiscountCode["reserved_for_user"]) {
+  if (!user) return null;
+  const id = typeof user === "string" ? user : user.id;
+  return typeof id === "string" && id.trim() ? id.trim() : null;
+}
+
 function isConflict(error: unknown) {
   if (!isDirectusError(error)) return false;
   return error.errors.some((entry) => {
@@ -120,14 +138,7 @@ function isConflict(error: unknown) {
 }
 
 function logDiscountError(operation: string, error: unknown) {
-  if (process.env.NODE_ENV !== "development") return;
-  const code = isDirectusError(error)
-    ? error.errors[0]?.extensions?.code ?? "DIRECTUS_ERROR"
-    : error instanceof Error
-      ? error.name
-      : "UNKNOWN_ERROR";
-  // Deliberately omit request data, response bodies, tokens, and user identifiers.
-  console.error(`[Directus discounts] ${operation} failed`, { code });
+  logDirectusDiagnostic(`discounts.${operation}`, error);
 }
 
 async function requestContext() {
@@ -196,6 +207,11 @@ async function redeemLocked(userId: string, normalizedCode: string): Promise<Red
     const code = await getDiscountByCode(normalizedCode);
     if (!code) return { ok: false, error: "INVALID_CODE" };
 
+    const reservedUserId = normalizeReservedUserId(code.reserved_for_user);
+    if (reservedUserId && reservedUserId !== userId) {
+      return { ok: false, error: "SCHOLARSHIP_CODE_NOT_OWNED" };
+    }
+
     const recordError = validateCodeRecord(code, new Date());
     if (recordError) return { ok: false, error: recordError };
 
@@ -230,6 +246,153 @@ async function redeemLocked(userId: string, normalizedCode: string): Promise<Red
     if (isConflict(caught)) return { ok: false, error: "USER_REDEMPTION_LIMIT_REACHED" };
     logDiscountError("redemption", caught);
     return { ok: false, error: "SERVER_ERROR" };
+  }
+}
+
+export async function scholarshipDiscountCodeExists(rawCode: string): Promise<
+  { ok: true; exists: boolean } | { ok: false; error: "SERVER_ERROR" }
+> {
+  try {
+    return { ok: true, exists: Boolean(await getDiscountByCode(rawCode)) };
+  } catch (caught) {
+    logDiscountError("scholarship code uniqueness check", caught);
+    return { ok: false, error: "SERVER_ERROR" };
+  }
+}
+
+function scholarshipRecordMatches(
+  record: DirectusDiscountCode,
+  input: { userId: string; awardPercentage: number; currency: string }
+) {
+  return (
+    normalizeReservedUserId(record.reserved_for_user) === input.userId &&
+    record.discount_type === "percentage" &&
+    Number(record.discount_value) === input.awardPercentage &&
+    record.currency?.trim().toUpperCase() === input.currency &&
+    record.applies_to === "training" &&
+    record.is_active === true &&
+    record.stackable === false &&
+    Number(record.max_redemptions) === 1 &&
+    Number(record.max_redemptions_per_user) === 1
+  );
+}
+
+async function ensureScholarshipDiscountLocked(input: {
+  code: string;
+  userId: string;
+  awardPercentage: number;
+  currency: string;
+}): Promise<
+  | { ok: true; data: { code: string; created: boolean } }
+  | { ok: false; error: ScholarshipDiscountSyncError }
+> {
+  let existing: DirectusDiscountCode | null;
+  try {
+    existing = await getDiscountByCode(input.code);
+  } catch (caught) {
+    logDirectusDiagnostic("scholarship-discount.lookup-code", caught);
+    return { ok: false, error: "SERVER_ERROR" };
+  }
+
+  if (existing) {
+    try {
+      if (scholarshipRecordMatches(existing, input)) {
+        return { ok: true, data: { code: input.code, created: false } };
+      }
+      logDirectusDiagnostic(
+        "scholarship-discount.validate-reserved-for-user",
+        new Error("Existing scholarship discount does not match its trusted attempt values")
+      );
+      return { ok: false, error: "CONFLICT" };
+    } catch (caught) {
+      logDirectusDiagnostic("scholarship-discount.validate-reserved-for-user", caught);
+      return { ok: false, error: "CONFLICT" };
+    }
+  }
+
+  try {
+    const context = await requestContext();
+    if (!context) return { ok: false, error: "SERVER_ERROR" };
+    await context.client.request(
+      withToken(
+        context.token,
+        createItem("discount_codes", {
+          code: input.code,
+          title: `Scholarship Award - ${input.awardPercentage}%`,
+          description: "Scholarship discount awarded after qualifying in the scholarship exam.",
+          discount_type: "percentage",
+          discount_value: input.awardPercentage,
+          currency: input.currency,
+          starts_at: new Date().toISOString(),
+          // No scholarship expiry rule exists in the current project configuration.
+          expires_at: null,
+          max_redemptions: 1,
+          max_redemptions_per_user: 1,
+          applies_to: "training",
+          is_active: true,
+          stackable: false,
+          reserved_for_user: input.userId
+        })
+      )
+    );
+    return { ok: true, data: { code: input.code, created: true } };
+  } catch (caught) {
+    if (isConflict(caught)) {
+      try {
+        const raced = await getDiscountByCode(input.code);
+        if (raced && scholarshipRecordMatches(raced, input)) {
+          return { ok: true, data: { code: input.code, created: false } };
+        }
+        return { ok: false, error: "COLLISION" };
+      } catch (readError) {
+        logDirectusDiagnostic("scholarship-discount.lookup-after-conflict", readError);
+        return { ok: false, error: "SERVER_ERROR" };
+      }
+    }
+    logDirectusDiagnostic("scholarship-discount.create-code", caught);
+    return { ok: false, error: "SERVER_ERROR" };
+  }
+}
+
+export async function ensureScholarshipDiscountCode(input: {
+  code: string;
+  userId: string;
+  awardPercentage: number;
+  currency: string;
+}) {
+  let code: string;
+  let awardPercentage: number;
+  let currency: string;
+  try {
+    code = normalizeDiscountCode(input.code);
+    awardPercentage = Number(input.awardPercentage);
+    currency = input.currency.trim().toUpperCase();
+  } catch (caught) {
+    logDirectusDiagnostic("scholarship-discount.normalize-input", caught);
+    return { ok: false, error: "SERVER_ERROR" } as const;
+  }
+  if (!code || code.length > 128) return { ok: false, error: "INVALID_CODE" } as const;
+  if (!Number.isFinite(awardPercentage) || awardPercentage <= 0 || awardPercentage > 100) {
+    return { ok: false, error: "INVALID_AWARD" } as const;
+  }
+  if (!/^[A-Z]{3}$/.test(currency)) return { ok: false, error: "INVALID_CURRENCY" } as const;
+
+  const lockKey = code;
+  const previous = scholarshipCodeLocks.get(lockKey) ?? Promise.resolve();
+  let release = () => {};
+  const current = new Promise<void>((resolve) => (release = resolve));
+  scholarshipCodeLocks.set(lockKey, current);
+  await previous;
+  try {
+    return await ensureScholarshipDiscountLocked({
+      ...input,
+      code,
+      awardPercentage,
+      currency
+    });
+  } finally {
+    release();
+    if (scholarshipCodeLocks.get(lockKey) === current) scholarshipCodeLocks.delete(lockKey);
   }
 }
 

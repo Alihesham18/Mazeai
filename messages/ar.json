@@ -336,6 +336,15 @@
       "description": "تحتوي هذه الصفحة على بنية بداية مفيدة وسيتم توسيعها في مرحلة لاحقة."
     }
   },
+  "events": {
+    "event": "فعالية", "register": "تسجيل", "registerForEvent": "التسجيل في الفعالية",
+    "registrationSuccessful": "تم التسجيل بنجاح.", "alreadyRegistered": "أنت مسجل بالفعل في هذه الفعالية.",
+    "registrationClosed": "التسجيل مغلق.", "eventFull": "اكتمل عدد الحضور.",
+    "unableToLoadEvents": "تعذر تحميل الفعاليات. يرجى المحاولة مرة أخرى.", "noEvents": "لا توجد فعاليات منشورة بعد.",
+    "locationPending": "سيتم الإعلان عن الموقع", "capacity": "السعة", "phone": "الهاتف", "message": "الرسالة",
+    "invalidPhone": "أدخل رقم هاتف صالحًا.", "registrationFailed": "تعذر إكمال التسجيل. يرجى المحاولة مرة أخرى.",
+    "sessionExpired": "يرجى تسجيل الدخول للتسجيل في هذه الفعالية."
+  },
   "auth": {
     "accountEyebrow": "الحساب",
     "welcomeBack": "مرحباً بعودتك",
@@ -416,6 +425,9 @@
     "trainingApplicationsSupport": "طلبات التدريب المقدمة وحالاتها الحالية.",
     "myTrainingsSupport": "البرامج التدريبية المسجل فيها.",
     "eventRegistrationsSupport": "الفعاليات التي سجلت فيها.",
+    "eventRegistrationsUnavailable": "تعذر تحميل التسجيلات. يرجى المحاولة مرة أخرى.",
+    "event": "فعالية", "eventDate": "تاريخ الفعالية", "registeredOn": "تاريخ التسجيل", "eventLocationFormat": "الموقع / التنسيق",
+    "eventRegistrationStatus": { "registered": "مسجل", "attended": "حضر", "cancelled": "ملغى" },
     "copyCode": "نسخ الرمز",
     "copied": "تم النسخ!",
     "takeAgain": "إعادة الاختبار",
@@ -471,6 +483,13 @@
     "scholarshipPercentage": "النسبة المئوية",
     "scholarshipAward": "قيمة المنحة",
     "discountCode": "رمز الخصم",
+    "scholarshipDiscountReady": "خصم المنحة جاهز",
+    "scholarshipDiscountUnavailable": "تم حفظ نتيجة المنحة، لكن الخصم غير متاح بعد. يرجى المحاولة مرة أخرى.",
+    "discountCodeCreated": "تم إنشاء رمز خصم المنحة.",
+    "discountAlreadyIssued": "تم إصدار خصم المنحة سابقًا وأعيد استخدام الرمز نفسه.",
+    "unableCreateScholarshipDiscount": "تعذر إنشاء خصم المنحة.",
+    "unableSynchronizeScholarshipDiscount": "تعذرت مزامنة خصم المنحة.",
+    "redeemScholarshipFromProfile": "استبدل هذا الرمز من ملفك الشخصي",
     "scholarshipStatus": {
       "eligible": "مؤهل",
       "notEligible": "غير مؤهل",
@@ -512,6 +531,7 @@
         "REDEMPTION_LIMIT_REACHED": "وصل رمز الخصم هذا إلى حد الاستبدال.",
         "USER_REDEMPTION_LIMIT_REACHED": "لقد وصلت بالفعل إلى الحد الأقصى المسموح به لاستبدال هذا الرمز.",
         "UNAUTHENTICATED": "يرجى تسجيل الدخول لاستبدال رمز الخصم.",
+        "SCHOLARSHIP_CODE_NOT_OWNED": "خصم المنحة هذا يخص حسابًا آخر.",
         "SERVER_ERROR": "تعذر استبدال رمز الخصم. يرجى المحاولة مرة أخرى."
       }
     },

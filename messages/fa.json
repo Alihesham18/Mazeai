@@ -336,6 +336,15 @@
       "description": "این صفحه دارای ساختار اولیه کاربردی است و در مرحله‌ای بعد توسعه خواهد یافت."
     }
   },
+  "events": {
+    "event": "رویداد", "register": "ثبت‌نام", "registerForEvent": "ثبت‌نام در رویداد",
+    "registrationSuccessful": "ثبت‌نام با موفقیت انجام شد.", "alreadyRegistered": "شما قبلاً در این رویداد ثبت‌نام کرده‌اید.",
+    "registrationClosed": "ثبت‌نام بسته است.", "eventFull": "ظرفیت رویداد تکمیل است.",
+    "unableToLoadEvents": "بارگذاری رویدادها ممکن نشد. دوباره تلاش کنید.", "noEvents": "هنوز رویداد منتشرشده‌ای وجود ندارد.",
+    "locationPending": "محل برگزاری اعلام خواهد شد", "capacity": "ظرفیت", "phone": "تلفن", "message": "پیام",
+    "invalidPhone": "یک شماره تلفن معتبر وارد کنید.", "registrationFailed": "ثبت‌نام رویداد انجام نشد. دوباره تلاش کنید.",
+    "sessionExpired": "برای ثبت‌نام در این رویداد وارد شوید."
+  },
   "auth": {
     "accountEyebrow": "حساب",
     "welcomeBack": "خوش آمدید",
@@ -416,6 +425,9 @@
     "trainingApplicationsSupport": "درخواست‌های آموزشی ارسال‌شده و وضعیت فعلی آن‌ها.",
     "myTrainingsSupport": "برنامه‌های آموزشی که در آن‌ها ثبت‌نام کرده‌اید.",
     "eventRegistrationsSupport": "رویدادهایی که در آن‌ها ثبت‌نام کرده‌اید.",
+    "eventRegistrationsUnavailable": "بارگذاری ثبت‌نام‌ها ممکن نشد. دوباره تلاش کنید.",
+    "event": "رویداد", "eventDate": "تاریخ رویداد", "registeredOn": "تاریخ ثبت‌نام", "eventLocationFormat": "محل / نوع برگزاری",
+    "eventRegistrationStatus": { "registered": "ثبت‌شده", "attended": "شرکت کرده", "cancelled": "لغوشده" },
     "copyCode": "کپی کد",
     "copied": "کپی شد!",
     "takeAgain": "آزمون مجدد",
@@ -471,6 +483,13 @@
     "scholarshipPercentage": "درصد",
     "scholarshipAward": "میزان بورسیه",
     "discountCode": "کد تخفیف",
+    "scholarshipDiscountReady": "تخفیف بورسیه آماده است",
+    "scholarshipDiscountUnavailable": "نتیجه بورسیه ذخیره شد، اما تخفیف هنوز در دسترس نیست. لطفاً دوباره تلاش کنید.",
+    "discountCodeCreated": "کد تخفیف بورسیه ایجاد شد.",
+    "discountAlreadyIssued": "این تخفیف بورسیه قبلاً صادر شده و همان کد دوباره استفاده شد.",
+    "unableCreateScholarshipDiscount": "ایجاد تخفیف بورسیه انجام نشد.",
+    "unableSynchronizeScholarshipDiscount": "همگام‌سازی تخفیف بورسیه انجام نشد.",
+    "redeemScholarshipFromProfile": "این کد را از نمایه خود فعال کنید",
     "scholarshipStatus": {
       "eligible": "واجد شرایط",
       "notEligible": "واجد شرایط نیست",
@@ -512,6 +531,7 @@
         "REDEMPTION_LIMIT_REACHED": "این کد تخفیف به سقف استفاده رسیده است.",
         "USER_REDEMPTION_LIMIT_REACHED": "شما قبلاً به حداکثر دفعات مجاز استفاده از این کد رسیده‌اید.",
         "UNAUTHENTICATED": "برای فعال‌سازی کد تخفیف وارد حساب شوید.",
+        "SCHOLARSHIP_CODE_NOT_OWNED": "این تخفیف بورسیه متعلق به حساب دیگری است.",
         "SERVER_ERROR": "کد تخفیف فعال نشد. لطفاً دوباره تلاش کنید."
       }
     },

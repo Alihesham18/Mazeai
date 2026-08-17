@@ -80,7 +80,8 @@ export async function submitScholarshipExamAction(
     programId: programResult.data.id,
     ...scored,
     scholarshipPercentage,
-    status
+    status,
+    currency: programResult.data.currency
   });
   if (!createResult.ok) return { status: "error", message: "submissionFailed" };
 
@@ -91,6 +92,7 @@ export async function submitScholarshipExamAction(
       ...scored,
       scholarshipPercentage,
       discountCode: createResult.data.discountCode,
+      discountReady: createResult.data.discountReady,
       status
     }
   };

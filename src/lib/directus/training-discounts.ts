@@ -93,7 +93,8 @@ const quoteCodeFields = [
   "is_active",
   "stackable",
   "max_redemptions",
-  "max_redemptions_per_user"
+  "max_redemptions_per_user",
+  "reserved_for_user"
 ] as const;
 const quoteRedemptionFields = [
   "id",

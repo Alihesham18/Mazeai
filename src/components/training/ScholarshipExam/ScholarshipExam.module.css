@@ -249,6 +249,37 @@
   font-weight: 800;
 }
 
+.resultCode {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  margin-block: 1rem;
+}
+
+.resultCode > span {
+  inline-size: 100%;
+  color: var(--color-success);
+  font-weight: 800;
+}
+
+.resultCode .discountCode {
+  margin: 0;
+}
+
+.resultCode > a {
+  color: var(--color-gold-soft);
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.resultWarning {
+  max-inline-size: 38rem;
+  margin-block: 1rem;
+  color: var(--color-error);
+  font-size: 0.86rem;
+}
+
 @media (min-width: 58rem) {
   .examGrid {
     grid-template-columns: minmax(18rem, 0.7fr) minmax(0, 1.3fr);

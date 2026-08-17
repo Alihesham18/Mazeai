@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -11,37 +10,29 @@ import {
 import { useTranslations } from "next-intl";
 import {
   useEffect,
-  useMemo,
   useState
 } from "react";
 import { createPortal } from "react-dom";
 
-import {
-  getLatestCompletedEvent
-} from "@/data/featured-events";
-
 import type {
   Locale
 } from "@/i18n/routing";
+import type { DirectusEvent } from "@/lib/directus/types";
 
 import {
-  localizedPath,
-  localize
+  localizedPath
 } from "@/lib/utilities/localize";
 
 import styles from "./NewsPopup.module.css";
 
 export function NewsPopup({
+  event,
   locale
 }: {
+  event: DirectusEvent | null;
   locale: Locale;
 }) {
   const t = useTranslations("home");
-
-  const event = useMemo(
-    () => getLatestCompletedEvent(),
-    []
-  );
 
   const [isMounted, setIsMounted] =
     useState(false);
@@ -180,15 +171,12 @@ export function NewsPopup({
           styles.imageArea
         }
       >
-        {event.eventImage ? (
-          <Image
-            src={event.eventImage}
-            alt={event.title}
-            fill
-            sizes="340px"
-            className={
-              styles.eventImage
-            }
+        {event.image_url ? (
+          <span
+            aria-label={event.title}
+            className={styles.eventImage}
+            role="img"
+            style={{ backgroundImage: `url(${JSON.stringify(event.image_url)})` }}
           />
         ) : (
           <ImageIcon
@@ -215,10 +203,7 @@ export function NewsPopup({
           styles.description
         }
       >
-        {localize(
-          event.description,
-          locale
-        )}
+        {event.short_description}
       </p>
 
       <div
@@ -233,12 +218,11 @@ export function NewsPopup({
 
         <time
           dateTime={
-            event.dateTime
+            event.event_date
           }
         >
-          {localize(
-            event.date,
-            locale
+          {new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(
+            new Date(event.event_date)
           )}
         </time>
       </div>

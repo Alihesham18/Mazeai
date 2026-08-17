@@ -1,19 +1,12 @@
-import {
-  createPageMetadata,
-  StandalonePage,
-  type StandalonePageConfig
-} from "@/components/pages/StandalonePage";
+import EventPage, { generateMetadata as generateEventMetadata } from "../[eventSlug]/page";
 import type { Locale } from "@/i18n/routing";
 
-const page: StandalonePageConfig = {
-  path: "events/education-ai-lab",
-  titleKey: "pages.placeholder.title",
-  descriptionKey: "pages.placeholder.description",
-  sections: ["Event overview", "Agenda", "Who should attend", "Registration"]
-};
+const eventSlug = "education-ai-lab";
 
-export const generateMetadata = createPageMetadata(page);
+export function generateMetadata({ params }: { params: { locale: Locale } }) {
+  return generateEventMetadata({ params: { ...params, eventSlug } });
+}
 
 export default function EducationAiLabPage({ params }: { params: { locale: Locale } }) {
-  return <StandalonePage locale={params.locale} page={page} />;
+  return EventPage({ params: { ...params, eventSlug } });
 }

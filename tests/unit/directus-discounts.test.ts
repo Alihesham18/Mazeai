@@ -15,12 +15,15 @@ vi.mock("@directus/sdk", () => ({
 vi.mock("@/lib/directus/client", () => ({ createDirectusRestClient: () => ({ request }) }));
 
 import {
+  ensureScholarshipDiscountCode,
   getCurrentUserDiscounts,
   normalizeDiscountCode,
+  normalizeReservedUserId,
   redeemDiscountCode
 } from "@/lib/directus/discounts";
+import type { DirectusDiscountCode } from "@/lib/directus/types";
 
-const baseCode = {
+const baseCode: DirectusDiscountCode = {
   id: "discount-uuid",
   code: "TEST20",
   title: "Test discount",
@@ -34,7 +37,8 @@ const baseCode = {
   max_redemptions_per_user: 1,
   applies_to: "training",
   is_active: true,
-  stackable: false
+  stackable: false,
+  reserved_for_user: null
 };
 
 function successfulRequests(code = baseCode) {
@@ -55,6 +59,14 @@ describe("Directus discount redemption", () => {
 
   it("normalizes whitespace and casing", () => {
     expect(normalizeDiscountCode(" test20 ")).toBe("TEST20");
+  });
+
+  it("normalizes reserved_for_user without requiring nested user fields", () => {
+    expect(normalizeReservedUserId(" directus-user-uuid ")).toBe("directus-user-uuid");
+    expect(
+      normalizeReservedUserId({ id: "related-user-uuid" } as DirectusDiscountCode["reserved_for_user"])
+    ).toBe("related-user-uuid");
+    expect(normalizeReservedUserId(null)).toBeNull();
   });
 
   it("creates an available redemption with trusted relations and no usage fields", async () => {
@@ -81,6 +93,139 @@ describe("Directus discount redemption", () => {
     expect(create.item).not.toHaveProperty("original_amount");
     expect(create.item).not.toHaveProperty("discount_amount");
     expect(create.item).not.toHaveProperty("final_amount");
+  });
+
+  it("allows the reserved scholarship owner to redeem their code", async () => {
+    successfulRequests({ ...baseCode, reserved_for_user: "directus-user-uuid" });
+
+    await expect(redeemDiscountCode("directus-user-uuid", "TEST20")).resolves.toEqual({
+      ok: true,
+      redemptionId: "redemption-uuid"
+    });
+  });
+
+  it("rejects a scholarship code reserved for another user before creating a redemption", async () => {
+    request.mockResolvedValueOnce([{ ...baseCode, reserved_for_user: "another-user" }]);
+
+    await expect(redeemDiscountCode("directus-user-uuid", "TEST20")).resolves.toEqual({
+      ok: false,
+      error: "SCHOLARSHIP_CODE_NOT_OWNED"
+    });
+    expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it("creates an owner-reserved, single-use training discount for a scholarship", async () => {
+    request.mockResolvedValueOnce([]).mockResolvedValueOnce({ id: "scholarship-discount" });
+
+    await expect(
+      ensureScholarshipDiscountCode({
+        code: " synergy-abc234 ",
+        userId: "directus-user-uuid",
+        awardPercentage: 40,
+        currency: "try"
+      })
+    ).resolves.toEqual({
+      ok: true,
+      data: { code: "SYNERGY-ABC234", created: true }
+    });
+    const create = request.mock.calls[1][0];
+    expect(create).toMatchObject({
+      operation: "create",
+      collection: "discount_codes",
+      item: {
+        code: "SYNERGY-ABC234",
+        discount_type: "percentage",
+        discount_value: 40,
+        currency: "TRY",
+        expires_at: null,
+        max_redemptions: 1,
+        max_redemptions_per_user: 1,
+        applies_to: "training",
+        is_active: true,
+        stackable: false,
+        reserved_for_user: "directus-user-uuid"
+      }
+    });
+    expect(Date.parse(create.item.starts_at)).not.toBeNaN();
+  });
+
+  it("reuses a matching scholarship discount instead of creating a duplicate", async () => {
+    request.mockResolvedValueOnce([
+      {
+        ...baseCode,
+        code: "SYNERGY-ABC234",
+        discount_value: 40,
+        max_redemptions: 1,
+        reserved_for_user: "directus-user-uuid"
+      }
+    ]);
+
+    await expect(
+      ensureScholarshipDiscountCode({
+        code: "SYNERGY-ABC234",
+        userId: "directus-user-uuid",
+        awardPercentage: 40,
+        currency: "TRY"
+      })
+    ).resolves.toEqual({
+      ok: true,
+      data: { code: "SYNERGY-ABC234", created: false }
+    });
+    expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it("creates only once when synchronization is repeated for the same stored attempt code", async () => {
+    const scholarshipCode = {
+      ...baseCode,
+      code: "SYNERGY-ABC234",
+      discount_value: 40,
+      max_redemptions: 1,
+      reserved_for_user: "directus-user-uuid"
+    };
+    request
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce({ id: "scholarship-discount" })
+      .mockResolvedValueOnce([scholarshipCode]);
+    const input = {
+      code: "SYNERGY-ABC234",
+      userId: "directus-user-uuid",
+      awardPercentage: 40,
+      currency: "TRY"
+    };
+
+    await expect(ensureScholarshipDiscountCode(input)).resolves.toMatchObject({
+      ok: true,
+      data: { created: true }
+    });
+    await expect(ensureScholarshipDiscountCode(input)).resolves.toMatchObject({
+      ok: true,
+      data: { created: false }
+    });
+    expect(
+      request.mock.calls.filter(([command]) => command.operation === "create")
+    ).toHaveLength(1);
+  });
+
+  it("does not claim a conflicting scholarship code owned by another user", async () => {
+    request.mockResolvedValueOnce([
+      {
+        ...baseCode,
+        code: "SYNERGY-ABC234",
+        discount_value: 40,
+        max_redemptions: 1,
+        reserved_for_user: "another-user"
+      }
+    ]);
+
+    await expect(
+      ensureScholarshipDiscountCode({
+        code: "SYNERGY-ABC234",
+        userId: "directus-user-uuid",
+        awardPercentage: 40,
+        currency: "TRY"
+      })
+    ).resolves.toEqual({ ok: false, error: "CONFLICT" });
+    expect(request).toHaveBeenCalledTimes(1);
   });
 
   it("rejects a nonexistent code", async () => {

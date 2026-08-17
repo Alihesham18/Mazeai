@@ -1,33 +1,22 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { EventDetailPage } from "@/components/pages/EventDetailPage";
-import { featuredEvents, getFeaturedEvent } from "@/data/featured-events";
 import type { Locale } from "@/i18n/routing";
-import { localize } from "@/lib/utilities/localize";
+import { getPublishedEventBySlug } from "@/lib/directus/events";
 
-interface EventPageProps {
-  params: { eventSlug: string; locale: Locale };
-}
+interface EventPageProps { params: { eventSlug: string; locale: Locale } }
 
-export function generateStaticParams() {
-  return featuredEvents.map((event) => ({ eventSlug: event.slug }));
-}
-
-export function generateMetadata({ params }: EventPageProps): Metadata {
-  const event = getFeaturedEvent(params.eventSlug);
-
-  if (!event) return {};
-
+export async function generateMetadata({ params }: EventPageProps): Promise<Metadata> {
+  const result = await getPublishedEventBySlug(params.eventSlug);
+  if (!result.ok || !result.data) return {};
   return {
-    title: `${event.title} | SynergyMazeAI`,
-    description: localize(event.description, params.locale)
+    title: `${result.data.title} | SynergyMazeAI`,
+    description: result.data.short_description || result.data.description || undefined
   };
 }
 
-export default function EventPage({ params }: EventPageProps) {
-  const event = getFeaturedEvent(params.eventSlug);
-
-  if (!event) notFound();
-
-  return <EventDetailPage event={event} locale={params.locale} />;
+export default async function EventPage({ params }: EventPageProps) {
+  const result = await getPublishedEventBySlug(params.eventSlug);
+  if (!result.ok || !result.data) notFound();
+  return <EventDetailPage event={result.data} locale={params.locale} />;
 }

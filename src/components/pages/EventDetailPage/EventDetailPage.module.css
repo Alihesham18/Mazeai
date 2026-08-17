@@ -50,6 +50,16 @@
   font-size: clamp(1.08rem, 2vw, 1.3rem);
 }
 
+.eventImage {
+  inline-size: 100%;
+  max-inline-size: 64rem;
+  aspect-ratio: 16 / 7;
+  margin-block-start: 2rem;
+  border-radius: 12px;
+  background-position: center;
+  background-size: cover;
+}
+
 .heroMeta {
   display: grid;
   gap: 1px;

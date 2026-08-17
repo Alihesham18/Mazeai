@@ -195,7 +195,11 @@
 }
 
 .eventImage {
-  object-fit: cover;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  background-position: center;
+  background-size: cover;
 }
 
 

@@ -2,8 +2,11 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const { request } = vi.hoisted(() => ({ request: vi.fn() }));
 
+vi.mock("server-only", () => ({}));
 vi.mock("next/cache", () => ({ unstable_noStore: vi.fn() }));
 vi.mock("@directus/sdk", () => ({
+  isDirectusError: (error: unknown) =>
+    Boolean(error && typeof error === "object" && "errors" in error),
   readItems: (collection: string, query: unknown) => ({ operation: "read", collection, query }),
   createItem: (collection: string, item: unknown) => ({ operation: "create", collection, item }),
   withToken: (_token: string, command: unknown) => command

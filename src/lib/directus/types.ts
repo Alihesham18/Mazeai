@@ -72,7 +72,7 @@ export interface DirectusScholarshipRule {
 export interface DirectusScholarshipExamAttempt {
   id: string;
   user: string | DirectusWebsiteUser;
-  training_program: string | Pick<DirectusTrainingProgram, "id" | "slug" | "title">;
+  training_program: string | Pick<DirectusTrainingProgram, "id" | "slug" | "title" | "currency">;
   score: number;
   total_questions: number;
   percentage: number;
@@ -102,6 +102,7 @@ export interface DirectusDiscountCode {
   applies_to: DiscountAppliesTo;
   is_active: boolean;
   stackable: boolean;
+  reserved_for_user: string | DirectusWebsiteUser | null;
   date_created?: string | null;
   date_updated?: string | null;
 }
@@ -122,6 +123,36 @@ export interface DirectusDiscountRedemption {
   date_updated?: string | null;
 }
 
+export interface DirectusEvent {
+  id: number;
+  slug: string;
+  title: string;
+  short_description: string | null;
+  description: string | null;
+  event_date: string;
+  end_date: string | null;
+  location: string | null;
+  format: string | null;
+  image_url: string | null;
+  registration_open: boolean;
+  capacity: number | null;
+  status: string;
+}
+
+export type EventRegistrationStatus = "registered" | "attended" | "cancelled";
+
+export interface DirectusEventRegistration {
+  id: string;
+  date_created: string | null;
+  date_updated: string | null;
+  user: string | DirectusWebsiteUser;
+  event: number | DirectusEvent;
+  phone_country_code: string | null;
+  phone_number: string | null;
+  message: string | null;
+  status: EventRegistrationStatus;
+}
+
 export interface DirectusSchema {
   directus_users: DirectusWebsiteUser[];
   user_profiles: DirectusUserProfile[];
@@ -131,6 +162,8 @@ export interface DirectusSchema {
   scholarship_exam_attempts: DirectusScholarshipExamAttempt[];
   discount_codes: DirectusDiscountCode[];
   discount_redemptions: DirectusDiscountRedemption[];
+  event: DirectusEvent[];
+  event_registrations: DirectusEventRegistration[];
 }
 
 export interface DirectusSession {

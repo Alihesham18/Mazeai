@@ -66,8 +66,34 @@ against a server-only answer key, applies active `scholarship_rules`, and saves
 the trusted result to `scholarship_exam_attempts`. Creation uses the dedicated,
 server-only `DIRECTUS_SCHOLARSHIP_TOKEN`; Website Users retain read-only access
 to their own attempts. Eligible discount codes use cryptographic randomness and
-the database uniqueness constraint. My Account reads saved attempts through the
-current Website User session.
+the database uniqueness constraint. The persisted attempt code is synchronized
+to `discount_codes` with the server-only `DIRECTUS_DISCOUNT_SERVICE_TOKEN`, is
+reserved to the authenticated Directus user, and is limited to one training
+redemption. Existing eligible attempts are backfilled from their stored code;
+visiting the account page never generates a replacement code. No scholarship
+expiry setting exists in the current project, so synchronized codes have a null
+`expires_at` value. My Account reads saved attempts through the current Website
+User session.
 
-Event registrations are not persisted by the current website, so that account
-section keeps an honest empty state.
+Per-code in-process locks and re-reads make synchronization idempotent within an
+application instance. The unique index on `discount_codes.code` resolves races
+between instances without claiming an unrelated code. Absolute transactional
+coupling between attempt creation and discount creation would require a Directus
+transaction/flow or an additional database constraint; the UI therefore marks a
+code ready only after synchronization succeeds and retries historic synchronization
+from the persisted attempt.
+
+Event registration creates, duplicate checks, and account-history reads use the
+authenticated Website User session. Directus continues to assign and enforce
+ownership with `$CURRENT_USER`; the browser never supplies a user ID. The
+server-only `DIRECTUS_EVENT_SERVICE_TOKEN` is used only to count all active
+(`registered` or `attended`) registrations for an event when enforcing a finite
+capacity. Cancelled registrations do not consume capacity, and a null capacity
+is unlimited. The token must never use a `NEXT_PUBLIC_` prefix or be imported by
+client modules.
+
+Capacity is re-counted immediately before creation, but count-then-create is not
+atomic across simultaneous requests and can still overbook under concurrency.
+The implementation keeps the global count separate so it can later be replaced
+by a transactional Directus Flow or database-backed transaction if strict
+capacity enforcement becomes necessary.

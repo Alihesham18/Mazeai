@@ -1,19 +1,12 @@
-import {
-  createPageMetadata,
-  StandalonePage,
-  type StandalonePageConfig
-} from "@/components/pages/StandalonePage";
+import EventPage, { generateMetadata as generateEventMetadata } from "../[eventSlug]/page";
 import type { Locale } from "@/i18n/routing";
 
-const page: StandalonePageConfig = {
-  path: "events/research-prototype-clinic",
-  titleKey: "pages.placeholder.title",
-  descriptionKey: "pages.placeholder.description",
-  sections: ["Event overview", "Agenda", "Who should attend", "Registration"]
-};
+const eventSlug = "research-prototype-clinic";
 
-export const generateMetadata = createPageMetadata(page);
+export function generateMetadata({ params }: { params: { locale: Locale } }) {
+  return generateEventMetadata({ params: { ...params, eventSlug } });
+}
 
 export default function ResearchPrototypeClinicPage({ params }: { params: { locale: Locale } }) {
-  return <StandalonePage locale={params.locale} page={page} />;
+  return EventPage({ params: { ...params, eventSlug } });
 }

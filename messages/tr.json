@@ -336,6 +336,15 @@
       "description": "Bu sayfa yararlı bir başlangıç yapısına sahiptir ve sonraki fazda genişletilecektir."
     }
   },
+  "events": {
+    "event": "Etkinlik", "register": "Kayıt Ol", "registerForEvent": "Etkinliğe kayıt ol",
+    "registrationSuccessful": "Kayıt başarılı.", "alreadyRegistered": "Bu etkinliğe zaten kayıtlısınız.",
+    "registrationClosed": "Kayıtlar kapalı.", "eventFull": "Etkinlik dolu.",
+    "unableToLoadEvents": "Etkinlikler yüklenemedi. Lütfen tekrar deneyin.", "noEvents": "Henüz yayımlanmış etkinlik yok.",
+    "locationPending": "Konum daha sonra duyurulacak", "capacity": "Kapasite", "phone": "Telefon", "message": "Mesaj",
+    "invalidPhone": "Geçerli bir telefon numarası girin.", "registrationFailed": "Etkinlik kaydı tamamlanamadı. Lütfen tekrar deneyin.",
+    "sessionExpired": "Bu etkinliğe kayıt olmak için giriş yapın."
+  },
   "auth": {
     "accountEyebrow": "Hesap",
     "welcomeBack": "Tekrar hoş geldiniz",
@@ -416,6 +425,9 @@
     "trainingApplicationsSupport": "Gönderdiğiniz eğitim başvuruları ve güncel durumları.",
     "myTrainingsSupport": "Kayıtlı olduğunuz eğitim programları.",
     "eventRegistrationsSupport": "Kayıt olduğunuz etkinlikler.",
+    "eventRegistrationsUnavailable": "Kayıtlar yüklenemedi. Lütfen tekrar deneyin.",
+    "event": "Etkinlik", "eventDate": "Etkinlik tarihi", "registeredOn": "Kayıt tarihi", "eventLocationFormat": "Konum / Format",
+    "eventRegistrationStatus": { "registered": "Kayıtlı", "attended": "Katıldı", "cancelled": "İptal edildi" },
     "copyCode": "Kodu Kopyala",
     "copied": "Kopyalandı!",
     "takeAgain": "Tekrar Gir",
@@ -471,6 +483,13 @@
     "scholarshipPercentage": "Yüzde",
     "scholarshipAward": "Burs İndirimi",
     "discountCode": "İndirim Kodu",
+    "scholarshipDiscountReady": "Burs indirimi hazır",
+    "scholarshipDiscountUnavailable": "Burs sonucunuz kaydedildi ancak indirim henüz kullanılamıyor. Lütfen tekrar deneyin.",
+    "discountCodeCreated": "Burs indirim kodunuz oluşturuldu.",
+    "discountAlreadyIssued": "Bu burs indirimi daha önce oluşturuldu ve aynı kod yeniden kullanıldı.",
+    "unableCreateScholarshipDiscount": "Burs indirimi oluşturulamadı.",
+    "unableSynchronizeScholarshipDiscount": "Burs indirimi eşitlenemedi.",
+    "redeemScholarshipFromProfile": "Bu kodu profilinizden kullanın",
     "scholarshipStatus": {
       "eligible": "Uygun",
       "notEligible": "Uygun Değil",
@@ -512,6 +531,7 @@
         "REDEMPTION_LIMIT_REACHED": "Bu indirim kodu kullanım sınırına ulaştı.",
         "USER_REDEMPTION_LIMIT_REACHED": "Bu kod için izin verilen en fazla kullanım sayısına zaten ulaştınız.",
         "UNAUTHENTICATED": "İndirim kodu kullanmak için lütfen giriş yapın.",
+        "SCHOLARSHIP_CODE_NOT_OWNED": "Bu burs indirimi başka bir hesaba ait.",
         "SERVER_ERROR": "İndirim kodu kullanılamadı. Lütfen tekrar deneyin."
       }
     },

@@ -11,6 +11,7 @@ import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import type { AuthProfile } from "@/lib/auth/types";
 import { PhoneInput } from "@/components/forms/PhoneInput";
+import { CopyDiscountCode } from "@/components/account/CopyDiscountCode";
 import { submitScholarshipExamAction } from "@/lib/scholarship/actions";
 import type { ScholarshipSubmissionState } from "@/lib/scholarship/types";
 import styles from "./ScholarshipExam.module.css";
@@ -116,10 +117,25 @@ export function ScholarshipExam({ locale, program, exam, user }: ScholarshipExam
               {result.scholarshipPercentage}%
             </span>
           ) : null}
-          {result.discountCode ? (
-            <code className={styles.discountCode}>
-              {localize(scholarshipExamCopy.discountCode, locale)}: {result.discountCode}
-            </code>
+          {result.discountReady && result.discountCode ? (
+            <div className={styles.resultCode}>
+              <span>{localize(scholarshipExamCopy.scholarshipDiscountReady, locale)}</span>
+              <code className={styles.discountCode}>
+                {localize(scholarshipExamCopy.discountCode, locale)}: {result.discountCode}
+              </code>
+              <CopyDiscountCode
+                code={result.discountCode}
+                copyLabel={localize(scholarshipExamCopy.copyCode, locale)}
+                copiedLabel={localize(scholarshipExamCopy.copied, locale)}
+              />
+              <Link href={localizedPath(locale, "/account/profile")}>
+                {localize(scholarshipExamCopy.redeemFromProfile, locale)}
+              </Link>
+            </div>
+          ) : result.status === "eligible" ? (
+            <span className={styles.resultWarning} role="alert">
+              {localize(scholarshipExamCopy.scholarshipDiscountUnavailable, locale)}
+            </span>
           ) : null}
           <span>{localize(scholarshipExamCopy.resultMessage, locale)}</span>
           <em>{localize(scholarshipExamCopy.resultSaved, locale)}</em>

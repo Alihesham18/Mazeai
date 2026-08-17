@@ -336,6 +336,15 @@
       "description": "This page has useful starter structure and will be expanded in a later phase."
     }
   },
+  "events": {
+    "event": "Event", "register": "Register", "registerForEvent": "Register for event",
+    "registrationSuccessful": "Registration successful.", "alreadyRegistered": "You are already registered for this event.",
+    "registrationClosed": "Registration is closed.", "eventFull": "Event is full.",
+    "unableToLoadEvents": "Unable to load events. Please try again.", "noEvents": "No published events are available yet.",
+    "locationPending": "Location to be announced", "capacity": "Capacity", "phone": "Telephone", "message": "Message",
+    "invalidPhone": "Enter a valid telephone number.", "registrationFailed": "Unable to complete event registration. Please try again.",
+    "sessionExpired": "Please log in to register for this event."
+  },
   "auth": {
     "accountEyebrow": "Account",
     "welcomeBack": "Welcome back",
@@ -416,6 +425,9 @@
     "trainingApplicationsSupport": "Your submitted training applications and current statuses.",
     "myTrainingsSupport": "Training programs you are enrolled in.",
     "eventRegistrationsSupport": "Events you have registered for.",
+    "eventRegistrationsUnavailable": "Unable to load registrations. Please try again.",
+    "event": "Event", "eventDate": "Event date", "registeredOn": "Registered on", "eventLocationFormat": "Location / Format",
+    "eventRegistrationStatus": { "registered": "Registered", "attended": "Attended", "cancelled": "Cancelled" },
     "copyCode": "Copy Code",
     "copied": "Copied!",
     "takeAgain": "Take Again",
@@ -471,6 +483,13 @@
     "scholarshipPercentage": "Percentage",
     "scholarshipAward": "Scholarship Award",
     "discountCode": "Discount Code",
+    "scholarshipDiscountReady": "Scholarship discount ready",
+    "scholarshipDiscountUnavailable": "Your scholarship result was saved, but the discount is not available yet. Please try again.",
+    "discountCodeCreated": "Your scholarship discount code was created.",
+    "discountAlreadyIssued": "This scholarship discount was already issued and the same code was reused.",
+    "unableCreateScholarshipDiscount": "Unable to create the scholarship discount.",
+    "unableSynchronizeScholarshipDiscount": "Unable to synchronize the scholarship discount.",
+    "redeemScholarshipFromProfile": "Redeem this code from your profile",
     "scholarshipStatus": {
       "eligible": "Eligible",
       "notEligible": "Not Eligible",
@@ -512,6 +531,7 @@
         "REDEMPTION_LIMIT_REACHED": "This discount code has reached its redemption limit.",
         "USER_REDEMPTION_LIMIT_REACHED": "You have already reached the maximum number of redemptions allowed for this code.",
         "UNAUTHENTICATED": "Please sign in to redeem a discount code.",
+        "SCHOLARSHIP_CODE_NOT_OWNED": "This scholarship discount belongs to another account.",
         "SERVER_ERROR": "The discount code could not be redeemed. Please try again."
       }
     },

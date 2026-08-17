@@ -51,7 +51,8 @@ export default async function ScholarshipExamsPage({ params }: { params: { local
           {attempts.map((attempt) => {
             const eligible = attempt.status === "eligible";
             const showAward = eligible && attempt.scholarshipPercentage !== null;
-            const showCode = eligible && Boolean(attempt.discountCode?.trim());
+            const showCode =
+              eligible && attempt.discountReady && Boolean(attempt.discountCode?.trim());
             const date = formatAccountDate(attempt.dateCreated, params.locale);
             const canRetake = attempt.program && getScholarshipExam(attempt.program.slug);
 
@@ -126,6 +127,9 @@ export default async function ScholarshipExamsPage({ params }: { params: { local
                       ) : null}
                       {showCode && attempt.discountCode ? (
                         <div className={styles.codeBlock}>
+                          <strong className={styles.statusPositive}>
+                            {t("scholarshipDiscountReady")}
+                          </strong>
                           <span>{t("discountCode")}</span>
                           <div className={styles.codeRow}>
                             <code dir="ltr">{attempt.discountCode}</code>
@@ -135,7 +139,17 @@ export default async function ScholarshipExamsPage({ params }: { params: { local
                               copiedLabel={t("copied")}
                             />
                           </div>
+                          <Link
+                            className={styles.summaryLink}
+                            href={localizedPath(params.locale, "/account/profile")}
+                          >
+                            {t("redeemScholarshipFromProfile")}
+                          </Link>
                         </div>
+                      ) : eligible ? (
+                        <p className={styles.summaryError} role="alert">
+                          {t("scholarshipDiscountUnavailable")}
+                        </p>
                       ) : null}
                     </div>
                   ) : null}

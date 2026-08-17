@@ -53,6 +53,26 @@ export const scholarshipExamCopy = {
   percentage: text("Percentage", "Yüzde", "النسبة المئوية", "درصد"),
   scholarshipAward: text("Scholarship Award", "Burs İndirimi", "قيمة المنحة", "میزان بورسیه"),
   discountCode: text("Discount Code", "İndirim Kodu", "رمز الخصم", "کد تخفیف"),
+  scholarshipDiscountReady: text(
+    "Scholarship discount ready",
+    "Burs indirimi hazır",
+    "خصم المنحة جاهز",
+    "تخفیف بورسیه آماده است"
+  ),
+  scholarshipDiscountUnavailable: text(
+    "Your result was saved, but the scholarship discount is not available yet. Please try again from My Account.",
+    "Sonucunuz kaydedildi ancak burs indirimi henüz kullanılamıyor. Lütfen Hesabım bölümünden tekrar deneyin.",
+    "تم حفظ نتيجتك، لكن خصم المنحة غير متاح بعد. يرجى المحاولة مجددًا من حسابي.",
+    "نتیجه شما ذخیره شد، اما تخفیف بورسیه هنوز در دسترس نیست. لطفاً از حساب من دوباره تلاش کنید."
+  ),
+  redeemFromProfile: text(
+    "Redeem this code from your profile",
+    "Bu kodu profilinizden kullanın",
+    "استبدل هذا الرمز من ملفك الشخصي",
+    "این کد را از نمایه خود فعال کنید"
+  ),
+  copyCode: text("Copy Code", "Kodu Kopyala", "نسخ الرمز", "کپی کد"),
+  copied: text("Copied!", "Kopyalandı!", "تم النسخ!", "کپی شد!"),
   resultSaved: text(
     "Your result has been saved to My Account.",
     "Sonucunuz Hesabım bölümüne kaydedildi.",
