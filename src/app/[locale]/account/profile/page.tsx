@@ -2,12 +2,14 @@ import { KeyRound, UserRound } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ProfileForm } from "@/components/auth/AuthForms";
 import { ProfileSummary } from "@/components/account/ProfileSummary";
+import { Discounts } from "@/components/account/Discounts";
 import { Button } from "@/components/ui/Button";
 import type { Locale } from "@/i18n/routing";
 import { requireAccountUser } from "@/lib/auth/account";
 import { withDirectusProfilePhone } from "@/lib/auth/user";
 import { ensureUserAccountNumber } from "@/lib/directus/account-numbers";
 import { getCurrentUserDirectusProfile } from "@/lib/directus/profile";
+import { getCurrentUserDiscounts } from "@/lib/directus/discounts";
 import { localizedPath } from "@/lib/utilities/localize";
 import styles from "./page.module.css";
 
@@ -15,8 +17,9 @@ export default async function AccountProfilePage({ params }: { params: { locale:
   setRequestLocale(params.locale);
   const currentUser = await requireAccountUser(params.locale, "/account/profile");
   const provisionedAccount = await ensureUserAccountNumber(currentUser.id);
-  const [directusProfile, t] = await Promise.all([
+  const [directusProfile, discountsResult, t] = await Promise.all([
     getCurrentUserDirectusProfile(),
+    getCurrentUserDiscounts(currentUser.id),
     getTranslations({ locale: params.locale, namespace: "auth" })
   ]);
   const profile = withDirectusProfilePhone(
@@ -74,6 +77,12 @@ export default async function AccountProfilePage({ params }: { params: { locale:
           {t("changePassword")}
         </Button>
       </section>
+
+      <Discounts
+        locale={params.locale}
+        discounts={discountsResult.ok ? discountsResult.data : []}
+        unavailable={!discountsResult.ok}
+      />
     </>
   );
 }

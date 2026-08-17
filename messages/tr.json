@@ -446,6 +446,42 @@
     },
     "noEventRegistrations": "Henüz etkinlik kaydı yok.",
     "noEventRegistrationsSupport": "Yaklaşan etkinliklerimizi keşfedin ve kayıt olun.",
+    "discounts": {
+      "title": "İndirimler ve Teklifler",
+      "support": "Bir promosyon kodunu kullanın ve hesabınıza kaydedin.",
+      "inputLabel": "İndirim kodu",
+      "placeholder": "İndirim kodunu girin",
+      "redeem": "Kodu Kullan",
+      "redeeming": "Kullanılıyor...",
+      "off": "İNDİRİM",
+      "myDiscounts": "İndirimlerim",
+      "emptyTitle": "Henüz indirim yok",
+      "emptySupport": "Hesabınıza uygun bir indirim eklemek için promosyon kodu kullanın.",
+      "unavailable": "İndirimleriniz yüklenemedi. Lütfen tekrar deneyin.",
+      "typeLabel": "İndirim türü",
+      "appliesToLabel": "Geçerli olduğu alan",
+      "expiresLabel": "Son kullanım",
+      "types": { "percentage": "Yüzde", "fixed": "Sabit Tutar" },
+      "appliesTo": {
+        "all": "Tüm Uygun Hizmetler",
+        "training": "Eğitim Programları",
+        "scholarship_exam": "Burs Sınavları",
+        "event": "Etkinlikler",
+        "service": "Hizmetler"
+      },
+      "statuses": { "available": "Kullanılabilir", "used": "Kullanıldı", "revoked": "İptal Edildi", "expired": "Süresi Doldu" },
+      "messages": {
+        "REDEMPTION_SUCCESS": "İndirim kodu hesabınıza eklendi.",
+        "INVALID_CODE": "Bu indirim kodu mevcut değil.",
+        "CODE_INACTIVE": "Bu indirim kodu şu anda kullanılamıyor.",
+        "CODE_NOT_STARTED": "Bu indirim kodu henüz aktif değil.",
+        "CODE_EXPIRED": "Bu indirim kodunun süresi dolmuş.",
+        "REDEMPTION_LIMIT_REACHED": "Bu indirim kodu kullanım sınırına ulaştı.",
+        "USER_REDEMPTION_LIMIT_REACHED": "Bu kod için izin verilen en fazla kullanım sayısına zaten ulaştınız.",
+        "UNAUTHENTICATED": "İndirim kodu kullanmak için lütfen giriş yapın.",
+        "SERVER_ERROR": "İndirim kodu kullanılamadı. Lütfen tekrar deneyin."
+      }
+    },
     "messages": {
       "accountExists": "Bu e-posta için bir hesap zaten mevcut olabilir. Giriş yapmayı veya parolanızı sıfırlamayı deneyin.",
       "backendUnavailable": "Kimlik doğrulama hizmetine bağlanılamıyor. Lütfen tekrar deneyin.",

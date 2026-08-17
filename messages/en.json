@@ -446,6 +446,42 @@
     },
     "noEventRegistrations": "No event registrations yet.",
     "noEventRegistrationsSupport": "Explore our upcoming events and register.",
+    "discounts": {
+      "title": "Discounts & Offers",
+      "support": "Redeem a promotional code and save it to your account.",
+      "inputLabel": "Discount code",
+      "placeholder": "Enter discount code",
+      "redeem": "Redeem Code",
+      "redeeming": "Redeeming...",
+      "off": "OFF",
+      "myDiscounts": "My Discounts",
+      "emptyTitle": "No discounts yet",
+      "emptySupport": "Redeem a promotional code to add an eligible discount to your account.",
+      "unavailable": "Your discounts could not be loaded. Please try again.",
+      "typeLabel": "Discount type",
+      "appliesToLabel": "Applies to",
+      "expiresLabel": "Expires",
+      "types": { "percentage": "Percentage", "fixed": "Fixed Amount" },
+      "appliesTo": {
+        "all": "All Eligible Services",
+        "training": "Training Programs",
+        "scholarship_exam": "Scholarship Exams",
+        "event": "Events",
+        "service": "Services"
+      },
+      "statuses": { "available": "Available", "used": "Used", "revoked": "Revoked", "expired": "Expired" },
+      "messages": {
+        "REDEMPTION_SUCCESS": "The discount code was added to your account.",
+        "INVALID_CODE": "This discount code does not exist.",
+        "CODE_INACTIVE": "This discount code is currently unavailable.",
+        "CODE_NOT_STARTED": "This discount code is not active yet.",
+        "CODE_EXPIRED": "This discount code has expired.",
+        "REDEMPTION_LIMIT_REACHED": "This discount code has reached its redemption limit.",
+        "USER_REDEMPTION_LIMIT_REACHED": "You have already reached the maximum number of redemptions allowed for this code.",
+        "UNAUTHENTICATED": "Please sign in to redeem a discount code.",
+        "SERVER_ERROR": "The discount code could not be redeemed. Please try again."
+      }
+    },
     "messages": {
       "accountExists": "An account may already exist for this email. Try logging in or resetting your password.",
       "backendUnavailable": "Unable to connect to the authentication service. Please try again.",

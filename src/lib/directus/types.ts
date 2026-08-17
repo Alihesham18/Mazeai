@@ -82,6 +82,45 @@ export interface DirectusScholarshipExamAttempt {
   date_updated?: string | null;
 }
 
+export type DiscountType = "percentage" | "fixed";
+export type DiscountAppliesTo = "all" | "training" | "scholarship_exam" | "event" | "service";
+export type DiscountRedemptionStatus = "available" | "used" | "revoked";
+
+export interface DirectusDiscountCode {
+  id: string;
+  code: string;
+  title: string | null;
+  description: string | null;
+  discount_type: DiscountType;
+  discount_value: number | string;
+  currency: string | null;
+  starts_at: string | null;
+  expires_at: string | null;
+  max_redemptions: number | null;
+  max_redemptions_per_user: number | null;
+  applies_to: DiscountAppliesTo;
+  is_active: boolean;
+  stackable: boolean;
+  date_created?: string | null;
+  date_updated?: string | null;
+}
+
+export interface DirectusDiscountRedemption {
+  id: string;
+  user: string | DirectusWebsiteUser;
+  discount_code: string | DirectusDiscountCode;
+  status: DiscountRedemptionStatus;
+  used_at: string | null;
+  used_for_type: Exclude<DiscountAppliesTo, "all"> | null;
+  used_for_id: string | null;
+  original_amount: number | string | null;
+  discount_amount: number | string | null;
+  final_amount: number | string | null;
+  currency: string | null;
+  date_created?: string | null;
+  date_updated?: string | null;
+}
+
 export interface DirectusSchema {
   directus_users: DirectusWebsiteUser[];
   user_profiles: DirectusUserProfile[];
@@ -89,6 +128,8 @@ export interface DirectusSchema {
   training_applications: DirectusTrainingApplication[];
   scholarship_rules: DirectusScholarshipRule[];
   scholarship_exam_attempts: DirectusScholarshipExamAttempt[];
+  discount_codes: DirectusDiscountCode[];
+  discount_redemptions: DirectusDiscountRedemption[];
 }
 
 export interface DirectusSession {

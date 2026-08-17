@@ -1,11 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 
-const { requireAccountUser, ensureUserAccountNumber, getCurrentUserDirectusProfile } = vi.hoisted(
+const { requireAccountUser, ensureUserAccountNumber, getCurrentUserDirectusProfile, getCurrentUserDiscounts } = vi.hoisted(
   () => ({
     requireAccountUser: vi.fn(),
     ensureUserAccountNumber: vi.fn(),
-    getCurrentUserDirectusProfile: vi.fn()
+    getCurrentUserDirectusProfile: vi.fn(),
+    getCurrentUserDiscounts: vi.fn()
   })
 );
 
@@ -17,11 +18,15 @@ vi.mock("next-intl/server", () => ({
 vi.mock("@/lib/auth/account", () => ({ requireAccountUser }));
 vi.mock("@/lib/directus/account-numbers", () => ({ ensureUserAccountNumber }));
 vi.mock("@/lib/directus/profile", () => ({ getCurrentUserDirectusProfile }));
+vi.mock("@/lib/directus/discounts", () => ({ getCurrentUserDiscounts }));
 vi.mock("@/lib/auth/user", () => ({
   withDirectusProfilePhone: (profile: unknown) => profile
 }));
 vi.mock("@/components/auth/AuthForms", () => ({
   ProfileForm: () => <div data-testid="profile-form" />
+}));
+vi.mock("@/components/account/Discounts", () => ({
+  Discounts: () => <div data-testid="discounts" />
 }));
 
 import AccountProfilePage from "@/app/[locale]/account/profile/page";
@@ -50,6 +55,7 @@ describe("AccountProfilePage", () => {
         phone_number: "5525073889"
       }
     });
+    getCurrentUserDiscounts.mockResolvedValue({ ok: true, data: [] });
 
     const view = await AccountProfilePage({ params: { locale: "en" } });
     render(view);
@@ -59,5 +65,7 @@ describe("AccountProfilePage", () => {
     expect(screen.getByText("Ali Hesham")).toBeInTheDocument();
     expect(screen.getByText("SMA-2026-000001")).toBeInTheDocument();
     expect(screen.getByTestId("profile-form")).toBeInTheDocument();
+    expect(getCurrentUserDiscounts).toHaveBeenCalledWith("user-1");
+    expect(screen.getByTestId("discounts")).toBeInTheDocument();
   });
 });

@@ -446,6 +446,42 @@
     },
     "noEventRegistrations": "لا توجد تسجيلات فعاليات بعد.",
     "noEventRegistrationsSupport": "استكشف فعالياتنا القادمة وسجل فيها.",
+    "discounts": {
+      "title": "الخصومات والعروض",
+      "support": "استبدل رمزًا ترويجيًا واحفظه في حسابك.",
+      "inputLabel": "رمز الخصم",
+      "placeholder": "أدخل رمز الخصم",
+      "redeem": "استبدال الرمز",
+      "redeeming": "جارٍ الاستبدال...",
+      "off": "خصم",
+      "myDiscounts": "خصوماتي",
+      "emptyTitle": "لا توجد خصومات بعد",
+      "emptySupport": "استبدل رمزًا ترويجيًا لإضافة خصم مؤهل إلى حسابك.",
+      "unavailable": "تعذر تحميل خصوماتك. يرجى المحاولة مرة أخرى.",
+      "typeLabel": "نوع الخصم",
+      "appliesToLabel": "ينطبق على",
+      "expiresLabel": "ينتهي في",
+      "types": { "percentage": "نسبة مئوية", "fixed": "مبلغ ثابت" },
+      "appliesTo": {
+        "all": "جميع الخدمات المؤهلة",
+        "training": "برامج التدريب",
+        "scholarship_exam": "اختبارات المنح",
+        "event": "الفعاليات",
+        "service": "الخدمات"
+      },
+      "statuses": { "available": "متاح", "used": "مستخدم", "revoked": "ملغى", "expired": "منتهي" },
+      "messages": {
+        "REDEMPTION_SUCCESS": "تمت إضافة رمز الخصم إلى حسابك.",
+        "INVALID_CODE": "رمز الخصم هذا غير موجود.",
+        "CODE_INACTIVE": "رمز الخصم هذا غير متاح حاليًا.",
+        "CODE_NOT_STARTED": "رمز الخصم هذا غير نشط بعد.",
+        "CODE_EXPIRED": "انتهت صلاحية رمز الخصم هذا.",
+        "REDEMPTION_LIMIT_REACHED": "وصل رمز الخصم هذا إلى حد الاستبدال.",
+        "USER_REDEMPTION_LIMIT_REACHED": "لقد وصلت بالفعل إلى الحد الأقصى المسموح به لاستبدال هذا الرمز.",
+        "UNAUTHENTICATED": "يرجى تسجيل الدخول لاستبدال رمز الخصم.",
+        "SERVER_ERROR": "تعذر استبدال رمز الخصم. يرجى المحاولة مرة أخرى."
+      }
+    },
     "messages": {
       "accountExists": "قد يكون هناك حساب بهذا البريد. جرب تسجيل الدخول أو إعادة تعيين كلمة المرور.",
       "backendUnavailable": "تعذر الاتصال بخدمة المصادقة. حاول مرة أخرى.",
