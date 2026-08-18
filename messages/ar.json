@@ -358,6 +358,13 @@
     "invalidPhone": "أدخل رقم هاتف صالحًا.", "registrationFailed": "تعذر إكمال التسجيل. يرجى المحاولة مرة أخرى.",
     "sessionExpired": "يرجى تسجيل الدخول للتسجيل في هذه الفعالية."
   },
+  "caseStudies": {
+    "eyebrow": "أعمالنا", "collectionEyebrow": "مجموعة دراسات الحالة", "collectionTitle": "استكشف دراسات الحالة",
+    "featured": "مميزة", "client": "العميل", "technologies": "التقنيات", "readCaseStudy": "اقرأ {title}",
+    "back": "العودة إلى دراسات الحالة", "challenge": "التحدي", "solution": "الحل", "results": "النتائج", "overview": "نظرة عامة",
+    "empty": "لا توجد دراسات حالة منشورة حتى الآن.", "unableToLoad": "تعذر تحميل دراسات الحالة. يرجى المحاولة مرة أخرى.",
+    "detailUnavailableTitle": "دراسة الحالة غير متاحة", "detailUnavailable": "تعذر تحميل دراسة الحالة هذه. يرجى المحاولة مرة أخرى."
+  },
   "auth": {
     "accountEyebrow": "الحساب",
     "welcomeBack": "مرحباً بعودتك",

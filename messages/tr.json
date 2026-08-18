@@ -358,6 +358,13 @@
     "invalidPhone": "Geçerli bir telefon numarası girin.", "registrationFailed": "Etkinlik kaydı tamamlanamadı. Lütfen tekrar deneyin.",
     "sessionExpired": "Bu etkinliğe kayıt olmak için giriş yapın."
   },
+  "caseStudies": {
+    "eyebrow": "Çalışmalarımız", "collectionEyebrow": "Vaka çalışması koleksiyonu", "collectionTitle": "Vaka çalışmalarımızı keşfedin",
+    "featured": "Öne çıkan", "client": "Müşteri", "technologies": "Teknolojiler", "readCaseStudy": "{title} çalışmasını okuyun",
+    "back": "Vaka çalışmalarına dön", "challenge": "Zorluk", "solution": "Çözüm", "results": "Sonuçlar", "overview": "Genel bakış",
+    "empty": "Henüz yayınlanmış bir vaka çalışması bulunmuyor.", "unableToLoad": "Vaka çalışmaları yüklenemedi. Lütfen tekrar deneyin.",
+    "detailUnavailableTitle": "Vaka çalışması kullanılamıyor", "detailUnavailable": "Bu vaka çalışması yüklenemedi. Lütfen tekrar deneyin."
+  },
   "auth": {
     "accountEyebrow": "Hesap",
     "welcomeBack": "Tekrar hoş geldiniz",

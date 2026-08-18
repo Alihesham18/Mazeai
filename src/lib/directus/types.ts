@@ -153,6 +153,32 @@ export interface DirectusEventRegistration {
   status: EventRegistrationStatus;
 }
 
+export interface DirectusCaseStudyTranslation {
+  id: string;
+  case_study?: string | DirectusCaseStudy;
+  language: string;
+  title: string | null;
+  short_description: string | null;
+  challenge: string | null;
+  solution: string | null;
+  results: string | null;
+  content: string | null;
+}
+
+export interface DirectusCaseStudy {
+  id: string;
+  slug: string;
+  status: string;
+  featured: boolean | null;
+  published_at: string | null;
+  cover_image: string | { id: string } | null;
+  industry: string | null;
+  client: string | null;
+  sort: number | null;
+  technologies: unknown;
+  translations: DirectusCaseStudyTranslation[] | null;
+}
+
 export interface DirectusSchema {
   directus_users: DirectusWebsiteUser[];
   user_profiles: DirectusUserProfile[];
@@ -164,6 +190,8 @@ export interface DirectusSchema {
   discount_redemptions: DirectusDiscountRedemption[];
   event: DirectusEvent[];
   event_registrations: DirectusEventRegistration[];
+  case_studies: DirectusCaseStudy[];
+  case_study_translations: DirectusCaseStudyTranslation[];
 }
 
 export interface DirectusSession {

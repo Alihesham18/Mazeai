@@ -358,6 +358,13 @@
     "invalidPhone": "یک شماره تلفن معتبر وارد کنید.", "registrationFailed": "ثبت‌نام رویداد انجام نشد. دوباره تلاش کنید.",
     "sessionExpired": "برای ثبت‌نام در این رویداد وارد شوید."
   },
+  "caseStudies": {
+    "eyebrow": "فعالیت‌های ما", "collectionEyebrow": "مجموعه مطالعات موردی", "collectionTitle": "مطالعات موردی ما را ببینید",
+    "featured": "برگزیده", "client": "مشتری", "technologies": "فناوری‌ها", "readCaseStudy": "مطالعه {title}",
+    "back": "بازگشت به مطالعات موردی", "challenge": "چالش", "solution": "راه‌حل", "results": "نتایج", "overview": "مرور کلی",
+    "empty": "هنوز مطالعه موردی منتشرشده‌ای وجود ندارد.", "unableToLoad": "مطالعات موردی بارگذاری نشد. لطفاً دوباره تلاش کنید.",
+    "detailUnavailableTitle": "مطالعه موردی در دسترس نیست", "detailUnavailable": "این مطالعه موردی بارگذاری نشد. لطفاً دوباره تلاش کنید."
+  },
   "auth": {
     "accountEyebrow": "حساب",
     "welcomeBack": "خوش آمدید",

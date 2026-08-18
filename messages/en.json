@@ -358,6 +358,13 @@
     "invalidPhone": "Enter a valid telephone number.", "registrationFailed": "Unable to complete event registration. Please try again.",
     "sessionExpired": "Please log in to register for this event."
   },
+  "caseStudies": {
+    "eyebrow": "Our work", "collectionEyebrow": "Case study collection", "collectionTitle": "Explore our case studies",
+    "featured": "Featured", "client": "Client", "technologies": "Technologies", "readCaseStudy": "Read {title}",
+    "back": "Back to case studies", "challenge": "Challenge", "solution": "Solution", "results": "Results", "overview": "Overview",
+    "empty": "No published case studies are available yet.", "unableToLoad": "Unable to load case studies. Please try again.",
+    "detailUnavailableTitle": "Case study unavailable", "detailUnavailable": "This case study could not be loaded. Please try again."
+  },
   "auth": {
     "accountEyebrow": "Account",
     "welcomeBack": "Welcome back",

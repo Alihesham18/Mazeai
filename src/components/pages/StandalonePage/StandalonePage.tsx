@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
-import { blogPosts, caseStudies, publications, researchProjects } from "@/data/mock-content";
+import { blogPosts, publications, researchProjects } from "@/data/mock-content";
 import type { Locale } from "@/i18n/routing";
 import { localizedPath, localize } from "@/lib/utilities/localize";
 import type { CardContent, LocalizedText } from "@/types/content";
@@ -174,7 +174,6 @@ const genericDescriptions: Record<Locale, (title: string) => string> = {
 
 function getDirectory(path: string): DirectoryContent | null {
   const directories: Record<string, DirectoryContent> = {
-    "case-studies": { items: caseStudies, basePath: "/case-studies" },
     blog: { items: blogPosts, basePath: "/blog" },
     "research/projects": { items: researchProjects, basePath: "/research/projects" },
     "research/publications": { items: publications, basePath: "/research/publications" }
@@ -185,7 +184,6 @@ function getDirectory(path: string): DirectoryContent | null {
 
 function getDetail(path: string): CardContent | null {
   const collections = [
-    { prefix: "case-studies/", items: caseStudies },
     { prefix: "blog/", items: blogPosts },
     { prefix: "research/projects/", items: researchProjects }
   ];
