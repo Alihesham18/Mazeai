@@ -1,9 +1,8 @@
-import { CalendarDays, Medal, RotateCcw } from "lucide-react";
+import { CalendarDays, Medal } from "lucide-react";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { CopyDiscountCode } from "@/components/account/CopyDiscountCode";
 import { Button } from "@/components/ui/Button";
-import { getScholarshipExam } from "@/data/scholarship-exams";
 import type { Locale } from "@/i18n/routing";
 import { requireAccountUser } from "@/lib/auth/account";
 import { getCurrentUserScholarshipAttempts } from "@/lib/directus/scholarship";
@@ -39,7 +38,9 @@ export default async function ScholarshipExamsPage({ params }: { params: { local
       </div>
 
       {!scholarshipResult.ok ? (
-        <p className={styles.panelMessage}>{t("scholarshipAttemptsUnavailable")}</p>
+        <p className={styles.panelMessage} role="alert">
+          {t("scholarshipAttemptsUnavailable")}
+        </p>
       ) : attempts.length === 0 ? (
         <div className={styles.emptyState}>
           <Medal size={36} aria-hidden="true" />
@@ -54,7 +55,6 @@ export default async function ScholarshipExamsPage({ params }: { params: { local
             const showCode =
               eligible && attempt.discountReady && Boolean(attempt.discountCode?.trim());
             const date = formatAccountDate(attempt.dateCreated, params.locale);
-            const canRetake = attempt.program && getScholarshipExam(attempt.program.slug);
 
             return (
               <li
@@ -102,18 +102,6 @@ export default async function ScholarshipExamsPage({ params }: { params: { local
                         <CalendarDays size={15} aria-hidden="true" />
                         {date}
                       </time>
-                    ) : null}
-                    {canRetake && attempt.program ? (
-                      <Link
-                        className={styles.retakeLink}
-                        href={localizedPath(
-                          params.locale,
-                          `/training/${attempt.program.slug}/scholarship`
-                        )}
-                      >
-                        <RotateCcw size={15} aria-hidden="true" />
-                        {t("takeAgain")}
-                      </Link>
                     ) : null}
                   </div>
 

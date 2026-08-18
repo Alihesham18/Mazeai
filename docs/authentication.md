@@ -75,6 +75,12 @@ expiry setting exists in the current project, so synchronized codes have a null
 `expires_at` value. My Account reads saved attempts through the current Website
 User session.
 
+The answer payload is size-bounded and accepts only exact question-ID/selected-
+option pairs. The server verifies that the Directus program slug matches the
+official exam, requires every official question exactly once, validates option
+bounds, and derives score, question count, percentage, status, award, and code
+without accepting any of those values from the browser.
+
 Per-code in-process locks and re-reads make synchronization idempotent within an
 application instance. The unique index on `discount_codes.code` resolves races
 between instances without claiming an unrelated code. Absolute transactional
@@ -82,6 +88,23 @@ coupling between attempt creation and discount creation would require a Directus
 transaction/flow or an additional database constraint; the UI therefore marks a
 code ready only after synchronization succeeds and retries historic synchronization
 from the persisted attempt.
+
+Scholarship exam submission is limited to one official attempt per authenticated
+user and training program. The existing-attempt query uses the Website User
+session, filters only by `training_program`, and relies on the Directus
+`user = $CURRENT_USER` policy rather than requesting or filtering the hidden
+`user` field. Historic duplicates remain visible; the oldest attempt is used as
+completion evidence. A per-user/per-program in-process lock plus a final re-read
+reduces double submissions within one application instance. Absolute prevention
+across multiple instances requires a database composite unique constraint or a
+transactional Directus Flow; neither is created automatically.
+
+Directus may persist a scholarship attempt while returning a null or partial
+create response when the creating accountability cannot read the response
+projection. The server therefore normalizes the response explicitly and, when
+needed, re-reads the oldest attempt for the training through the Website User
+session and ownership policy. A nullable `discount_code` remains a valid saved
+state; discount reconciliation runs only when a persisted code is available.
 
 Event registration creates, duplicate checks, and account-history reads use the
 authenticated Website User session. Directus continues to assign and enforce

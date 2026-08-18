@@ -3,6 +3,19 @@
     "title": "SynergyMazeAI | AI, Research, and Education Partner",
     "description": "SynergyMazeAI helps organizations develop intelligent solutions, advance research, and prepare people for an AI-driven future."
   },
+  "scholarshipExam": {
+    "completedTitle": "Scholarship Exam Completed",
+    "alreadyCompleted": "You have already completed this scholarship exam.",
+    "viewAttempts": "View Scholarship Attempts",
+    "oneAttemptOnly": "This exam can only be taken once.",
+    "unableVerifyPreviousAttempts": "Unable to verify previous attempts. Please try again.",
+    "authenticationRequired": "Your session has expired. Please log in again.",
+    "unansweredQuestions": "Please answer every question before submitting the exam.",
+    "invalidSubmission": "The exam submission is invalid. Review your answers and try again.",
+    "examUnavailable": "This scholarship exam is currently unavailable.",
+    "submissionFailure": "Exam submission failed. Please try again.",
+    "discountPreparing": "Your scholarship result was saved. Your discount is being prepared."
+  },
   "common": {
     "skip": "Skip to content",
     "learnMore": "Learn more",

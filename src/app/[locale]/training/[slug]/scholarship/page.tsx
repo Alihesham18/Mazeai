@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { ScholarshipExam } from "@/components/training/ScholarshipExam";
 import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exams";
@@ -9,6 +9,8 @@ import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
 import { getCurrentUserProfile, withDirectusProfilePhone } from "@/lib/auth/user";
 import { getCurrentUserDirectusProfile } from "@/lib/directus/profile";
+import { getCurrentUserScholarshipAttemptForProgram } from "@/lib/directus/scholarship";
+import { getPublishedTrainingProgramBySlug } from "@/lib/directus/training";
 
 export function generateStaticParams() {
   return trainingPrograms
@@ -53,10 +55,51 @@ export default async function TrainingScholarshipPage({
   const user = currentUser
     ? withDirectusProfilePhone(currentUser, directusProfile?.ok ? directusProfile.profile : null)
     : null;
+  const t = await getTranslations({ locale: params.locale, namespace: "scholarshipExam" });
+  let existingAttempt = null;
+  let attemptCheckFailed = false;
+
+  if (currentUser) {
+    const programResult = await getPublishedTrainingProgramBySlug(params.slug);
+    if (!programResult.ok || !programResult.data) {
+      attemptCheckFailed = true;
+    } else {
+      const attemptResult = await getCurrentUserScholarshipAttemptForProgram(
+        programResult.data.id,
+        {
+          prepareDiscount: {
+            currency: programResult.data.currency
+          }
+        }
+      );
+      if (attemptResult.ok) existingAttempt = attemptResult.data;
+      else attemptCheckFailed = true;
+    }
+  }
 
   return (
     <Container>
-      <ScholarshipExam locale={params.locale} program={program} exam={exam} user={user} />
+      <ScholarshipExam
+        attemptCheckFailed={attemptCheckFailed}
+        attemptLabels={{
+          completedTitle: t("completedTitle"),
+          alreadyCompleted: t("alreadyCompleted"),
+          viewAttempts: t("viewAttempts"),
+          oneAttemptOnly: t("oneAttemptOnly"),
+          unableVerifyPreviousAttempts: t("unableVerifyPreviousAttempts"),
+          authenticationRequired: t("authenticationRequired"),
+          unansweredQuestions: t("unansweredQuestions"),
+          invalidSubmission: t("invalidSubmission"),
+          examUnavailable: t("examUnavailable"),
+          submissionFailure: t("submissionFailure"),
+          discountPreparing: t("discountPreparing")
+        }}
+        existingAttempt={existingAttempt}
+        locale={params.locale}
+        program={program}
+        exam={exam}
+        user={user}
+      />
     </Container>
   );
 }

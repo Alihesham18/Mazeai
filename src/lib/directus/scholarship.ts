@@ -44,6 +44,17 @@ const accountAttemptFields = [
   { training_program: ["id", "slug", "title", "currency"] }
 ] as const;
 
+const existingAttemptFields = [
+  "id",
+  "score",
+  "total_questions",
+  "percentage",
+  "scholarship_percentage",
+  "discount_code",
+  "status",
+  "date_created"
+] as const;
+
 function scholarshipServiceToken() {
   return process.env.DIRECTUS_SCHOLARSHIP_TOKEN?.trim() || null;
 }
@@ -107,6 +118,175 @@ export interface TrustedScholarshipAttemptInput {
   currency: string | null;
 }
 
+export interface ExistingScholarshipAttempt {
+  id: string;
+  score: number;
+  totalQuestions: number;
+  percentage: number;
+  scholarshipPercentage: number | null;
+  discountCode: string | null;
+  discountReady: boolean;
+  hasHistoricDuplicates: boolean;
+  status: ScholarshipAttemptStatus;
+  dateCreated: string | null;
+}
+
+export async function getCurrentUserScholarshipAttemptForProgram(
+  programId: string,
+  options: {
+    prepareDiscount?: { currency: string | null };
+  } = {}
+): Promise<ScholarshipBackendResult<ExistingScholarshipAttempt | null>> {
+  noStore();
+  const client = createDirectusRestClient();
+  let session;
+  try {
+    session = await getAuthenticatedDirectusSession();
+  } catch (caught) {
+    logDirectusDiagnostic("scholarship-attempts.verify-authentication", caught);
+    return { ok: false, error: "sessionExpired" };
+  }
+  if (!client || !session) return { ok: false, error: "sessionExpired" };
+
+  try {
+    const attempts = await client.request(
+      withToken(
+        session.accessToken,
+        readItems("scholarship_exam_attempts", {
+          fields: existingAttemptFields,
+          filter: { training_program: { _eq: programId } },
+          sort: ["date_created", "id"],
+          limit: 2
+        })
+      )
+    );
+    const attempt = attempts[0];
+    if (!attempt) return { ok: true, data: null };
+
+    const data: ExistingScholarshipAttempt = {
+      id: attempt.id,
+      score: Number(attempt.score),
+      totalQuestions: Number(attempt.total_questions),
+      percentage: Number(attempt.percentage),
+      scholarshipPercentage:
+        attempt.scholarship_percentage === null
+          ? null
+          : Number(attempt.scholarship_percentage),
+      discountCode:
+        typeof attempt.discount_code === "string" && attempt.discount_code.trim()
+          ? attempt.discount_code
+          : null,
+      discountReady: false,
+      hasHistoricDuplicates: attempts.length > 1,
+      status: attempt.status,
+      dateCreated: attempt.date_created
+    };
+
+    const preparation = options.prepareDiscount;
+    const currency = preparation?.currency?.trim().toUpperCase() ?? "";
+    if (
+      preparation &&
+      !data.hasHistoricDuplicates &&
+      data.status === "eligible" &&
+      data.discountCode &&
+      data.scholarshipPercentage !== null &&
+      /^[A-Z]{3}$/.test(currency)
+    ) {
+      try {
+        const currentUser = await getCurrentDirectusUser();
+        if (!currentUser) return { ok: false, error: "sessionExpired" };
+        const synchronized = await ensureScholarshipDiscountCode({
+          code: data.discountCode,
+          userId: currentUser.id,
+          awardPercentage: data.scholarshipPercentage,
+          currency
+        });
+        data.discountReady = synchronized.ok;
+      } catch (caught) {
+        logDirectusDiagnostic("scholarship-attempts.prepare-existing-discount", caught);
+      }
+    }
+
+    return { ok: true, data };
+  } catch (caught) {
+    logDirectusDiagnostic("scholarship-attempts.verify-current-user-program", caught);
+    return {
+      ok: false,
+      error:
+        directusAuthErrorCode(caught) === "sessionExpired"
+          ? "sessionExpired"
+          : "requestFailed"
+    };
+  }
+}
+
+function normalizeCreatedScholarshipAttempt(value: unknown): {
+  attemptId: string;
+  discountCode: string | null;
+} | null {
+  if (!value || typeof value !== "object") return null;
+  const record = value as Record<string, unknown>;
+  if (typeof record.id !== "string" || !record.id.trim()) return null;
+  if (!Object.prototype.hasOwnProperty.call(record, "discount_code")) return null;
+  return {
+    attemptId: record.id,
+    discountCode:
+      typeof record.discount_code === "string" && record.discount_code.trim()
+        ? record.discount_code
+        : null
+  };
+}
+
+async function recoverPersistedScholarshipAttempt(input: {
+  programId: string;
+  userId: string;
+  currency: string;
+}): Promise<{
+  attemptId: string;
+  discountCode: string | null;
+  discountReady: boolean;
+} | null> {
+  const recovered = await getCurrentUserScholarshipAttemptForProgram(input.programId);
+  if (!recovered.ok || !recovered.data) return null;
+  const { discountCode, hasHistoricDuplicates, scholarshipPercentage, status } =
+    recovered.data;
+  const currency = input.currency.trim().toUpperCase();
+  if (
+    hasHistoricDuplicates ||
+    status !== "eligible" ||
+    scholarshipPercentage === null ||
+    !discountCode ||
+    !/^[A-Z]{3}$/.test(currency)
+  ) {
+    return {
+      attemptId: recovered.data.id,
+      discountCode,
+      discountReady: false
+    };
+  }
+
+  try {
+    const synchronized = await ensureScholarshipDiscountCode({
+      code: discountCode,
+      userId: input.userId,
+      awardPercentage: scholarshipPercentage,
+      currency
+    });
+    return {
+      attemptId: recovered.data.id,
+      discountCode,
+      discountReady: synchronized.ok
+    };
+  } catch (caught) {
+    logDirectusDiagnostic("scholarship-attempts.recover-discount", caught);
+    return {
+      attemptId: recovered.data.id,
+      discountCode,
+      discountReady: false
+    };
+  }
+}
+
 export async function createTrustedScholarshipAttempt(
   input: TrustedScholarshipAttemptInput,
   options: { codeFactory?: () => string; maxCollisionRetries?: number } = {}
@@ -142,7 +322,7 @@ export async function createTrustedScholarshipAttempt(
       if (availability.exists) continue;
     }
     try {
-      const created = await client.request(
+      const createResponse = await client.request(
         withToken(
           token,
           createItem("scholarship_exam_attempts", {
@@ -157,21 +337,38 @@ export async function createTrustedScholarshipAttempt(
           }, { fields: ["id", "discount_code"] })
         )
       );
+      const created = normalizeCreatedScholarshipAttempt(createResponse);
+      if (!created) {
+        const recovered = await recoverPersistedScholarshipAttempt({
+          programId: input.programId,
+          userId: input.userId,
+          currency
+        });
+        if (recovered) return { ok: true, data: recovered };
+        return { ok: false, error: "requestFailed" };
+      }
       if (!discountCode || award === null) {
         return {
           ok: true,
-          data: { attemptId: created.id, discountCode: null, discountReady: false }
+          data: {
+            attemptId: created.attemptId,
+            discountCode: created.discountCode,
+            discountReady: false
+          }
         };
       }
 
-      const persistedDiscountCode =
-        typeof created.discount_code === "string" && created.discount_code.trim()
-          ? created.discount_code
-          : null;
+      const persistedDiscountCode = created.discountCode;
       if (!persistedDiscountCode) {
+        const recovered = await recoverPersistedScholarshipAttempt({
+          programId: input.programId,
+          userId: input.userId,
+          currency
+        });
+        if (recovered) return { ok: true, data: recovered };
         return {
           ok: true,
-          data: { attemptId: created.id, discountCode: null, discountReady: false }
+          data: { attemptId: created.attemptId, discountCode: null, discountReady: false }
         };
       }
 
@@ -184,12 +381,18 @@ export async function createTrustedScholarshipAttempt(
       return {
         ok: true,
         data: {
-          attemptId: created.id,
+          attemptId: created.attemptId,
           discountCode: persistedDiscountCode,
           discountReady: synchronized.ok
         }
       };
     } catch (caught) {
+      const recovered = await recoverPersistedScholarshipAttempt({
+        programId: input.programId,
+        userId: input.userId,
+        currency
+      });
+      if (recovered) return { ok: true, data: recovered };
       if (!eligible || !isUniqueConflict(caught)) {
         logDirectusDiagnostic("scholarship-attempts.create", caught);
         return { ok: false, error: "requestFailed" };
@@ -276,10 +479,21 @@ export async function getCurrentUserScholarshipAttempts(): Promise<
     }
   });
 
+  const programAttemptCounts = new Map<string, number>();
+  for (const attempt of history) {
+    if (attempt.program?.id) {
+      programAttemptCounts.set(
+        attempt.program.id,
+        (programAttemptCounts.get(attempt.program.id) ?? 0) + 1
+      );
+    }
+  }
+
   const data = await Promise.all(
     history.map(async (attempt) => {
       try {
         if (
+          (attempt.program?.id && (programAttemptCounts.get(attempt.program.id) ?? 0) > 1) ||
           attempt.status !== "eligible" ||
           !attempt.discountCode?.trim() ||
           attempt.scholarshipPercentage === null ||

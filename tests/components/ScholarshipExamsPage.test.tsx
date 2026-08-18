@@ -63,6 +63,7 @@ describe("ScholarshipExamsPage", () => {
       "href",
       "/en/account/profile"
     );
+    expect(screen.queryByText("takeAgain")).not.toBeInTheDocument();
   });
 
   it("does not present an unsynchronized code as redeemable", async () => {
@@ -84,5 +85,31 @@ describe("ScholarshipExamsPage", () => {
     render(await ScholarshipExamsPage({ params: { locale: "en" } }));
 
     expect(screen.getByText("scholarshipAttemptsUnavailable")).toBeInTheDocument();
+  });
+
+  it("keeps a historic not-eligible attempt with the same trusted result values", async () => {
+    getAttempts.mockResolvedValue({
+      ok: true,
+      data: [
+        {
+          ...eligibleAttempt,
+          id: "attempt-not-eligible",
+          score: 4,
+          percentage: 40,
+          scholarshipPercentage: null,
+          discountCode: null,
+          discountReady: false,
+          status: "not_eligible"
+        }
+      ]
+    });
+
+    render(await ScholarshipExamsPage({ params: { locale: "en" } }));
+
+    expect(screen.getByText("4 / 10")).toBeInTheDocument();
+    expect(screen.getByText("40%")).toBeInTheDocument();
+    expect(screen.getByText("scholarshipStatus.notEligible")).toBeInTheDocument();
+    expect(screen.queryByText("scholarshipAward")).not.toBeInTheDocument();
+    expect(screen.queryByText("takeAgain")).not.toBeInTheDocument();
   });
 });

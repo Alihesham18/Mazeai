@@ -3,6 +3,19 @@
     "title": "SynergyMazeAI | Yapay Zeka, Araştırma ve Eğitim Partneri",
     "description": "SynergyMazeAI, kurumların akıllı çözümler geliştirmesine, araştırmayı ilerletmesine ve insanları yapay zeka odaklı geleceğe hazırlamasına yardımcı olur."
   },
+  "scholarshipExam": {
+    "completedTitle": "Bursluluk Sınavı Tamamlandı",
+    "alreadyCompleted": "Bu bursluluk sınavını daha önce tamamladınız.",
+    "viewAttempts": "Bursluluk Sınavı Denemelerini Görüntüle",
+    "oneAttemptOnly": "Bu sınava yalnızca bir kez girilebilir.",
+    "unableVerifyPreviousAttempts": "Önceki denemeler doğrulanamadı. Lütfen tekrar deneyin.",
+    "authenticationRequired": "Oturumunuz sona erdi. Lütfen yeniden giriş yapın.",
+    "unansweredQuestions": "Sınavı göndermeden önce tüm soruları yanıtlayın.",
+    "invalidSubmission": "Sınav gönderimi geçersiz. Yanıtlarınızı kontrol edip tekrar deneyin.",
+    "examUnavailable": "Bu bursluluk sınavı şu anda kullanılamıyor.",
+    "submissionFailure": "Sınav gönderilemedi. Lütfen tekrar deneyin.",
+    "discountPreparing": "Burs sonucunuz kaydedildi. İndiriminiz hazırlanıyor."
+  },
   "common": {
     "skip": "İçeriğe geç",
     "learnMore": "Daha fazla bilgi",

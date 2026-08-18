@@ -134,8 +134,11 @@
   gap: 0.75rem;
 }
 
-.options button {
+.options label {
+  position: relative;
   min-block-size: 3.5rem;
+  display: flex;
+  align-items: center;
   padding: 0.9rem 1rem;
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
@@ -146,11 +149,24 @@
   text-align: start;
 }
 
-.options button:hover,
-.options button.selected {
+.options input {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.options label:hover,
+.options label.selected {
   border-color: var(--color-border-gold);
   color: var(--color-text);
   background: var(--color-primary-subtle);
+}
+
+.options label:has(input:focus-visible) {
+  outline: 2px solid var(--color-primary-hover);
+  outline-offset: 2px;
 }
 
 .validation {
@@ -237,6 +253,7 @@
 }
 
 .discountCode {
+  max-inline-size: 100%;
   width: fit-content;
   display: block;
   margin-block: 1rem;
@@ -247,6 +264,7 @@
   color: var(--color-gold-soft);
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-weight: 800;
+  overflow-wrap: anywhere;
 }
 
 .resultCode {
@@ -278,6 +296,10 @@
   margin-block: 1rem;
   color: var(--color-error);
   font-size: 0.86rem;
+}
+
+.result > .primaryAction {
+  margin-block-start: 1rem;
 }
 
 @media (min-width: 58rem) {
