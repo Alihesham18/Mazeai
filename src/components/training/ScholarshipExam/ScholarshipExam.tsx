@@ -6,14 +6,16 @@ import { useState, type FormEvent } from "react";
 import { useFormState, useFormStatus } from "react-dom";
 import type { ScholarshipExam as ScholarshipExamData } from "@/data/scholarship-exams";
 import { scholarshipExamCopy } from "@/data/scholarship-exams";
-import type { TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import type { AuthProfile } from "@/lib/auth/types";
 import { PhoneInput } from "@/components/forms/PhoneInput";
 import { CopyDiscountCode } from "@/components/account/CopyDiscountCode";
 import { submitScholarshipExamAction } from "@/lib/scholarship/actions";
-import type { ScholarshipSubmissionState } from "@/lib/scholarship/types";
+import type {
+  ScholarshipProgramSummary,
+  ScholarshipSubmissionState
+} from "@/lib/scholarship/types";
 import type { ExistingScholarshipAttempt } from "@/lib/directus/scholarship";
 import styles from "./ScholarshipExam.module.css";
 
@@ -34,7 +36,7 @@ interface ScholarshipExamProps {
   };
   existingAttempt: ExistingScholarshipAttempt | null;
   locale: Locale;
-  program: TrainingProgram;
+  program: ScholarshipProgramSummary;
   exam: ScholarshipExamData;
   user: AuthProfile | null;
 }
@@ -144,7 +146,7 @@ export function ScholarshipExam({
 
       <header className={styles.header}>
         <p>{localize(scholarshipExamCopy.label, locale)}</p>
-        <h1>{localize(program.title, locale)}</h1>
+        <h1>{program.title}</h1>
         <span>{localize(scholarshipExamCopy.intro, locale)}</span>
       </header>
 

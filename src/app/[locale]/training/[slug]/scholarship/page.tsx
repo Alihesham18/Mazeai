@@ -11,6 +11,7 @@ import { getCurrentUserProfile, withDirectusProfilePhone } from "@/lib/auth/user
 import { getCurrentUserDirectusProfile } from "@/lib/directus/profile";
 import { getCurrentUserScholarshipAttemptForProgram } from "@/lib/directus/scholarship";
 import { getPublishedTrainingProgramBySlug } from "@/lib/directus/training";
+import type { ScholarshipProgramSummary } from "@/lib/scholarship/types";
 
 export function generateStaticParams() {
   return trainingPrograms
@@ -49,6 +50,11 @@ export default async function TrainingScholarshipPage({
   if (!program || program.category !== "bootcamp" || !exam) {
     notFound();
   }
+
+  const programSummary: ScholarshipProgramSummary = {
+    slug: program.slug,
+    title: localize(program.title, params.locale)
+  };
 
   const currentUser = await getCurrentUserProfile();
   const directusProfile = currentUser ? await getCurrentUserDirectusProfile() : null;
@@ -96,7 +102,7 @@ export default async function TrainingScholarshipPage({
         }}
         existingAttempt={existingAttempt}
         locale={params.locale}
-        program={program}
+        program={programSummary}
         exam={exam}
         user={user}
       />

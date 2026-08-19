@@ -3,6 +3,11 @@ export interface ScholarshipAnswerSubmission {
   selectedOption: number;
 }
 
+export interface ScholarshipProgramSummary {
+  slug: string;
+  title: string;
+}
+
 export type ScholarshipAttemptStatus = "eligible" | "not_eligible" | "under_review" | "completed";
 
 export interface ScholarshipExamResult {

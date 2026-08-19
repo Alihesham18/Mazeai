@@ -16,9 +16,8 @@ vi.mock("@/lib/scholarship/actions", () => ({
 
 import { ScholarshipExam } from "@/components/training/ScholarshipExam";
 import { getScholarshipExam } from "@/data/scholarship-exams";
-import { getTrainingProgram } from "@/data/training-programs";
 
-const program = getTrainingProgram("mobile-programming")!;
+const program = { slug: "mobile-programming", title: "Mobile Programming" };
 const exam = getScholarshipExam("mobile-programming")!;
 const attemptLabels = {
   completedTitle: "Scholarship Exam Completed",

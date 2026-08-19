@@ -5,19 +5,23 @@ const {
   getAttempt,
   getCurrentUserProfile,
   getDirectusProfile,
-  getProgram
+  getProgram,
+  notFound
 } = vi.hoisted(() => ({
   getAttempt: vi.fn(),
   getCurrentUserProfile: vi.fn(),
   getDirectusProfile: vi.fn(),
-  getProgram: vi.fn()
+  getProgram: vi.fn(),
+  notFound: vi.fn(() => {
+    throw new Error("NEXT_NOT_FOUND");
+  })
 }));
 
 vi.mock("next-intl/server", () => ({
   setRequestLocale: vi.fn(),
   getTranslations: vi.fn(async () => (key: string) => key)
 }));
-vi.mock("next/navigation", () => ({ notFound: vi.fn() }));
+vi.mock("next/navigation", () => ({ notFound }));
 vi.mock("@/lib/auth/user", () => ({
   getCurrentUserProfile,
   withDirectusProfilePhone: (user: unknown) => user
@@ -34,21 +38,27 @@ vi.mock("@/lib/directus/scholarship", () => ({
 vi.mock("@/components/training/ScholarshipExam", () => ({
   ScholarshipExam: ({
     attemptCheckFailed,
-    existingAttempt
+    existingAttempt,
+    program
   }: {
     attemptCheckFailed: boolean;
     existingAttempt: { id: string } | null;
+    program: Record<string, unknown>;
   }) => (
     <div
       data-attempt-check-failed={String(attemptCheckFailed)}
+      data-program-keys={Object.keys(program).sort().join(",")}
+      data-program-slug={String(program.slug)}
       data-testid="scholarship-exam"
     >
-      {existingAttempt?.id ?? "new-exam"}
+      {existingAttempt?.id ?? String(program.title)}
     </div>
   )
 }));
 
-import TrainingScholarshipPage from "@/app/[locale]/training/[slug]/scholarship/page";
+import TrainingScholarshipPage, {
+  generateStaticParams
+} from "@/app/[locale]/training/[slug]/scholarship/page";
 
 const user = {
   id: "user-1",
@@ -72,6 +82,40 @@ describe("TrainingScholarshipPage", () => {
       }
     });
     getAttempt.mockReset();
+    notFound.mockClear();
+  });
+
+  it("resolves supported scholarship slugs to the minimal localized client payload", async () => {
+    getCurrentUserProfile.mockResolvedValueOnce(null);
+
+    render(
+      await TrainingScholarshipPage({
+        params: { locale: "tr", slug: "mobile-programming" }
+      })
+    );
+
+    expect(generateStaticParams()).toEqual(expect.arrayContaining([
+      { slug: "data-science-machine-learning" },
+      { slug: "mobile-programming" },
+      { slug: "web-development-dotnet" },
+      { slug: "cybersecurity" }
+    ]));
+    expect(screen.getByTestId("scholarship-exam")).toHaveTextContent("Mobil Programlama");
+    expect(screen.getByTestId("scholarship-exam")).toHaveAttribute(
+      "data-program-keys",
+      "slug,title"
+    );
+    expect(screen.getByTestId("scholarship-exam")).toHaveAttribute(
+      "data-program-slug",
+      "mobile-programming"
+    );
+  });
+
+  it("keeps unsupported scholarship slugs on the not-found path", async () => {
+    await expect(
+      TrainingScholarshipPage({ params: { locale: "en", slug: "unsupported-program" } })
+    ).rejects.toThrow("NEXT_NOT_FOUND");
+    expect(notFound).toHaveBeenCalledOnce();
   });
 
   it("loads the policy-scoped completed attempt and prepares its discount", async () => {
