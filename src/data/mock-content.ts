@@ -234,54 +234,6 @@ export const events: EventContent[] = [
   }
 ];
 
-export const blogPosts: CardContent[] = [
-  {
-    slug: "responsible-ai-starting-points",
-    title: {
-      en: "Responsible AI Starting Points",
-      tr: "Sorumlu Yapay Zeka Başlangıçları",
-      ar: "نقاط بداية للذكاء الاصطناعي المسؤول",
-      fa: "نقاط آغاز هوش مصنوعی مسئولانه"
-    },
-    description: {
-      en: "How teams can frame risk, value, and accountability before building.",
-      tr: "Ekipler geliştirmeden önce risk, değer ve hesap verebilirliği nasıl çerçeveleyebilir.",
-      ar: "كيف تؤطر الفرق المخاطر والقيمة والمساءلة قبل البناء.",
-      fa: "تیم‌ها چگونه می‌توانند پیش از شروع ساخت، ریسک، ارزش و پاسخ‌گویی را چارچوب‌بندی کنند."
-    }
-  },
-  {
-    slug: "from-research-to-prototype",
-    title: {
-      en: "From Research to Prototype",
-      tr: "Araştırmadan Prototipe",
-      ar: "من البحث إلى النموذج الأولي",
-      fa: "از پژوهش تا نمونه اولیه"
-    },
-    description: {
-      en: "A practical path for turning early research into a usable proof of concept.",
-      tr: "Erken araştırmayı kullanılabilir bir kavram kanıtına dönüştürmek için pratik yol.",
-      ar: "مسار عملي لتحويل البحث المبكر إلى إثبات مفهوم قابل للاستخدام.",
-      fa: "مسیری عملی برای تبدیل پژوهش اولیه به اثبات مفهومی قابل استفاده."
-    }
-  },
-  {
-    slug: "ai-literacy-for-organizations",
-    title: {
-      en: "AI Literacy for Organizations",
-      tr: "Kurumlar İçin Yapay Zeka Okuryazarlığı",
-      ar: "ثقافة الذكاء الاصطناعي للمؤسسات",
-      fa: "سواد هوش مصنوعی برای سازمان‌ها"
-    },
-    description: {
-      en: "What non-technical teams need to participate in AI transformation.",
-      tr: "Teknik olmayan ekiplerin yapay zeka dönüşümüne katılmak için ihtiyaç duydukları.",
-      ar: "ما تحتاجه الفرق غير التقنية للمشاركة في تحول الذكاء الاصطناعي.",
-      fa: "آنچه تیم‌های غیرفنی برای مشارکت در تحول هوش مصنوعی نیاز دارند."
-    }
-  }
-];
-
 export const publications: PublicationContent[] = [
   {
     slug: "mock-responsible-ai-framework",

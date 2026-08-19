@@ -365,6 +365,12 @@
     "empty": "هنوز مطالعه موردی منتشرشده‌ای وجود ندارد.", "unableToLoad": "مطالعات موردی بارگذاری نشد. لطفاً دوباره تلاش کنید.",
     "detailUnavailableTitle": "مطالعه موردی در دسترس نیست", "detailUnavailable": "این مطالعه موردی بارگذاری نشد. لطفاً دوباره تلاش کنید."
   },
+  "blog": {
+    "eyebrow": "دیدگاه‌ها", "collectionEyebrow": "مقاله‌ها", "collectionTitle": "تازه‌ترین دیدگاه‌های ما را بخوانید",
+    "article": "مقاله", "readArticle": "مطالعه {title}", "published": "منتشرشده در {date}", "back": "بازگشت به وبلاگ",
+    "articleContent": "محتوای مقاله", "empty": "هنوز مقاله منتشرشده‌ای وجود ندارد.", "unableToLoad": "مقاله‌ها بارگذاری نشدند. لطفاً دوباره تلاش کنید.",
+    "detailUnavailableTitle": "مقاله در دسترس نیست", "detailUnavailable": "این مقاله بارگذاری نشد. لطفاً دوباره تلاش کنید."
+  },
   "auth": {
     "accountEyebrow": "حساب",
     "welcomeBack": "خوش آمدید",

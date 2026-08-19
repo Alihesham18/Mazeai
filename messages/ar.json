@@ -365,6 +365,12 @@
     "empty": "لا توجد دراسات حالة منشورة حتى الآن.", "unableToLoad": "تعذر تحميل دراسات الحالة. يرجى المحاولة مرة أخرى.",
     "detailUnavailableTitle": "دراسة الحالة غير متاحة", "detailUnavailable": "تعذر تحميل دراسة الحالة هذه. يرجى المحاولة مرة أخرى."
   },
+  "blog": {
+    "eyebrow": "رؤى", "collectionEyebrow": "المقالات", "collectionTitle": "استكشف أحدث أفكارنا",
+    "article": "مقال", "readArticle": "اقرأ {title}", "published": "نُشر في {date}", "back": "العودة إلى المدونة",
+    "articleContent": "محتوى المقال", "empty": "لا توجد مقالات منشورة حتى الآن.", "unableToLoad": "تعذر تحميل المقالات. يرجى المحاولة مرة أخرى.",
+    "detailUnavailableTitle": "المقال غير متاح", "detailUnavailable": "تعذر تحميل هذا المقال. يرجى المحاولة مرة أخرى."
+  },
   "auth": {
     "accountEyebrow": "الحساب",
     "welcomeBack": "مرحباً بعودتك",

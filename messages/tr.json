@@ -365,6 +365,12 @@
     "empty": "Henüz yayınlanmış bir vaka çalışması bulunmuyor.", "unableToLoad": "Vaka çalışmaları yüklenemedi. Lütfen tekrar deneyin.",
     "detailUnavailableTitle": "Vaka çalışması kullanılamıyor", "detailUnavailable": "Bu vaka çalışması yüklenemedi. Lütfen tekrar deneyin."
   },
+  "blog": {
+    "eyebrow": "İçgörüler", "collectionEyebrow": "Makaleler", "collectionTitle": "En güncel düşüncelerimizi keşfedin",
+    "article": "Makale", "readArticle": "{title} makalesini okuyun", "published": "{date} tarihinde yayınlandı", "back": "Blog'a dön",
+    "articleContent": "Makale içeriği", "empty": "Henüz yayınlanmış makale bulunmuyor.", "unableToLoad": "Makaleler yüklenemedi. Lütfen tekrar deneyin.",
+    "detailUnavailableTitle": "Makale kullanılamıyor", "detailUnavailable": "Bu makale yüklenemedi. Lütfen tekrar deneyin."
+  },
   "auth": {
     "accountEyebrow": "Hesap",
     "welcomeBack": "Tekrar hoş geldiniz",

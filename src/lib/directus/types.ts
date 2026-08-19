@@ -217,6 +217,26 @@ export interface DirectusCaseStudy {
   translations: DirectusCaseStudyTranslation[] | null;
 }
 
+export interface DirectusBlogPostTranslation {
+  id: string;
+  blog_post?: string | DirectusBlogPost;
+  language: string;
+  title: string | null;
+  excerpt: string | null;
+  content: string | null;
+  seo_title: string | null;
+  seo_description: string | null;
+}
+
+export interface DirectusBlogPost {
+  id: string;
+  slug: string;
+  status: string;
+  sort: number | null;
+  published_at: string | null;
+  translations: DirectusBlogPostTranslation[] | null;
+}
+
 export interface DirectusSchema {
   directus_users: DirectusWebsiteUser[];
   user_profiles: DirectusUserProfile[];
@@ -233,6 +253,8 @@ export interface DirectusSchema {
   event_registrations: DirectusEventRegistration[];
   case_studies: DirectusCaseStudy[];
   case_study_translations: DirectusCaseStudyTranslation[];
+  blog_posts: DirectusBlogPost[];
+  blog_post_translations: DirectusBlogPostTranslation[];
 }
 
 export interface DirectusSession {

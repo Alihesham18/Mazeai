@@ -365,6 +365,12 @@
     "empty": "No published case studies are available yet.", "unableToLoad": "Unable to load case studies. Please try again.",
     "detailUnavailableTitle": "Case study unavailable", "detailUnavailable": "This case study could not be loaded. Please try again."
   },
+  "blog": {
+    "eyebrow": "Insights", "collectionEyebrow": "Articles", "collectionTitle": "Explore our latest thinking",
+    "article": "Article", "readArticle": "Read {title}", "published": "Published {date}", "back": "Back to Blog",
+    "articleContent": "Article content", "empty": "No published articles are available yet.", "unableToLoad": "Unable to load articles. Please try again.",
+    "detailUnavailableTitle": "Article unavailable", "detailUnavailable": "This article could not be loaded. Please try again."
+  },
   "auth": {
     "accountEyebrow": "Account",
     "welcomeBack": "Welcome back",
