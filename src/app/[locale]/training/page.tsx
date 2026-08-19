@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { TrainingCatalogPage } from "@/components/pages/TrainingCatalogPage";
-import { trainingCopy } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
-import { localize } from "@/lib/utilities/localize";
 
 export const dynamic = "force-dynamic";
 
-export function generateMetadata({ params }: { params: { locale: Locale } }): Metadata {
+export async function generateMetadata({ params }: { params: { locale: Locale } }): Promise<Metadata> {
+  const t = await getTranslations({ locale: params.locale, namespace: "training" });
   return {
-    title: `${localize(trainingCopy.academy, params.locale)} | SynergyMazeAI`,
-    description: localize(trainingCopy.description, params.locale)
+    title: `${t("academy")} | SynergyMazeAI`,
+    description: t("description")
   };
 }
 

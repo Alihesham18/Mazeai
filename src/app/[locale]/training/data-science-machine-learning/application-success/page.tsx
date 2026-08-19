@@ -1,28 +1,27 @@
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
-import { getTrainingProgram, trainingCopy } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
-import { localize, localizedPath } from "@/lib/utilities/localize";
+import { localizedPath } from "@/lib/utilities/localize";
 import styles from "./page.module.css";
 
-const program = getTrainingProgram("data-science-machine-learning");
-
-export default function TrainingApplicationSuccess({ params }: { params: { locale: Locale } }) {
+export default async function TrainingApplicationSuccess({ params }: { params: { locale: Locale } }) {
+  const t = await getTranslations({ locale: params.locale, namespace: "training" });
   return (
     <section className={styles.success}>
       <Container className={styles.wrap}>
         <CheckCircle2 size={52} aria-hidden="true" />
-        <p>{localize(trainingCopy.application, params.locale)}</p>
-        <h1>{localize(trainingCopy.successTitle, params.locale)}</h1>
-        <span>{localize(trainingCopy.successDescription, params.locale)}</span>
+        <p>{t("application")}</p>
+        <h1>{t("successTitle")}</h1>
+        <span>{t("successDescription")}</span>
         <Link
           href={localizedPath(
             params.locale,
-            `/training/${program?.slug ?? "data-science-machine-learning"}`
+            "/training/data-science-machine-learning"
           )}
         >
-          {localize(trainingCopy.returnCourse, params.locale)}
+          {t("returnCourse")}
         </Link>
       </Container>
     </section>

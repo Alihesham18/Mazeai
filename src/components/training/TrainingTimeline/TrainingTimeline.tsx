@@ -1,32 +1,35 @@
 import { Container } from "@/components/ui/Container";
-import { trainingCopy, type TrainingProgram } from "@/data/training-programs";
+import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { localize } from "@/lib/utilities/localize";
+import type { PublicTrainingProgram } from "@/lib/training/types";
 import styles from "./TrainingTimeline.module.css";
 
-export function TrainingTimeline({
+export async function TrainingTimeline({
   locale,
   program
 }: {
   locale: Locale;
-  program: TrainingProgram;
+  program: PublicTrainingProgram;
 }) {
+  if (program.weeklyPlan.length === 0) return null;
+  const t = await getTranslations({ locale, namespace: "training" });
+
   return (
     <section className={styles.section} aria-labelledby="weekly-plan-heading">
       <Container>
         <div className={styles.heading}>
-          <p>{localize(trainingCopy.weeklyPlan, locale)}</p>
-          <h2 id="weekly-plan-heading">{localize(trainingCopy.weeklyProgress, locale)}</h2>
+          <p>{t("weeklyPlan")}</p>
+          <h2 id="weekly-plan-heading">{t("weeklyProgress")}</h2>
         </div>
         <ol className={styles.list}>
-          {program.weeks.map((week, index) => (
-            <li key={week.title.en}>
+          {program.weeklyPlan.map((week, index) => (
+            <li key={week.id}>
               <span className={styles.number}>{index + 1}</span>
               <div>
                 <small>
-                  {localize(trainingCopy.week, locale)} {index + 1}
+                  {t("week")} {index + 1}
                 </small>
-                <strong>{localize(week.title, locale)}</strong>
+                <strong>{week.title}</strong>
               </div>
             </li>
           ))}

@@ -16,14 +16,14 @@ export function TrainingProgramImage({
   className?: string;
   priority?: boolean;
   sizes: string;
-  src: string;
+  src: string | null;
 }) {
   const [isAvailable, setIsAvailable] = useState(true);
 
   return (
     <>
       {children}
-      {isAvailable ? (
+      {isAvailable && src ? (
         <Image
           className={className}
           src={src}

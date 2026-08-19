@@ -1,9 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { requireAccountUser, getAcceptedTrainings, getDiscountOverview } = vi.hoisted(() => ({
+const { requireAccountUser, getAcceptedTrainings, getLocalizedPrograms, getDiscountOverview } = vi.hoisted(() => ({
   requireAccountUser: vi.fn(),
   getAcceptedTrainings: vi.fn(),
+  getLocalizedPrograms: vi.fn(),
   getDiscountOverview: vi.fn()
 }));
 
@@ -13,7 +14,8 @@ vi.mock("next-intl/server", () => ({
 }));
 vi.mock("@/lib/auth/account", () => ({ requireAccountUser }));
 vi.mock("@/lib/directus/training", () => ({
-  getCurrentUserAcceptedTrainingApplications: getAcceptedTrainings
+  getCurrentUserAcceptedTrainingApplications: getAcceptedTrainings,
+  getLocalizedPublishedTrainingPrograms: getLocalizedPrograms
 }));
 vi.mock("@/lib/directus/training-discounts", () => ({
   getTrainingDiscountOverview: getDiscountOverview
@@ -52,8 +54,10 @@ describe("MyTrainingsPage", () => {
   beforeEach(() => {
     requireAccountUser.mockReset();
     getAcceptedTrainings.mockReset();
+    getLocalizedPrograms.mockReset();
     getDiscountOverview.mockReset();
     requireAccountUser.mockResolvedValue({ id: "current-user-uuid" });
+    getLocalizedPrograms.mockResolvedValue({ ok: true, data: [] });
   });
 
   it("keeps the existing empty state when there are no accepted trainings", async () => {

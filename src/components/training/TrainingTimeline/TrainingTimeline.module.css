@@ -73,6 +73,10 @@
   text-transform: uppercase;
 }
 
+.list strong {
+  overflow-wrap: anywhere;
+}
+
 @media (max-width: 30rem) {
   .list li {
     gap: 0.75rem;

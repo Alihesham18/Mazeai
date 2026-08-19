@@ -5,11 +5,18 @@ export function toCurrencyNumber(amount: CurrencyAmount): number | null {
   return Number.isFinite(numericAmount) ? numericAmount : null;
 }
 
-export function formatTrainingFee(fee: CurrencyAmount): string {
+export function formatTrainingFee(
+  fee: CurrencyAmount,
+  locale = "en",
+  currency = "TRY"
+): string {
   const numericFee = toCurrencyNumber(fee);
   if (numericFee === null) return "₺—";
 
-  return `₺${numericFee.toLocaleString("en-US", {
+  return new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    currencyDisplay: "narrowSymbol",
     maximumFractionDigits: 0
-  })}`;
+  }).format(numericFee);
 }

@@ -4,7 +4,10 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import type { Locale } from "@/i18n/routing";
 import { requireAccountUser } from "@/lib/auth/account";
-import { getCurrentUserTrainingApplications } from "@/lib/directus/training";
+import {
+  getCurrentUserTrainingApplications,
+  getLocalizedPublishedTrainingPrograms
+} from "@/lib/directus/training";
 import { formatAccountDate } from "@/lib/utilities/account";
 import { localizedPath } from "@/lib/utilities/localize";
 import styles from "../page.module.css";
@@ -12,11 +15,15 @@ import styles from "../page.module.css";
 export default async function TrainingApplicationsPage({ params }: { params: { locale: Locale } }) {
   setRequestLocale(params.locale);
   await requireAccountUser(params.locale, "/account/training-applications");
-  const [applicationResult, t] = await Promise.all([
+  const [applicationResult, localizedResult, t] = await Promise.all([
     getCurrentUserTrainingApplications(),
+    getLocalizedPublishedTrainingPrograms(params.locale),
     getTranslations({ locale: params.locale, namespace: "auth" })
   ]);
   const applications = applicationResult.ok ? applicationResult.data : [];
+  const localizedPrograms = new Map(
+    (localizedResult.ok ? localizedResult.data : []).map((program) => [program.slug, program])
+  );
   const statusLabel = (status: (typeof applications)[number]["status"]) => {
     if (status === "under_review") return t("trainingStatus.underReview");
     if (status === "accepted") return t("trainingStatus.accepted");
@@ -60,7 +67,7 @@ export default async function TrainingApplicationsPage({ params }: { params: { l
                     <Link
                       href={localizedPath(params.locale, `/training/${application.program.slug}`)}
                     >
-                      {application.program.title}
+                      {localizedPrograms.get(application.program.slug)?.title ?? application.program.title}
                     </Link>
                   ) : (
                     <strong>{t("trainingProgram")}</strong>

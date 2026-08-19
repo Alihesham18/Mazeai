@@ -1,37 +1,28 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { TrainingCoursePage } from "@/components/pages/TrainingCoursePage";
-import { getTrainingProgram, trainingPrograms } from "@/data/training-programs";
+import { Container } from "@/components/ui/Container";
 import type { Locale } from "@/i18n/routing";
-import { localize } from "@/lib/utilities/localize";
 import { getCurrentUserProfile, withDirectusProfilePhone } from "@/lib/auth/user";
 import { getCurrentUserDirectusProfile } from "@/lib/directus/profile";
-import { getPublishedTrainingProgramBySlug } from "@/lib/directus/training";
-import { mergeDirectusTrainingProgram } from "@/lib/training/directus";
+import { getLocalizedPublishedTrainingProgramBySlug } from "@/lib/directus/training";
+import styles from "./page.module.css";
 
 export const dynamic = "force-dynamic";
-
-export function generateStaticParams() {
-  return trainingPrograms.map((program) => ({ slug: program.slug }));
-}
 
 export async function generateMetadata({
   params
 }: {
   params: { locale: Locale; slug: string };
 }): Promise<Metadata> {
-  const localProgram = getTrainingProgram(params.slug);
-
-  if (!localProgram) return {};
-  const directusProgram = await getPublishedTrainingProgramBySlug(params.slug);
-  const program =
-    directusProgram.ok && directusProgram.data
-      ? mergeDirectusTrainingProgram(localProgram, directusProgram.data)
-      : localProgram;
+  const result = await getLocalizedPublishedTrainingProgramBySlug(params.slug, params.locale);
+  if (!result.ok || !result.data) return {};
+  const program = result.data;
 
   return {
-    title: `${localize(program.title, params.locale)} | SynergyMazeAI`,
-    description: localize(program.shortDescription, params.locale)
+    title: `${program.title} | SynergyMazeAI`,
+    description: program.shortDescription ?? undefined
   };
 }
 
@@ -40,20 +31,22 @@ export default async function TrainingProgramPage({
 }: {
   params: { locale: Locale; slug: string };
 }) {
-  const localProgram = getTrainingProgram(params.slug);
-
-  if (!localProgram) notFound();
-
   const [directusProgram, currentUser] = await Promise.all([
-    getPublishedTrainingProgramBySlug(params.slug),
+    getLocalizedPublishedTrainingProgramBySlug(params.slug, params.locale),
     getCurrentUserProfile()
   ]);
-  if (directusProgram.ok && !directusProgram.data) notFound();
+  if (!directusProgram.ok) {
+    const t = await getTranslations({ locale: params.locale, namespace: "training" });
+    return (
+      <main className={styles.state}>
+        <Container>
+          <p role="alert">{t("unavailable")}</p>
+        </Container>
+      </main>
+    );
+  }
+  if (!directusProgram.data) notFound();
 
-  const program =
-    directusProgram.ok && directusProgram.data
-      ? mergeDirectusTrainingProgram(localProgram, directusProgram.data)
-      : { ...localProgram, applicationOpen: !currentUser, directusAvailable: false };
   const directusProfile = currentUser ? await getCurrentUserDirectusProfile() : null;
   const user = currentUser
     ? withDirectusProfilePhone(
@@ -61,5 +54,5 @@ export default async function TrainingProgramPage({
         directusProfile?.ok ? directusProfile.profile : null
       )
     : null;
-  return <TrainingCoursePage locale={params.locale} program={program} user={user} />;
+  return <TrainingCoursePage locale={params.locale} program={directusProgram.data} user={user} />;
 }

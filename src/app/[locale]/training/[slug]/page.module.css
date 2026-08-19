@@ -1,0 +1,9 @@
+.state {
+  min-block-size: 60vh;
+  padding-block: clamp(8rem, 14vw, 11rem) 5rem;
+}
+
+.state p {
+  max-inline-size: 42rem;
+  color: var(--color-text-muted);
+}

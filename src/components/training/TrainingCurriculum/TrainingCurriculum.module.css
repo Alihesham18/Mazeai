@@ -47,6 +47,10 @@
   font-weight: 850;
 }
 
+.grid strong {
+  overflow-wrap: anywhere;
+}
+
 @media (min-width: 46rem) {
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

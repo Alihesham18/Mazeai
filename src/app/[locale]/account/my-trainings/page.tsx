@@ -12,7 +12,10 @@ import { Button } from "@/components/ui/Button";
 import { TrainingDiscountPricing } from "@/components/account/TrainingDiscountPricing";
 import type { Locale } from "@/i18n/routing";
 import { requireAccountUser } from "@/lib/auth/account";
-import { getCurrentUserAcceptedTrainingApplications } from "@/lib/directus/training";
+import {
+  getCurrentUserAcceptedTrainingApplications,
+  getLocalizedPublishedTrainingPrograms
+} from "@/lib/directus/training";
 import { getTrainingDiscountOverview } from "@/lib/directus/training-discounts";
 import { localizedPath } from "@/lib/utilities/localize";
 import styles from "../page.module.css";
@@ -20,11 +23,15 @@ import styles from "../page.module.css";
 export default async function MyTrainingsPage({ params }: { params: { locale: Locale } }) {
   setRequestLocale(params.locale);
   const currentUser = await requireAccountUser(params.locale, "/account/my-trainings");
-  const [trainingResult, t] = await Promise.all([
+  const [trainingResult, localizedResult, t] = await Promise.all([
     getCurrentUserAcceptedTrainingApplications(),
+    getLocalizedPublishedTrainingPrograms(params.locale),
     getTranslations({ locale: params.locale, namespace: "auth" })
   ]);
   const trainings = trainingResult.ok ? trainingResult.data : [];
+  const localizedPrograms = new Map(
+    (localizedResult.ok ? localizedResult.data : []).map((program) => [program.slug, program])
+  );
   const discountResult = trainings.length
     ? await getTrainingDiscountOverview(currentUser.id, trainings)
     : { ok: true as const, data: {} };
@@ -51,20 +58,27 @@ export default async function MyTrainingsPage({ params }: { params: { locale: Lo
         </div>
       ) : (
         <ul className={styles.trainingList}>
-          {trainings.map(({ applicationId, program }) => (
+          {trainings.map(({ applicationId, program }) => {
+            const localizedProgram = localizedPrograms.get(program.slug);
+            const title = localizedProgram?.title ?? program.title;
+            const shortDescription =
+              localizedProgram?.shortDescription ?? program.short_description;
+            const instructorRole = localizedProgram?.instructorRole ?? program.instructor_role;
+
+            return (
             <li className={styles.trainingCard} key={applicationId}>
               <div className={styles.trainingCardHeader}>
                 <div>
                   <span>{program.category}</span>
-                  <h3>{program.title}</h3>
+                  <h3>{title}</h3>
                 </div>
                 <span className={[styles.statusBadge, styles.statusPositive].join(" ")}>
                   {t("trainingStatus.accepted")}
                 </span>
               </div>
 
-              {program.short_description ? (
-                <p className={styles.trainingDescription}>{program.short_description}</p>
+              {shortDescription ? (
+                <p className={styles.trainingDescription}>{shortDescription}</p>
               ) : null}
 
               <dl className={styles.trainingDetails}>
@@ -101,7 +115,7 @@ export default async function MyTrainingsPage({ params }: { params: { locale: Lo
                     <dt><UserRound size={16} aria-hidden="true" />{t("trainingInstructor")}</dt>
                     <dd>
                       {program.instructor_name}
-                      {program.instructor_role ? <small>{program.instructor_role}</small> : null}
+                      {instructorRole ? <small>{instructorRole}</small> : null}
                     </dd>
                   </div>
                 ) : null}
@@ -129,7 +143,8 @@ export default async function MyTrainingsPage({ params }: { params: { locale: Lo
                 {t("viewTraining")}
               </Button>
             </li>
-          ))}
+            );
+          })}
         </ul>
       )}
     </section>

@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { TrainingProgramImage } from "@/components/training/TrainingProgramImage";
 import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exams";
-import { trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
+import type { PublicTrainingProgram } from "@/lib/training/types";
 import { formatTrainingFee } from "@/lib/utilities/currency";
 import { localize, localizedPath } from "@/lib/utilities/localize";
 import styles from "./TrainingCatalogPage.module.css";
@@ -32,22 +33,23 @@ export function TrainingCatalog({
   authenticated
 }: {
   locale: Locale;
-  programs: readonly TrainingProgram[];
+  programs: readonly PublicTrainingProgram[];
   authenticated: boolean;
 }) {
+  const t = useTranslations("training");
   const [category, setCategory] = useState<TrainingCategory>("bootcamp");
   const programs = allPrograms.filter((program) => program.category === category);
 
   return (
     <>
-      <div className={styles.segmentedControl} aria-label={localize(trainingCopy.title, locale)}>
+      <div className={styles.segmentedControl} aria-label={t("title")}>
         <button
           type="button"
           className={category === "bootcamp" ? styles.selected : ""}
           aria-pressed={category === "bootcamp"}
           onClick={() => setCategory("bootcamp")}
         >
-          {localize(trainingCopy.bootcamps, locale)}
+          {t("bootcamps")}
         </button>
         <button
           type="button"
@@ -55,7 +57,7 @@ export function TrainingCatalog({
           aria-pressed={category === "short-course"}
           onClick={() => setCategory("short-course")}
         >
-          {localize(trainingCopy.shortCourses, locale)}
+          {t("shortCourses")}
         </button>
       </div>
 
@@ -75,50 +77,54 @@ export function TrainingCatalog({
                 <Link
                   className={styles.posterLink}
                   href={detailPath}
-                  aria-label={localize(program.title, locale)}
+                  aria-label={program.title}
                 >
                   <TrainingProgramImage
                     className={styles.poster}
                     src={program.image}
-                    alt={localize(program.imageAlt, locale)}
+                    alt={program.imageAlt ?? ""}
                     sizes="(min-width: 800px) 33vw, 100vw"
                   >
                     <span className={styles.posterFallback} aria-hidden="true">
-                      <strong>{localize(program.title, locale)}</strong>
-                      <span>{program.instructor}</span>
+                      <strong>{program.title}</strong>
+                      {program.instructor ? <span>{program.instructor}</span> : null}
                     </span>
                   </TrainingProgramImage>
                   <span className={styles.posterBadges} aria-hidden="true">
-                    <span>{localize(program.format, locale)}</span>
-                    <span>{localize(program.duration, locale)}</span>
+                    {program.format ? <span>{program.format}</span> : null}
+                    {program.durationHours !== null ? (
+                      <span>{t("hours", { count: program.durationHours })}</span>
+                    ) : null}
                   </span>
                 </Link>
 
                 <div className={styles.cardBody}>
                   <h2>
-                    <Link href={detailPath}>{localize(program.title, locale)}</Link>
+                    <Link href={detailPath}>{program.title}</Link>
                   </h2>
-                  <p>{localize(program.shortDescription, locale)}</p>
+                  {program.shortDescription ? <p>{program.shortDescription}</p> : null}
 
                   <div className={styles.cardBottom}>
                     <div className={styles.cardMeta}>
-                      <div>
+                      {program.instructor ? <div>
                         <span className={styles.initials} aria-hidden="true">
                           {getInstructorInitials(program.instructor)}
                         </span>
                         <p>
                           <strong>{program.instructor}</strong>
-                          <span>{localize(program.instructorRole, locale)}</span>
+                          {program.instructorRole ? <span>{program.instructorRole}</span> : null}
                         </p>
-                      </div>
-                      <div className={styles.fee}>
-                        <span>{localize(trainingCopy.tuition, locale)}</span>
-                        <strong>{formatTrainingFee(program.fee)}</strong>
-                      </div>
+                      </div> : null}
+                      {program.fee !== null && program.currency ? (
+                        <div className={styles.fee}>
+                          <span>{t("tuition")}</span>
+                          <strong>{formatTrainingFee(program.fee, locale, program.currency)}</strong>
+                        </div>
+                      ) : null}
                     </div>
 
                     <Link className={styles.detailLink} href={detailPath}>
-                      {localize(trainingCopy.review, locale)}
+                      {t("review")}
                       <ArrowUpRight size={17} aria-hidden="true" />
                     </Link>
 
@@ -132,19 +138,11 @@ export function TrainingCatalog({
                     >
                       {program.applicationOpen ? (
                         <Link href={preregistrationPath}>
-                          {localize(
-                            authenticated ? trainingCopy.preregister : trainingCopy.loginToApply,
-                            locale
-                          )}
+                          {t(authenticated ? "preregister" : "loginToApply")}
                         </Link>
                       ) : (
                         <span className={styles.closedAction}>
-                          {localize(
-                            program.directusAvailable
-                              ? trainingCopy.applicationClosed
-                              : trainingCopy.programUnavailable,
-                            locale
-                          )}
+                          {t("applicationClosed")}
                         </span>
                       )}
                       {hasScholarshipExam ? (
@@ -161,7 +159,7 @@ export function TrainingCatalog({
         </div>
       ) : (
         <p className={styles.emptyState} aria-live="polite">
-          {localize(trainingCopy.shortCoursesEmpty, locale)}
+          {t("categoryEmpty")}
         </p>
       )}
     </>

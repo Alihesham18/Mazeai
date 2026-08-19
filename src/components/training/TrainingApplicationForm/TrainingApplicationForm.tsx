@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useFormState, useFormStatus } from "react-dom";
-import { trainingCopy, type TrainingProgram } from "@/data/training-programs";
 import type { Locale } from "@/i18n/routing";
-import { localize, localizedPath } from "@/lib/utilities/localize";
+import type { PublicTrainingProgram } from "@/lib/training/types";
+import { localizedPath } from "@/lib/utilities/localize";
 import type { AuthProfile } from "@/lib/auth/types";
 import { PhoneInput } from "@/components/forms/PhoneInput";
 import {
@@ -15,24 +16,25 @@ import styles from "./TrainingApplicationForm.module.css";
 
 const initialTrainingApplicationState: TrainingApplicationActionState = { status: "idle" };
 
-function SubmitButton({ locale, submitted }: { locale: Locale; submitted: boolean }) {
+function SubmitButton({ submitted }: { submitted: boolean }) {
+  const t = useTranslations("training");
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending || submitted}>
-      {localize(pending ? trainingCopy.submitting : trainingCopy.submit, locale)}
+      {t(pending ? "submitting" : "submit")}
     </button>
   );
 }
 
-function ApplicationMessage({ state, locale }: { state: TrainingApplicationActionState; locale: Locale }) {
+function ApplicationMessage({ state }: { state: TrainingApplicationActionState }) {
+  const t = useTranslations("training");
   if (!state.message) return null;
-  const copy = trainingCopy[state.message];
   return (
     <p
       className={state.status === "success" ? styles.successNotice : styles.errorNotice}
       role={state.status === "success" ? "status" : "alert"}
     >
-      {localize(copy, locale)}
+      {t(state.message)}
     </p>
   );
 }
@@ -43,9 +45,10 @@ export function TrainingApplicationForm({
   user
 }: {
   locale: Locale;
-  program: TrainingProgram;
+  program: PublicTrainingProgram;
   user: AuthProfile | null;
 }) {
+  const t = useTranslations("training");
   const [state, formAction] = useFormState(
     submitTrainingApplicationAction.bind(null, locale, program.slug),
     initialTrainingApplicationState
@@ -56,10 +59,7 @@ export function TrainingApplicationForm({
   if (!program.applicationOpen) {
     return (
       <p className={styles.errorNotice} role="status">
-        {localize(
-          program.directusAvailable ? trainingCopy.applicationClosed : trainingCopy.programUnavailable,
-          locale
-        )}
+        {t("applicationClosed")}
       </p>
     );
   }
@@ -67,7 +67,7 @@ export function TrainingApplicationForm({
   if (!user) {
     return (
       <Link className={styles.loginAction} href={loginPath}>
-        {localize(trainingCopy.loginToApply, locale)}
+        {t("loginToApply")}
       </Link>
     );
   }
@@ -75,7 +75,7 @@ export function TrainingApplicationForm({
   return (
     <form className={styles.form} action={formAction}>
       <div className={styles.field}>
-        <label htmlFor="training-first-name">{localize(trainingCopy.firstName, locale)} *</label>
+        <label htmlFor="training-first-name">{t("firstName")} *</label>
         <input
           id="training-first-name"
           value={user.firstName}
@@ -84,11 +84,11 @@ export function TrainingApplicationForm({
         />
       </div>
       <div className={styles.field}>
-        <label htmlFor="training-last-name">{localize(trainingCopy.lastName, locale)} *</label>
+        <label htmlFor="training-last-name">{t("lastName")} *</label>
         <input id="training-last-name" value={user.lastName} autoComplete="family-name" readOnly />
       </div>
       <div className={styles.field}>
-        <label htmlFor="training-email">{localize(trainingCopy.email, locale)} *</label>
+        <label htmlFor="training-email">{t("email")} *</label>
         <input
           id="training-email"
           name="email"
@@ -99,7 +99,7 @@ export function TrainingApplicationForm({
         />
       </div>
       <div className={styles.field}>
-        <label htmlFor="training-phone">{localize(trainingCopy.phone, locale)} *</label>
+        <label htmlFor="training-phone">{t("phone")} *</label>
         <PhoneInput
           id="training-phone"
           name="phone"
@@ -109,17 +109,17 @@ export function TrainingApplicationForm({
         />
       </div>
       <div className={styles.field}>
-        <label htmlFor="training-program">{localize(trainingCopy.program, locale)} *</label>
+        <label htmlFor="training-program">{t("program")} *</label>
         <select id="training-program" value={program.slug} disabled>
-          <option value={program.slug}>{localize(program.title, locale)}</option>
+          <option value={program.slug}>{program.title}</option>
         </select>
       </div>
       <div className={[styles.field, styles.messageField].join(" ")}>
-        <label htmlFor="training-message">{localize(trainingCopy.message, locale)}</label>
+        <label htmlFor="training-message">{t("message")}</label>
         <textarea id="training-message" name="message" rows={4} />
       </div>
-      <SubmitButton locale={locale} submitted={state.status === "success"} />
-      <ApplicationMessage state={state} locale={locale} />
+      <SubmitButton submitted={state.status === "success"} />
+      <ApplicationMessage state={state} />
     </form>
   );
 }

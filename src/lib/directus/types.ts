@@ -43,8 +43,46 @@ export interface DirectusTrainingProgram {
   image_url: string | null;
   application_open: boolean;
   status: string;
+  translations?: DirectusTrainingProgramTranslation[] | null;
+  content_items?: DirectusTrainingProgramContentItem[] | null;
   date_created?: string | null;
   date_updated?: string | null;
+}
+
+export interface DirectusTrainingProgramTranslation {
+  id: string;
+  training_program: string | DirectusTrainingProgram;
+  language: string;
+  title: string | null;
+  short_description: string | null;
+  description: string | null;
+  image_alt: string | null;
+  hours_breakdown: string | null;
+  instructor_role: string | null;
+  instructor_bio: string | null;
+  requirements: string | null;
+  target_audience: string | null;
+  prerequisites: string | null;
+  seo_title: string | null;
+  seo_description: string | null;
+}
+
+export interface DirectusTrainingProgramContentItemTranslation {
+  id: string;
+  content_item: string | DirectusTrainingProgramContentItem;
+  language: string;
+  title: string | null;
+  description: string | null;
+}
+
+export interface DirectusTrainingProgramContentItem {
+  id: string;
+  training_program: string | DirectusTrainingProgram;
+  kind: "curriculum" | "weekly_plan" | string;
+  sort: number | null;
+  starts_at: string | null;
+  ends_at: string | null;
+  translations?: DirectusTrainingProgramContentItemTranslation[] | null;
 }
 
 export type TrainingApplicationStatus = "submitted" | "under_review" | "accepted" | "rejected";
@@ -183,6 +221,9 @@ export interface DirectusSchema {
   directus_users: DirectusWebsiteUser[];
   user_profiles: DirectusUserProfile[];
   training_programs: DirectusTrainingProgram[];
+  training_program_translations: DirectusTrainingProgramTranslation[];
+  training_program_content_items: DirectusTrainingProgramContentItem[];
+  training_program_content_item_translations: DirectusTrainingProgramContentItemTranslation[];
   training_applications: DirectusTrainingApplication[];
   scholarship_rules: DirectusScholarshipRule[];
   scholarship_exam_attempts: DirectusScholarshipExamAttempt[];
