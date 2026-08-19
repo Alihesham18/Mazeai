@@ -28,7 +28,34 @@
   },
   "adminAuth": {
     "title": "پنل مدیریت",
-    "confirmed": "دسترسی مدیر مجاز تأیید شد."
+    "navigationLabel": "ناوبری پنل مدیریت",
+    "menu": "منو",
+    "closeMenu": "بستن منو",
+    "administratorAccount": "حساب مدیر",
+    "dashboardPlaceholder": "داشبورد مدیریت در مرحله بعدی پیاده‌سازی می‌شود.",
+    "managementPlaceholder": "این بخش مدیریتی در مراحل بعدی پنل مدیریت پیاده‌سازی می‌شود.",
+    "groups": {
+      "people": "افراد",
+      "training": "آموزش",
+      "events": "رویدادها",
+      "content": "محتوا",
+      "system": "سیستم"
+    },
+    "navigation": {
+      "dashboard": "داشبورد",
+      "users": "کاربران",
+      "trainingPrograms": "برنامه‌های آموزشی",
+      "trainingApplications": "درخواست‌های آموزشی",
+      "enrolledTrainings": "آموزش‌های ثبت‌شده",
+      "scholarships": "بورس‌ها",
+      "discountCodes": "کدهای تخفیف",
+      "events": "رویدادها",
+      "eventRegistrations": "ثبت‌نام‌های رویداد",
+      "caseStudies": "مطالعات موردی",
+      "blog": "وبلاگ",
+      "research": "تحقیق و توسعه",
+      "activity": "فعالیت / ممیزی"
+    }
   },
   "navigation": {
     "home": "خانه",

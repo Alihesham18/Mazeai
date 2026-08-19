@@ -28,7 +28,34 @@
   },
   "adminAuth": {
     "title": "Yönetim Paneli",
-    "confirmed": "Yetkili yönetici erişimi doğrulandı."
+    "navigationLabel": "Yönetim menüsü",
+    "menu": "Menü",
+    "closeMenu": "Menüyü kapat",
+    "administratorAccount": "Yönetici hesabı",
+    "dashboardPlaceholder": "Yönetim panosu bir sonraki görevde uygulanacaktır.",
+    "managementPlaceholder": "Bu yönetim alanı sonraki yönetici görevlerinde uygulanacaktır.",
+    "groups": {
+      "people": "Kişiler",
+      "training": "Eğitim",
+      "events": "Etkinlikler",
+      "content": "İçerik",
+      "system": "Sistem"
+    },
+    "navigation": {
+      "dashboard": "Pano",
+      "users": "Kullanıcılar",
+      "trainingPrograms": "Eğitim Programları",
+      "trainingApplications": "Eğitim Başvuruları",
+      "enrolledTrainings": "Kayıtlı Eğitimler",
+      "scholarships": "Burslar",
+      "discountCodes": "İndirim Kodları",
+      "events": "Etkinlikler",
+      "eventRegistrations": "Etkinlik Kayıtları",
+      "caseStudies": "Vaka Çalışmaları",
+      "blog": "Blog",
+      "research": "Ar-Ge",
+      "activity": "Etkinlik / Denetim"
+    }
   },
   "navigation": {
     "home": "Ana Sayfa",

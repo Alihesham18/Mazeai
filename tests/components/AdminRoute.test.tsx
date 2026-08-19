@@ -1,22 +1,49 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { getTranslations, requireAdmin, setRequestLocale } = vi.hoisted(() => ({
-  getTranslations: vi.fn(async () => (key: string) => key),
+const { requireAdmin, setRequestLocale } = vi.hoisted(() => ({
   requireAdmin: vi.fn(),
   setRequestLocale: vi.fn()
 }));
 
-vi.mock("next-intl/server", () => ({ getTranslations, setRequestLocale }));
+vi.mock("next-intl/server", () => ({ setRequestLocale }));
 vi.mock("@/lib/auth/admin", () => ({ requireAdmin }));
+vi.mock("@/components/admin/AdminShell", () => ({
+  AdminShell: ({
+    children,
+    identity,
+    locale
+  }: {
+    children: React.ReactNode;
+    identity: { email: string; firstName: string; lastName: string };
+    locale: string;
+  }) => (
+    <div data-testid="admin-shell" data-locale={locale} data-email={identity.email}>
+      {children}
+    </div>
+  )
+}));
+vi.mock("@/components/admin/AdminPlaceholder", () => ({
+  AdminPlaceholder: ({ titleKey, dashboard }: { titleKey: string; dashboard?: boolean }) => (
+    <section>
+      <h1>{titleKey}</h1>
+      <p>{dashboard ? "dashboardPlaceholder" : "managementPlaceholder"}</p>
+    </section>
+  )
+}));
 
 import AdminLayout from "@/app/[locale]/admin/layout";
 import AdminPage from "@/app/[locale]/admin/page";
 
 describe("protected admin route", () => {
   beforeEach(() => {
-    requireAdmin.mockReset().mockResolvedValue({ id: "admin-user" });
-    getTranslations.mockClear();
+    requireAdmin.mockReset().mockResolvedValue({
+      id: "admin-user",
+      email: "admin@example.com",
+      firstName: "Maze",
+      lastName: "Admin",
+      roleId: "server-only-role-id"
+    });
     setRequestLocale.mockClear();
   });
 
@@ -25,15 +52,16 @@ describe("protected admin route", () => {
     render(view);
 
     expect(requireAdmin).toHaveBeenCalledWith({ locale: "tr", destination: "/admin" });
+    expect(screen.getByTestId("admin-shell")).toHaveAttribute("data-email", "admin@example.com");
+    expect(screen.queryByText("server-only-role-id")).not.toBeInTheDocument();
     expect(screen.getByText("protected")).toBeInTheDocument();
   });
 
-  it("renders only the localized authorization proof content", async () => {
+  it("keeps the admin root as a dashboard placeholder without fake statistics", async () => {
     render(await AdminPage({ params: { locale: "ar" } }));
 
     expect(setRequestLocale).toHaveBeenCalledWith("ar");
-    expect(getTranslations).toHaveBeenCalledWith({ locale: "ar", namespace: "adminAuth" });
-    expect(screen.getByRole("heading", { name: "title" })).toBeInTheDocument();
-    expect(screen.getByText("confirmed")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "navigation.dashboard" })).toBeInTheDocument();
+    expect(screen.getByText("dashboardPlaceholder")).toBeInTheDocument();
   });
 });

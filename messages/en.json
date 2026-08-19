@@ -28,7 +28,34 @@
   },
   "adminAuth": {
     "title": "Admin Panel",
-    "confirmed": "Authenticated administrator access confirmed."
+    "navigationLabel": "Admin navigation",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "administratorAccount": "Administrator account",
+    "dashboardPlaceholder": "The administration dashboard will be implemented in the next task.",
+    "managementPlaceholder": "This management area will be implemented in the next admin tasks.",
+    "groups": {
+      "people": "People",
+      "training": "Training",
+      "events": "Events",
+      "content": "Content",
+      "system": "System"
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "trainingPrograms": "Training Programs",
+      "trainingApplications": "Training Applications",
+      "enrolledTrainings": "Enrolled Trainings",
+      "scholarships": "Scholarships",
+      "discountCodes": "Discount Codes",
+      "events": "Events",
+      "eventRegistrations": "Event Registrations",
+      "caseStudies": "Case Studies",
+      "blog": "Blog",
+      "research": "R&D",
+      "activity": "Activity / Audit"
+    }
   },
   "navigation": {
     "home": "Home",

@@ -28,7 +28,34 @@
   },
   "adminAuth": {
     "title": "لوحة الإدارة",
-    "confirmed": "تم تأكيد وصول المسؤول المصرح له."
+    "navigationLabel": "تنقل لوحة الإدارة",
+    "menu": "القائمة",
+    "closeMenu": "إغلاق القائمة",
+    "administratorAccount": "حساب المسؤول",
+    "dashboardPlaceholder": "سيتم تنفيذ لوحة الإدارة في المهمة التالية.",
+    "managementPlaceholder": "سيتم تنفيذ منطقة الإدارة هذه في مهام الإدارة القادمة.",
+    "groups": {
+      "people": "الأشخاص",
+      "training": "التدريب",
+      "events": "الفعاليات",
+      "content": "المحتوى",
+      "system": "النظام"
+    },
+    "navigation": {
+      "dashboard": "لوحة المعلومات",
+      "users": "المستخدمون",
+      "trainingPrograms": "برامج التدريب",
+      "trainingApplications": "طلبات التدريب",
+      "enrolledTrainings": "التدريبات المسجلة",
+      "scholarships": "المنح",
+      "discountCodes": "رموز الخصم",
+      "events": "الفعاليات",
+      "eventRegistrations": "تسجيلات الفعاليات",
+      "caseStudies": "دراسات الحالة",
+      "blog": "المدونة",
+      "research": "البحث والتطوير",
+      "activity": "النشاط / التدقيق"
+    }
   },
   "navigation": {
     "home": "الرئيسية",
