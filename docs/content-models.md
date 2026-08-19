@@ -6,11 +6,24 @@ Typed local content models include:
 - Research projects
 - Publications
 - Events
-- Blog posts
 - Navigation
 - Page shells
 
 All fictional clients, partner blocks, metrics, and testimonials must remain labeled as placeholder content until replaced with verified real data.
+
+## Blog
+
+Directus is the source of truth for Blog content. Public website reads use the `blog_posts`
+collection and its translations relation:
+
+```text
+blog_posts.translations
+  -> blog_post_translations.blog_post
+```
+
+Translations use `en`, `tr`, `ar`, and `fa`. Catalog and detail queries are anonymous and
+explicitly filter to `blog_posts.status = published`. The localized routes are
+`/[locale]/blog` and `/[locale]/blog/[slug]`.
 
 ## Case Studies
 

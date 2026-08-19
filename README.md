@@ -52,7 +52,13 @@ All public routes are locale-prefixed. English and Turkish use `dir="ltr"`; Arab
 
 ## Content Architecture
 
-Mock services, projects, publications, events, case studies, blog posts, team-ready shells, and partner-ready shells live in `src/data`. Placeholder metrics and testimonials are explicitly fictional.
+Mock services, projects, publications, events, case studies, team-ready shells, and partner-ready shells live in `src/data`. Placeholder metrics and testimonials are explicitly fictional.
+
+### Blog
+
+Directus is the source of truth for Blog content through `blog_posts` and
+`blog_post_translations`. Published Blog catalog and detail content is read anonymously for
+English, Turkish, Arabic, and Farsi at `/[locale]/blog` and `/[locale]/blog/[slug]`.
 
 ## Integrations Plan
 
@@ -80,4 +86,4 @@ For Phase 1 shells, add an entry to `src/data/page-shells.ts`. For a fully desig
 
 ## Remaining Tasks
 
-Phase 2 should replace route shells with fully designed services, R&D, events, case studies, blog, about, team, partners, contact, and legal pages. Phase 3 should implement accessible React Hook Form flows and mock API submissions.
+Phase 2 should replace the remaining route shells with fully designed services, R&D, events, case studies, about, team, partners, contact, and legal pages. Phase 3 should implement accessible React Hook Form flows and mock API submissions.
