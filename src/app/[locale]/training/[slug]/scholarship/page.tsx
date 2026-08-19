@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { ScholarshipExam } from "@/components/training/ScholarshipExam";
 import { getScholarshipExam, scholarshipExamCopy } from "@/data/scholarship-exams";
-import { getTrainingProgram, trainingPrograms } from "@/data/training-programs";
+import { getScholarshipProgram, scholarshipPrograms } from "@/data/scholarship-programs";
 import type { Locale } from "@/i18n/routing";
 import { localize } from "@/lib/utilities/localize";
 import { getCurrentUserProfile, withDirectusProfilePhone } from "@/lib/auth/user";
@@ -14,8 +14,8 @@ import { getPublishedTrainingProgramBySlug } from "@/lib/directus/training";
 import type { ScholarshipProgramSummary } from "@/lib/scholarship/types";
 
 export function generateStaticParams() {
-  return trainingPrograms
-    .filter((program) => program.category === "bootcamp" && getScholarshipExam(program.slug))
+  return scholarshipPrograms
+    .filter((program) => getScholarshipExam(program.slug))
     .map((program) => ({ slug: program.slug }));
 }
 
@@ -24,10 +24,10 @@ export function generateMetadata({
 }: {
   params: { locale: Locale; slug: string };
 }): Metadata {
-  const program = getTrainingProgram(params.slug);
+  const program = getScholarshipProgram(params.slug);
   const exam = getScholarshipExam(params.slug);
 
-  if (!program || program.category !== "bootcamp" || !exam) return {};
+  if (!program || !exam) return {};
 
   return {
     title: `${localize(scholarshipExamCopy.label, params.locale)}: ${localize(
@@ -44,10 +44,10 @@ export default async function TrainingScholarshipPage({
   params: { locale: Locale; slug: string };
 }) {
   setRequestLocale(params.locale);
-  const program = getTrainingProgram(params.slug);
+  const program = getScholarshipProgram(params.slug);
   const exam = getScholarshipExam(params.slug);
 
-  if (!program || program.category !== "bootcamp" || !exam) {
+  if (!program || !exam) {
     notFound();
   }
 
