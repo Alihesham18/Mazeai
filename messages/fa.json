@@ -70,6 +70,46 @@
       "attended": "شرکت کرده",
       "cancelled": "لغوشده"
     },
+    "users": {
+      "management": "مدیریت کاربران",
+      "description": "حساب‌های کاربران وب‌سایت و اطلاعات نمایه آن‌ها را بررسی کنید.",
+      "searchUsers": "جستجوی کاربران",
+      "searchPlaceholder": "نام یا ایمیل",
+      "search": "جستجو",
+      "status": "وضعیت",
+      "allStatuses": "همه وضعیت‌ها",
+      "clearFilters": "پاک کردن فیلترها",
+      "name": "نام",
+      "email": "ایمیل",
+      "accountNumber": "شماره حساب",
+      "lastAccess": "آخرین دسترسی",
+      "role": "نقش",
+      "actions": "اقدامات",
+      "viewDetails": "مشاهده جزئیات",
+      "previous": "قبلی",
+      "next": "بعدی",
+      "paginationLabel": "صفحه‌های فهرست کاربران",
+      "pageOf": "صفحه {page} از {pages}",
+      "totalResults": "{count} کاربر",
+      "noUsersFound": "کاربری یافت نشد",
+      "noUsersMessage": "هیچ کاربر وب‌سایتی با جستجو و فیلترهای فعلی مطابقت ندارد.",
+      "unavailable": "در دسترس نیست",
+      "unavailableTitle": "فهرست کاربران در دسترس نیست",
+      "unavailableMessage": "اطلاعات کاربران به‌صورت امن بارگیری نشد. لطفاً بعداً دوباره تلاش کنید.",
+      "userDetails": "جزئیات کاربر",
+      "backToUsers": "بازگشت به کاربران",
+      "account": "حساب",
+      "statuses": {
+        "active": "فعال",
+        "invited": "دعوت‌شده",
+        "draft": "پیش‌نویس",
+        "suspended": "تعلیق‌شده",
+        "archived": "بایگانی‌شده"
+      },
+      "roles": {
+        "websiteUser": "کاربر وب‌سایت"
+      }
+    },
     "groups": {
       "people": "افراد",
       "training": "آموزش",

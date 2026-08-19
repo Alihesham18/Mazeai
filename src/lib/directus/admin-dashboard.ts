@@ -2,7 +2,7 @@ import "server-only";
 
 import { aggregate, readItems, withToken } from "@directus/sdk";
 import { unstable_noStore as noStore } from "next/cache";
-import { requireAdmin } from "@/lib/auth/admin";
+import { normalizeDirectusRoleId, requireAdmin } from "@/lib/auth/admin";
 import { getAuthenticatedDirectusSession } from "@/lib/directus/auth";
 import { createDirectusRestClient } from "@/lib/directus/client";
 import { logDirectusDiagnostic } from "@/lib/directus/diagnostics";
@@ -90,11 +90,25 @@ export async function getAdminDashboardData(): Promise<AdminDashboardData> {
 
   const request = <T>(command: Parameters<typeof client.request<T>>[0]) =>
     client.request(withToken(session.accessToken, command));
+  const websiteUserRoleId = normalizeDirectusRoleId(process.env.DIRECTUS_WEBSITE_USER_ROLE_ID);
+  if (!websiteUserRoleId) {
+    logDirectusDiagnostic(
+      "admin-dashboard.count-users.configuration",
+      new Error("Website User role is not configured")
+    );
+  }
 
   const metricReads = {
-    totalUsers: safeRead("admin-dashboard.count-users", () =>
-      request(aggregate("directus_users", { aggregate: { count: ["id"] } }))
-    ),
+    totalUsers: websiteUserRoleId
+      ? safeRead("admin-dashboard.count-users", () =>
+          request(
+            aggregate("directus_users", {
+              aggregate: { count: ["id"] },
+              query: { filter: { role: { _eq: websiteUserRoleId } } }
+            })
+          )
+        )
+      : Promise.resolve(null),
     trainingPrograms: safeRead("admin-dashboard.count-training-programs", () =>
       request(aggregate("training_programs", { aggregate: { count: ["id"] } }))
     ),

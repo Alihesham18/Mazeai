@@ -70,6 +70,46 @@
       "attended": "Katıldı",
       "cancelled": "İptal edildi"
     },
+    "users": {
+      "management": "Kullanıcı Yönetimi",
+      "description": "Web sitesi kullanıcı hesaplarını ve profil bilgilerini inceleyin.",
+      "searchUsers": "Kullanıcı Ara",
+      "searchPlaceholder": "Ad veya e-posta",
+      "search": "Ara",
+      "status": "Durum",
+      "allStatuses": "Tüm Durumlar",
+      "clearFilters": "Filtreleri temizle",
+      "name": "Ad",
+      "email": "E-posta",
+      "accountNumber": "Hesap Numarası",
+      "lastAccess": "Son Erişim",
+      "role": "Rol",
+      "actions": "İşlemler",
+      "viewDetails": "Detayları Görüntüle",
+      "previous": "Önceki",
+      "next": "Sonraki",
+      "paginationLabel": "Kullanıcı dizini sayfaları",
+      "pageOf": "Sayfa {page} / {pages}",
+      "totalResults": "{count} kullanıcı",
+      "noUsersFound": "Kullanıcı Bulunamadı",
+      "noUsersMessage": "Mevcut arama ve filtrelerle eşleşen web sitesi kullanıcısı yok.",
+      "unavailable": "Kullanılamıyor",
+      "unavailableTitle": "Kullanıcı dizini kullanılamıyor",
+      "unavailableMessage": "Kullanıcı bilgileri güvenli şekilde yüklenemedi. Lütfen daha sonra tekrar deneyin.",
+      "userDetails": "Kullanıcı Detayları",
+      "backToUsers": "Kullanıcılara Dön",
+      "account": "Hesap",
+      "statuses": {
+        "active": "Aktif",
+        "invited": "Davet Edildi",
+        "draft": "Taslak",
+        "suspended": "Askıya Alındı",
+        "archived": "Arşivlendi"
+      },
+      "roles": {
+        "websiteUser": "Web Sitesi Kullanıcısı"
+      }
+    },
     "groups": {
       "people": "Kişiler",
       "training": "Eğitim",

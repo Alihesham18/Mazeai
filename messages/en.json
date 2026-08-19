@@ -70,6 +70,46 @@
       "attended": "Attended",
       "cancelled": "Cancelled"
     },
+    "users": {
+      "management": "User Management",
+      "description": "Review website user accounts and profile information.",
+      "searchUsers": "Search Users",
+      "searchPlaceholder": "Name or email",
+      "search": "Search",
+      "status": "Status",
+      "allStatuses": "All Statuses",
+      "clearFilters": "Clear filters",
+      "name": "Name",
+      "email": "Email",
+      "accountNumber": "Account Number",
+      "lastAccess": "Last Access",
+      "role": "Role",
+      "actions": "Actions",
+      "viewDetails": "View Details",
+      "previous": "Previous",
+      "next": "Next",
+      "paginationLabel": "User directory pages",
+      "pageOf": "Page {page} of {pages}",
+      "totalResults": "{count, plural, =0 {No users} one {# user} other {# users}}",
+      "noUsersFound": "No Users Found",
+      "noUsersMessage": "No website users match the current search and filters.",
+      "unavailable": "Unavailable",
+      "unavailableTitle": "User directory unavailable",
+      "unavailableMessage": "User information could not be loaded safely. Please try again later.",
+      "userDetails": "User Details",
+      "backToUsers": "Back to Users",
+      "account": "Account",
+      "statuses": {
+        "active": "Active",
+        "invited": "Invited",
+        "draft": "Draft",
+        "suspended": "Suspended",
+        "archived": "Archived"
+      },
+      "roles": {
+        "websiteUser": "Website User"
+      }
+    },
     "groups": {
       "people": "People",
       "training": "Training",

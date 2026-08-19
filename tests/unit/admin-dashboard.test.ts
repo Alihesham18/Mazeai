@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
 const { createClient, getSession, logDiagnostic, noStore, request, requireAdmin } = vi.hoisted(
   () => ({
@@ -26,12 +26,18 @@ vi.mock("@directus/sdk", () => ({
   }),
   withToken: (token: string, command: unknown) => ({ token, command })
 }));
-vi.mock("@/lib/auth/admin", () => ({ requireAdmin }));
+vi.mock("@/lib/auth/admin", () => ({
+  normalizeDirectusRoleId: (value: unknown) => (typeof value === "string" ? value : null),
+  requireAdmin
+}));
 vi.mock("@/lib/directus/auth", () => ({ getAuthenticatedDirectusSession: getSession }));
 vi.mock("@/lib/directus/client", () => ({ createDirectusRestClient: createClient }));
 vi.mock("@/lib/directus/diagnostics", () => ({ logDirectusDiagnostic: logDiagnostic }));
 
 import { getAdminDashboardData } from "@/lib/directus/admin-dashboard";
+
+const websiteUserRoleId = "11111111-1111-4111-8111-111111111111";
+const previousWebsiteRoleId = process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
 
 type DashboardCommand = {
   token: string;
@@ -68,7 +74,13 @@ function successfulResponse({ command }: DashboardCommand) {
 }
 
 describe("admin dashboard data", () => {
+  afterAll(() => {
+    if (previousWebsiteRoleId === undefined) delete process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
+    else process.env.DIRECTUS_WEBSITE_USER_ROLE_ID = previousWebsiteRoleId;
+  });
+
   beforeEach(() => {
+    process.env.DIRECTUS_WEBSITE_USER_ROLE_ID = websiteUserRoleId;
     noStore.mockClear();
     logDiagnostic.mockClear();
     requireAdmin.mockReset().mockResolvedValue({
@@ -127,6 +139,22 @@ describe("admin dashboard data", () => {
         options: {
           aggregate: { count: ["id"] },
           query: { filter: { status: { _eq: "accepted" } } }
+        }
+      }
+    });
+  });
+
+  it("counts only Website User identities for consistency with the user directory", async () => {
+    await getAdminDashboardData();
+
+    expect(request).toHaveBeenCalledWith({
+      token: "website-admin-access-token",
+      command: {
+        operation: "aggregate",
+        collection: "directus_users",
+        options: {
+          aggregate: { count: ["id"] },
+          query: { filter: { role: { _eq: websiteUserRoleId } } }
         }
       }
     });

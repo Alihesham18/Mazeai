@@ -10,6 +10,7 @@ export interface DirectusWebsiteUser {
   email?: string | null;
   role?: string | DirectusUserRole | null;
   status?: string | null;
+  last_access?: string | null;
 }
 
 export interface DirectusUserProfile {

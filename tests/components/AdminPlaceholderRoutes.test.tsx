@@ -16,10 +16,8 @@ import AdminScholarshipsPage from "@/app/[locale]/admin/scholarships/page";
 import AdminTrainingApplicationsPage from "@/app/[locale]/admin/training/applications/page";
 import AdminTrainingEnrollmentsPage from "@/app/[locale]/admin/training/enrollments/page";
 import AdminTrainingProgramsPage from "@/app/[locale]/admin/training/programs/page";
-import AdminUsersPage from "@/app/[locale]/admin/users/page";
 
 const routes = [
-  [AdminUsersPage, "navigation.users"],
   [AdminTrainingProgramsPage, "navigation.trainingPrograms"],
   [AdminTrainingApplicationsPage, "navigation.trainingApplications"],
   [AdminTrainingEnrollmentsPage, "navigation.enrolledTrainings"],

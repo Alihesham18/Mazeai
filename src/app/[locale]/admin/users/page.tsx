@@ -1,6 +1,24 @@
-import { AdminPlaceholder } from "@/components/admin/AdminPlaceholder";
+import { setRequestLocale } from "next-intl/server";
+import { AdminUsers } from "@/components/admin/AdminUsers";
 import type { Locale } from "@/i18n/routing";
+import { getAdminUsers } from "@/lib/directus/admin-users";
 
-export default function AdminUsersPage({ params }: { params: { locale: Locale } }) {
-  return <AdminPlaceholder locale={params.locale} titleKey="navigation.users" />;
+function parameter(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function AdminUsersPage({
+  params,
+  searchParams
+}: {
+  params: { locale: Locale };
+  searchParams?: { page?: string | string[]; q?: string | string[]; status?: string | string[] };
+}) {
+  setRequestLocale(params.locale);
+  const result = await getAdminUsers({
+    page: parameter(searchParams?.page),
+    q: parameter(searchParams?.q),
+    status: parameter(searchParams?.status)
+  });
+  return <AdminUsers locale={params.locale} result={result} />;
 }

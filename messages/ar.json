@@ -70,6 +70,46 @@
       "attended": "حضر",
       "cancelled": "ملغى"
     },
+    "users": {
+      "management": "إدارة المستخدمين",
+      "description": "راجع حسابات مستخدمي الموقع ومعلومات ملفاتهم الشخصية.",
+      "searchUsers": "البحث عن المستخدمين",
+      "searchPlaceholder": "الاسم أو البريد الإلكتروني",
+      "search": "بحث",
+      "status": "الحالة",
+      "allStatuses": "جميع الحالات",
+      "clearFilters": "مسح عوامل التصفية",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "accountNumber": "رقم الحساب",
+      "lastAccess": "آخر وصول",
+      "role": "الدور",
+      "actions": "الإجراءات",
+      "viewDetails": "عرض التفاصيل",
+      "previous": "السابق",
+      "next": "التالي",
+      "paginationLabel": "صفحات دليل المستخدمين",
+      "pageOf": "الصفحة {page} من {pages}",
+      "totalResults": "{count} مستخدم",
+      "noUsersFound": "لم يتم العثور على مستخدمين",
+      "noUsersMessage": "لا يوجد مستخدمو موقع يطابقون البحث وعوامل التصفية الحالية.",
+      "unavailable": "غير متاح",
+      "unavailableTitle": "دليل المستخدمين غير متاح",
+      "unavailableMessage": "تعذر تحميل معلومات المستخدمين بأمان. يرجى المحاولة لاحقًا.",
+      "userDetails": "تفاصيل المستخدم",
+      "backToUsers": "العودة إلى المستخدمين",
+      "account": "الحساب",
+      "statuses": {
+        "active": "نشط",
+        "invited": "مدعو",
+        "draft": "مسودة",
+        "suspended": "موقوف",
+        "archived": "مؤرشف"
+      },
+      "roles": {
+        "websiteUser": "مستخدم الموقع"
+      }
+    },
     "groups": {
       "people": "الأشخاص",
       "training": "التدريب",
