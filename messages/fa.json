@@ -32,8 +32,44 @@
     "menu": "منو",
     "closeMenu": "بستن منو",
     "administratorAccount": "حساب مدیر",
-    "dashboardPlaceholder": "داشبورد مدیریت در مرحله بعدی پیاده‌سازی می‌شود.",
+    "administratorFallback": "مدیر",
     "managementPlaceholder": "این بخش مدیریتی در مراحل بعدی پنل مدیریت پیاده‌سازی می‌شود.",
+    "dashboard": {
+      "operationalOverview": "نمای عملیاتی",
+      "welcomeBack": "خوش آمدید، {name}",
+      "recentActivity": "فعالیت‌های اخیر",
+      "quickAccess": "دسترسی سریع",
+      "view": "مشاهده",
+      "unavailable": "در دسترس نیست",
+      "noRecentActivity": "فعالیت اخیری وجود ندارد"
+    },
+    "metrics": {
+      "totalUsers": "مجموع کاربران",
+      "trainingPrograms": "برنامه‌های آموزشی",
+      "trainingApplications": "درخواست‌های آموزشی",
+      "enrolledTrainings": "آموزش‌های ثبت‌شده",
+      "scholarships": "سوابق بورس",
+      "discountCodes": "کدهای تخفیف",
+      "events": "رویدادها",
+      "eventRegistrations": "ثبت‌نام‌های رویداد"
+    },
+    "activityTypes": {
+      "trainingApplication": "درخواست آموزشی",
+      "scholarshipAttempt": "تلاش آزمون بورس",
+      "eventRegistration": "ثبت‌نام رویداد"
+    },
+    "statuses": {
+      "submitted": "ارسال‌شده",
+      "underReview": "در حال بررسی",
+      "accepted": "پذیرفته‌شده",
+      "rejected": "ردشده",
+      "eligible": "واجد شرایط",
+      "notEligible": "فاقد شرایط",
+      "completed": "تکمیل‌شده",
+      "registered": "ثبت‌شده",
+      "attended": "شرکت کرده",
+      "cancelled": "لغوشده"
+    },
     "groups": {
       "people": "افراد",
       "training": "آموزش",

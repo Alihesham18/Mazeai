@@ -1,13 +1,15 @@
 import { render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-const { requireAdmin, setRequestLocale } = vi.hoisted(() => ({
+const { getAdminDashboardData, requireAdmin, setRequestLocale } = vi.hoisted(() => ({
+  getAdminDashboardData: vi.fn(),
   requireAdmin: vi.fn(),
   setRequestLocale: vi.fn()
 }));
 
 vi.mock("next-intl/server", () => ({ setRequestLocale }));
 vi.mock("@/lib/auth/admin", () => ({ requireAdmin }));
+vi.mock("@/lib/directus/admin-dashboard", () => ({ getAdminDashboardData }));
 vi.mock("@/components/admin/AdminShell", () => ({
   AdminShell: ({
     children,
@@ -23,11 +25,17 @@ vi.mock("@/components/admin/AdminShell", () => ({
     </div>
   )
 }));
-vi.mock("@/components/admin/AdminPlaceholder", () => ({
-  AdminPlaceholder: ({ titleKey, dashboard }: { titleKey: string; dashboard?: boolean }) => (
-    <section>
-      <h1>{titleKey}</h1>
-      <p>{dashboard ? "dashboardPlaceholder" : "managementPlaceholder"}</p>
+vi.mock("@/components/admin/AdminDashboard", () => ({
+  AdminDashboard: ({
+    data,
+    locale
+  }: {
+    data: { metrics: { totalUsers: number } };
+    locale: string;
+  }) => (
+    <section data-testid="admin-dashboard" data-locale={locale}>
+      <h1>dashboard</h1>
+      <p>{data.metrics.totalUsers}</p>
     </section>
   )
 }));
@@ -44,6 +52,11 @@ describe("protected admin route", () => {
       lastName: "Admin",
       roleId: "server-only-role-id"
     });
+    getAdminDashboardData.mockReset().mockResolvedValue({
+      administratorFirstName: "Maze",
+      metrics: { totalUsers: 11 },
+      recentActivity: []
+    });
     setRequestLocale.mockClear();
   });
 
@@ -57,11 +70,13 @@ describe("protected admin route", () => {
     expect(screen.getByText("protected")).toBeInTheDocument();
   });
 
-  it("keeps the admin root as a dashboard placeholder without fake statistics", async () => {
+  it("loads the real server-side dashboard data for the localized admin root", async () => {
     render(await AdminPage({ params: { locale: "ar" } }));
 
     expect(setRequestLocale).toHaveBeenCalledWith("ar");
-    expect(screen.getByRole("heading", { name: "navigation.dashboard" })).toBeInTheDocument();
-    expect(screen.getByText("dashboardPlaceholder")).toBeInTheDocument();
+    expect(getAdminDashboardData).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("admin-dashboard")).toHaveAttribute("data-locale", "ar");
+    expect(screen.getByRole("heading", { name: "dashboard" })).toBeInTheDocument();
+    expect(screen.getByText("11")).toBeInTheDocument();
   });
 });

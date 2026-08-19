@@ -32,8 +32,44 @@
     "menu": "Menu",
     "closeMenu": "Close menu",
     "administratorAccount": "Administrator account",
-    "dashboardPlaceholder": "The administration dashboard will be implemented in the next task.",
+    "administratorFallback": "Administrator",
     "managementPlaceholder": "This management area will be implemented in the next admin tasks.",
+    "dashboard": {
+      "operationalOverview": "Operational overview",
+      "welcomeBack": "Welcome back, {name}",
+      "recentActivity": "Recent Activity",
+      "quickAccess": "Quick Access",
+      "view": "View",
+      "unavailable": "Unavailable",
+      "noRecentActivity": "No recent activity"
+    },
+    "metrics": {
+      "totalUsers": "Total Users",
+      "trainingPrograms": "Training Programs",
+      "trainingApplications": "Training Applications",
+      "enrolledTrainings": "Enrolled Trainings",
+      "scholarships": "Scholarship Records",
+      "discountCodes": "Discount Codes",
+      "events": "Events",
+      "eventRegistrations": "Event Registrations"
+    },
+    "activityTypes": {
+      "trainingApplication": "Training application",
+      "scholarshipAttempt": "Scholarship attempt",
+      "eventRegistration": "Event registration"
+    },
+    "statuses": {
+      "submitted": "Submitted",
+      "underReview": "Under review",
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "eligible": "Eligible",
+      "notEligible": "Not eligible",
+      "completed": "Completed",
+      "registered": "Registered",
+      "attended": "Attended",
+      "cancelled": "Cancelled"
+    },
     "groups": {
       "people": "People",
       "training": "Training",

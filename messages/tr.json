@@ -32,8 +32,44 @@
     "menu": "Menü",
     "closeMenu": "Menüyü kapat",
     "administratorAccount": "Yönetici hesabı",
-    "dashboardPlaceholder": "Yönetim panosu bir sonraki görevde uygulanacaktır.",
+    "administratorFallback": "Yönetici",
     "managementPlaceholder": "Bu yönetim alanı sonraki yönetici görevlerinde uygulanacaktır.",
+    "dashboard": {
+      "operationalOverview": "Operasyonel genel bakış",
+      "welcomeBack": "Tekrar hoş geldiniz, {name}",
+      "recentActivity": "Son Etkinlikler",
+      "quickAccess": "Hızlı Erişim",
+      "view": "Görüntüle",
+      "unavailable": "Kullanılamıyor",
+      "noRecentActivity": "Yakın zamanda etkinlik yok"
+    },
+    "metrics": {
+      "totalUsers": "Toplam Kullanıcı",
+      "trainingPrograms": "Eğitim Programları",
+      "trainingApplications": "Eğitim Başvuruları",
+      "enrolledTrainings": "Kayıtlı Eğitimler",
+      "scholarships": "Burs Kayıtları",
+      "discountCodes": "İndirim Kodları",
+      "events": "Etkinlikler",
+      "eventRegistrations": "Etkinlik Kayıtları"
+    },
+    "activityTypes": {
+      "trainingApplication": "Eğitim başvurusu",
+      "scholarshipAttempt": "Burs sınavı denemesi",
+      "eventRegistration": "Etkinlik kaydı"
+    },
+    "statuses": {
+      "submitted": "Gönderildi",
+      "underReview": "İnceleniyor",
+      "accepted": "Kabul edildi",
+      "rejected": "Reddedildi",
+      "eligible": "Uygun",
+      "notEligible": "Uygun değil",
+      "completed": "Tamamlandı",
+      "registered": "Kayıtlı",
+      "attended": "Katıldı",
+      "cancelled": "İptal edildi"
+    },
     "groups": {
       "people": "Kişiler",
       "training": "Eğitim",

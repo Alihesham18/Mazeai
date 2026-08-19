@@ -32,8 +32,44 @@
     "menu": "القائمة",
     "closeMenu": "إغلاق القائمة",
     "administratorAccount": "حساب المسؤول",
-    "dashboardPlaceholder": "سيتم تنفيذ لوحة الإدارة في المهمة التالية.",
+    "administratorFallback": "المسؤول",
     "managementPlaceholder": "سيتم تنفيذ منطقة الإدارة هذه في مهام الإدارة القادمة.",
+    "dashboard": {
+      "operationalOverview": "نظرة عامة تشغيلية",
+      "welcomeBack": "مرحبًا بعودتك، {name}",
+      "recentActivity": "النشاط الأخير",
+      "quickAccess": "الوصول السريع",
+      "view": "عرض",
+      "unavailable": "غير متاح",
+      "noRecentActivity": "لا يوجد نشاط حديث"
+    },
+    "metrics": {
+      "totalUsers": "إجمالي المستخدمين",
+      "trainingPrograms": "برامج التدريب",
+      "trainingApplications": "طلبات التدريب",
+      "enrolledTrainings": "التدريبات المسجلة",
+      "scholarships": "سجلات المنح",
+      "discountCodes": "رموز الخصم",
+      "events": "الفعاليات",
+      "eventRegistrations": "تسجيلات الفعاليات"
+    },
+    "activityTypes": {
+      "trainingApplication": "طلب تدريب",
+      "scholarshipAttempt": "محاولة اختبار منحة",
+      "eventRegistration": "تسجيل فعالية"
+    },
+    "statuses": {
+      "submitted": "مقدم",
+      "underReview": "قيد المراجعة",
+      "accepted": "مقبول",
+      "rejected": "مرفوض",
+      "eligible": "مؤهل",
+      "notEligible": "غير مؤهل",
+      "completed": "مكتمل",
+      "registered": "مسجل",
+      "attended": "حضر",
+      "cancelled": "ملغى"
+    },
     "groups": {
       "people": "الأشخاص",
       "training": "التدريب",

@@ -1,8 +1,10 @@
 import { setRequestLocale } from "next-intl/server";
-import { AdminPlaceholder } from "@/components/admin/AdminPlaceholder";
+import { AdminDashboard } from "@/components/admin/AdminDashboard";
 import type { Locale } from "@/i18n/routing";
+import { getAdminDashboardData } from "@/lib/directus/admin-dashboard";
 
 export default async function AdminPage({ params }: { params: { locale: Locale } }) {
   setRequestLocale(params.locale);
-  return <AdminPlaceholder locale={params.locale} titleKey="navigation.dashboard" dashboard />;
+  const data = await getAdminDashboardData();
+  return <AdminDashboard data={data} locale={params.locale} />;
 }
