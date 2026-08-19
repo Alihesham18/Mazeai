@@ -26,6 +26,10 @@
     "sectionsIncluded": "Included in this page shell",
     "phaseNote": "This route is ready for Phase 2 content expansion and already uses the shared layout, SEO, translations, and RTL-safe styling."
   },
+  "adminAuth": {
+    "title": "Admin Panel",
+    "confirmed": "Authenticated administrator access confirmed."
+  },
   "navigation": {
     "home": "Home",
     "services": "Services",

@@ -1,3 +1,5 @@
+import "server-only";
+
 import { getCurrentDirectusUser } from "@/lib/directus/auth";
 import type { DirectusPhoneProfile, DirectusWebsiteUser } from "@/lib/directus/types";
 import { combineStoredPhone } from "@/lib/phone/normalize";

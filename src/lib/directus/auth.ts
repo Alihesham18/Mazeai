@@ -1,3 +1,5 @@
+import "server-only";
+
 import {
   isDirectusError,
   login,
@@ -11,14 +13,22 @@ import {
   withToken
 } from "@directus/sdk";
 import { cookies } from "next/headers";
+import {
+  authPersistenceCookie,
+  directusAccessTokenCookie,
+  directusExpiresAtCookie,
+  directusRefreshTokenCookie
+} from "@/lib/auth/constants";
 import { createDirectusRestClient } from "./client";
 import { logDirectusDiagnostic } from "./diagnostics";
 import type { DirectusSession, DirectusWebsiteUser } from "./types";
 
-export const directusAccessTokenCookie = "synergymazeai-directus-access-token";
-export const directusRefreshTokenCookie = "synergymazeai-directus-refresh-token";
-export const directusExpiresAtCookie = "synergymazeai-directus-expires-at";
-export const authPersistenceCookie = "synergymazeai-auth-persistent";
+export {
+  authPersistenceCookie,
+  directusAccessTokenCookie,
+  directusExpiresAtCookie,
+  directusRefreshTokenCookie
+} from "@/lib/auth/constants";
 
 export type DirectusAuthErrorCode =
   | "accountExists"

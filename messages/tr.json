@@ -26,6 +26,10 @@
     "sectionsIncluded": "Bu sayfa iskeletinde bulunanlar",
     "phaseNote": "Bu rota Faz 2 içerik genişletmesine hazırdır ve ortak düzen, SEO, çeviriler ve RTL uyumlu stilleri kullanır."
   },
+  "adminAuth": {
+    "title": "Yönetim Paneli",
+    "confirmed": "Yetkili yönetici erişimi doğrulandı."
+  },
   "navigation": {
     "home": "Ana Sayfa",
     "services": "Hizmetler",

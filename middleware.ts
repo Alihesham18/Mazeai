@@ -6,7 +6,7 @@ import {
   directusAccessTokenCookie,
   directusExpiresAtCookie,
   directusRefreshTokenCookie
-} from "@/lib/directus/auth";
+} from "@/lib/auth/constants";
 import { getDirectusUrl } from "@/lib/directus/client";
 
 const internationalizationMiddleware = createMiddleware({
@@ -21,7 +21,11 @@ export default async function middleware(request: NextRequest) {
   const refreshToken = request.cookies.get(directusRefreshTokenCookie)?.value;
   const expiresAt = Number(request.cookies.get(directusExpiresAtCookie)?.value);
 
-  if (!directusUrl || !refreshToken || (Number.isFinite(expiresAt) && expiresAt > Date.now() + 10_000)) {
+  if (
+    !directusUrl ||
+    !refreshToken ||
+    (Number.isFinite(expiresAt) && expiresAt > Date.now() + 10_000)
+  ) {
     return response;
   }
 
