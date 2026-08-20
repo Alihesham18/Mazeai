@@ -6,6 +6,8 @@ import fa from "../../messages/fa.json";
 import tr from "../../messages/tr.json";
 
 vi.mock("server-only", () => ({}));
+vi.mock("next-intl", () => ({ useTranslations: () => (key: string) => key }));
+vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
 vi.mock("next-intl/server", () => ({
   getTranslations: vi.fn(async () => (key: string, values?: Record<string, number>) => {
     if (key === "users.totalResults") return `${values?.count} users`;
@@ -105,11 +107,47 @@ describe("AdminUsers", () => {
       "userDetails",
       "backToUsers"
     ] as const;
+    const statusActionKeys = [
+      "accountControl",
+      "accountStatus",
+      "active",
+      "suspended",
+      "activeDescription",
+      "suspendedDescription",
+      "suspendUser",
+      "activateUser",
+      "accountSuspension",
+      "accountActivation",
+      "suspendTitle",
+      "activateTitle",
+      "suspendConfirmation",
+      "activateConfirmation",
+      "cancel",
+      "updating",
+      "successSuspended",
+      "successActivated",
+      "closeConfirmation"
+    ] as const;
+    const statusErrorKeys = [
+      "selfTarget",
+      "invalidTransition",
+      "notFound",
+      "invalidUserId",
+      "invalidStatus",
+      "unavailable"
+    ] as const;
 
     for (const catalog of Object.values(catalogs)) {
       for (const key of keys) expect(catalog.adminAuth.users[key].trim()).not.toBe("");
       for (const status of ["active", "invited", "draft", "suspended", "archived"] as const) {
         expect(catalog.adminAuth.users.statuses[status].trim()).not.toBe("");
+      }
+
+      for (const key of statusActionKeys) {
+        expect(catalog.adminAuth.users.statusAction[key].trim()).not.toBe("");
+      }
+      for (const key of statusErrorKeys) {
+        expect(catalog.adminAuth.users.statusAction.errors[key].trim()).not.toBe("");
       }
     }
   });

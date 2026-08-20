@@ -25,6 +25,7 @@ vi.mock("@directus/sdk", () => ({
     query
   }),
   readUsers: (query: unknown) => ({ operation: "readUsers", query }),
+  updateUser: (id: string, changes: unknown) => ({ operation: "updateUser", id, changes }),
   withToken: (token: string, command: unknown) => ({ token, command })
 }));
 vi.mock("@/lib/auth/admin", async () => {
@@ -38,7 +39,8 @@ vi.mock("@/lib/directus/diagnostics", () => ({ logDirectusDiagnostic: logDiagnos
 import {
   getAdminUserById,
   getAdminUsers,
-  normalizeAdminUsersQuery
+  normalizeAdminUsersQuery,
+  setAdminUserStatus
 } from "@/lib/directus/admin-users";
 
 const websiteRoleId = "11111111-1111-4111-8111-111111111111";
@@ -50,8 +52,10 @@ const previousWebsiteRoleId = process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
 type Command = {
   token: string;
   command: {
-    operation: "aggregate" | "readItems" | "readUsers";
+    operation: "aggregate" | "readItems" | "readUsers" | "updateUser";
     collection?: string;
+    id?: string;
+    changes?: Record<string, unknown>;
     options?: unknown;
     query?: Record<string, unknown>;
   };
@@ -75,6 +79,7 @@ function successfulResponse(input: Command) {
   if (command.operation === "readItems") {
     return [{ user: userId, account_number: "SMA-2026-000001" }];
   }
+  if (command.operation === "updateUser") return { id: userId, status: "suspended" };
   return [websiteUser];
 }
 
@@ -280,5 +285,113 @@ describe("admin user directory service", () => {
 
     await expect(getAdminUsers({})).rejects.toThrow("Admin authorization failed");
     expect(request).not.toHaveBeenCalled();
+  });
+
+  describe("account status mutation", () => {
+    it("independently authorizes, scopes the target role, and updates only status", async () => {
+      const result = await setAdminUserStatus(userId, "suspended");
+
+      expect(result).toEqual({
+        state: "updated",
+        status: "suspended"
+      });
+
+      expect(requireAdmin).toHaveBeenCalledTimes(1);
+      const readCall = requestFor("readUsers") as Command;
+      expect(readCall.command.query).toEqual({
+        fields: ["id", "status", "role"],
+        filter: {
+          _and: [{ id: { _eq: userId } }, { role: { _eq: websiteRoleId } }]
+        },
+        limit: 1
+      });
+
+      const updateCall = requestFor("updateUser") as Command;
+      expect(updateCall.command).toEqual({
+        operation: "updateUser",
+        id: userId,
+        changes: { status: "suspended" }
+      });
+      expect(JSON.stringify(result)).not.toContain("website-admin-access-token");
+    });
+
+    it("accepts the reverse suspended-to-active transition", async () => {
+      request.mockImplementation((input: Command) => {
+        if (input.command.operation === "readUsers") {
+          return [{ ...websiteUser, status: "suspended" }];
+        }
+        return successfulResponse(input);
+      });
+
+      await expect(setAdminUserStatus(userId, "active")).resolves.toEqual({
+        state: "updated",
+        status: "active"
+      });
+      expect((requestFor("updateUser") as Command).command.changes).toEqual({ status: "active" });
+    });
+
+    it("rejects malformed target IDs and unsupported statuses before data requests", async () => {
+      await expect(setAdminUserStatus("not-a-uuid", "suspended")).resolves.toEqual({
+        state: "invalidUserId"
+      });
+      expect(request).not.toHaveBeenCalled();
+
+      await expect(setAdminUserStatus(userId, "archived")).resolves.toEqual({
+        state: "invalidStatus"
+      });
+      expect(request).not.toHaveBeenCalled();
+    });
+
+    it("prevents an administrator from suspending their own account", async () => {
+      requireAdmin.mockResolvedValue({
+        id: userId,
+        email: "admin@example.com",
+        firstName: "Admin",
+        lastName: "User",
+        roleId: "admin-role-id"
+      });
+
+      await expect(setAdminUserStatus(userId, "suspended")).resolves.toEqual({
+        state: "selfTarget"
+      });
+      expect(request).not.toHaveBeenCalled();
+    });
+
+    it("rejects missing targets and invalid transitions without issuing an update", async () => {
+      request.mockResolvedValueOnce([]);
+      await expect(setAdminUserStatus(userId, "suspended")).resolves.toEqual({
+        state: "notFound"
+      });
+      expect(requestFor("updateUser")).toBeUndefined();
+
+      request.mockReset().mockImplementation(successfulResponse);
+      await expect(setAdminUserStatus(userId, "active")).resolves.toEqual({
+        state: "invalidTransition"
+      });
+      expect(requestFor("updateUser")).toBeUndefined();
+    });
+
+    it("fails closed if independent admin authorization rejects", async () => {
+      requireAdmin.mockRejectedValue(new Error("Admin authorization failed"));
+
+      await expect(setAdminUserStatus(userId, "suspended")).rejects.toThrow(
+        "Admin authorization failed"
+      );
+      expect(request).not.toHaveBeenCalled();
+    });
+
+    it("returns a safe unavailable state when the Directus update fails", async () => {
+      request.mockImplementation((input: Command) => {
+        if (input.command.operation === "updateUser") {
+          throw new Error("private Directus update response");
+        }
+        return successfulResponse(input);
+      });
+
+      await expect(setAdminUserStatus(userId, "suspended")).resolves.toEqual({
+        state: "unavailable"
+      });
+      expect(logDiagnostic).toHaveBeenCalledWith("admin-users.update-status", expect.any(Error));
+    });
   });
 });

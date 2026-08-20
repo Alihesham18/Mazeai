@@ -1,3 +1,4 @@
+import { AdminUserStatusAction } from "./AdminUserStatusAction";
 import { ArrowLeft, Search, UserRound } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
@@ -317,6 +318,8 @@ export async function AdminUserDetail({
           </div>
         </dl>
       </section>
+
+      <AdminUserStatusAction locale={locale} userId={user.id} currentStatus={user.status} />
     </div>
   );
 }
