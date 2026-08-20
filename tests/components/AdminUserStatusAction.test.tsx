@@ -89,6 +89,21 @@ describe("AdminUserStatusAction", () => {
     expect(trigger).toHaveFocus();
   });
 
+  it("keeps keyboard focus inside the confirmation dialog", () => {
+    renderStatusAction("active");
+    fireEvent.click(screen.getByRole("button", { name: "Suspend User" }));
+
+    const close = screen.getByRole("button", { name: "Close confirmation" });
+    const confirm = within(screen.getByRole("dialog")).getByRole("button", {
+      name: "Suspend User"
+    });
+    expect(close).toHaveFocus();
+    fireEvent.keyDown(document, { key: "Tab", shiftKey: true });
+    expect(confirm).toHaveFocus();
+    fireEvent.keyDown(document, { key: "Tab" });
+    expect(close).toHaveFocus();
+  });
+
   it("supports Escape and safe overlay-click closing", () => {
     renderStatusAction("active");
     const trigger = screen.getByRole("button", { name: "Suspend User" });

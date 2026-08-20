@@ -37,6 +37,10 @@ https://your-production-domain.example/fa/auth/callback
 7. Review Directus rate limits, password policy, and user status handling before
    public registration opens.
 
+Controlled administrator-initiated resets, managed-role permissions, and the
+user-management audit collection are documented in
+[`admin-user-management.md`](./admin-user-management.md).
+
 ## Account profile persistence
 
 Directus system users store account identity fields: first name, last name, and

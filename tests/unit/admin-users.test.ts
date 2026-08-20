@@ -1,15 +1,24 @@
 import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { createClient, getSession, logDiagnostic, noStore, request, requireAdmin } = vi.hoisted(
-  () => ({
-    createClient: vi.fn(),
-    getSession: vi.fn(),
-    logDiagnostic: vi.fn(),
-    noStore: vi.fn(),
-    request: vi.fn(),
-    requireAdmin: vi.fn()
-  })
-);
+const {
+  createClient,
+  getSession,
+  logDiagnostic,
+  noStore,
+  recordActivity,
+  request,
+  requestPasswordReset,
+  requireAdmin
+} = vi.hoisted(() => ({
+  createClient: vi.fn(),
+  getSession: vi.fn(),
+  logDiagnostic: vi.fn(),
+  noStore: vi.fn(),
+  recordActivity: vi.fn(),
+  request: vi.fn(),
+  requestPasswordReset: vi.fn(),
+  requireAdmin: vi.fn()
+}));
 
 vi.mock("server-only", () => ({}));
 vi.mock("next/cache", () => ({ unstable_noStore: noStore }));
@@ -32,7 +41,13 @@ vi.mock("@/lib/auth/admin", async () => {
   const actual = await vi.importActual<typeof import("@/lib/auth/admin")>("@/lib/auth/admin");
   return { ...actual, requireAdmin };
 });
-vi.mock("@/lib/directus/auth", () => ({ getAuthenticatedDirectusSession: getSession }));
+vi.mock("@/lib/directus/admin-activity", () => ({
+  recordAdminUserActivity: recordActivity
+}));
+vi.mock("@/lib/directus/auth", () => ({
+  getAuthenticatedDirectusSession: getSession,
+  requestDirectusPasswordReset: requestPasswordReset
+}));
 vi.mock("@/lib/directus/client", () => ({ createDirectusRestClient: createClient }));
 vi.mock("@/lib/directus/diagnostics", () => ({ logDirectusDiagnostic: logDiagnostic }));
 
@@ -40,14 +55,19 @@ import {
   getAdminUserById,
   getAdminUsers,
   normalizeAdminUsersQuery,
+  requestAdminUserPasswordReset,
+  setAdminUserRole,
   setAdminUserStatus
 } from "@/lib/directus/admin-users";
 
 const websiteRoleId = "11111111-1111-4111-8111-111111111111";
+const adminRoleId = "55555555-5555-4555-8555-555555555555";
 const serviceRoleId = "22222222-2222-4222-8222-222222222222";
 const userId = "33333333-3333-4333-8333-333333333333";
 const serviceUserId = "44444444-4444-4444-8444-444444444444";
 const previousWebsiteRoleId = process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
+const previousAdminRoleId = process.env.DIRECTUS_ADMIN_ROLE_ID;
+const previousManagementToken = process.env.DIRECTUS_USER_MANAGEMENT_TOKEN;
 
 type Command = {
   token: string;
@@ -93,10 +113,16 @@ describe("admin user directory service", () => {
   afterAll(() => {
     if (previousWebsiteRoleId === undefined) delete process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
     else process.env.DIRECTUS_WEBSITE_USER_ROLE_ID = previousWebsiteRoleId;
+    if (previousAdminRoleId === undefined) delete process.env.DIRECTUS_ADMIN_ROLE_ID;
+    else process.env.DIRECTUS_ADMIN_ROLE_ID = previousAdminRoleId;
+    if (previousManagementToken === undefined) delete process.env.DIRECTUS_USER_MANAGEMENT_TOKEN;
+    else process.env.DIRECTUS_USER_MANAGEMENT_TOKEN = previousManagementToken;
   });
 
   beforeEach(() => {
     process.env.DIRECTUS_WEBSITE_USER_ROLE_ID = websiteRoleId;
+    process.env.DIRECTUS_ADMIN_ROLE_ID = adminRoleId;
+    process.env.DIRECTUS_USER_MANAGEMENT_TOKEN = "user-management-service-token";
     requireAdmin.mockReset().mockResolvedValue({
       id: "admin-id",
       email: "admin@example.com",
@@ -111,6 +137,8 @@ describe("admin user directory service", () => {
     });
     request.mockReset().mockImplementation(successfulResponse);
     createClient.mockReset().mockReturnValue({ request });
+    recordActivity.mockReset().mockResolvedValue(true);
+    requestPasswordReset.mockReset().mockResolvedValue({ ok: true });
     logDiagnostic.mockClear();
     noStore.mockClear();
   });
@@ -132,7 +160,7 @@ describe("admin user directory service", () => {
           role: "websiteUser"
         }
       ],
-      query: { page: 1, query: "", status: null },
+      query: { page: 1, query: "", status: null, role: null },
       totalCount: 21,
       totalPages: 2
     });
@@ -153,7 +181,7 @@ describe("admin user directory service", () => {
       query: {
         filter: {
           _and: [
-            { role: { _eq: websiteRoleId } },
+            { role: { _in: [websiteRoleId, adminRoleId] } },
             { status: { _eq: "active" } },
             {
               _or: [
@@ -169,11 +197,30 @@ describe("admin user directory service", () => {
     expect(usersCall.command.query).toMatchObject({ limit: 20, offset: 20 });
   });
 
-  it("normalizes invalid pages and unsupported status values safely", () => {
-    expect(normalizeAdminUsersQuery({ page: "-7", q: " test ", status: "deleted" })).toEqual({
+  it("normalizes invalid pages, statuses, and application role values safely", () => {
+    expect(
+      normalizeAdminUsersQuery({
+        page: "-7",
+        q: " test ",
+        status: "deleted",
+        role: adminRoleId
+      })
+    ).toEqual({
       page: 1,
       query: "test",
-      status: null
+      status: null,
+      role: null
+    });
+    expect(normalizeAdminUsersQuery({ role: "websiteAdmin" }).role).toBe("websiteAdmin");
+  });
+
+  it("filters the directory by a normalized managed role without exposing its UUID", async () => {
+    await getAdminUsers({ role: "websiteAdmin" });
+
+    const aggregateCall = requestFor("aggregate") as Command;
+    expect(aggregateCall.command.options).toEqual({
+      aggregate: { count: ["id"] },
+      query: { filter: { _and: [{ role: { _in: [adminRoleId] } }] } }
     });
   });
 
@@ -275,7 +322,7 @@ describe("admin user directory service", () => {
 
     await expect(getAdminUsers({ q: "ali" })).resolves.toEqual({
       state: "unavailable",
-      query: { page: 1, query: "ali", status: null }
+      query: { page: 1, query: "ali", status: null, role: null }
     });
     expect(logDiagnostic).toHaveBeenCalledWith("admin-users.read-list", expect.any(Error));
   });
@@ -299,7 +346,7 @@ describe("admin user directory service", () => {
       expect(requireAdmin).toHaveBeenCalledTimes(1);
       const readCall = requestFor("readUsers") as Command;
       expect(readCall.command.query).toEqual({
-        fields: ["id", "status", "role"],
+        fields: ["id", "email", "status", "role"],
         filter: {
           _and: [{ id: { _eq: userId } }, { role: { _eq: websiteRoleId } }]
         },
@@ -311,6 +358,14 @@ describe("admin user directory service", () => {
         operation: "updateUser",
         id: userId,
         changes: { status: "suspended" }
+      });
+      expect(recordActivity).toHaveBeenCalledWith({
+        action: "user.suspended",
+        administrator: expect.objectContaining({ email: "admin@example.com" }),
+        targetUserId: userId,
+        targetEmail: "ali@example.com",
+        previousValue: "active",
+        newValue: "suspended"
       });
       expect(JSON.stringify(result)).not.toContain("website-admin-access-token");
     });
@@ -328,6 +383,9 @@ describe("admin user directory service", () => {
         status: "active"
       });
       expect((requestFor("updateUser") as Command).command.changes).toEqual({ status: "active" });
+      expect(recordActivity).toHaveBeenCalledWith(
+        expect.objectContaining({ action: "user.activated", previousValue: "suspended" })
+      );
     });
 
     it("rejects malformed target IDs and unsupported statuses before data requests", async () => {
@@ -393,5 +451,206 @@ describe("admin user directory service", () => {
       });
       expect(logDiagnostic).toHaveBeenCalledWith("admin-users.update-status", expect.any(Error));
     });
+  });
+
+  describe("access role mutation", () => {
+    it("promotes a Website User with the server-mapped role and records an audit event", async () => {
+      const result = await setAdminUserRole(userId, "websiteAdmin");
+
+      expect(result).toEqual({ state: "updated", role: "websiteAdmin" });
+      expect(requireAdmin).toHaveBeenCalledTimes(1);
+      const readCall = requestFor("readUsers") as Command;
+      expect(readCall.token).toBe("user-management-service-token");
+      expect(readCall.command.query).toEqual({
+        fields: ["id", "email", "status", "role"],
+        filter: {
+          _and: [{ id: { _eq: userId } }, { role: { _in: [websiteRoleId, adminRoleId] } }]
+        },
+        limit: 1
+      });
+      expect((requestFor("updateUser") as Command).command.changes).toEqual({
+        role: adminRoleId
+      });
+      expect(recordActivity).toHaveBeenCalledWith({
+        action: "user.role_changed",
+        administrator: expect.objectContaining({ email: "admin@example.com" }),
+        targetUserId: userId,
+        targetEmail: "ali@example.com",
+        previousValue: "websiteUser",
+        newValue: "websiteAdmin"
+      });
+      expect(JSON.stringify(result)).not.toContain(adminRoleId);
+      expect(JSON.stringify(result)).not.toContain("service-token");
+    });
+
+    it("demotes a Website Admin only after another active admin is verified", async () => {
+      request.mockImplementation((input: Command) => {
+        if (input.command.operation === "readUsers") {
+          return [{ ...websiteUser, role: adminRoleId }];
+        }
+        if (input.command.operation === "aggregate") return [{ count: { id: "1" } }];
+        return successfulResponse(input);
+      });
+
+      await expect(setAdminUserRole(userId, "websiteUser")).resolves.toEqual({
+        state: "updated",
+        role: "websiteUser"
+      });
+      const aggregateCall = requestFor("aggregate") as Command;
+      expect(aggregateCall.command.options).toEqual({
+        aggregate: { count: ["id"] },
+        query: {
+          filter: {
+            _and: [
+              { role: { _eq: adminRoleId } },
+              { status: { _eq: "active" } },
+              { id: { _neq: userId } }
+            ]
+          }
+        }
+      });
+      expect((requestFor("updateUser") as Command).command.changes).toEqual({
+        role: websiteRoleId
+      });
+    });
+
+    it("rejects unknown roles, raw UUID roles, and malformed target IDs", async () => {
+      await expect(setAdminUserRole(userId, "serviceAccount")).resolves.toEqual({
+        state: "invalidRole"
+      });
+      await expect(setAdminUserRole(userId, adminRoleId)).resolves.toEqual({
+        state: "invalidRole"
+      });
+      await expect(setAdminUserRole("not-a-uuid", "websiteAdmin")).resolves.toEqual({
+        state: "invalidUserId"
+      });
+      expect(request).not.toHaveBeenCalled();
+    });
+
+    it("rejects self-demotion before using the management service", async () => {
+      requireAdmin.mockResolvedValue({
+        id: userId,
+        email: "admin@example.com",
+        firstName: "Admin",
+        lastName: "User",
+        roleId: adminRoleId
+      });
+
+      await expect(setAdminUserRole(userId, "websiteUser")).resolves.toEqual({
+        state: "selfTarget"
+      });
+      expect(request).not.toHaveBeenCalled();
+    });
+
+    it("fails closed when demotion would remove the last active Website Admin", async () => {
+      request.mockImplementation((input: Command) => {
+        if (input.command.operation === "readUsers") {
+          return [{ ...websiteUser, role: adminRoleId }];
+        }
+        if (input.command.operation === "aggregate") return [{ count: { id: "0" } }];
+        return successfulResponse(input);
+      });
+
+      await expect(setAdminUserRole(userId, "websiteUser")).resolves.toEqual({
+        state: "lastAdmin"
+      });
+      expect(requestFor("updateUser")).toBeUndefined();
+      expect(recordActivity).not.toHaveBeenCalled();
+    });
+
+    it("loads the current role server-side and rejects missing or stale transitions", async () => {
+      request.mockResolvedValueOnce([]);
+      await expect(setAdminUserRole(userId, "websiteAdmin")).resolves.toEqual({
+        state: "notFound"
+      });
+
+      request.mockReset().mockImplementation(successfulResponse);
+      await expect(setAdminUserRole(userId, "websiteUser")).resolves.toEqual({
+        state: "invalidTransition"
+      });
+      expect(requestFor("updateUser")).toBeUndefined();
+    });
+
+    it.each(["normal Website User", "unauthenticated user"])(
+      "blocks a %s through independent authorization",
+      async () => {
+        requireAdmin.mockRejectedValue(new Error("Admin authorization failed"));
+
+        await expect(setAdminUserRole(userId, "websiteAdmin")).rejects.toThrow(
+          "Admin authorization failed"
+        );
+        expect(request).not.toHaveBeenCalled();
+      }
+    );
+  });
+
+  describe("administrator password reset request", () => {
+    it("loads the target email server-side and returns no reset or session tokens", async () => {
+      const result = await requestAdminUserPasswordReset(userId, "tr");
+
+      expect(result).toEqual({ state: "sent" });
+      expect(requireAdmin).toHaveBeenCalledTimes(1);
+      expect((requestFor("readUsers") as Command).command.query).toEqual({
+        fields: ["id", "email", "role"],
+        filter: {
+          _and: [{ id: { _eq: userId } }, { role: { _in: [websiteRoleId, adminRoleId] } }]
+        },
+        limit: 1
+      });
+      expect(requestPasswordReset).toHaveBeenCalledWith(
+        "ali@example.com",
+        "https://synergymazeai.com/tr/auth/callback?next=/tr/update-password"
+      );
+      expect(recordActivity).toHaveBeenCalledWith({
+        action: "user.password_reset_requested",
+        administrator: expect.objectContaining({ email: "admin@example.com" }),
+        targetUserId: userId,
+        targetEmail: "ali@example.com"
+      });
+      expect(JSON.stringify(result)).not.toMatch(/token|password|email|role/i);
+    });
+
+    it("rejects malformed targets and locales before reading user data", async () => {
+      await expect(requestAdminUserPasswordReset("not-a-uuid", "en")).resolves.toEqual({
+        state: "invalidUserId"
+      });
+      await expect(requestAdminUserPasswordReset(userId, "unsafe-locale")).resolves.toEqual({
+        state: "invalidLocale"
+      });
+      expect(request).not.toHaveBeenCalled();
+      expect(requestPasswordReset).not.toHaveBeenCalled();
+    });
+
+    it("rejects targets outside managed roles and provider failures safely", async () => {
+      request.mockResolvedValueOnce([{ ...websiteUser, role: serviceRoleId }]);
+      await expect(requestAdminUserPasswordReset(userId, "en")).resolves.toEqual({
+        state: "notFound"
+      });
+      expect(requestPasswordReset).not.toHaveBeenCalled();
+
+      request.mockReset().mockImplementation(successfulResponse);
+      requestPasswordReset.mockResolvedValue({ ok: false, error: "RATE_LIMITED" });
+      await expect(requestAdminUserPasswordReset(userId, "en")).resolves.toEqual({
+        state: "unavailable"
+      });
+      expect(logDiagnostic).toHaveBeenCalledWith(
+        "admin-users.password-reset-request",
+        expect.any(Error)
+      );
+      expect(recordActivity).not.toHaveBeenCalled();
+    });
+
+    it.each(["normal Website User", "unauthenticated user"])(
+      "blocks a %s through independent authorization",
+      async () => {
+        requireAdmin.mockRejectedValue(new Error("Admin authorization failed"));
+
+        await expect(requestAdminUserPasswordReset(userId, "en")).rejects.toThrow(
+          "Admin authorization failed"
+        );
+        expect(request).not.toHaveBeenCalled();
+        expect(requestPasswordReset).not.toHaveBeenCalled();
+      }
+    );
   });
 });

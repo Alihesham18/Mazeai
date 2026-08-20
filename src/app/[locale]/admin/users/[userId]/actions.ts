@@ -4,8 +4,13 @@ import { revalidatePath } from "next/cache";
 
 import type { Locale } from "@/i18n/routing";
 import {
+  requestAdminUserPasswordReset,
   setAdminUserStatus,
+  setAdminUserRole,
   type AdminUserMutableStatus,
+  type AdminUserPasswordResetResult,
+  type AdminUserRole,
+  type AdminUserRoleMutationResult,
   type AdminUserStatusMutationResult
 } from "@/lib/directus/admin-users";
 
@@ -42,4 +47,24 @@ export async function changeAdminUserStatusAction({
   }
 
   return result;
+}
+
+export async function changeAdminUserRoleAction(input: {
+  locale: Locale;
+  userId: string;
+  role: AdminUserRole;
+}): Promise<AdminUserRoleMutationResult> {
+  const result = await setAdminUserRole(input.userId, input.role);
+  if (result.state === "updated") {
+    revalidatePath(`/${input.locale}/admin/users`);
+    revalidatePath(`/${input.locale}/admin/users/${input.userId}`);
+  }
+  return result;
+}
+
+export async function requestAdminUserPasswordResetAction(input: {
+  locale: Locale;
+  userId: string;
+}): Promise<AdminUserPasswordResetResult> {
+  return requestAdminUserPasswordReset(input.userId, input.locale);
 }

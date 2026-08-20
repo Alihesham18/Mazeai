@@ -78,6 +78,7 @@
       "search": "Search",
       "status": "Status",
       "allStatuses": "All Statuses",
+      "allRoles": "All Roles",
       "clearFilters": "Clear filters",
       "name": "Name",
       "email": "Email",
@@ -136,7 +137,74 @@
         "archived": "Archived"
       },
       "roles": {
-        "websiteUser": "Website User"
+        "websiteUser": "Website User",
+        "websiteAdmin": "Website Admin"
+      },
+      "roleAction": {
+        "eyebrow": "Access Role",
+        "title": "Current Role",
+        "adminDescription": "This user can access the MazeAI administrative interface and tools.",
+        "userDescription": "This user has standard website access.",
+        "changeRole": "Change Role",
+        "promoteTitle": "Promote to Website Admin?",
+        "demoteTitle": "Change to Website User?",
+        "promoteConfirmation": "This user will gain access to the MazeAI administrative interface and administrative tools.",
+        "demoteConfirmation": "This user will lose access to the MazeAI administrative interface.",
+        "cancel": "Cancel",
+        "promoteUser": "Promote User",
+        "confirmDemotion": "Change Role",
+        "updating": "Updating...",
+        "closeConfirmation": "Close confirmation",
+        "successPromoted": "User promoted to Website Admin successfully.",
+        "successDemoted": "User changed to Website User successfully.",
+        "errors": {
+          "selfTarget": "You cannot demote your own administrator account.",
+          "lastAdmin": "The last active Website Admin cannot be demoted.",
+          "invalidTransition": "This user's current role cannot be changed with this action.",
+          "invalidUserId": "The user ID is invalid.",
+          "invalidRole": "The requested role is invalid.",
+          "notFound": "The user could not be found.",
+          "unavailable": "The user role could not be updated. Please try again."
+        }
+      },
+      "passwordReset": {
+        "eyebrow": "Password & Security",
+        "title": "Send Password Reset",
+        "description": "Send a secure password-reset link to this user.",
+        "recipient": "Reset link recipient:",
+        "sendResetLink": "Send Reset Link",
+        "confirmTitle": "Send password reset?",
+        "confirmation": "A secure password-reset link will be sent to {email}.",
+        "cancel": "Cancel",
+        "sending": "Sending...",
+        "closeConfirmation": "Close confirmation",
+        "success": "Password-reset email requested successfully.",
+        "errors": {
+          "invalidUserId": "The user ID is invalid.",
+          "invalidLocale": "The selected language is invalid.",
+          "notFound": "The user could not be found.",
+          "unavailable": "The password-reset email could not be requested. Please try again."
+        }
+      }
+    },
+    "activity": {
+      "eyebrow": "Security history",
+      "title": "Activity / Audit",
+      "description": "Review recent administrative user-management actions.",
+      "action": "Action",
+      "administrator": "Administrator",
+      "target": "Target user",
+      "change": "Change",
+      "time": "Time",
+      "noChange": "No account value changed",
+      "noActivity": "No user-management activity has been recorded yet.",
+      "unavailableTitle": "Activity history unavailable",
+      "unavailableMessage": "Audit information could not be loaded safely. Please try again later.",
+      "actions": {
+        "suspended": "User suspended",
+        "activated": "User activated",
+        "roleChanged": "Role changed",
+        "passwordResetRequested": "Password reset requested"
       }
     },
     "groups": {
@@ -486,26 +554,54 @@
     }
   },
   "events": {
-    "event": "Event", "register": "Register", "registerForEvent": "Register for event",
-    "registrationSuccessful": "Registration successful.", "alreadyRegistered": "You are already registered for this event.",
-    "registrationClosed": "Registration is closed.", "eventFull": "Event is full.",
-    "unableToLoadEvents": "Unable to load events. Please try again.", "noEvents": "No published events are available yet.",
-    "locationPending": "Location to be announced", "capacity": "Capacity", "phone": "Telephone", "message": "Message",
-    "invalidPhone": "Enter a valid telephone number.", "registrationFailed": "Unable to complete event registration. Please try again.",
+    "event": "Event",
+    "register": "Register",
+    "registerForEvent": "Register for event",
+    "registrationSuccessful": "Registration successful.",
+    "alreadyRegistered": "You are already registered for this event.",
+    "registrationClosed": "Registration is closed.",
+    "eventFull": "Event is full.",
+    "unableToLoadEvents": "Unable to load events. Please try again.",
+    "noEvents": "No published events are available yet.",
+    "locationPending": "Location to be announced",
+    "capacity": "Capacity",
+    "phone": "Telephone",
+    "message": "Message",
+    "invalidPhone": "Enter a valid telephone number.",
+    "registrationFailed": "Unable to complete event registration. Please try again.",
     "sessionExpired": "Please log in to register for this event."
   },
   "caseStudies": {
-    "eyebrow": "Our work", "collectionEyebrow": "Case study collection", "collectionTitle": "Explore our case studies",
-    "featured": "Featured", "client": "Client", "technologies": "Technologies", "readCaseStudy": "Read {title}",
-    "back": "Back to case studies", "challenge": "Challenge", "solution": "Solution", "results": "Results", "overview": "Overview",
-    "empty": "No published case studies are available yet.", "unableToLoad": "Unable to load case studies. Please try again.",
-    "detailUnavailableTitle": "Case study unavailable", "detailUnavailable": "This case study could not be loaded. Please try again."
+    "eyebrow": "Our work",
+    "collectionEyebrow": "Case study collection",
+    "collectionTitle": "Explore our case studies",
+    "featured": "Featured",
+    "client": "Client",
+    "technologies": "Technologies",
+    "readCaseStudy": "Read {title}",
+    "back": "Back to case studies",
+    "challenge": "Challenge",
+    "solution": "Solution",
+    "results": "Results",
+    "overview": "Overview",
+    "empty": "No published case studies are available yet.",
+    "unableToLoad": "Unable to load case studies. Please try again.",
+    "detailUnavailableTitle": "Case study unavailable",
+    "detailUnavailable": "This case study could not be loaded. Please try again."
   },
   "blog": {
-    "eyebrow": "Insights", "collectionEyebrow": "Articles", "collectionTitle": "Explore our latest thinking",
-    "article": "Article", "readArticle": "Read {title}", "published": "Published {date}", "back": "Back to Blog",
-    "articleContent": "Article content", "empty": "No published articles are available yet.", "unableToLoad": "Unable to load articles. Please try again.",
-    "detailUnavailableTitle": "Article unavailable", "detailUnavailable": "This article could not be loaded. Please try again."
+    "eyebrow": "Insights",
+    "collectionEyebrow": "Articles",
+    "collectionTitle": "Explore our latest thinking",
+    "article": "Article",
+    "readArticle": "Read {title}",
+    "published": "Published {date}",
+    "back": "Back to Blog",
+    "articleContent": "Article content",
+    "empty": "No published articles are available yet.",
+    "unableToLoad": "Unable to load articles. Please try again.",
+    "detailUnavailableTitle": "Article unavailable",
+    "detailUnavailable": "This article could not be loaded. Please try again."
   },
   "auth": {
     "accountEyebrow": "Account",
@@ -588,8 +684,15 @@
     "myTrainingsSupport": "Training programs you are enrolled in.",
     "eventRegistrationsSupport": "Events you have registered for.",
     "eventRegistrationsUnavailable": "Unable to load registrations. Please try again.",
-    "event": "Event", "eventDate": "Event date", "registeredOn": "Registered on", "eventLocationFormat": "Location / Format",
-    "eventRegistrationStatus": { "registered": "Registered", "attended": "Attended", "cancelled": "Cancelled" },
+    "event": "Event",
+    "eventDate": "Event date",
+    "registeredOn": "Registered on",
+    "eventLocationFormat": "Location / Format",
+    "eventRegistrationStatus": {
+      "registered": "Registered",
+      "attended": "Attended",
+      "cancelled": "Cancelled"
+    },
     "copyCode": "Copy Code",
     "copied": "Copied!",
     "takeAgain": "Take Again",
@@ -683,7 +786,12 @@
         "event": "Events",
         "service": "Services"
       },
-      "statuses": { "available": "Available", "used": "Used", "revoked": "Revoked", "expired": "Expired" },
+      "statuses": {
+        "available": "Available",
+        "used": "Used",
+        "revoked": "Revoked",
+        "expired": "Expired"
+      },
       "messages": {
         "REDEMPTION_SUCCESS": "The discount code was added to your account.",
         "INVALID_CODE": "This discount code does not exist.",

@@ -8,6 +8,11 @@ import tr from "../../messages/tr.json";
 vi.mock("server-only", () => ({}));
 vi.mock("next-intl", () => ({ useTranslations: () => (key: string) => key }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh: vi.fn() }) }));
+vi.mock("@/app/[locale]/admin/users/[userId]/actions", () => ({
+  changeAdminUserStatusAction: vi.fn(),
+  changeAdminUserRoleAction: vi.fn(),
+  requestAdminUserPasswordResetAction: vi.fn()
+}));
 vi.mock("next-intl/server", () => ({
   getTranslations: vi.fn(async () => (key: string, values?: Record<string, number>) => {
     if (key === "users.totalResults") return `${values?.count} users`;
@@ -33,7 +38,7 @@ const user: AdminUserSummary = {
 const readyResult: AdminUsersResult = {
   state: "ready",
   users: [user],
-  query: { page: 1, query: "ali", status: "active" },
+  query: { page: 1, query: "ali", status: "active", role: null },
   totalCount: 21,
   totalPages: 2
 };
@@ -44,7 +49,8 @@ describe("AdminUsers", () => {
 
     expect(screen.getByRole("heading", { name: "users.management" })).toBeInTheDocument();
     expect(screen.getByRole("searchbox")).toHaveValue("ali");
-    expect(screen.getByRole("combobox")).toHaveValue("active");
+    expect(screen.getAllByRole("combobox")[0]).toHaveValue("active");
+    expect(screen.getAllByRole("combobox")[1]).toHaveValue("");
     expect(screen.getAllByText("Ali Example").length).toBeGreaterThan(0);
     expect(screen.getAllByText("ali@example.com").length).toBeGreaterThan(0);
     expect(screen.getAllByText("SMA-2026-000001").length).toBeGreaterThan(0);
@@ -64,7 +70,7 @@ describe("AdminUsers", () => {
         locale: "en",
         result: {
           state: "unavailable",
-          query: { page: 1, query: "", status: null }
+          query: { page: 1, query: "", status: null, role: null }
         }
       })
     );
@@ -94,6 +100,7 @@ describe("AdminUsers", () => {
       "search",
       "status",
       "allStatuses",
+      "allRoles",
       "name",
       "email",
       "accountNumber",
@@ -136,6 +143,66 @@ describe("AdminUsers", () => {
       "invalidStatus",
       "unavailable"
     ] as const;
+    const roleActionKeys = [
+      "eyebrow",
+      "title",
+      "adminDescription",
+      "userDescription",
+      "changeRole",
+      "promoteTitle",
+      "demoteTitle",
+      "promoteConfirmation",
+      "demoteConfirmation",
+      "cancel",
+      "promoteUser",
+      "confirmDemotion",
+      "updating",
+      "closeConfirmation",
+      "successPromoted",
+      "successDemoted"
+    ] as const;
+    const roleErrorKeys = [
+      "selfTarget",
+      "lastAdmin",
+      "invalidTransition",
+      "invalidUserId",
+      "invalidRole",
+      "notFound",
+      "unavailable"
+    ] as const;
+    const passwordResetKeys = [
+      "eyebrow",
+      "title",
+      "description",
+      "recipient",
+      "sendResetLink",
+      "confirmTitle",
+      "confirmation",
+      "cancel",
+      "sending",
+      "closeConfirmation",
+      "success"
+    ] as const;
+    const passwordResetErrorKeys = [
+      "invalidUserId",
+      "invalidLocale",
+      "notFound",
+      "unavailable"
+    ] as const;
+    const activityKeys = [
+      "eyebrow",
+      "title",
+      "description",
+      "action",
+      "administrator",
+      "target",
+      "change",
+      "time",
+      "noChange",
+      "noActivity",
+      "unavailableTitle",
+      "unavailableMessage"
+    ] as const;
 
     for (const catalog of Object.values(catalogs)) {
       for (const key of keys) expect(catalog.adminAuth.users[key].trim()).not.toBe("");
@@ -148,6 +215,32 @@ describe("AdminUsers", () => {
       }
       for (const key of statusErrorKeys) {
         expect(catalog.adminAuth.users.statusAction.errors[key].trim()).not.toBe("");
+      }
+      for (const role of ["websiteUser", "websiteAdmin"] as const) {
+        expect(catalog.adminAuth.users.roles[role].trim()).not.toBe("");
+      }
+      for (const key of roleActionKeys) {
+        expect(catalog.adminAuth.users.roleAction[key].trim()).not.toBe("");
+      }
+      for (const key of roleErrorKeys) {
+        expect(catalog.adminAuth.users.roleAction.errors[key].trim()).not.toBe("");
+      }
+      for (const key of passwordResetKeys) {
+        expect(catalog.adminAuth.users.passwordReset[key].trim()).not.toBe("");
+      }
+      for (const key of passwordResetErrorKeys) {
+        expect(catalog.adminAuth.users.passwordReset.errors[key].trim()).not.toBe("");
+      }
+      for (const key of activityKeys) {
+        expect(catalog.adminAuth.activity[key].trim()).not.toBe("");
+      }
+      for (const key of [
+        "suspended",
+        "activated",
+        "roleChanged",
+        "passwordResetRequested"
+      ] as const) {
+        expect(catalog.adminAuth.activity.actions[key].trim()).not.toBe("");
       }
     }
   });

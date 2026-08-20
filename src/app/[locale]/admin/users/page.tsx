@@ -12,13 +12,19 @@ export default async function AdminUsersPage({
   searchParams
 }: {
   params: { locale: Locale };
-  searchParams?: { page?: string | string[]; q?: string | string[]; status?: string | string[] };
+  searchParams?: {
+    page?: string | string[];
+    q?: string | string[];
+    status?: string | string[];
+    role?: string | string[];
+  };
 }) {
   setRequestLocale(params.locale);
   const result = await getAdminUsers({
     page: parameter(searchParams?.page),
     q: parameter(searchParams?.q),
-    status: parameter(searchParams?.status)
+    status: parameter(searchParams?.status),
+    role: parameter(searchParams?.role)
   });
   return <AdminUsers locale={params.locale} result={result} />;
 }

@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import { useId, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { CheckCircle2, ShieldAlert, UserCheck, UserX, X } from "lucide-react";
+import { CheckCircle2, ShieldAlert, UserCheck, UserX } from "lucide-react";
 
 import { changeAdminUserStatusAction } from "@/app/[locale]/admin/users/[userId]/actions";
 import type { Locale } from "@/i18n/routing";
 import type { AdminUserMutableStatus, AdminUserStatus } from "@/lib/directus/admin-users";
 
+import { AdminConfirmationDialog } from "./AdminConfirmationDialog";
 import styles from "./AdminUsers.module.css";
 
 interface AdminUserStatusActionProps {
@@ -26,13 +26,8 @@ export function AdminUserStatusAction({
   const router = useRouter();
   const t = useTranslations("adminAuth");
   const cardTitleId = useId();
-  const dialogTitleId = useId();
-  const dialogDescriptionId = useId();
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const previouslyFocusedElement = useRef<HTMLElement | null>(null);
 
-  const [isMounted, setIsMounted] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -43,45 +38,6 @@ export function AdminUserStatusAction({
   const newStatus: AdminUserMutableStatus = currentStatus === "active" ? "suspended" : "active";
 
   const isSuspending = newStatus === "suspended";
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isConfirmOpen) return;
-
-    function handleEscape(event: KeyboardEvent) {
-      if (event.key === "Escape" && !isPending) {
-        setIsConfirmOpen(false);
-      }
-    }
-
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [isConfirmOpen, isPending]);
-
-  useEffect(() => {
-    if (!isConfirmOpen) return;
-
-    previouslyFocusedElement.current =
-      document.activeElement instanceof HTMLElement && document.activeElement !== document.body
-        ? document.activeElement
-        : triggerRef.current;
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    closeButtonRef.current?.focus();
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      previouslyFocusedElement.current?.focus();
-      previouslyFocusedElement.current = null;
-    };
-  }, [isConfirmOpen]);
 
   if (!isSupportedStatus) {
     return null;
@@ -167,85 +123,6 @@ export function AdminUserStatusAction({
     }
   }
 
-  const confirmationModal = isConfirmOpen ? (
-    <div className={styles.statusModalOverlay} role="presentation" onMouseDown={closeConfirmation}>
-      <div
-        className={styles.statusModal}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={dialogTitleId}
-        aria-describedby={dialogDescriptionId}
-        onMouseDown={(event) => event.stopPropagation()}
-      >
-        <button
-          ref={closeButtonRef}
-          type="button"
-          className={styles.statusModalClose}
-          onClick={closeConfirmation}
-          disabled={isPending}
-          aria-label={t("users.statusAction.closeConfirmation")}
-        >
-          <X size={18} aria-hidden="true" />
-        </button>
-
-        <div
-          className={`${styles.statusModalIcon} ${
-            isSuspending ? styles.statusModalIconDanger : styles.statusModalIconSuccess
-          }`}
-          aria-hidden="true"
-        >
-          {isSuspending ? <ShieldAlert size={25} /> : <UserCheck size={25} />}
-        </div>
-
-        <div className={styles.statusModalCopy}>
-          <p className={styles.statusModalEyebrow}>
-            {isSuspending
-              ? t("users.statusAction.accountSuspension")
-              : t("users.statusAction.accountActivation")}
-          </p>
-
-          <h2 id={dialogTitleId}>
-            {isSuspending
-              ? t("users.statusAction.suspendTitle")
-              : t("users.statusAction.activateTitle")}
-          </h2>
-
-          <p id={dialogDescriptionId}>
-            {isSuspending
-              ? t("users.statusAction.suspendConfirmation")
-              : t("users.statusAction.activateConfirmation")}
-          </p>
-        </div>
-
-        <div className={styles.statusModalActions}>
-          <button
-            type="button"
-            className={styles.statusModalCancel}
-            onClick={closeConfirmation}
-            disabled={isPending}
-          >
-            {t("users.statusAction.cancel")}
-          </button>
-
-          <button
-            type="button"
-            className={
-              isSuspending ? styles.statusModalConfirmDanger : styles.statusModalConfirmSuccess
-            }
-            onClick={handleStatusChange}
-            disabled={isPending}
-          >
-            {isPending
-              ? t("users.statusAction.updating")
-              : isSuspending
-                ? t("users.statusAction.suspendUser")
-                : t("users.statusAction.activateUser")}
-          </button>
-        </div>
-      </div>
-    </div>
-  ) : null;
-
   return (
     <>
       <section className={styles.statusActionCard} aria-labelledby={cardTitleId}>
@@ -326,7 +203,36 @@ export function AdminUserStatusAction({
         </div>
       ) : null}
 
-      {isMounted && confirmationModal ? createPortal(confirmationModal, document.body) : null}
+      <AdminConfirmationDialog
+        isOpen={isConfirmOpen}
+        isPending={isPending}
+        eyebrow={
+          isSuspending
+            ? t("users.statusAction.accountSuspension")
+            : t("users.statusAction.accountActivation")
+        }
+        title={
+          isSuspending
+            ? t("users.statusAction.suspendTitle")
+            : t("users.statusAction.activateTitle")
+        }
+        description={
+          isSuspending
+            ? t("users.statusAction.suspendConfirmation")
+            : t("users.statusAction.activateConfirmation")
+        }
+        cancelLabel={t("users.statusAction.cancel")}
+        confirmLabel={
+          isSuspending ? t("users.statusAction.suspendUser") : t("users.statusAction.activateUser")
+        }
+        pendingLabel={t("users.statusAction.updating")}
+        closeLabel={t("users.statusAction.closeConfirmation")}
+        tone={isSuspending ? "danger" : "success"}
+        icon={isSuspending ? <ShieldAlert size={25} /> : <UserCheck size={25} />}
+        returnFocusRef={triggerRef}
+        onClose={closeConfirmation}
+        onConfirm={handleStatusChange}
+      />
     </>
   );
 }

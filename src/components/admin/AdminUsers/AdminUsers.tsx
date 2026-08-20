@@ -1,10 +1,14 @@
 import { AdminUserStatusAction } from "./AdminUserStatusAction";
+import { AdminUserRoleAction } from "./AdminUserRoleAction";
+import { AdminUserPasswordResetAction } from "./AdminUserPasswordResetAction";
 import { ArrowLeft, Search, UserRound } from "lucide-react";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import {
   adminUserStatuses,
+  adminUserRoles,
+  type AdminUserRole,
   type AdminUserStatus,
   type AdminUserSummary,
   type AdminUsersResult
@@ -18,6 +22,11 @@ const statusKeys: Record<AdminUserStatus, string> = {
   draft: "users.statuses.draft",
   suspended: "users.statuses.suspended",
   archived: "users.statuses.archived"
+};
+
+const roleKeys: Record<AdminUserRole, string> = {
+  websiteUser: "users.roles.websiteUser",
+  websiteAdmin: "users.roles.websiteAdmin"
 };
 
 function userName(user: AdminUserSummary) {
@@ -41,11 +50,17 @@ function formattedDate(locale: Locale, value: string | null) {
 
 function usersHref(
   locale: Locale,
-  input: { page?: number; query?: string; status?: AdminUserStatus | null }
+  input: {
+    page?: number;
+    query?: string;
+    status?: AdminUserStatus | null;
+    role?: AdminUserRole | null;
+  }
 ) {
   const parameters = new URLSearchParams();
   if (input.query) parameters.set("q", input.query);
   if (input.status) parameters.set("status", input.status);
+  if (input.role) parameters.set("role", input.role);
   if (input.page && input.page > 1) parameters.set("page", String(input.page));
   const queryString = parameters.toString();
   const path = localizedPath(locale, "/admin/users");
@@ -98,8 +113,19 @@ export async function AdminUsers({ locale, result }: { locale: Locale; result: A
             ))}
           </select>
         </label>
+        <label className={styles.statusField}>
+          <span>{t("users.role")}</span>
+          <select name="role" defaultValue={query.role ?? ""}>
+            <option value="">{t("users.allRoles")}</option>
+            {adminUserRoles.map((role) => (
+              <option key={role} value={role}>
+                {t(roleKeys[role])}
+              </option>
+            ))}
+          </select>
+        </label>
         <button type="submit">{t("users.search")}</button>
-        {query.query || query.status ? (
+        {query.query || query.status || query.role ? (
           <Link className={styles.clearLink} href={localizedPath(locale, "/admin/users")}>
             {t("users.clearFilters")}
           </Link>
@@ -158,7 +184,7 @@ export async function AdminUsers({ locale, result }: { locale: Locale; result: A
                           <StatusBadge status={user.status} label={statusLabel} />
                         </td>
                         <td>{formattedDate(locale, user.lastAccess) ?? unavailable}</td>
-                        <td>{t("users.roles.websiteUser")}</td>
+                        <td>{t(roleKeys[user.role])}</td>
                         <td>
                           <Link href={localizedPath(locale, `/admin/users/${user.id}`)}>
                             {t("users.viewDetails")}
@@ -197,7 +223,7 @@ export async function AdminUsers({ locale, result }: { locale: Locale; result: A
                       </div>
                       <div>
                         <dt>{t("users.role")}</dt>
-                        <dd>{t("users.roles.websiteUser")}</dd>
+                        <dd>{t(roleKeys[user.role])}</dd>
                       </div>
                     </dl>
                     <Link href={localizedPath(locale, `/admin/users/${user.id}`)}>
@@ -215,7 +241,8 @@ export async function AdminUsers({ locale, result }: { locale: Locale; result: A
                 href={usersHref(locale, {
                   page: query.page - 1,
                   query: query.query,
-                  status: query.status
+                  status: query.status,
+                  role: query.role
                 })}
               >
                 {t("users.previous")}
@@ -229,7 +256,8 @@ export async function AdminUsers({ locale, result }: { locale: Locale; result: A
                 href={usersHref(locale, {
                   page: query.page + 1,
                   query: query.query,
-                  status: query.status
+                  status: query.status,
+                  role: query.role
                 })}
               >
                 {t("users.next")}
@@ -314,12 +342,16 @@ export async function AdminUserDetail({
           </div>
           <div>
             <dt>{t("users.role")}</dt>
-            <dd>{t("users.roles.websiteUser")}</dd>
+            <dd>{t(roleKeys[user.role])}</dd>
           </div>
         </dl>
       </section>
 
-      <AdminUserStatusAction locale={locale} userId={user.id} currentStatus={user.status} />
+      {user.role === "websiteUser" ? (
+        <AdminUserStatusAction locale={locale} userId={user.id} currentStatus={user.status} />
+      ) : null}
+      <AdminUserRoleAction locale={locale} userId={user.id} currentRole={user.role} />
+      <AdminUserPasswordResetAction locale={locale} userId={user.id} email={user.email} />
     </div>
   );
 }

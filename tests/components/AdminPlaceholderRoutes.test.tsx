@@ -5,7 +5,6 @@ vi.mock("@/components/admin/AdminPlaceholder", () => ({
   AdminPlaceholder: ({ titleKey }: { titleKey: string }) => <h1>{titleKey}</h1>
 }));
 
-import AdminActivityPage from "@/app/[locale]/admin/activity/page";
 import AdminBlogPage from "@/app/[locale]/admin/blog/page";
 import AdminCaseStudiesPage from "@/app/[locale]/admin/case-studies/page";
 import AdminDiscountsPage from "@/app/[locale]/admin/discounts/page";
@@ -27,8 +26,7 @@ const routes = [
   [AdminEventRegistrationsPage, "navigation.eventRegistrations"],
   [AdminCaseStudiesPage, "navigation.caseStudies"],
   [AdminBlogPage, "navigation.blog"],
-  [AdminResearchPage, "navigation.research"],
-  [AdminActivityPage, "navigation.activity"]
+  [AdminResearchPage, "navigation.research"]
 ] as const;
 
 describe("admin placeholder routes", () => {

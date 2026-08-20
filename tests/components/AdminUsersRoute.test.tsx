@@ -34,7 +34,7 @@ describe("admin user routes", () => {
     getAdminUsers.mockReset().mockResolvedValue({
       state: "ready",
       users: [],
-      query: { page: 1, query: "", status: null },
+      query: { page: 1, query: "", status: null, role: null },
       totalCount: 0,
       totalPages: 1
     });
@@ -44,16 +44,21 @@ describe("admin user routes", () => {
     });
   });
 
-  it("passes shareable search, status, and page parameters to the server service", async () => {
+  it("passes shareable search, status, role, and page parameters to the server service", async () => {
     render(
       await AdminUsersPage({
         params: { locale: "fa" },
-        searchParams: { q: "ali", status: "active", page: "2" }
+        searchParams: { q: "ali", status: "active", role: "websiteAdmin", page: "2" }
       })
     );
 
     expect(setRequestLocale).toHaveBeenCalledWith("fa");
-    expect(getAdminUsers).toHaveBeenCalledWith({ q: "ali", status: "active", page: "2" });
+    expect(getAdminUsers).toHaveBeenCalledWith({
+      q: "ali",
+      status: "active",
+      role: "websiteAdmin",
+      page: "2"
+    });
     expect(screen.getByTestId("users-page")).toHaveAttribute("data-locale", "fa");
   });
 

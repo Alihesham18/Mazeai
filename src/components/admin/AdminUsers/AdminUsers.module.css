@@ -27,7 +27,7 @@
 
 .filters {
   display: grid;
-  grid-template-columns: minmax(240px, 1fr) minmax(170px, 0.35fr) auto auto;
+  grid-template-columns: minmax(240px, 1fr) repeat(2, minmax(160px, 0.35fr)) auto auto;
   align-items: end;
   gap: 0.75rem;
   padding: 1rem;
@@ -729,6 +729,18 @@
   background: rgba(104, 213, 162, 0.09);
 }
 
+.statusModalIconWarning {
+  color: #e5bd69;
+  border: 1px solid rgba(218, 171, 77, 0.3);
+  background: rgba(218, 171, 77, 0.1);
+}
+
+.statusModalIconNeutral {
+  color: #c9b6ed;
+  border: 1px solid rgba(155, 122, 214, 0.26);
+  background: rgba(124, 86, 190, 0.1);
+}
+
 .statusModalCopy {
   padding-inline-end: 24px;
 }
@@ -767,7 +779,9 @@
 
 .statusModalCancel,
 .statusModalConfirmDanger,
-.statusModalConfirmSuccess {
+.statusModalConfirmSuccess,
+.statusModalConfirmWarning,
+.statusModalConfirmNeutral {
   min-height: 40px;
   padding: 0 16px;
   border-radius: 8px;
@@ -775,6 +789,18 @@
   font-size: 0.78rem;
   font-weight: 700;
   cursor: pointer;
+}
+
+.statusModalConfirmWarning {
+  color: #17110a;
+  border: 1px solid rgba(229, 189, 105, 0.65);
+  background: #d8aa52;
+}
+
+.statusModalConfirmNeutral {
+  color: #ffffff;
+  border: 1px solid rgba(155, 122, 214, 0.48);
+  background: #66509a;
 }
 
 .statusModalCancel {
@@ -797,7 +823,9 @@
 
 .statusModalCancel:disabled,
 .statusModalConfirmDanger:disabled,
-.statusModalConfirmSuccess:disabled {
+.statusModalConfirmSuccess:disabled,
+.statusModalConfirmWarning:disabled,
+.statusModalConfirmNeutral:disabled {
   cursor: not-allowed;
   opacity: 0.55;
 }
@@ -807,9 +835,86 @@
 .statusModalClose:focus-visible,
 .statusModalCancel:focus-visible,
 .statusModalConfirmDanger:focus-visible,
-.statusModalConfirmSuccess:focus-visible {
+.statusModalConfirmSuccess:focus-visible,
+.statusModalConfirmWarning:focus-visible,
+.statusModalConfirmNeutral:focus-visible,
+.roleChangeButton:focus-visible,
+.passwordResetButton:focus-visible {
   outline: 3px solid var(--color-primary-hover);
   outline-offset: 3px;
+}
+
+.roleActionIcon {
+  color: #c9b6ed;
+  border: 1px solid rgba(155, 122, 214, 0.24);
+  background: rgba(124, 86, 190, 0.09);
+}
+
+.passwordActionIcon {
+  color: #e1b75f;
+  border: 1px solid rgba(218, 171, 77, 0.23);
+  background: rgba(218, 171, 77, 0.08);
+}
+
+.roleBadgeUser,
+.roleBadgeAdmin {
+  border: 1px solid rgba(155, 122, 214, 0.22);
+  background: rgba(124, 86, 190, 0.08);
+}
+
+.roleBadgeUser {
+  color: #bba8df;
+}
+
+.roleBadgeAdmin {
+  color: #e4bc68;
+  border-color: rgba(218, 171, 77, 0.26);
+  background: rgba(218, 171, 77, 0.08);
+}
+
+.roleChangeButton,
+.passwordResetButton {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-inline: 15px;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.roleChangeButton {
+  color: #c9b6ed;
+  border: 1px solid rgba(155, 122, 214, 0.25);
+  background: rgba(124, 86, 190, 0.08);
+}
+
+.passwordResetButton {
+  color: #e1bc71;
+  border: 1px solid rgba(218, 171, 77, 0.25);
+  background: rgba(218, 171, 77, 0.07);
+}
+
+.roleChangeButton:hover:not(:disabled),
+.passwordResetButton:hover:not(:disabled) {
+  border-color: rgba(218, 171, 77, 0.48);
+  background: rgba(218, 171, 77, 0.12);
+}
+
+.roleChangeButton:disabled,
+.passwordResetButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.passwordResetRecipient {
+  margin-block-start: 0.45rem !important;
+  color: rgba(238, 233, 244, 0.78) !important;
+  font-weight: 650;
 }
 
 :global([dir="rtl"]) .statusActionEyebrow,
@@ -837,7 +942,9 @@
 
   .statusModalCancel,
   .statusModalConfirmDanger,
-  .statusModalConfirmSuccess {
+  .statusModalConfirmSuccess,
+  .statusModalConfirmWarning,
+  .statusModalConfirmNeutral {
     width: 100%;
   }
 }

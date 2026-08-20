@@ -78,6 +78,7 @@
       "search": "Ara",
       "status": "Durum",
       "allStatuses": "Tüm Durumlar",
+      "allRoles": "Tüm Roller",
       "clearFilters": "Filtreleri temizle",
       "name": "Ad",
       "email": "E-posta",
@@ -136,7 +137,74 @@
         "archived": "Arşivlendi"
       },
       "roles": {
-        "websiteUser": "Web Sitesi Kullanıcısı"
+        "websiteUser": "Web Sitesi Kullanıcısı",
+        "websiteAdmin": "Web Sitesi Yöneticisi"
+      },
+      "roleAction": {
+        "eyebrow": "Erişim Rolü",
+        "title": "Mevcut Rol",
+        "adminDescription": "Bu kullanıcı MazeAI yönetim arayüzüne ve araçlarına erişebilir.",
+        "userDescription": "Bu kullanıcı standart web sitesi erişimine sahiptir.",
+        "changeRole": "Rolü Değiştir",
+        "promoteTitle": "Web Sitesi Yöneticisine yükseltilsin mi?",
+        "demoteTitle": "Web Sitesi Kullanıcısı yapılsın mı?",
+        "promoteConfirmation": "Bu kullanıcı MazeAI yönetim arayüzüne ve yönetim araçlarına erişim kazanacaktır.",
+        "demoteConfirmation": "Bu kullanıcı MazeAI yönetim arayüzüne erişimini kaybedecektir.",
+        "cancel": "İptal",
+        "promoteUser": "Kullanıcıyı Yükselt",
+        "confirmDemotion": "Rolü Değiştir",
+        "updating": "Güncelleniyor...",
+        "closeConfirmation": "Onay penceresini kapat",
+        "successPromoted": "Kullanıcı başarıyla Web Sitesi Yöneticisine yükseltildi.",
+        "successDemoted": "Kullanıcı başarıyla Web Sitesi Kullanıcısı yapıldı.",
+        "errors": {
+          "selfTarget": "Kendi yönetici hesabınızın yetkisini düşüremezsiniz.",
+          "lastAdmin": "Son aktif Web Sitesi Yöneticisinin yetkisi düşürülemez.",
+          "invalidTransition": "Bu kullanıcının mevcut rolü bu işlemle değiştirilemez.",
+          "invalidUserId": "Kullanıcı kimliği geçersiz.",
+          "invalidRole": "İstenen rol geçersiz.",
+          "notFound": "Kullanıcı bulunamadı.",
+          "unavailable": "Kullanıcı rolü güncellenemedi. Lütfen tekrar deneyin."
+        }
+      },
+      "passwordReset": {
+        "eyebrow": "Parola ve Güvenlik",
+        "title": "Parola Sıfırlama Gönder",
+        "description": "Bu kullanıcıya güvenli bir parola sıfırlama bağlantısı gönderin.",
+        "recipient": "Sıfırlama bağlantısının alıcısı:",
+        "sendResetLink": "Sıfırlama Bağlantısı Gönder",
+        "confirmTitle": "Parola sıfırlama gönderilsin mi?",
+        "confirmation": "{email} adresine güvenli bir parola sıfırlama bağlantısı gönderilecektir.",
+        "cancel": "İptal",
+        "sending": "Gönderiliyor...",
+        "closeConfirmation": "Onay penceresini kapat",
+        "success": "Parola sıfırlama e-postası başarıyla istendi.",
+        "errors": {
+          "invalidUserId": "Kullanıcı kimliği geçersiz.",
+          "invalidLocale": "Seçilen dil geçersiz.",
+          "notFound": "Kullanıcı bulunamadı.",
+          "unavailable": "Parola sıfırlama e-postası istenemedi. Lütfen tekrar deneyin."
+        }
+      }
+    },
+    "activity": {
+      "eyebrow": "Güvenlik geçmişi",
+      "title": "Etkinlik / Denetim",
+      "description": "Son yönetici kullanıcı yönetimi işlemlerini inceleyin.",
+      "action": "İşlem",
+      "administrator": "Yönetici",
+      "target": "Hedef kullanıcı",
+      "change": "Değişiklik",
+      "time": "Zaman",
+      "noChange": "Hesap değeri değişmedi",
+      "noActivity": "Henüz bir kullanıcı yönetimi etkinliği kaydedilmedi.",
+      "unavailableTitle": "Etkinlik geçmişi kullanılamıyor",
+      "unavailableMessage": "Denetim bilgileri güvenli şekilde yüklenemedi. Lütfen daha sonra tekrar deneyin.",
+      "actions": {
+        "suspended": "Kullanıcı askıya alındı",
+        "activated": "Kullanıcı etkinleştirildi",
+        "roleChanged": "Rol değiştirildi",
+        "passwordResetRequested": "Parola sıfırlama istendi"
       }
     },
     "groups": {
@@ -486,26 +554,54 @@
     }
   },
   "events": {
-    "event": "Etkinlik", "register": "Kayıt Ol", "registerForEvent": "Etkinliğe kayıt ol",
-    "registrationSuccessful": "Kayıt başarılı.", "alreadyRegistered": "Bu etkinliğe zaten kayıtlısınız.",
-    "registrationClosed": "Kayıtlar kapalı.", "eventFull": "Etkinlik dolu.",
-    "unableToLoadEvents": "Etkinlikler yüklenemedi. Lütfen tekrar deneyin.", "noEvents": "Henüz yayımlanmış etkinlik yok.",
-    "locationPending": "Konum daha sonra duyurulacak", "capacity": "Kapasite", "phone": "Telefon", "message": "Mesaj",
-    "invalidPhone": "Geçerli bir telefon numarası girin.", "registrationFailed": "Etkinlik kaydı tamamlanamadı. Lütfen tekrar deneyin.",
+    "event": "Etkinlik",
+    "register": "Kayıt Ol",
+    "registerForEvent": "Etkinliğe kayıt ol",
+    "registrationSuccessful": "Kayıt başarılı.",
+    "alreadyRegistered": "Bu etkinliğe zaten kayıtlısınız.",
+    "registrationClosed": "Kayıtlar kapalı.",
+    "eventFull": "Etkinlik dolu.",
+    "unableToLoadEvents": "Etkinlikler yüklenemedi. Lütfen tekrar deneyin.",
+    "noEvents": "Henüz yayımlanmış etkinlik yok.",
+    "locationPending": "Konum daha sonra duyurulacak",
+    "capacity": "Kapasite",
+    "phone": "Telefon",
+    "message": "Mesaj",
+    "invalidPhone": "Geçerli bir telefon numarası girin.",
+    "registrationFailed": "Etkinlik kaydı tamamlanamadı. Lütfen tekrar deneyin.",
     "sessionExpired": "Bu etkinliğe kayıt olmak için giriş yapın."
   },
   "caseStudies": {
-    "eyebrow": "Çalışmalarımız", "collectionEyebrow": "Vaka çalışması koleksiyonu", "collectionTitle": "Vaka çalışmalarımızı keşfedin",
-    "featured": "Öne çıkan", "client": "Müşteri", "technologies": "Teknolojiler", "readCaseStudy": "{title} çalışmasını okuyun",
-    "back": "Vaka çalışmalarına dön", "challenge": "Zorluk", "solution": "Çözüm", "results": "Sonuçlar", "overview": "Genel bakış",
-    "empty": "Henüz yayınlanmış bir vaka çalışması bulunmuyor.", "unableToLoad": "Vaka çalışmaları yüklenemedi. Lütfen tekrar deneyin.",
-    "detailUnavailableTitle": "Vaka çalışması kullanılamıyor", "detailUnavailable": "Bu vaka çalışması yüklenemedi. Lütfen tekrar deneyin."
+    "eyebrow": "Çalışmalarımız",
+    "collectionEyebrow": "Vaka çalışması koleksiyonu",
+    "collectionTitle": "Vaka çalışmalarımızı keşfedin",
+    "featured": "Öne çıkan",
+    "client": "Müşteri",
+    "technologies": "Teknolojiler",
+    "readCaseStudy": "{title} çalışmasını okuyun",
+    "back": "Vaka çalışmalarına dön",
+    "challenge": "Zorluk",
+    "solution": "Çözüm",
+    "results": "Sonuçlar",
+    "overview": "Genel bakış",
+    "empty": "Henüz yayınlanmış bir vaka çalışması bulunmuyor.",
+    "unableToLoad": "Vaka çalışmaları yüklenemedi. Lütfen tekrar deneyin.",
+    "detailUnavailableTitle": "Vaka çalışması kullanılamıyor",
+    "detailUnavailable": "Bu vaka çalışması yüklenemedi. Lütfen tekrar deneyin."
   },
   "blog": {
-    "eyebrow": "İçgörüler", "collectionEyebrow": "Makaleler", "collectionTitle": "En güncel düşüncelerimizi keşfedin",
-    "article": "Makale", "readArticle": "{title} makalesini okuyun", "published": "{date} tarihinde yayınlandı", "back": "Blog'a dön",
-    "articleContent": "Makale içeriği", "empty": "Henüz yayınlanmış makale bulunmuyor.", "unableToLoad": "Makaleler yüklenemedi. Lütfen tekrar deneyin.",
-    "detailUnavailableTitle": "Makale kullanılamıyor", "detailUnavailable": "Bu makale yüklenemedi. Lütfen tekrar deneyin."
+    "eyebrow": "İçgörüler",
+    "collectionEyebrow": "Makaleler",
+    "collectionTitle": "En güncel düşüncelerimizi keşfedin",
+    "article": "Makale",
+    "readArticle": "{title} makalesini okuyun",
+    "published": "{date} tarihinde yayınlandı",
+    "back": "Blog'a dön",
+    "articleContent": "Makale içeriği",
+    "empty": "Henüz yayınlanmış makale bulunmuyor.",
+    "unableToLoad": "Makaleler yüklenemedi. Lütfen tekrar deneyin.",
+    "detailUnavailableTitle": "Makale kullanılamıyor",
+    "detailUnavailable": "Bu makale yüklenemedi. Lütfen tekrar deneyin."
   },
   "auth": {
     "accountEyebrow": "Hesap",
@@ -588,8 +684,15 @@
     "myTrainingsSupport": "Kayıtlı olduğunuz eğitim programları.",
     "eventRegistrationsSupport": "Kayıt olduğunuz etkinlikler.",
     "eventRegistrationsUnavailable": "Kayıtlar yüklenemedi. Lütfen tekrar deneyin.",
-    "event": "Etkinlik", "eventDate": "Etkinlik tarihi", "registeredOn": "Kayıt tarihi", "eventLocationFormat": "Konum / Format",
-    "eventRegistrationStatus": { "registered": "Kayıtlı", "attended": "Katıldı", "cancelled": "İptal edildi" },
+    "event": "Etkinlik",
+    "eventDate": "Etkinlik tarihi",
+    "registeredOn": "Kayıt tarihi",
+    "eventLocationFormat": "Konum / Format",
+    "eventRegistrationStatus": {
+      "registered": "Kayıtlı",
+      "attended": "Katıldı",
+      "cancelled": "İptal edildi"
+    },
     "copyCode": "Kodu Kopyala",
     "copied": "Kopyalandı!",
     "takeAgain": "Tekrar Gir",
@@ -683,7 +786,12 @@
         "event": "Etkinlikler",
         "service": "Hizmetler"
       },
-      "statuses": { "available": "Kullanılabilir", "used": "Kullanıldı", "revoked": "İptal Edildi", "expired": "Süresi Doldu" },
+      "statuses": {
+        "available": "Kullanılabilir",
+        "used": "Kullanıldı",
+        "revoked": "İptal Edildi",
+        "expired": "Süresi Doldu"
+      },
       "messages": {
         "REDEMPTION_SUCCESS": "İndirim kodu hesabınıza eklendi.",
         "INVALID_CODE": "Bu indirim kodu mevcut değil.",

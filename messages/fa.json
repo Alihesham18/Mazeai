@@ -78,6 +78,7 @@
       "search": "جستجو",
       "status": "وضعیت",
       "allStatuses": "همه وضعیت‌ها",
+      "allRoles": "همه نقش‌ها",
       "clearFilters": "پاک کردن فیلترها",
       "name": "نام",
       "email": "ایمیل",
@@ -136,7 +137,74 @@
         "archived": "بایگانی‌شده"
       },
       "roles": {
-        "websiteUser": "کاربر وب‌سایت"
+        "websiteUser": "کاربر وب‌سایت",
+        "websiteAdmin": "مدیر وب‌سایت"
+      },
+      "roleAction": {
+        "eyebrow": "نقش دسترسی",
+        "title": "نقش فعلی",
+        "adminDescription": "این کاربر به رابط و ابزارهای مدیریتی MazeAI دسترسی دارد.",
+        "userDescription": "این کاربر دسترسی استاندارد وب‌سایت را دارد.",
+        "changeRole": "تغییر نقش",
+        "promoteTitle": "به مدیر وب‌سایت ارتقا یابد؟",
+        "demoteTitle": "به کاربر وب‌سایت تغییر یابد؟",
+        "promoteConfirmation": "این کاربر به رابط مدیریتی MazeAI و ابزارهای مدیریت دسترسی پیدا خواهد کرد.",
+        "demoteConfirmation": "این کاربر دسترسی به رابط مدیریتی MazeAI را از دست خواهد داد.",
+        "cancel": "لغو",
+        "promoteUser": "ارتقای کاربر",
+        "confirmDemotion": "تغییر نقش",
+        "updating": "در حال به‌روزرسانی...",
+        "closeConfirmation": "بستن پنجره تأیید",
+        "successPromoted": "کاربر با موفقیت به مدیر وب‌سایت ارتقا یافت.",
+        "successDemoted": "کاربر با موفقیت به کاربر وب‌سایت تغییر یافت.",
+        "errors": {
+          "selfTarget": "نمی‌توانید سطح دسترسی حساب مدیریتی خود را کاهش دهید.",
+          "lastAdmin": "سطح دسترسی آخرین مدیر فعال وب‌سایت قابل کاهش نیست.",
+          "invalidTransition": "نقش فعلی این کاربر با این اقدام قابل تغییر نیست.",
+          "invalidUserId": "شناسه کاربر نامعتبر است.",
+          "invalidRole": "نقش درخواستی نامعتبر است.",
+          "notFound": "کاربر یافت نشد.",
+          "unavailable": "نقش کاربر به‌روزرسانی نشد. لطفاً دوباره تلاش کنید."
+        }
+      },
+      "passwordReset": {
+        "eyebrow": "گذرواژه و امنیت",
+        "title": "ارسال بازنشانی گذرواژه",
+        "description": "یک پیوند امن بازنشانی گذرواژه برای این کاربر ارسال کنید.",
+        "recipient": "دریافت‌کننده پیوند بازنشانی:",
+        "sendResetLink": "ارسال پیوند بازنشانی",
+        "confirmTitle": "بازنشانی گذرواژه ارسال شود؟",
+        "confirmation": "یک پیوند امن بازنشانی گذرواژه به {email} ارسال خواهد شد.",
+        "cancel": "لغو",
+        "sending": "در حال ارسال...",
+        "closeConfirmation": "بستن پنجره تأیید",
+        "success": "درخواست ایمیل بازنشانی گذرواژه با موفقیت ثبت شد.",
+        "errors": {
+          "invalidUserId": "شناسه کاربر نامعتبر است.",
+          "invalidLocale": "زبان انتخاب‌شده نامعتبر است.",
+          "notFound": "کاربر یافت نشد.",
+          "unavailable": "درخواست ایمیل بازنشانی گذرواژه انجام نشد. لطفاً دوباره تلاش کنید."
+        }
+      }
+    },
+    "activity": {
+      "eyebrow": "سابقه امنیتی",
+      "title": "فعالیت / ممیزی",
+      "description": "اقدامات اخیر مدیران در زمینه مدیریت کاربران را بررسی کنید.",
+      "action": "اقدام",
+      "administrator": "مدیر",
+      "target": "کاربر هدف",
+      "change": "تغییر",
+      "time": "زمان",
+      "noChange": "هیچ مقداری در حساب تغییر نکرد",
+      "noActivity": "هنوز هیچ فعالیتی برای مدیریت کاربران ثبت نشده است.",
+      "unavailableTitle": "سابقه فعالیت در دسترس نیست",
+      "unavailableMessage": "اطلاعات ممیزی به‌صورت امن بارگیری نشد. لطفاً بعداً دوباره تلاش کنید.",
+      "actions": {
+        "suspended": "کاربر تعلیق شد",
+        "activated": "کاربر فعال شد",
+        "roleChanged": "نقش تغییر کرد",
+        "passwordResetRequested": "بازنشانی گذرواژه درخواست شد"
       }
     },
     "groups": {
@@ -486,26 +554,54 @@
     }
   },
   "events": {
-    "event": "رویداد", "register": "ثبت‌نام", "registerForEvent": "ثبت‌نام در رویداد",
-    "registrationSuccessful": "ثبت‌نام با موفقیت انجام شد.", "alreadyRegistered": "شما قبلاً در این رویداد ثبت‌نام کرده‌اید.",
-    "registrationClosed": "ثبت‌نام بسته است.", "eventFull": "ظرفیت رویداد تکمیل است.",
-    "unableToLoadEvents": "بارگذاری رویدادها ممکن نشد. دوباره تلاش کنید.", "noEvents": "هنوز رویداد منتشرشده‌ای وجود ندارد.",
-    "locationPending": "محل برگزاری اعلام خواهد شد", "capacity": "ظرفیت", "phone": "تلفن", "message": "پیام",
-    "invalidPhone": "یک شماره تلفن معتبر وارد کنید.", "registrationFailed": "ثبت‌نام رویداد انجام نشد. دوباره تلاش کنید.",
+    "event": "رویداد",
+    "register": "ثبت‌نام",
+    "registerForEvent": "ثبت‌نام در رویداد",
+    "registrationSuccessful": "ثبت‌نام با موفقیت انجام شد.",
+    "alreadyRegistered": "شما قبلاً در این رویداد ثبت‌نام کرده‌اید.",
+    "registrationClosed": "ثبت‌نام بسته است.",
+    "eventFull": "ظرفیت رویداد تکمیل است.",
+    "unableToLoadEvents": "بارگذاری رویدادها ممکن نشد. دوباره تلاش کنید.",
+    "noEvents": "هنوز رویداد منتشرشده‌ای وجود ندارد.",
+    "locationPending": "محل برگزاری اعلام خواهد شد",
+    "capacity": "ظرفیت",
+    "phone": "تلفن",
+    "message": "پیام",
+    "invalidPhone": "یک شماره تلفن معتبر وارد کنید.",
+    "registrationFailed": "ثبت‌نام رویداد انجام نشد. دوباره تلاش کنید.",
     "sessionExpired": "برای ثبت‌نام در این رویداد وارد شوید."
   },
   "caseStudies": {
-    "eyebrow": "فعالیت‌های ما", "collectionEyebrow": "مجموعه مطالعات موردی", "collectionTitle": "مطالعات موردی ما را ببینید",
-    "featured": "برگزیده", "client": "مشتری", "technologies": "فناوری‌ها", "readCaseStudy": "مطالعه {title}",
-    "back": "بازگشت به مطالعات موردی", "challenge": "چالش", "solution": "راه‌حل", "results": "نتایج", "overview": "مرور کلی",
-    "empty": "هنوز مطالعه موردی منتشرشده‌ای وجود ندارد.", "unableToLoad": "مطالعات موردی بارگذاری نشد. لطفاً دوباره تلاش کنید.",
-    "detailUnavailableTitle": "مطالعه موردی در دسترس نیست", "detailUnavailable": "این مطالعه موردی بارگذاری نشد. لطفاً دوباره تلاش کنید."
+    "eyebrow": "فعالیت‌های ما",
+    "collectionEyebrow": "مجموعه مطالعات موردی",
+    "collectionTitle": "مطالعات موردی ما را ببینید",
+    "featured": "برگزیده",
+    "client": "مشتری",
+    "technologies": "فناوری‌ها",
+    "readCaseStudy": "مطالعه {title}",
+    "back": "بازگشت به مطالعات موردی",
+    "challenge": "چالش",
+    "solution": "راه‌حل",
+    "results": "نتایج",
+    "overview": "مرور کلی",
+    "empty": "هنوز مطالعه موردی منتشرشده‌ای وجود ندارد.",
+    "unableToLoad": "مطالعات موردی بارگذاری نشد. لطفاً دوباره تلاش کنید.",
+    "detailUnavailableTitle": "مطالعه موردی در دسترس نیست",
+    "detailUnavailable": "این مطالعه موردی بارگذاری نشد. لطفاً دوباره تلاش کنید."
   },
   "blog": {
-    "eyebrow": "دیدگاه‌ها", "collectionEyebrow": "مقاله‌ها", "collectionTitle": "تازه‌ترین دیدگاه‌های ما را بخوانید",
-    "article": "مقاله", "readArticle": "مطالعه {title}", "published": "منتشرشده در {date}", "back": "بازگشت به وبلاگ",
-    "articleContent": "محتوای مقاله", "empty": "هنوز مقاله منتشرشده‌ای وجود ندارد.", "unableToLoad": "مقاله‌ها بارگذاری نشدند. لطفاً دوباره تلاش کنید.",
-    "detailUnavailableTitle": "مقاله در دسترس نیست", "detailUnavailable": "این مقاله بارگذاری نشد. لطفاً دوباره تلاش کنید."
+    "eyebrow": "دیدگاه‌ها",
+    "collectionEyebrow": "مقاله‌ها",
+    "collectionTitle": "تازه‌ترین دیدگاه‌های ما را بخوانید",
+    "article": "مقاله",
+    "readArticle": "مطالعه {title}",
+    "published": "منتشرشده در {date}",
+    "back": "بازگشت به وبلاگ",
+    "articleContent": "محتوای مقاله",
+    "empty": "هنوز مقاله منتشرشده‌ای وجود ندارد.",
+    "unableToLoad": "مقاله‌ها بارگذاری نشدند. لطفاً دوباره تلاش کنید.",
+    "detailUnavailableTitle": "مقاله در دسترس نیست",
+    "detailUnavailable": "این مقاله بارگذاری نشد. لطفاً دوباره تلاش کنید."
   },
   "auth": {
     "accountEyebrow": "حساب",
@@ -588,8 +684,15 @@
     "myTrainingsSupport": "برنامه‌های آموزشی که در آن‌ها ثبت‌نام کرده‌اید.",
     "eventRegistrationsSupport": "رویدادهایی که در آن‌ها ثبت‌نام کرده‌اید.",
     "eventRegistrationsUnavailable": "بارگذاری ثبت‌نام‌ها ممکن نشد. دوباره تلاش کنید.",
-    "event": "رویداد", "eventDate": "تاریخ رویداد", "registeredOn": "تاریخ ثبت‌نام", "eventLocationFormat": "محل / نوع برگزاری",
-    "eventRegistrationStatus": { "registered": "ثبت‌شده", "attended": "شرکت کرده", "cancelled": "لغوشده" },
+    "event": "رویداد",
+    "eventDate": "تاریخ رویداد",
+    "registeredOn": "تاریخ ثبت‌نام",
+    "eventLocationFormat": "محل / نوع برگزاری",
+    "eventRegistrationStatus": {
+      "registered": "ثبت‌شده",
+      "attended": "شرکت کرده",
+      "cancelled": "لغوشده"
+    },
     "copyCode": "کپی کد",
     "copied": "کپی شد!",
     "takeAgain": "آزمون مجدد",
@@ -683,7 +786,12 @@
         "event": "رویدادها",
         "service": "خدمات"
       },
-      "statuses": { "available": "در دسترس", "used": "استفاده‌شده", "revoked": "لغوشده", "expired": "منقضی" },
+      "statuses": {
+        "available": "در دسترس",
+        "used": "استفاده‌شده",
+        "revoked": "لغوشده",
+        "expired": "منقضی"
+      },
       "messages": {
         "REDEMPTION_SUCCESS": "کد تخفیف به حساب شما افزوده شد.",
         "INVALID_CODE": "این کد تخفیف وجود ندارد.",

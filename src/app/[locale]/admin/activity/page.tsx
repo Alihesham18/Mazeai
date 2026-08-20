@@ -1,6 +1,12 @@
-import { AdminPlaceholder } from "@/components/admin/AdminPlaceholder";
-import type { Locale } from "@/i18n/routing";
+import { setRequestLocale } from "next-intl/server";
 
-export default function AdminActivityPage({ params }: { params: { locale: Locale } }) {
-  return <AdminPlaceholder locale={params.locale} titleKey="navigation.activity" />;
+import { AdminActivity } from "@/components/admin/AdminActivity";
+import type { Locale } from "@/i18n/routing";
+import { getAdminUserActivity } from "@/lib/directus/admin-activity";
+
+export default async function AdminActivityPage({ params }: { params: { locale: Locale } }) {
+  setRequestLocale(params.locale);
+  const result = await getAdminUserActivity();
+
+  return <AdminActivity locale={params.locale} result={result} />;
 }
