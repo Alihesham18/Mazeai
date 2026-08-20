@@ -24,8 +24,20 @@
   background: var(--color-control-hover);
 }
 
+.lightIcon {
+  display: none;
+}
+
 :global([data-theme="light"]) .toggle {
   border-color: var(--color-border);
   color: var(--color-primary);
   box-shadow: 0 4px 14px rgba(42, 24, 69, 0.08);
+}
+
+:global([data-theme="light"]) .darkIcon {
+  display: none;
+}
+
+:global([data-theme="light"]) .lightIcon {
+  display: block;
 }

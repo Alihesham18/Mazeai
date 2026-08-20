@@ -1,6 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import {
   createContext,
   useContext,
@@ -10,21 +9,21 @@ import {
   useState,
   type ReactNode
 } from "react";
+import { isTheme, THEME_STORAGE_KEY, type Theme } from "@/components/theme/theme-config";
 
-export type Theme = "dark" | "light";
+export type { Theme } from "@/components/theme/theme-config";
 
 interface ThemeContextValue {
   theme: Theme;
   toggleTheme: () => void;
 }
 
-const STORAGE_KEY = "synergymazeai-theme";
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 function resolvePreferredTheme(): Theme {
-  const savedTheme = window.localStorage.getItem(STORAGE_KEY);
+  const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
 
-  if (savedTheme === "dark" || savedTheme === "light") {
+  if (isTheme(savedTheme)) {
     return savedTheme;
   }
 
@@ -33,19 +32,20 @@ function resolvePreferredTheme(): Theme {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
-  const pathname = usePathname();
+
+  const applyTheme = (nextTheme: Theme) => {
+    document.documentElement.dataset.theme = nextTheme;
+    setTheme(nextTheme);
+  };
 
   useLayoutEffect(() => {
-    const preferredTheme = resolvePreferredTheme();
-    document.documentElement.dataset.theme = preferredTheme;
-    setTheme(preferredTheme);
-  }, [pathname]);
+    applyTheme(resolvePreferredTheme());
+  }, []);
 
   useEffect(() => {
     const handleStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY && (event.newValue === "dark" || event.newValue === "light")) {
-        document.documentElement.dataset.theme = event.newValue;
-        setTheme(event.newValue);
+      if (event.key === THEME_STORAGE_KEY) {
+        applyTheme(isTheme(event.newValue) ? event.newValue : resolvePreferredTheme());
       }
     };
 
@@ -57,12 +57,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     () => ({
       theme,
       toggleTheme: () => {
-        setTheme((currentTheme) => {
-          const nextTheme = currentTheme === "dark" ? "light" : "dark";
-          document.documentElement.dataset.theme = nextTheme;
-          window.localStorage.setItem(STORAGE_KEY, nextTheme);
-          return nextTheme;
-        });
+        const documentTheme = document.documentElement.dataset.theme;
+        const currentTheme = isTheme(documentTheme) ? documentTheme : theme;
+        const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+        window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+        applyTheme(nextTheme);
       }
     }),
     [theme]

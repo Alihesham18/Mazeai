@@ -8,6 +8,7 @@ import { PageBackground } from "@/components/effects/PageBackground";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { THEME_INIT_SCRIPT } from "@/components/theme/theme-config";
 import { siteConfig } from "@/config/site";
 import { getDirection, isLocale, locales, type Locale } from "@/i18n/routing";
 import { getCurrentUserProfile } from "@/lib/auth/user";
@@ -75,12 +76,10 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const direction = getDirection(locale);
   const user = await getCurrentUserProfile();
 
-  const themeScript = `(() => { try { const saved = localStorage.getItem("synergymazeai-theme"); const theme = saved === "light" || saved === "dark" ? saved : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); document.documentElement.dataset.theme = theme; } catch { document.documentElement.dataset.theme = "dark"; } })();`;
-
   return (
-    <html lang={locale} dir={direction} suppressHydrationWarning>
+    <html lang={locale} dir={direction} data-theme="dark" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
       </head>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>

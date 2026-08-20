@@ -5,19 +5,18 @@ import { useTheme } from "@/components/theme/ThemeProvider";
 import styles from "./ThemeToggle.module.css";
 
 export function ThemeToggle({ className = "" }: { className?: string }) {
-  const { theme, toggleTheme } = useTheme();
-  const isDark = theme === "dark";
-  const label = isDark ? "Switch to light mode" : "Switch to dark mode";
+  const { toggleTheme } = useTheme();
 
   return (
     <button
       type="button"
       className={[styles.toggle, className].filter(Boolean).join(" ")}
-      aria-label={label}
-      title={label}
+      aria-label="Toggle color theme"
+      title="Toggle color theme"
       onClick={toggleTheme}
     >
-      {isDark ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
+      <Sun className={styles.darkIcon} size={20} aria-hidden="true" />
+      <Moon className={styles.lightIcon} size={20} aria-hidden="true" />
     </button>
   );
 }
