@@ -1,150 +1,137 @@
 .nav {
   display: none;
-  align-items: center;
-  gap: 0.35rem;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.1rem;
+  align-self: stretch;
 }
 
 .item {
   position: relative;
+  display: flex;
 }
 
 .trigger,
 .link {
   position: relative;
-  min-block-size: 58px;
+  min-block-size: 100%;
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
   justify-content: center;
+  gap: 0.25rem;
   padding-block: 0.75rem;
-  padding-inline: var(--header-nav-padding, 0.72rem);
-  border: 1px solid transparent;
-  border-radius: 10px;
+  padding-inline: var(--header-nav-padding, 0.52rem);
+  border: 0;
   background: transparent;
-  color: var(--color-nav-text);
+  color: var(--maze-text-soft);
   cursor: pointer;
-  font-size: var(--header-nav-font-size, 0.92rem);
-  font-weight: 700;
+  font-size: var(--header-nav-font-size, 0.78rem);
+  font-weight: 650;
   line-height: 1.2;
   text-align: center;
-  transition:
-    text-shadow 160ms ease,
-    border-color 160ms ease,
-    background 160ms ease,
-    color 160ms ease;
+  transition: color var(--maze-transition-fast);
 }
 
 .wrapped {
-  max-inline-size: 6.2rem;
+  max-inline-size: 5.5rem;
   white-space: normal;
 }
 
 .trigger:hover,
-.link:hover {
-  color: var(--color-text);
+.link:hover,
+.trigger:focus-visible,
+.link:focus-visible {
+  color: var(--maze-gold-light);
 }
 
 .current {
-  padding-block: 0.95rem;
-  padding-inline: 1.1rem;
-  border-color: var(--color-border-gold);
-  color: var(--color-nav-text);
-  background: var(--color-surface-violet);
+  color: var(--maze-gold-light);
 }
 
 .current::after {
   position: absolute;
-  inset-inline: 0.72rem;
-  inset-block-end: 0.2rem;
-  block-size: 1px;
-  border-radius: 999px;
-  background: var(--color-gold);
+  inset-inline: max(0.5rem, 24%);
+  inset-block-end: -1px;
+  block-size: 2px;
+  background: var(--maze-gold);
   content: "";
 }
 
 .menu {
   position: absolute;
-  inset-block-start: calc(100% + 0.45rem);
+  inset-block-start: calc(100% + 1px);
   inset-inline-start: 0;
   z-index: 20;
   min-inline-size: 17rem;
-  padding: 0.45rem;
-  border: 1px solid var(--color-border-gold);
-  border-radius: 0.5rem;
-  background: var(--color-surface-98);
-  box-shadow: var(--shadow-soft);
+  padding: 0.65rem;
+  border: 1px solid var(--maze-border);
+  border-block-start: 2px solid var(--maze-gold);
+  border-radius: 0 0 var(--maze-radius-md) var(--maze-radius-md);
+  background: color-mix(in srgb, var(--maze-surface) 97%, transparent);
+  box-shadow: var(--maze-shadow-card);
+}
+
+.menu::before {
+  position: absolute;
+  inset-block-start: 0.65rem;
+  inset-inline-start: 0;
+  inline-size: 1px;
+  block-size: calc(100% - 1.3rem);
+  background: var(--maze-border-gold);
+  content: "";
 }
 
 .menuLink {
+  position: relative;
   display: block;
-  padding-block: 0.7rem;
-  padding-inline: 0.75rem;
-  border-radius: 0.4rem;
-  color: var(--color-gold-soft);
-  font-weight: 700;
+  min-block-size: 2.65rem;
+  padding-block: 0.72rem;
+  padding-inline: 0.9rem;
+  color: var(--maze-text-soft);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.35;
+  transition:
+    background-color var(--maze-transition-fast),
+    color var(--maze-transition-fast);
 }
 
 .menuLink:hover,
-.menuLink:focus-visible {
-  color: var(--color-text);
-  background: var(--color-primary-subtle);
+.menuLink:focus-visible,
+.menuLinkCurrent {
+  color: var(--maze-gold-light);
+  background: var(--color-gold-subtle);
+}
+
+.menuLinkCurrent::before {
+  position: absolute;
+  inset-block: 0.7rem;
+  inset-inline-start: 0;
+  inline-size: 1px;
+  background: var(--maze-gold);
+  content: "";
 }
 
 .trigger svg {
-  color: var(--color-gold-soft);
-  transition: color 160ms ease;
+  color: var(--maze-gold-dark);
+  transition:
+    color var(--maze-transition-fast),
+    transform var(--maze-transition-fast);
 }
 
-.trigger:hover svg,
-.current svg {
-  color: var(--color-text);
+.trigger[aria-expanded="true"] svg {
+  color: var(--maze-gold-light);
+  transform: rotate(180deg);
 }
 
 @media (min-width: 1200px) {
   .nav {
     display: flex;
-    justify-content: center;
   }
 }
 
 @media (min-width: 1200px) and (max-width: 1399px) {
-  .nav {
-    gap: 0.1rem;
-  }
-
-  .trigger,
-  .link {
-    min-block-size: 48px;
-    padding-block: 0.65rem;
-  }
-
   .wrapped {
-    max-inline-size: 4.8rem;
-  }
-
-  .current {
-    padding-block: 0.75rem;
-    padding-inline: 0.55rem;
-  }
-}
-
-@media (min-width: 1400px) and (max-width: 1599px) {
-  .nav {
-    gap: 0.2rem;
-  }
-
-  .trigger,
-  .link {
-    min-block-size: 52px;
-    padding-block: 0.7rem;
-  }
-
-  .wrapped {
-    max-inline-size: 5.4rem;
-  }
-
-  .current {
-    padding-block: 0.85rem;
-    padding-inline: 0.7rem;
+    max-inline-size: 4.6rem;
   }
 }

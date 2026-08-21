@@ -32,13 +32,49 @@ describe("MobileNavigation", () => {
       </NextIntlClientProvider>
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "Open navigation menu" }));
+    const trigger = screen.getByRole("button", { name: "Open navigation menu" });
+    fireEvent.click(trigger);
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "Mobile navigation" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Language" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Partner With Us" })).toHaveAttribute(
+      "href",
+      "/en/contact"
+    );
     expect(document.body.dataset.menuOpen).toBe("true");
 
     fireEvent.keyDown(window, { key: "Escape" });
     expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     expect(document.body.dataset.menuOpen).toBe("false");
+    expect(trigger).toHaveFocus();
+  });
+
+  it("marks the active route and keeps keyboard focus inside the open dialog", () => {
+    vi.stubGlobal(
+      "matchMedia",
+      vi.fn().mockReturnValue({
+        matches: false,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn()
+      })
+    );
+
+    render(
+      <NextIntlClientProvider locale="en" messages={en}>
+        <ThemeProvider>
+          <MobileNavigation locale="en" />
+        </ThemeProvider>
+      </NextIntlClientProvider>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Open navigation menu" }));
+    expect(screen.getByRole("link", { name: "Home" })).toHaveAttribute("aria-current", "page");
+
+    const close = screen.getByRole("button", { name: "Close navigation menu" });
+    expect(close).toHaveFocus();
+    screen.getByRole("link", { name: "SynergyMazeAI" }).focus();
+    fireEvent.keyDown(window, { key: "Tab", shiftKey: true });
+    expect(screen.getByRole("link", { name: "Partner With Us" })).toHaveFocus();
   });
 
   it("links authenticated users to dedicated account pages", () => {

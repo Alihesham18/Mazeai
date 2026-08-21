@@ -1,6 +1,15 @@
 import type { ComponentPropsWithoutRef } from "react";
 import styles from "./Container.module.css";
 
-export function Container({ className, ...props }: ComponentPropsWithoutRef<"div">) {
-  return <div className={[styles.container, className].filter(Boolean).join(" ")} {...props} />;
+interface ContainerProps extends ComponentPropsWithoutRef<"div"> {
+  size?: "default" | "narrow" | "wide";
+}
+
+export function Container({ className, size = "default", ...props }: ContainerProps) {
+  return (
+    <div
+      className={[styles.container, styles[size], className].filter(Boolean).join(" ")}
+      {...props}
+    />
+  );
 }

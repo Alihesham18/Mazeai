@@ -1,0 +1,1 @@
+export { MazeHeroGraphic } from "./MazeHeroGraphic";

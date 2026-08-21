@@ -1,12 +1,12 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.65rem;
   color: var(--color-brand-text);
   font-family: var(--font-heading);
   font-size: var(--header-logo-font-size, 1.02rem);
-  font-weight: 800;
-  letter-spacing: 0;
+  font-weight: 750;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
@@ -15,8 +15,9 @@
   block-size: var(--header-logo-mark-size, 2rem);
   flex: 0 0 var(--header-logo-mark-size, 2rem);
   overflow: hidden;
-  border-radius: 0.45rem;
-  background: #21052e;
+  border: 1px solid var(--maze-border-gold);
+  border-radius: var(--maze-radius-sm);
+  background: #160b1c;
 }
 
 .image {

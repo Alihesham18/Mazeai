@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Check, Languages } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { locales, type Locale } from "@/i18n/routing";
@@ -33,6 +34,7 @@ function getLocalizedHref(pathname: string, nextLocale: Locale): string {
 }
 
 export function LanguageSwitcher({ locale }: { locale: Locale }) {
+  const t = useTranslations("navigation");
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const switcherRef = useRef<HTMLDivElement>(null);
@@ -77,8 +79,8 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
         ref={triggerRef}
         type="button"
         className={styles.trigger}
-        aria-label="Choose language"
-        title="Choose language"
+        aria-label={t("language")}
+        title={t("language")}
         aria-haspopup="menu"
         aria-expanded={isOpen}
         aria-controls={isOpen ? menuId : undefined}
@@ -88,7 +90,7 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
       </button>
 
       {isOpen ? (
-        <div id={menuId} className={styles.menu} role="menu" aria-label="Choose language">
+        <div id={menuId} className={styles.menu} role="menu" aria-label={t("language")}>
           {locales.map((nextLocale) => {
             const isCurrent = locale === nextLocale;
 
@@ -109,7 +111,9 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
                 </span>
                 <span className={styles.optionMeta}>
                   <span className={styles.code}>{languageCodes[nextLocale]}</span>
-                  {isCurrent ? <Check className={styles.check} size={16} aria-hidden="true" /> : null}
+                  {isCurrent ? (
+                    <Check className={styles.check} size={16} aria-hidden="true" />
+                  ) : null}
                 </span>
               </Link>
             );

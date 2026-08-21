@@ -1,21 +1,79 @@
 .card {
+  position: relative;
   min-block-size: 100%;
-  padding: 1.25rem;
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
+  overflow: hidden;
+  padding: var(--maze-card-space);
+  border: 1px solid var(--maze-border-subtle);
+  border-radius: var(--maze-radius-lg);
   background: var(--gradient-card);
-  box-shadow: var(--shadow-soft);
+  box-shadow: var(--maze-shadow-card);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-start: var(--maze-card-space);
+  inline-size: 3rem;
+  block-size: 1px;
+  background: var(--maze-gold);
+  opacity: 0.75;
+}
+
+.standard {
+  background: var(--gradient-card);
+}
+
+.featured {
+  border-color: var(--maze-border-gold);
+  border-inline-start-width: 3px;
+  background:
+    linear-gradient(135deg, var(--color-gold-subtle), transparent 42%), var(--gradient-card);
+  box-shadow: var(--maze-shadow-card);
+}
+
+.technical {
+  background:
+    linear-gradient(var(--maze-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--maze-grid-line) 1px, transparent 1px), var(--gradient-card);
+  background-size:
+    1.5rem 1.5rem,
+    1.5rem 1.5rem,
+    auto;
+}
+
+.technical::after {
+  content: "";
+  position: absolute;
+  inset-block-end: 0.75rem;
+  inset-inline-end: 0.75rem;
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-block-end: 1px solid var(--maze-gold-dark);
+  border-inline-end: 1px solid var(--maze-gold-dark);
+  opacity: 0.75;
 }
 
 .interactive {
   transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    background 160ms ease;
+    transform var(--maze-transition-medium),
+    border-color var(--maze-transition-medium),
+    box-shadow var(--maze-transition-medium),
+    background-color var(--maze-transition-medium);
 }
 
 .interactive:hover {
-  border-color: var(--color-border-gold);
-  box-shadow: var(--shadow-soft);
-  transform: translateY(-3px);
+  border-color: var(--maze-border-hover);
+  box-shadow: var(--maze-shadow-raised);
+  transform: translateY(-2px);
+}
+
+.interactive:focus-within {
+  border-color: var(--maze-border-hover);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive:hover {
+    transform: none;
+  }
 }

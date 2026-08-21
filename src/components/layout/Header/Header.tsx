@@ -27,7 +27,9 @@ export function Header({ locale, user }: { locale: Locale; user: AuthProfile | n
         <DesktopNavigation locale={locale} />
         <div className={styles.actions}>
           <ThemeToggle className={styles.desktopThemeToggle} />
-          <LanguageSwitcher locale={locale} />
+          <div className={styles.desktopLanguage}>
+            <LanguageSwitcher locale={locale} />
+          </div>
           <AccountNavigation locale={locale} profile={user} className={styles.desktopAccount} />
           <Button
             href={localizedPath(locale, "/contact")}

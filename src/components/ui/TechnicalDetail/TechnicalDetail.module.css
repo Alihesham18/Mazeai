@@ -1,0 +1,138 @@
+.detail {
+  pointer-events: none;
+  color: var(--maze-gold);
+}
+
+.line {
+  inline-size: min(100%, 10rem);
+  block-size: 1px;
+  background: linear-gradient(90deg, var(--maze-gold), var(--maze-gold-dark) 42%, transparent);
+}
+
+:global([dir="rtl"]) .line {
+  background: linear-gradient(270deg, var(--maze-gold), var(--maze-gold-dark) 42%, transparent);
+}
+
+.circuit {
+  position: relative;
+  inline-size: min(100%, 18rem);
+  block-size: 1.25rem;
+  border-block-start: 1px solid var(--maze-border-gold);
+}
+
+.circuit::before,
+.circuit::after {
+  content: "";
+  position: absolute;
+  inset-block-start: -3px;
+  inline-size: 5px;
+  block-size: 5px;
+  border: 1px solid var(--maze-gold);
+  background: var(--maze-bg);
+}
+
+.circuit::before {
+  inset-inline-start: 22%;
+}
+
+.circuit::after {
+  inset-inline-end: 8%;
+  border-radius: var(--maze-radius-round);
+}
+
+.grid,
+.dots {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  mask-image: linear-gradient(to bottom, black, transparent 86%);
+}
+
+.grid {
+  background-image:
+    linear-gradient(var(--maze-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--maze-grid-line) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+}
+
+.dots {
+  background-image: radial-gradient(circle, var(--maze-border-gold) 0 1px, transparent 1.5px);
+  background-size: 1.25rem 1.25rem;
+}
+
+.mazeCorner,
+.brackets {
+  position: relative;
+  inline-size: 3rem;
+  block-size: 3rem;
+}
+
+.mazeCorner {
+  border-block-start: 1px solid var(--maze-gold);
+  border-inline-start: 1px solid var(--maze-gold);
+}
+
+.mazeCorner::before,
+.mazeCorner::after {
+  content: "";
+  position: absolute;
+  border-color: var(--maze-gold-dark);
+  border-style: solid;
+}
+
+.mazeCorner::before {
+  inset-block-start: 0.55rem;
+  inset-inline-start: 0.55rem;
+  inline-size: 1.5rem;
+  block-size: 0.75rem;
+  border-width: 0;
+  border-block-end-width: 1px;
+  border-inline-end-width: 1px;
+}
+
+.mazeCorner::after {
+  inset-block-start: 1.3rem;
+  inset-inline-start: 1.3rem;
+  inline-size: 0.75rem;
+  block-size: 1.1rem;
+  border-width: 0;
+  border-block-end-width: 1px;
+  border-inline-start-width: 1px;
+}
+
+.brackets::before,
+.brackets::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inline-size: 0.75rem;
+  border-block: 1px solid var(--maze-border-gold);
+}
+
+.brackets::before {
+  inset-inline-start: 0;
+  border-inline-start: 1px solid var(--maze-border-gold);
+}
+
+.brackets::after {
+  inset-inline-end: 0;
+  border-inline-end: 1px solid var(--maze-border-gold);
+}
+
+.label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--maze-space-2);
+  color: var(--maze-text-muted);
+  font-family: var(--maze-font-mono);
+  font-size: var(--maze-type-caption);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.index {
+  color: var(--maze-gold-light);
+  font-variant-numeric: tabular-nums;
+}

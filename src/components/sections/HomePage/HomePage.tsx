@@ -2,23 +2,30 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
   BrainCircuit,
-  Code2,
-  Dna,
-  ExternalLink,
+  CalendarDays,
   FlaskConical,
-  GraduationCap
+  GraduationCap,
+  MapPin
 } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
+import { CaseStudyCoverImage } from "@/components/case-studies/CaseStudyCoverImage";
+import { MazeHeroGraphic } from "@/components/home/MazeHeroGraphic";
 import { NewsPopup } from "@/components/home/NewsPopup/NewsPopup";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
 import { Container } from "@/components/ui/Container";
-import { activeResearchProjects } from "@/data/active-research-projects";
-import type { Locale } from "@/i18n/routing";
+import { SectionHeading } from "@/components/ui/Section";
+import { TechnicalDetail, TechnicalLabel } from "@/components/ui/TechnicalDetail";
+import { getDirection, type Locale } from "@/i18n/routing";
+import { getPublishedCaseStudies } from "@/lib/directus/case-studies";
 import { getPublishedEvents } from "@/lib/directus/events";
-import { localizedPath, localize } from "@/lib/utilities/localize";
+import { localizedPath } from "@/lib/utilities/localize";
 
+import sectionStyles from "./HomePageSections.module.css";
 import styles from "./HomePage.module.css";
 
 const schools = [
@@ -60,146 +67,317 @@ const pathways = [
   }
 ] as const;
 
+const credibilityKeys = ["one", "three", "four", "six"] as const;
+
+function formatDate(value: string | null, locale: Locale) {
+  if (!value || !Number.isFinite(Date.parse(value))) return null;
+  return new Intl.DateTimeFormat(locale, { dateStyle: "medium" }).format(new Date(value));
+}
+
 export async function HomePage({ locale }: { locale: Locale }) {
-  const [t, eventResult] = await Promise.all([
+  const [t, eventResult, caseStudyResult] = await Promise.all([
     getTranslations({ locale }),
-    getPublishedEvents()
+    getPublishedEvents(),
+    getPublishedCaseStudies(locale)
   ]);
-  const featuredProject = activeResearchProjects.find((project) => project.slug === "biopredict");
   const now = Date.now();
+  const selectedEvent = eventResult.ok
+    ? ([...eventResult.data]
+        .filter((event) => Date.parse(event.event_date) >= now)
+        .sort((first, second) => Date.parse(first.event_date) - Date.parse(second.event_date))[0] ??
+      null)
+    : null;
   const latestCompletedEvent = eventResult.ok
-    ? eventResult.data
+    ? ([...eventResult.data]
         .filter((event) => Date.parse(event.event_date) < now)
         .sort((first, second) => Date.parse(second.event_date) - Date.parse(first.event_date))[0] ??
-      null
+      null)
     : null;
+  const selectedCaseStudies = caseStudyResult.ok
+    ? [...caseStudyResult.data]
+        .sort((first, second) => Number(second.featured) - Number(first.featured))
+        .slice(0, 2)
+    : [];
 
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <Container className={styles.heroGrid}>
+        <Container size="wide" className={styles.heroGrid}>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>{t("home.eyebrow")}</p>
+            <TechnicalLabel index="01" className={styles.eyebrow}>
+              {t("home.eyebrow")}
+            </TechnicalLabel>
             <h1>{t("home.headline")}</h1>
             <p className={styles.lead}>{t("home.supporting")}</p>
 
             <div className={styles.actions}>
               <Button href={localizedPath(locale, "/services")}>
                 {t("home.primaryCta")}
-                <ArrowRight size={17} aria-hidden="true" />
+                <ArrowRight className={styles.directionalIcon} size={17} aria-hidden="true" />
               </Button>
-              <Button href={localizedPath(locale, "/research")} variant="secondary">
+              <Button href={localizedPath(locale, "/research")} variant="outline">
                 {t("home.researchCta")}
-                <ArrowRight size={17} aria-hidden="true" />
+                <ArrowRight className={styles.directionalIcon} size={17} aria-hidden="true" />
               </Button>
+            </div>
+
+            <div className={styles.heroTrust} aria-label={t("home.choosePathTitle")}>
+              <span>
+                <b>01</b>
+                {t("home.aiPathTitle")}
+              </span>
+              <span>
+                <b>02</b>
+                {t("home.researchPathTitle")}
+              </span>
+              <span>
+                <b>03</b>
+                {t("home.educationPathTitle")}
+              </span>
             </div>
           </div>
 
-          <div className={styles.heroVisual} role="img" aria-label={t("home.visualLabel")}>
-            <Image
-             src="/images/hero-ai-chip.png"
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 960px) 54vw, 100vw"
-              className={styles.heroImage}
-            />
+          <div className={styles.heroVisual}>
+            <MazeHeroGraphic label={t("home.visualLabel")} systemLabel={t("home.eyebrow")} />
           </div>
         </Container>
       </section>
 
       <NewsPopup event={latestCompletedEvent} locale={locale} />
 
-      <section className={styles.pathwaysSection}>
+      <section className={sectionStyles.capabilities} data-home-section="capabilities">
         <Container>
-          <header className={styles.centeredHeader}>
-            <p className={styles.sectionLabel}>{t("home.choosePathEyebrow")}</p>
-            <h2>{t("home.choosePathTitle")}</h2>
-          </header>
+          <SectionHeading
+            eyebrow={t("home.choosePathEyebrow")}
+            title={t("home.choosePathTitle")}
+            description={t("home.capabilitiesDescription")}
+          />
 
-          <div className={styles.pathwayGrid}>
-            {pathways.map(({ titleKey, descriptionKey, href, icon: Icon }) => (
-              <Link className={styles.pathwayCard} href={localizedPath(locale, href)} key={href}>
-                <span className={styles.pathwayIcon} aria-hidden="true">
-                  <Icon size={29} />
-                </span>
+          <div className={sectionStyles.capabilityGrid}>
+            {pathways.map(({ titleKey, descriptionKey, href, icon: Icon }, index) => (
+              <Card
+                className={sectionStyles.capabilityCard}
+                data-featured={index === 0 || undefined}
+                interactive
+                key={href}
+                variant={index === 0 ? "featured" : "technical"}
+              >
+                <div className={sectionStyles.capabilityTopline}>
+                  <span>{String(index + 1).padStart(2, "0")} / CAP</span>
+                  <Icon size={24} strokeWidth={1.5} aria-hidden="true" />
+                </div>
                 <h3>{t(titleKey)}</h3>
                 <p>{t(descriptionKey)}</p>
-                <span className={styles.textLink}>
+                <Link className={sectionStyles.inlineLink} href={localizedPath(locale, href)}>
                   {t("home.explore")}
-                  <ArrowRight size={15} aria-hidden="true" />
-                </span>
-              </Link>
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+              </Card>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className={styles.trustSection} data-testid="schools-section">
+      <section className={sectionStyles.work} data-home-section="work">
         <Container>
-          <h2 className={styles.visuallyHidden}>{t("home.partners")}</h2>
-          <p className={styles.trustLabel}>{t("home.partnersEyebrow")}</p>
-
-          <div className={styles.schoolGrid} aria-label={t("home.partners")}>
-            {schools.map((school) => (
-              <a
-                className={styles.schoolLink}
-                href={school.href}
-                key={school.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${school.name} - ${t("home.schoolVisit")}`}
-              >
-                <span className={styles.schoolLogo}>
-                  <Image src={school.logo} alt={`${school.name} logo`} fill sizes="150px" />
-                </span>
-                <ExternalLink size={13} aria-hidden="true" />
-              </a>
-            ))}
+          <div className={sectionStyles.sectionTopline}>
+            <SectionHeading
+              compact
+              eyebrow={t("home.caseEyebrow")}
+              title={t("home.caseTitle")}
+              description={t("home.workDescription")}
+            />
+            <Button href={localizedPath(locale, "/case-studies")} variant="text">
+              {t("home.viewAllCaseStudies")}
+              <ArrowRight className={sectionStyles.directionalIcon} size={16} aria-hidden="true" />
+            </Button>
           </div>
+
+          {!caseStudyResult.ok ? (
+            <p className={sectionStyles.state} role="alert">
+              {t("caseStudies.unableToLoad")}
+            </p>
+          ) : selectedCaseStudies.length === 0 ? (
+            <p className={sectionStyles.state}>{t("caseStudies.empty")}</p>
+          ) : (
+            <div className={sectionStyles.workGrid}>
+              {selectedCaseStudies.map((caseStudy, index) => (
+                <Card
+                  className={sectionStyles.workCard}
+                  data-featured={index === 0 || undefined}
+                  interactive
+                  key={caseStudy.id}
+                  lang={caseStudy.locale}
+                  dir={getDirection(caseStudy.locale)}
+                  variant={index === 0 ? "featured" : "standard"}
+                >
+                  {caseStudy.coverImage ? (
+                    <CaseStudyCoverImage
+                      alt={caseStudy.title}
+                      className={sectionStyles.workImage}
+                      imageClassName={sectionStyles.workImageElement}
+                      sizes="(min-width: 900px) 45vw, 100vw"
+                      src={caseStudy.coverImage}
+                    />
+                  ) : (
+                    <div className={sectionStyles.workPlaceholder} aria-hidden="true">
+                      <TechnicalDetail variant="mazeCorner" />
+                      <span>WORK / {String(index + 1).padStart(2, "0")}</span>
+                    </div>
+                  )}
+                  <div className={sectionStyles.workBody}>
+                    <div className={sectionStyles.workMeta}>
+                      {caseStudy.industry ? <Badge>{caseStudy.industry}</Badge> : null}
+                      <span>{String(index + 1).padStart(2, "0")} / WORK</span>
+                    </div>
+                    <h3>{caseStudy.title}</h3>
+                    {caseStudy.shortDescription ? <p>{caseStudy.shortDescription}</p> : null}
+                    {caseStudy.technologies.length > 0 ? (
+                      <ul
+                        className={sectionStyles.technicalTags}
+                        aria-label={t("caseStudies.technologies")}
+                      >
+                        {caseStudy.technologies.slice(0, 3).map((technology) => (
+                          <li key={technology}>{technology}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    <Link
+                      className={sectionStyles.inlineLink}
+                      href={localizedPath(locale, `/case-studies/${caseStudy.slug}`)}
+                    >
+                      {t("caseStudies.readCaseStudy", { title: caseStudy.title })}
+                      <ArrowUpRight size={16} aria-hidden="true" />
+                    </Link>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          )}
         </Container>
       </section>
 
-      {featuredProject ? (
-        <section className={styles.featuredSection}>
-          <Container className={styles.featuredGrid}>
-            <div className={styles.featuredCopy}>
-              <p className={styles.sectionLabel}>{t("home.featuredEyebrow")}</p>
-              <h2>{featuredProject.name}</h2>
-              <p>{localize(featuredProject.description, locale)}</p>
-              <Button
-                href={localizedPath(locale, "/research/projects/biopredict")}
-                variant="secondary"
-              >
-                {t("home.featuredProjectCta")}
-                <ArrowRight size={17} aria-hidden="true" />
+      <section
+        className={sectionStyles.partners}
+        data-home-section="ecosystem"
+        aria-labelledby="home-partners-heading"
+      >
+        <Container>
+          <div className={sectionStyles.partnersLayout}>
+            <div className={sectionStyles.partnersCopy}>
+              <TechnicalLabel index="05">{t("home.partnersEyebrow")}</TechnicalLabel>
+              <h2 id="home-partners-heading">{t("home.ecosystemTitle")}</h2>
+              <p>{t("home.partnerNote")}</p>
+              <Button href={localizedPath(locale, "/contact")} variant="outline">
+                {t("home.secondaryCta")}
               </Button>
             </div>
-
-            <div className={styles.scienceVisual} aria-hidden="true">
-              <span className={styles.visualOrb} />
-              <Dna className={styles.dnaIcon} strokeWidth={1.2} />
-              <span className={styles.dataLineOne} />
-              <span className={styles.dataLineTwo} />
-              <span className={styles.dataLineThree} />
+            <div className={sectionStyles.partnerLogos} aria-label={t("home.partners")}>
+              {schools.map((school) => (
+                <a
+                  aria-label={`${school.name} — ${t("home.schoolVisit")}`}
+                  className={sectionStyles.partnerLogo}
+                  href={school.href}
+                  key={school.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <span className={sectionStyles.partnerLogoMedia}>
+                    <Image alt={school.name} fill sizes="150px" src={school.logo} />
+                  </span>
+                  <span className={sectionStyles.partnerLogoFooter}>
+                    <strong>{school.name}</strong>
+                    <ArrowUpRight size={15} aria-hidden="true" />
+                  </span>
+                </a>
+              ))}
             </div>
-          </Container>
-        </section>
-      ) : null}
+          </div>
 
-      <section className={styles.ctaSection}>
+          <div className={sectionStyles.credibilityInner}>
+            <div className={sectionStyles.credibilityIntro}>
+              <TechnicalLabel index="TRUST">{t("home.credibilityEyebrow")}</TechnicalLabel>
+              <h3 className={sectionStyles.visuallyHidden}>{t("home.whyTitle")}</h3>
+            </div>
+            <div className={sectionStyles.credibilityItems}>
+              {credibilityKeys.map((key, index) => (
+                <span key={key}>
+                  <b>{String(index + 1).padStart(2, "0")}</b>
+                  {t(`home.why.${key}`)}
+                </span>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className={sectionStyles.activity} data-home-section="activity">
+        <Container size="wide">
+          <div className={sectionStyles.sectionTopline}>
+            <SectionHeading
+              compact
+              eyebrow={t("home.eventsEyebrow")}
+              title={t("home.activityTitle")}
+              description={t("home.activityDescription")}
+            />
+            <Button href={localizedPath(locale, "/events")} variant="text">
+              {t("home.viewAllEvents")}
+              <ArrowRight className={sectionStyles.directionalIcon} size={16} aria-hidden="true" />
+            </Button>
+          </div>
+
+          {!eventResult.ok ? (
+            <p className={sectionStyles.state} role="alert">
+              {t("events.unableToLoadEvents")}
+            </p>
+          ) : !selectedEvent ? (
+            <p className={sectionStyles.state}>{t("events.noEvents")}</p>
+          ) : (
+            <Card className={sectionStyles.eventFeature} variant="technical">
+              <div className={sectionStyles.eventDateBlock}>
+                <CalendarDays size={22} aria-hidden="true" />
+                <time dateTime={selectedEvent.event_date}>
+                  {formatDate(selectedEvent.event_date, locale)}
+                </time>
+              </div>
+              <div className={sectionStyles.eventBody}>
+                <div className={sectionStyles.eventMeta}>
+                  <Badge>{selectedEvent.format || t("events.event")}</Badge>
+                  <span>
+                    <MapPin size={14} aria-hidden="true" />
+                    {selectedEvent.location || t("events.locationPending")}
+                  </span>
+                </div>
+                <h3>{selectedEvent.title}</h3>
+                {selectedEvent.short_description ? <p>{selectedEvent.short_description}</p> : null}
+                <Link
+                  className={sectionStyles.inlineLink}
+                  href={localizedPath(locale, `/events/${selectedEvent.slug}`)}
+                >
+                  {t("home.viewEvent")}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+              </div>
+            </Card>
+          )}
+        </Container>
+      </section>
+
+      <section
+        className={sectionStyles.finalCta}
+        data-home-section="cta"
+        aria-labelledby="home-final-cta-heading"
+      >
         <Container>
-          <div className={styles.ctaPanel}>
-            <span className={styles.ctaIcon} aria-hidden="true">
-              <Code2 size={28} />
-            </span>
-            <div className={styles.ctaCopy}>
-              <h2>{t("home.ctaTitle")}</h2>
-              <p>{t("home.ctaText")}</p>
-            </div>
+          <div className={sectionStyles.finalCtaPanel}>
+            <TechnicalDetail variant="grid" className={sectionStyles.finalCtaGrid} />
+            <TechnicalDetail variant="mazeCorner" className={sectionStyles.finalCtaCorner} />
+            <TechnicalLabel index="09">{t("navigation.partner")}</TechnicalLabel>
+            <h2 id="home-final-cta-heading">{t("home.ctaTitle")}</h2>
+            <p>{t("home.ctaText")}</p>
             <Button href={localizedPath(locale, "/contact")}>
               {t("home.secondaryCta")}
-              <ArrowRight size={17} aria-hidden="true" />
+              <ArrowRight className={sectionStyles.directionalIcon} size={17} aria-hidden="true" />
             </Button>
           </div>
         </Container>

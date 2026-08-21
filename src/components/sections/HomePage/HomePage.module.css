@@ -5,14 +5,14 @@
 
   background:
     radial-gradient(
-      circle at 80% 12%,
-      rgba(124, 58, 237, 0.14),
-      transparent 30rem
+      circle at 78% 8%,
+      color-mix(in srgb, var(--maze-violet) 8%, transparent),
+      transparent 25rem
     ),
     radial-gradient(
-      circle at 18% 58%,
-      rgba(214, 168, 75, 0.035),
-      transparent 28rem
+      circle at 18% 28%,
+      color-mix(in srgb, var(--maze-gold) 4%, transparent),
+      transparent 30rem
     ),
     linear-gradient(
       180deg,
@@ -29,34 +29,17 @@
   pointer-events: none;
   content: "";
 
-  opacity: 0.05;
+  opacity: 0.55;
 
   background-image:
-    linear-gradient(
-      rgba(167, 139, 250, 0.08) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(167, 139, 250, 0.08) 1px,
-      transparent 1px
-    );
+    linear-gradient(var(--maze-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--maze-grid-line) 1px, transparent 1px);
 
-  background-size: 96px 96px;
+  background-size: 6rem 6rem;
 
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.3),
-      transparent 34%
-    );
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 34%);
 
-  mask-image:
-    linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.3),
-      transparent 34%
-    );
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), transparent 34%);
 }
 
 /* =========================================================
@@ -65,38 +48,60 @@
 
 .hero {
   position: relative;
-
-  min-block-size:
-    min(
-      680px,
-      calc(100svh - 78px)
+  min-block-size: min(46rem, calc(100svh - 76px));
+  border-block-end: 1px solid var(--maze-border-subtle);
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0 50%,
+      color-mix(in srgb, var(--maze-surface) 28%, transparent) 50%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--maze-bg-elevated) 42%, transparent),
+      transparent 70%
     );
+}
 
-  border-block-end:
-    1px solid rgba(214, 168, 75, 0.08);
+:global([dir="rtl"]) .hero {
+  background:
+    linear-gradient(
+      270deg,
+      transparent 0 50%,
+      color-mix(in srgb, var(--maze-surface) 28%, transparent) 50%
+    ),
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--maze-bg-elevated) 42%, transparent),
+      transparent 70%
+    );
+}
+
+.hero::after {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 50%;
+  inline-size: 1px;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(transparent, var(--maze-border-gold) 25% 75%, transparent);
 }
 
 .heroGrid {
   display: grid;
 
-  grid-template-columns:
-    minmax(0, 46fr)
-    minmax(0, 54fr);
-
+  grid-template-columns: minmax(0, 1.04fr) minmax(28rem, 0.96fr);
   min-block-size: inherit;
-
   align-items: center;
-
-  gap: 1.5rem;
+  gap: clamp(2rem, 5vw, 5.5rem);
 }
 
 .heroCopy {
   position: relative;
   z-index: 2;
 
-  max-inline-size: 35rem;
-
-  padding-block: 4rem;
+  max-inline-size: 39rem;
+  padding-block: clamp(4rem, 8vw, 7rem);
 }
 
 .eyebrow,
@@ -115,36 +120,87 @@
 }
 
 .heroCopy h1 {
-  max-inline-size: 11ch;
-
-  margin: 1rem 0 1.25rem;
-
+  max-inline-size: 12ch;
+  margin: 1.25rem 0 1.5rem;
   color: var(--color-text);
+  font-family: var(--maze-font-editorial);
+  font-size: clamp(3.25rem, 5.3vw, 5.15rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
 
-  font-size: 4.25rem;
-  line-height: 1.02;
-
+:global([dir="rtl"]) .heroCopy h1 {
+  font-family: var(--maze-font-arabic);
+  font-weight: 700;
   letter-spacing: 0;
+  line-height: 1.12;
 }
 
 .lead {
-  max-inline-size: 34rem;
-
+  max-inline-size: 36rem;
   margin: 0;
-
-  color: var(--color-text-muted);
-
-  font-size: 1.05rem;
-  line-height: 1.75;
+  color: var(--maze-text-soft);
+  font-size: var(--maze-type-body-lg);
+  line-height: 1.7;
 }
 
 .actions {
   display: flex;
   flex-wrap: wrap;
 
-  gap: 0.85rem;
+  gap: 0.75rem;
+  margin-block-start: 2.25rem;
+}
 
-  margin-block-start: 2rem;
+.directionalIcon {
+  transition: transform var(--maze-transition-fast);
+}
+
+.actions a:hover .directionalIcon {
+  transform: translateX(2px);
+}
+
+:global([dir="rtl"]) .directionalIcon {
+  transform: scaleX(-1);
+}
+
+:global([dir="rtl"]) .actions a:hover .directionalIcon {
+  transform: scaleX(-1) translateX(2px);
+}
+
+.heroTrust {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
+  padding-block-start: 1rem;
+  border-block-start: 1px solid var(--maze-border-subtle);
+}
+
+.heroTrust span {
+  display: grid;
+  gap: 0.3rem;
+  min-inline-size: 0;
+  padding-inline: 0.85rem;
+  color: var(--maze-text-muted);
+  border-inline-start: 1px solid var(--maze-border-subtle);
+  font-size: 0.72rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.heroTrust span:first-child {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+.heroTrust b {
+  color: var(--maze-gold-light);
+  font-family: var(--maze-font-mono);
+  font-size: 0.625rem;
+  font-weight: 600;
 }
 
 /* =========================================================
@@ -153,37 +209,7 @@
 
 .heroVisual {
   position: relative;
-
   min-block-size: 36rem;
-
-  overflow: hidden;
-
-  isolation: isolate;
-
-  background: transparent;
-}
-
-:global([data-theme="light"]) .heroVisual {
-  background: radial-gradient(circle at center, rgba(109, 61, 245, 0.1), transparent 68%);
-}
-
-.heroVisual::before,
-.heroVisual::after {
-  content: none;
-}
-
-.heroImage {
-  object-fit: cover;
-  object-position: center;
-
-  mix-blend-mode: normal;
-
-  filter:
-    saturate(1.02)
-    contrast(1.02);
-
-  -webkit-mask-image: none;
-  mask-image: none;
 }
 
 /* =========================================================
@@ -222,11 +248,7 @@
 .pathwayGrid {
   display: grid;
 
-  grid-template-columns:
-    repeat(
-      3,
-      minmax(0, 1fr)
-    );
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 
   gap: 1rem;
 }
@@ -251,9 +273,7 @@
 
   background: var(--gradient-card);
 
-  box-shadow:
-    inset 0 1px 0
-    rgba(255, 255, 255, 0.02);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
 
   transition:
     transform 180ms ease,
@@ -264,12 +284,9 @@
 .pathwayCard:hover {
   transform: translateY(-4px);
 
-  border-color:
-    rgba(214, 168, 75, 0.45);
+  border-color: rgba(214, 168, 75, 0.45);
 
-  box-shadow:
-    0 18px 42px
-    rgba(46, 22, 112, 0.2);
+  box-shadow: 0 18px 42px rgba(46, 22, 112, 0.2);
 }
 
 .pathwayIcon,
@@ -283,21 +300,15 @@
 
   color: var(--color-gold-soft);
 
-  border:
-    1px solid
-    rgba(214, 168, 75, 0.3);
+  border: 1px solid rgba(214, 168, 75, 0.3);
 
   border-radius: 10px;
 
-  background:
-    rgba(214, 168, 75, 0.07);
+  background: rgba(214, 168, 75, 0.07);
 }
 
 .pathwayCard h3 {
-  margin:
-    1.4rem
-    0
-    0.65rem;
+  margin: 1.4rem 0 0.65rem;
 
   color: var(--color-text);
 
@@ -338,13 +349,9 @@
 .trustSection {
   position: relative;
 
-  padding-block:
-    2rem
-    2.5rem;
+  padding-block: 2rem 2.5rem;
 
-  border-block:
-    1px solid
-    rgba(214, 168, 75, 0.08);
+  border-block: 1px solid rgba(214, 168, 75, 0.08);
 
   background: var(--color-background-72);
 }
@@ -382,8 +389,7 @@
 
   opacity: 0.68;
 
-  transition:
-    opacity 160ms ease;
+  transition: opacity 160ms ease;
 }
 
 .schoolLink:hover {
@@ -398,9 +404,7 @@
   inline-size: 8.2rem;
   block-size: 3rem;
 
-  filter:
-    grayscale(1)
-    brightness(1.05);
+  filter: grayscale(1) brightness(1.05);
 }
 
 .schoolLogo img {
@@ -412,9 +416,7 @@
    ========================================================= */
 
 .featuredSection {
-  border-block-end:
-    1px solid
-    rgba(214, 168, 75, 0.08);
+  border-block-end: 1px solid rgba(214, 168, 75, 0.08);
 }
 
 .featuredGrid {
@@ -430,10 +432,7 @@
 }
 
 .featuredCopy h2 {
-  margin:
-    0.65rem
-    0
-    1rem;
+  margin: 0.65rem 0 1rem;
 
   color: var(--color-text);
 
@@ -445,10 +444,7 @@
 .featuredCopy > p:not(.sectionLabel) {
   max-inline-size: 37rem;
 
-  margin:
-    0
-    0
-    1.7rem;
+  margin: 0 0 1.7rem;
 
   color: var(--color-text-muted);
 
@@ -470,27 +466,14 @@
 
   place-items: center;
 
-  border:
-    1px solid
-    rgba(167, 139, 250, 0.18);
+  border: 1px solid rgba(167, 139, 250, 0.18);
 
   border-radius: 12px;
 
   background:
-    linear-gradient(
-      rgba(167, 139, 250, 0.055) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(167, 139, 250, 0.055) 1px,
-      transparent 1px
-    ),
-    radial-gradient(
-      circle at center,
-      rgba(124, 58, 237, 0.22),
-      transparent 58%
-    ),
+    linear-gradient(rgba(167, 139, 250, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(167, 139, 250, 0.055) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(124, 58, 237, 0.22), transparent 58%),
     var(--color-background-secondary);
 
   background-size:
@@ -506,17 +489,13 @@
   inline-size: 13rem;
   block-size: 13rem;
 
-  border:
-    1px solid
-    rgba(214, 168, 75, 0.26);
+  border: 1px solid rgba(214, 168, 75, 0.26);
 
   border-radius: 50%;
 
   box-shadow:
-    0 0 60px
-    rgba(124, 58, 237, 0.2),
-    inset 0 0 40px
-    rgba(124, 58, 237, 0.14);
+    0 0 60px rgba(124, 58, 237, 0.2),
+    inset 0 0 40px rgba(124, 58, 237, 0.14);
 }
 
 .dnaIcon {
@@ -525,11 +504,7 @@
 
   color: var(--color-primary-hover);
 
-  filter:
-    drop-shadow(
-      0 0 16px
-      rgba(124, 58, 237, 0.7)
-    );
+  filter: drop-shadow(0 0 16px rgba(124, 58, 237, 0.7));
 }
 
 .dataLineOne,
@@ -542,12 +517,7 @@
   inline-size: 24%;
   block-size: 1px;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(214, 168, 75, 0.7)
-    );
+  background: linear-gradient(90deg, transparent, rgba(214, 168, 75, 0.7));
 }
 
 .dataLineOne {
@@ -588,17 +558,13 @@
 
   padding: 1.5rem;
 
-  border:
-    1px solid
-    rgba(214, 168, 75, 0.28);
+  border: 1px solid rgba(214, 168, 75, 0.28);
 
   border-radius: 12px;
 
   background: var(--gradient-card);
 
-  box-shadow:
-    inset 0 1px 0
-    rgba(255, 255, 255, 0.025);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025);
 }
 
 .ctaCopy h2 {
@@ -615,10 +581,7 @@
 }
 
 .ctaCopy p {
-  margin:
-    0.35rem
-    0
-    0;
+  margin: 0.35rem 0 0;
 
   color: var(--color-text-muted);
 }
@@ -644,9 +607,7 @@
 
 .page a:focus-visible,
 .page button:focus-visible {
-  outline:
-    2px solid
-    var(--color-gold-soft);
+  outline: 2px solid var(--color-gold-soft);
 
   outline-offset: 4px;
 }
@@ -655,19 +616,14 @@
    RESPONSIVE
    ========================================================= */
 
-@media (max-width: 960px) {
+@media (max-width: 1024px) {
   .heroGrid {
-    grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 0.9fr);
-  }
-
-  .heroCopy h1 {
-    font-size: 3.5rem;
+    grid-template-columns: minmax(0, 1fr) minmax(25rem, 0.9fr);
+    gap: 2rem;
   }
 
   .heroVisual {
-    min-block-size: 29rem;
+    min-block-size: 30rem;
   }
 
   .pathwaysSection,
@@ -680,35 +636,45 @@
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 900px) {
   .hero {
     min-block-size: auto;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--maze-bg-elevated) 42%, transparent),
+      transparent 70%
+    );
+  }
+
+  :global([dir="rtl"]) .hero {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--maze-bg-elevated) 42%, transparent),
+      transparent 70%
+    );
+  }
+
+  .hero::after {
+    display: none;
   }
 
   .heroGrid {
     grid-template-columns: 1fr;
-
-    padding-block:
-      3.5rem
-      2.5rem;
+    padding-block: 3.75rem 2.5rem;
   }
 
   .heroCopy {
     max-inline-size: none;
-
     padding-block: 0;
   }
 
   .heroCopy h1 {
-    max-inline-size: 12ch;
-
-    font-size: 2.75rem;
+    max-inline-size: 13ch;
   }
 
   .heroVisual {
-    min-block-size: 23rem;
-
-    margin-block-start: -1rem;
+    min-block-size: 25rem;
+    margin-block-start: 0;
   }
 
   .pathwaysSection,
@@ -760,13 +726,28 @@
   }
 }
 
-@media (max-width: 460px) {
+@media (max-width: 760px) {
   .heroGrid {
-    padding-block-start: 2.75rem;
+    padding-block-start: 3.25rem;
   }
 
   .heroCopy h1 {
-    font-size: 2.35rem;
+    font-size: clamp(2.8rem, 11vw, 4rem);
+  }
+
+  .heroVisual {
+    min-block-size: 23rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .heroGrid {
+    padding-block: 2.75rem 2rem;
+  }
+
+  .heroCopy h1 {
+    max-inline-size: 12ch;
+    font-size: clamp(2.45rem, 12vw, 3.15rem);
   }
 
   .lead {
@@ -781,6 +762,15 @@
     inline-size: 100%;
   }
 
+  .heroTrust {
+    margin-block-start: 2.5rem;
+  }
+
+  .heroTrust span {
+    padding-inline: 0.55rem;
+    font-size: 0.625rem;
+  }
+
   .heroVisual {
     min-block-size: 18rem;
   }
@@ -792,11 +782,7 @@
   .schoolGrid {
     display: grid;
 
-    grid-template-columns:
-      repeat(
-        3,
-        minmax(0, 1fr)
-      );
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .schoolLink {
@@ -830,6 +816,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .directionalIcon,
   .pathwayCard,
   .schoolLink {
     transition: none;

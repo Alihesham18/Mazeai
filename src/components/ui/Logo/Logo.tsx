@@ -5,7 +5,7 @@ import styles from "./Logo.module.css";
 
 export function Logo({ locale }: { locale: Locale }) {
   return (
-    <Link href={`/${locale}`} className={styles.logo} aria-label="SynergyMazeAI home">
+    <Link href={`/${locale}`} className={styles.logo} aria-label="SynergyMazeAI">
       <span className={styles.mark} aria-hidden="true">
         <Image
           src="/images/branding/synergymazeai-logo.png"

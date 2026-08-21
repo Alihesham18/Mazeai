@@ -1,51 +1,117 @@
 .button {
   min-block-size: 44px;
+  inline-size: fit-content;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding-block: 0.78rem;
-  padding-inline: 1.05rem;
+  gap: var(--maze-space-2);
+  padding-block: 0.6875rem;
+  padding-inline: 1.125rem;
   border: 1px solid transparent;
-  border-radius: 0.55rem;
-  font-weight: 750;
+  border-radius: var(--maze-radius-md);
+  font-size: var(--maze-type-small);
+  font-weight: 700;
+  letter-spacing: 0.01em;
   line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
   transition:
-    border-color 160ms ease,
-    background 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
+    border-color var(--maze-transition-fast),
+    background-color var(--maze-transition-fast),
+    box-shadow var(--maze-transition-fast),
+    color var(--maze-transition-fast),
+    transform var(--maze-transition-fast);
 }
 
-.button:hover {
+.button:hover:not([aria-disabled="true"]):not(:disabled) {
   transform: translateY(-1px);
 }
 
-.primary {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
+.button:active:not([aria-disabled="true"]):not(:disabled) {
+  transform: translateY(0);
 }
 
-.primary:hover {
-  background: var(--color-primary-hover);
+.button:disabled,
+.button[aria-disabled="true"] {
+  cursor: not-allowed;
+  filter: saturate(0.45);
+  opacity: 0.52;
+}
+
+.primary {
+  border-color: var(--maze-gold-light);
+  background: linear-gradient(135deg, var(--maze-gold-light), var(--maze-gold));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.18),
+    var(--maze-shadow-gold);
+  color: var(--maze-on-gold);
+}
+
+.primary:hover:not([aria-disabled="true"]):not(:disabled) {
+  background: linear-gradient(135deg, var(--maze-gold-hover), var(--maze-gold-light));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.22),
+    0 14px 36px rgba(158, 116, 33, 0.24);
+}
+
+.outline {
+  border-color: var(--maze-border-gold);
+  background: transparent;
+  color: var(--maze-gold-light);
+}
+
+.outline:hover:not([aria-disabled="true"]):not(:disabled) {
+  border-color: var(--maze-gold-light);
+  background: var(--color-gold-subtle);
+  color: var(--maze-text);
 }
 
 .secondary {
-  border-color: var(--color-border-gold);
-  background: var(--color-surface-raised-82);
-  color: var(--color-text);
+  border-color: var(--maze-border);
+  background: var(--maze-surface-hover);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+  color: var(--maze-text);
 }
 
-.secondary:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold-soft);
+.secondary:hover:not([aria-disabled="true"]):not(:disabled) {
+  border-color: var(--maze-border-gold);
+  background: color-mix(in srgb, var(--maze-surface-hover) 88%, var(--maze-gold) 12%);
+  color: var(--maze-gold-light);
 }
 
+.text,
 .ghost {
-  color: var(--color-text-muted);
+  min-block-size: 36px;
+  padding-inline: var(--maze-space-1);
+  border-radius: var(--maze-radius-sm);
+  background: transparent;
+  color: var(--maze-text-soft);
 }
 
-.ghost:hover {
-  color: var(--color-text);
-  background: var(--color-primary-soft-subtle);
+.text:hover:not([aria-disabled="true"]):not(:disabled),
+.ghost:hover:not([aria-disabled="true"]):not(:disabled) {
+  color: var(--maze-gold-light);
+  background: transparent;
+}
+
+.spinner {
+  inline-size: 0.9rem;
+  block-size: 0.9rem;
+  flex: 0 0 auto;
+  border: 1.5px solid currentColor;
+  border-inline-end-color: transparent;
+  border-radius: var(--maze-radius-round);
+  animation: button-spin 700ms linear infinite;
+}
+
+@keyframes button-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (max-width: 480px) {
+  .button {
+    max-inline-size: 100%;
+  }
 }

@@ -16,7 +16,7 @@ describe("LanguageSwitcher", () => {
       </NextIntlClientProvider>
     );
 
-    const trigger = screen.getByRole("button", { name: "Choose language" });
+    const trigger = screen.getByRole("button", { name: "Language" });
     fireEvent.click(trigger);
 
     expect(trigger).toHaveAttribute("aria-expanded", "true");

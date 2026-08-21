@@ -33,7 +33,11 @@ export function DesktopNavigation({ locale }: DesktopNavigationProps) {
   }, []);
 
   return (
-    <nav className={styles.nav} aria-label="Main navigation" onMouseLeave={() => setOpenHref(null)}>
+    <nav
+      className={styles.nav}
+      aria-label={translate("navigation.mainLabel")}
+      onMouseLeave={() => setOpenHref(null)}
+    >
       {navigation.map((item) => (
         <NavigationItem
           key={item.href}
@@ -78,7 +82,7 @@ function NavigationItem({
           .join(" ")}
         aria-current={isCurrent ? "page" : undefined}
       >
-          {translate(item.labelKey)}
+        {translate(item.labelKey)}
       </Link>
     );
   }
@@ -97,6 +101,7 @@ function NavigationItem({
           .filter(Boolean)
           .join(" ")}
         aria-expanded={isOpen}
+        aria-haspopup="menu"
         aria-controls={menuId}
         onClick={() => setOpenHref(isOpen ? null : item.href)}
       >
@@ -109,7 +114,13 @@ function NavigationItem({
             <Link
               key={child.href}
               href={localizedPath(locale, child.href)}
-              className={styles.menuLink}
+              className={[
+                styles.menuLink,
+                pathname === localizedPath(locale, child.href) ? styles.menuLinkCurrent : ""
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              aria-current={pathname === localizedPath(locale, child.href) ? "page" : undefined}
               onClick={() => setOpenHref(null)}
             >
               {translate(child.labelKey)}
