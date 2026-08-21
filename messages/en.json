@@ -367,8 +367,27 @@
     "overview": {
       "eyebrow": "Digital services",
       "title": "Services",
-      "description": "From first idea to launch, we create thoughtful websites that are clear, responsive, and ready to grow.",
-      "viewDetails": "View details"
+      "description": "We help organizations shape ideas, design clear digital experiences, build dependable web products, and understand where AI can create practical value.",
+      "philosophy": {
+        "eyebrow": "How we work",
+        "title": "Clarity before complexity.",
+        "items": {
+          "one": "Technology should make complex work clearer, not more complicated.",
+          "two": "Strong digital products begin with the problem, not the technology.",
+          "three": "AI creates value when strategy, people, data, and implementation move together."
+        }
+      },
+      "directoryEyebrow": "Our services",
+      "directoryTitle": "Choose the right path for your project.",
+      "explore": {
+        "webDevelopment": "Explore Web Development",
+        "webDesign": "Explore Web Design",
+        "aiConsulting": "Explore AI Consulting"
+      },
+      "ctaEyebrow": "Start a conversation",
+      "ctaTitle": "Have a digital product or AI opportunity to explore?",
+      "ctaText": "Share the challenge, idea, or decision in front of you. We will help define a practical next step.",
+      "ctaAction": "Talk to our team"
     },
     "webDevelopment": {
       "eyebrow": "Engineering and delivery",
@@ -469,6 +488,99 @@
       "technologiesTitle": "A practical design toolkit",
       "ctaTitle": "Ready to shape your digital experience?",
       "ctaText": "Share your idea, goals, or existing website and we will define the right design direction."
+    },
+    "aiConsulting": {
+      "eyebrow": "AI strategy and advisory",
+      "title": "AI Consulting",
+      "shortDescription": "We help organizations identify practical AI opportunities, evaluate readiness, prioritize use cases, and define a clear path from idea to implementation.",
+      "intro": "We help organizations understand where AI can create practical value, assess readiness, prioritize opportunities, and develop a responsible roadmap for implementation.",
+      "heroPrimary": "Talk to an AI Consultant",
+      "heroSecondary": "Explore Our Approach",
+      "capabilities": {
+        "eyebrow": "What we help with",
+        "title": "Make informed AI decisions before implementation begins.",
+        "description": "We connect organizational priorities, operational realities, data, technology, and risk to clarify where AI is genuinely useful.",
+        "items": {
+          "one": {
+            "title": "AI Opportunity Assessment",
+            "description": "Identify processes, challenges, and opportunities where AI could provide meaningful value."
+          },
+          "two": {
+            "title": "Use Case Discovery and Prioritization",
+            "description": "Evaluate possible use cases by feasibility, value, data availability, risk, and implementation complexity."
+          },
+          "three": {
+            "title": "Data and Technology Readiness",
+            "description": "Review available data, infrastructure, integrations, and technical requirements before implementation."
+          },
+          "four": {
+            "title": "AI Strategy and Roadmap",
+            "description": "Define a phased roadmap that connects organizational priorities with practical AI initiatives."
+          },
+          "five": {
+            "title": "Responsible AI and Governance",
+            "description": "Consider privacy, security, transparency, human oversight, and responsible deployment from the outset."
+          }
+        }
+      },
+      "process": {
+        "eyebrow": "Consulting process",
+        "title": "A structured path from questions to direction.",
+        "description": "Each engagement is shaped to the organization, while the working process stays clear and decision-focused.",
+        "items": {
+          "one": {
+            "title": "Discover",
+            "description": "Understand organizational goals, workflows, stakeholders, and current challenges."
+          },
+          "two": {
+            "title": "Assess",
+            "description": "Evaluate data, systems, processes, constraints, and overall AI readiness."
+          },
+          "three": {
+            "title": "Prioritize",
+            "description": "Identify the highest-value opportunities that are realistic to pursue."
+          },
+          "four": {
+            "title": "Roadmap",
+            "description": "Define recommended initiatives, dependencies, safeguards, and implementation stages."
+          },
+          "five": {
+            "title": "Support",
+            "description": "Provide guidance as the organization moves from planning toward implementation."
+          }
+        }
+      },
+      "deliverables": {
+        "eyebrow": "Possible deliverables",
+        "title": "Practical material for the decisions ahead.",
+        "description": "Depending on the engagement, deliverables may include:",
+        "items": {
+          "one": "AI opportunity map",
+          "two": "Prioritized use-case backlog",
+          "three": "AI and data readiness assessment",
+          "four": "Recommended architecture or technical direction",
+          "five": "Phased implementation roadmap",
+          "six": "Responsible AI considerations",
+          "seven": "Clear next-step recommendations"
+        }
+      },
+      "audience": {
+        "eyebrow": "Who it is for",
+        "title": "For teams that need clarity before committing.",
+        "description": "AI consulting can be useful for:",
+        "items": {
+          "one": "Organizations exploring AI for the first time",
+          "two": "Teams with AI ideas but no clear implementation path",
+          "three": "Organizations evaluating automation opportunities",
+          "four": "Leaders who need a realistic AI roadmap",
+          "five": "Teams reviewing data and infrastructure readiness"
+        }
+      },
+      "ctaEyebrow": "Discuss the opportunity",
+      "ctaTitle": "Have an AI opportunity worth exploring?",
+      "ctaText": "Let us identify what is practical, valuable, and responsible before you invest in implementation.",
+      "ctaPrimary": "Talk to an AI Consultant",
+      "ctaSecondary": "Back to Services"
     }
   },
   "pages": {

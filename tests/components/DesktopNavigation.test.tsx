@@ -32,4 +32,36 @@ describe("DesktopNavigation", () => {
       "page"
     );
   });
+
+  it("shows only the three ready services and the Services overview", () => {
+    render(
+      <NextIntlClientProvider locale="en" messages={en}>
+        <DesktopNavigation locale="en" />
+      </NextIntlClientProvider>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Services" }));
+
+    expect(screen.getByRole("link", { name: "Services Overview" })).toHaveAttribute(
+      "href",
+      "/en/services"
+    );
+    expect(screen.getByRole("link", { name: "Web Development" })).toHaveAttribute(
+      "href",
+      "/en/services/web-development"
+    );
+    expect(screen.getByRole("link", { name: "Web Design" })).toHaveAttribute(
+      "href",
+      "/en/services/web-design"
+    );
+    expect(screen.getByRole("link", { name: "AI Consulting" })).toHaveAttribute(
+      "href",
+      "/en/services/ai-consulting"
+    );
+    expect(screen.queryByRole("link", { name: "AI Solutions and Automation" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Research and Development" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Education and Training" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Academic Partnerships" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Custom Programs" })).toBeNull();
+  });
 });

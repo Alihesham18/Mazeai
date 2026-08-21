@@ -117,4 +117,37 @@ describe("MobileNavigation", () => {
     );
     consoleError.mockRestore();
   });
+
+  it("keeps the mobile Services group focused on the three ready services", () => {
+    vi.stubGlobal(
+      "matchMedia",
+      vi.fn().mockReturnValue({
+        matches: false,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn()
+      })
+    );
+
+    render(
+      <NextIntlClientProvider locale="en" messages={en}>
+        <ThemeProvider>
+          <MobileNavigation locale="en" />
+        </ThemeProvider>
+      </NextIntlClientProvider>
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "Open navigation menu" }));
+    const servicesSummary = screen.getByText("Services", { selector: "summary" });
+    fireEvent.click(servicesSummary);
+
+    expect(screen.getByRole("link", { name: "Services Overview" })).toHaveAttribute(
+      "href",
+      "/en/services"
+    );
+    expect(screen.getByRole("link", { name: "Web Development" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Web Design" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "AI Consulting" })).toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "AI Solutions and Automation" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Custom Programs" })).toBeNull();
+  });
 });

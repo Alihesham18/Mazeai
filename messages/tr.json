@@ -367,8 +367,27 @@
     "overview": {
       "eyebrow": "Dijital hizmetler",
       "title": "Hizmetler",
-      "description": "İlk fikirden yayına kadar açık, duyarlı ve büyümeye hazır web siteleri tasarlıyor ve geliştiriyoruz.",
-      "viewDetails": "Detayları görüntüle"
+      "description": "Kurumların fikirlerini şekillendirmesine, açık dijital deneyimler tasarlamasına, güvenilir web ürünleri geliştirmesine ve yapay zekanın nerede pratik değer yaratabileceğini anlamasına yardımcı oluyoruz.",
+      "philosophy": {
+        "eyebrow": "Nasıl çalışıyoruz",
+        "title": "Karmaşıklıktan önce açıklık.",
+        "items": {
+          "one": "Teknoloji, karmaşık işleri daha anlaşılır hale getirmeli; daha karmaşık değil.",
+          "two": "Güçlü dijital ürünler teknolojiyle değil, problemle başlar.",
+          "three": "Yapay zeka; strateji, insanlar, veri ve uygulama birlikte ilerlediğinde değer yaratır."
+        }
+      },
+      "directoryEyebrow": "Hizmetlerimiz",
+      "directoryTitle": "Projeniz için doğru yolu seçin.",
+      "explore": {
+        "webDevelopment": "Web Geliştirmeyi Keşfedin",
+        "webDesign": "Web Tasarımı Keşfedin",
+        "aiConsulting": "Yapay Zeka Danışmanlığını Keşfedin"
+      },
+      "ctaEyebrow": "Bir görüşme başlatın",
+      "ctaTitle": "Keşfedilecek bir dijital ürün veya yapay zeka fırsatınız mı var?",
+      "ctaText": "Karşınızdaki zorluğu, fikri veya kararı paylaşın. Pratik bir sonraki adımı tanımlamanıza yardımcı olalım.",
+      "ctaAction": "Ekibimizle konuşun"
     },
     "webDevelopment": {
       "eyebrow": "Mühendislik ve teslimat",
@@ -469,6 +488,99 @@
       "technologiesTitle": "Pratik bir tasarım araç seti",
       "ctaTitle": "Dijital deneyiminizi şekillendirmeye hazır mısınız?",
       "ctaText": "Fikrinizi, hedeflerinizi veya mevcut sitenizi paylaşın; doğru tasarım yönünü belirleyelim."
+    },
+    "aiConsulting": {
+      "eyebrow": "Yapay zeka stratejisi ve danışmanlığı",
+      "title": "Yapay Zeka Danışmanlığı",
+      "shortDescription": "Kurumların pratik yapay zeka fırsatlarını belirlemesine, hazırlık düzeyini değerlendirmesine, kullanım senaryolarını önceliklendirmesine ve fikirden uygulamaya açık bir yol çizmesine yardımcı oluyoruz.",
+      "intro": "Kurumların yapay zekanın nerede pratik değer yaratabileceğini anlamasına, hazırlık düzeyini değerlendirmesine, fırsatları önceliklendirmesine ve uygulama için sorumlu bir yol haritası geliştirmesine yardımcı oluyoruz.",
+      "heroPrimary": "Yapay Zeka Danışmanıyla Konuşun",
+      "heroSecondary": "Yaklaşımımızı Keşfedin",
+      "capabilities": {
+        "eyebrow": "Nasıl yardımcı oluyoruz",
+        "title": "Uygulama başlamadan önce bilinçli yapay zeka kararları alın.",
+        "description": "Yapay zekanın gerçekten yararlı olduğu alanları netleştirmek için kurumsal öncelikleri, operasyonel gerçekleri, veriyi, teknolojiyi ve riski birlikte ele alıyoruz.",
+        "items": {
+          "one": {
+            "title": "Yapay Zeka Fırsat Değerlendirmesi",
+            "description": "Yapay zekanın anlamlı değer sağlayabileceği süreçleri, zorlukları ve fırsatları belirleyin."
+          },
+          "two": {
+            "title": "Kullanım Senaryosu Keşfi ve Önceliklendirme",
+            "description": "Olası kullanım senaryolarını uygulanabilirlik, değer, veri bulunabilirliği, risk ve uygulama karmaşıklığına göre değerlendirin."
+          },
+          "three": {
+            "title": "Veri ve Teknoloji Hazırlığı",
+            "description": "Uygulama öncesinde mevcut veriyi, altyapıyı, entegrasyonları ve teknik gereksinimleri inceleyin."
+          },
+          "four": {
+            "title": "Yapay Zeka Stratejisi ve Yol Haritası",
+            "description": "Kurumsal öncelikleri pratik yapay zeka girişimleriyle buluşturan aşamalı bir yol haritası tanımlayın."
+          },
+          "five": {
+            "title": "Sorumlu Yapay Zeka ve Yönetişim",
+            "description": "Gizlilik, güvenlik, şeffaflık, insan gözetimi ve sorumlu kullanımı en baştan değerlendirin."
+          }
+        }
+      },
+      "process": {
+        "eyebrow": "Danışmanlık süreci",
+        "title": "Sorulardan yön belirlemeye yapılandırılmış bir yol.",
+        "description": "Her çalışma kuruma göre şekillenir; çalışma süreci ise açık ve karar odaklı kalır.",
+        "items": {
+          "one": {
+            "title": "Keşfet",
+            "description": "Kurumsal hedefleri, iş akışlarını, paydaşları ve mevcut zorlukları anlayın."
+          },
+          "two": {
+            "title": "Değerlendir",
+            "description": "Veriyi, sistemleri, süreçleri, kısıtları ve genel yapay zeka hazırlığını değerlendirin."
+          },
+          "three": {
+            "title": "Önceliklendir",
+            "description": "Gerçekçi biçimde izlenebilecek en yüksek değerli fırsatları belirleyin."
+          },
+          "four": {
+            "title": "Yol Haritası",
+            "description": "Önerilen girişimleri, bağımlılıkları, güvenceleri ve uygulama aşamalarını tanımlayın."
+          },
+          "five": {
+            "title": "Destek",
+            "description": "Kurum planlamadan uygulamaya geçerken rehberlik sağlayın."
+          }
+        }
+      },
+      "deliverables": {
+        "eyebrow": "Olası çıktılar",
+        "title": "Önünüzdeki kararlar için pratik materyaller.",
+        "description": "Çalışmanın kapsamına bağlı olarak çıktılar şunları içerebilir:",
+        "items": {
+          "one": "Yapay zeka fırsat haritası",
+          "two": "Önceliklendirilmiş kullanım senaryosu listesi",
+          "three": "Yapay zeka ve veri hazırlık değerlendirmesi",
+          "four": "Önerilen mimari veya teknik yön",
+          "five": "Aşamalı uygulama yol haritası",
+          "six": "Sorumlu yapay zeka değerlendirmeleri",
+          "seven": "Açık sonraki adım önerileri"
+        }
+      },
+      "audience": {
+        "eyebrow": "Kimler için",
+        "title": "Taahhütte bulunmadan önce açıklığa ihtiyaç duyan ekipler için.",
+        "description": "Yapay zeka danışmanlığı şu gruplar için yararlı olabilir:",
+        "items": {
+          "one": "Yapay zekayı ilk kez keşfeden kurumlar",
+          "two": "Yapay zeka fikirleri olan ancak açık bir uygulama yolu bulunmayan ekipler",
+          "three": "Otomasyon fırsatlarını değerlendiren kurumlar",
+          "four": "Gerçekçi bir yapay zeka yol haritasına ihtiyaç duyan liderler",
+          "five": "Veri ve altyapı hazırlığını inceleyen ekipler"
+        }
+      },
+      "ctaEyebrow": "Fırsatı değerlendirin",
+      "ctaTitle": "Keşfedilmeye değer bir yapay zeka fırsatınız mı var?",
+      "ctaText": "Uygulamaya yatırım yapmadan önce neyin pratik, değerli ve sorumlu olduğunu birlikte belirleyelim.",
+      "ctaPrimary": "Yapay Zeka Danışmanıyla Konuşun",
+      "ctaSecondary": "Hizmetlere Dön"
     }
   },
   "pages": {

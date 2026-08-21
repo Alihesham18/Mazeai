@@ -1,0 +1,80 @@
+.visual {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  border: 1px solid var(--maze-border-gold);
+  background:
+    radial-gradient(circle at 68% 42%, rgba(118, 85, 216, 0.13), transparent 34%),
+    linear-gradient(145deg, rgba(18, 18, 23, 0.94), rgba(7, 7, 9, 0.98));
+}
+
+.visual::before {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  border: 1px solid var(--maze-border-subtle);
+  pointer-events: none;
+}
+
+.visual svg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.grid path {
+  fill: none;
+  stroke: var(--maze-grid-line);
+  stroke-width: 1;
+}
+
+.routes path,
+.secondaryRoutes path,
+.cornerMarks path {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.routes path {
+  stroke: var(--maze-gold);
+  stroke-width: 1.5;
+}
+
+.secondaryRoutes path {
+  stroke: var(--maze-violet);
+  stroke-dasharray: 5 7;
+  stroke-width: 1.25;
+}
+
+.nodes circle {
+  fill: var(--maze-bg);
+  stroke: var(--maze-gold-light);
+  stroke-width: 2;
+}
+
+.nodes circle:nth-child(3n) {
+  fill: var(--maze-violet-muted);
+  stroke: var(--maze-violet);
+}
+
+.decisionBlocks rect {
+  fill: rgba(13, 13, 17, 0.92);
+  stroke: var(--maze-border-gold);
+  stroke-width: 1;
+}
+
+.cornerMarks path {
+  stroke: var(--maze-gold-dark);
+  stroke-width: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .secondaryRoutes path {
+    animation: consulting-flow 12s linear infinite;
+  }
+}
+
+@keyframes consulting-flow {
+  to {
+    stroke-dashoffset: -48;
+  }
+}

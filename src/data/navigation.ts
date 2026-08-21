@@ -9,12 +9,7 @@ export const navigation: NavItem[] = [
       { labelKey: "navigation.servicesOverview", href: "/services" },
       { labelKey: "navigation.webDevelopment", href: "/services/web-development" },
       { labelKey: "navigation.webDesign", href: "/services/web-design" },
-      { labelKey: "navigation.aiConsulting", href: "/services/ai-consulting" },
-      { labelKey: "navigation.aiSolutions", href: "/services/ai-solutions-automation" },
-      { labelKey: "navigation.researchDevelopment", href: "/services/research-development" },
-      { labelKey: "navigation.educationTraining", href: "/services/education-training" },
-      { labelKey: "navigation.academicPartnerships", href: "/services/academic-partnerships" },
-      { labelKey: "navigation.customPrograms", href: "/services/custom-programs" }
+      { labelKey: "navigation.aiConsulting", href: "/services/ai-consulting" }
     ]
   },
   { labelKey: "navigation.training", href: "/training" },
