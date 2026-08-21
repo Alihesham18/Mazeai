@@ -10,9 +10,9 @@ import {
 } from "@directus/sdk";
 import { unstable_noStore as noStore } from "next/cache";
 
-import { siteConfig } from "@/config/site";
 import { isLocale } from "@/i18n/routing";
 import { normalizeDirectusRoleId, requireAdmin, type AdminPrincipal } from "@/lib/auth/admin";
+import { createTrustedPasswordResetUrl } from "@/lib/auth/password-reset-url";
 import { recordAdminUserActivity } from "@/lib/directus/admin-activity";
 import { getAuthenticatedDirectusSession, requestDirectusPasswordReset } from "@/lib/directus/auth";
 import { createDirectusRestClient } from "@/lib/directus/client";
@@ -547,8 +547,14 @@ export async function requestAdminUserPasswordReset(
       return { state: "notFound" };
     }
 
-    const baseUrl = siteConfig.url.replace(/\/+$/, "");
-    const resetUrl = `${baseUrl}/${locale}/auth/callback?next=/${locale}/update-password`;
+    const resetUrl = createTrustedPasswordResetUrl(locale);
+    if (!resetUrl) {
+      logDirectusDiagnostic(
+        "admin-users.password-reset-configuration",
+        new Error("Trusted password reset URL is not configured")
+      );
+      return { state: "unavailable" };
+    }
     const result = await requestDirectusPasswordReset(email, resetUrl);
     if (!result.ok) {
       logDirectusDiagnostic(

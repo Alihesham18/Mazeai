@@ -65,6 +65,7 @@ const adminRoleId = "55555555-5555-4555-8555-555555555555";
 const serviceRoleId = "22222222-2222-4222-8222-222222222222";
 const userId = "33333333-3333-4333-8333-333333333333";
 const serviceUserId = "44444444-4444-4444-8444-444444444444";
+const administratorId = "66666666-6666-4666-8666-666666666666";
 const previousWebsiteRoleId = process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
 const previousAdminRoleId = process.env.DIRECTUS_ADMIN_ROLE_ID;
 const previousManagementToken = process.env.DIRECTUS_USER_MANAGEMENT_TOKEN;
@@ -124,11 +125,11 @@ describe("admin user directory service", () => {
     process.env.DIRECTUS_ADMIN_ROLE_ID = adminRoleId;
     process.env.DIRECTUS_USER_MANAGEMENT_TOKEN = "user-management-service-token";
     requireAdmin.mockReset().mockResolvedValue({
-      id: "admin-id",
+      id: administratorId,
       email: "admin@example.com",
       firstName: "Admin",
       lastName: "User",
-      roleId: "admin-role-id"
+      roleId: adminRoleId
     });
     getSession.mockReset().mockResolvedValue({
       accessToken: "website-admin-access-token",
@@ -361,7 +362,13 @@ describe("admin user directory service", () => {
       });
       expect(recordActivity).toHaveBeenCalledWith({
         action: "user.suspended",
-        administrator: expect.objectContaining({ email: "admin@example.com" }),
+        administrator: {
+          id: administratorId,
+          email: "admin@example.com",
+          firstName: "Admin",
+          lastName: "User",
+          roleId: adminRoleId
+        },
         targetUserId: userId,
         targetEmail: "ali@example.com",
         previousValue: "active",
@@ -384,7 +391,12 @@ describe("admin user directory service", () => {
       });
       expect((requestFor("updateUser") as Command).command.changes).toEqual({ status: "active" });
       expect(recordActivity).toHaveBeenCalledWith(
-        expect.objectContaining({ action: "user.activated", previousValue: "suspended" })
+        expect.objectContaining({
+          action: "user.activated",
+          administrator: expect.objectContaining({ id: administratorId }),
+          targetUserId: userId,
+          previousValue: "suspended"
+        })
       );
     });
 
@@ -406,7 +418,7 @@ describe("admin user directory service", () => {
         email: "admin@example.com",
         firstName: "Admin",
         lastName: "User",
-        roleId: "admin-role-id"
+        roleId: adminRoleId
       });
 
       await expect(setAdminUserStatus(userId, "suspended")).resolves.toEqual({
@@ -451,6 +463,17 @@ describe("admin user directory service", () => {
       });
       expect(logDiagnostic).toHaveBeenCalledWith("admin-users.update-status", expect.any(Error));
     });
+
+    it("keeps a successful primary status mutation successful when audit writing fails", async () => {
+      recordActivity.mockResolvedValue(false);
+
+      await expect(setAdminUserStatus(userId, "suspended")).resolves.toEqual({
+        state: "updated",
+        status: "suspended"
+      });
+      expect(requestFor("updateUser")).toBeDefined();
+      expect(recordActivity).toHaveBeenCalledTimes(1);
+    });
   });
 
   describe("access role mutation", () => {
@@ -473,7 +496,11 @@ describe("admin user directory service", () => {
       });
       expect(recordActivity).toHaveBeenCalledWith({
         action: "user.role_changed",
-        administrator: expect.objectContaining({ email: "admin@example.com" }),
+        administrator: expect.objectContaining({
+          id: administratorId,
+          email: "admin@example.com",
+          roleId: adminRoleId
+        }),
         targetUserId: userId,
         targetEmail: "ali@example.com",
         previousValue: "websiteUser",
@@ -481,6 +508,24 @@ describe("admin user directory service", () => {
       });
       expect(JSON.stringify(result)).not.toContain(adminRoleId);
       expect(JSON.stringify(result)).not.toContain("service-token");
+    });
+
+    it("ignores any forged client administrator argument and uses requireAdmin's principal", async () => {
+      await Reflect.apply(setAdminUserRole, null, [
+        userId,
+        "websiteAdmin",
+        { administratorId: serviceUserId }
+      ]);
+
+      expect(recordActivity).toHaveBeenCalledWith(
+        expect.objectContaining({
+          administrator: expect.objectContaining({ id: administratorId }),
+          targetUserId: userId
+        })
+      );
+      expect(recordActivity).not.toHaveBeenCalledWith(
+        expect.objectContaining({ administrator: expect.objectContaining({ id: serviceUserId }) })
+      );
     });
 
     it("demotes a Website Admin only after another active admin is verified", async () => {
@@ -599,11 +644,15 @@ describe("admin user directory service", () => {
       });
       expect(requestPasswordReset).toHaveBeenCalledWith(
         "ali@example.com",
-        "https://synergymazeai.com/tr/auth/callback?next=/tr/update-password"
+        "https://synergymazeai.com/tr/auth/callback?next=%2Ftr%2Fupdate-password"
       );
       expect(recordActivity).toHaveBeenCalledWith({
         action: "user.password_reset_requested",
-        administrator: expect.objectContaining({ email: "admin@example.com" }),
+        administrator: expect.objectContaining({
+          id: administratorId,
+          email: "admin@example.com",
+          roleId: adminRoleId
+        }),
         targetUserId: userId,
         targetEmail: "ali@example.com"
       });
@@ -638,6 +687,17 @@ describe("admin user directory service", () => {
         expect.any(Error)
       );
       expect(recordActivity).not.toHaveBeenCalled();
+    });
+
+    it("keeps provider errors normalized and credential-free", async () => {
+      requestPasswordReset.mockResolvedValue({ ok: false, error: "serverFailure" });
+
+      const result = await requestAdminUserPasswordReset(userId, "en");
+
+      expect(result).toEqual({ state: "unavailable" });
+      const diagnosticError = logDiagnostic.mock.calls[0][1] as Error;
+      expect(diagnosticError.message).toBe("Password reset provider returned serverFailure");
+      expect(diagnosticError.message).not.toMatch(/smtp|secret|credential/i);
     });
 
     it.each(["normal Website User", "unauthenticated user"])(

@@ -1,10 +1,9 @@
 "use server";
 
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { isLocale, type Locale } from "@/i18n/routing";
-import { siteConfig } from "@/config/site";
+import { createTrustedPasswordResetUrl } from "@/lib/auth/password-reset-url";
 import {
   clearDirectusSession,
   changeCurrentDirectusPassword,
@@ -55,10 +54,6 @@ function safeDestination(destination: string, locale: Locale) {
   return destination === localeRoot || destination.startsWith(`${localeRoot}/`)
     ? destination
     : `${localeRoot}/account`;
-}
-
-function requestOrigin() {
-  return headers().get("origin") ?? siteConfig.url;
 }
 
 export async function loginAction(
@@ -154,10 +149,10 @@ export async function requestPasswordResetAction(
     return error("emailInvalid");
   }
 
-  const result = await requestDirectusPasswordReset(
-    parsed.data.email,
-    `${requestOrigin()}/${locale}/auth/callback?next=/${locale}/update-password`
-  );
+  const resetUrl = createTrustedPasswordResetUrl(locale);
+  if (!resetUrl) return error("configuration");
+
+  const result = await requestDirectusPasswordReset(parsed.data.email, resetUrl);
 
   if (!result.ok) {
     return error(result.error);

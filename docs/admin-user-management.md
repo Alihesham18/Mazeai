@@ -53,6 +53,111 @@ DIRECTUS_USER_MANAGEMENT_TOKEN=...
 Do not commit real UUIDs or tokens. `NEXT_PUBLIC_SITE_URL` must be the canonical
 trusted application origin; it is not derived from a request header.
 
+## Automated Directus setup
+
+The local Task 4B metadata rollout is automated by
+`scripts/setup-admin-user-management.mjs`. It uses the Directus metadata API and
+is safe to rerun after a partial failure. It never deletes a collection, field,
+relationship, policy, permission, service user, or existing content.
+
+Create a temporary static token on an existing Directus administrator, export it
+only to the shell running the setup, and execute:
+
+```sh
+DIRECTUS_SETUP_TOKEN=... npm run directus:setup-admin-users
+```
+
+Do not save `DIRECTUS_SETUP_TOKEN` in project files. Revoke it immediately after
+the command succeeds. If the variable is missing, the command exits before any
+Directus request or mutation.
+
+The command:
+
+- reuses the existing partial `admin_activity` collection and adds only missing
+  Task 4B fields and relationships;
+- creates or reuses the Website Admin and service policies without changing
+  Website User permissions;
+- preserves or safely tightens the existing status-only permission;
+- preserves the exact `id._eq = $CURRENT_USER` Website Admin self-read, leaves
+  the shared `Website Admin Dashboard Read` policy and any real direct-user
+  consumer unchanged, copies the dashboard reads into
+  `Website Admin Dashboard Restricted`, detaches only Website Admin from the
+  shared policy, restricts dashboard user IDs to the two managed roles, and
+  expands the existing `Website Admin User Read` from Website User-only to both
+  managed roles with only the Task 4B directory fields;
+- creates or reuses a role-less, user-policy-attached management service identity;
+- creates/rotates its static token and writes only
+  `DIRECTUS_USER_MANAGEMENT_TOKEN` to the Git-ignored `.env.local` file;
+- validates metadata, attachments, forbidden permissions, the unchanged Website
+  User permission snapshot, and a read-only request made with the service token;
+- refuses non-local Directus URLs unless the operator explicitly sets
+  `DIRECTUS_SETUP_ALLOW_REMOTE=true`.
+
+If the preflight rejects existing Website Admin user-read access, run the
+strictly read-only diagnosis before changing any policy:
+
+```sh
+DIRECTUS_SETUP_TOKEN=... npm run directus:setup-admin-users -- --diagnose-admin-read
+```
+
+This reports role and policy names with hashed identifier references, every
+role-contributed `directus_users` Read permission, sanitized item filters,
+allowed fields, inherited role composition, and potentially visible unmanaged
+roles. It exits before all schema, policy, user, permission, and token writes.
+The self-read exception accepts only the exact current-user ID predicate, either
+directly or inside its existing single-rule `_and` wrapper; arbitrary ID filters
+and other filter shapes remain rejected.
+
+To inspect the direct consumers and every permission of the shared dashboard
+policy without changing it, run:
+
+```sh
+DIRECTUS_SETUP_TOKEN=... npm run directus:setup-admin-users -- --diagnose-dashboard-policy
+```
+
+User emails are masked, UUIDs are replaced by hashed references, sensitive
+metadata values are redacted, and the command exits before every write phase.
+
+If the restricted policy attachment validator stops after policy creation, inspect
+the exact Directus 11 `directus_access` response shape without writes:
+
+```sh
+DIRECTUS_SETUP_TOKEN=... npm run directus:setup-admin-users -- --diagnose-restricted-policy
+```
+
+This distinguishes non-null role/user foreign keys from junction IDs, reports
+duplicate attachment targets, inspects every old and restricted-policy junction,
+and determines whether the previously reported old-policy user is a real user
+foreign key or a legacy junction-ID parser artifact. Policy validation never
+falls back from a null role/user foreign key to the junction row's own ID.
+
+To inspect the existing Website Admin status-update permission and its exact
+validation shape without changing it, run:
+
+```sh
+DIRECTUS_SETUP_TOKEN=... npm run directus:setup-admin-users -- --diagnose-status-permission
+```
+
+The diagnostic reports sanitized item and validation filters, allowed fields,
+and strict policy attachments. Only the exact `active`/`suspended` allowlist—or
+its logically equivalent single-rule `_and` wrapper—is accepted.
+
+The shared-dashboard migration verifies the copied policy before detaching the
+Website Admin role. It deletes only the Website Admin `directus_access` junction;
+the original policy, permissions, direct users, and any other role attachments
+must match their pre-migration snapshot afterward. Reruns reuse the restricted
+policy and continue safely after any completed stage.
+
+After a successful setup, metadata can be checked again without changes:
+
+```sh
+DIRECTUS_SETUP_TOKEN=... npm run directus:setup-admin-users -- --verify-only
+```
+
+The verification intentionally does not promote, demote, suspend, delete, or
+reset any real account and does not create a synthetic audit record. Those checks
+remain part of the runtime checklist below.
+
 ## Directus `admin_activity` collection
 
 Create one collection named `admin_activity`. Hide it from normal users/Data
@@ -169,10 +274,17 @@ behavior before rollout.
 - Allowed fields: `action`, `administrator`, `administrator_email`,
   `target_user`, `target_email`, `previous_value`, `new_value`
 - Validation: `action` is one of the four allowlisted values; both relationships
-  resolve to users whose role is Website User or Website Admin; emails are
-  non-empty and at most 254 characters; previous/new values are null or one of
-  `active`, `suspended`, `websiteUser`, `websiteAdmin`
+  are non-null; emails are non-empty and at most 254 characters; previous/new
+  values are null or one of `active`, `suspended`, `websiteUser`, `websiteAdmin`
 - Read, Update, Delete, Share: no access
+
+Directus 11.17.4 validates create permissions against the submitted top-level
+payload and does not hydrate a scalar M2O UUID for a nested rule such as
+`administrator.role`. The server activity writer therefore re-reads both the
+authenticated administrator and target through the restricted management
+service immediately before create, requires both IDs and emails to match, and
+requires both users to belong to one of the two configured application roles.
+The browser never supplies the administrator relation.
 
 Do not grant this service role Admin Access, App/Data Studio Access, user create,
 user delete, password, token, policy, or arbitrary role access. Do not reuse a
@@ -198,6 +310,39 @@ https://your-production-domain.example/fa/auth/callback
 Verify the Directus password-reset request rate limit and mail-provider delivery
 limits in staging. A successful API response confirms the reset request was
 accepted; email receipt remains dependent on that infrastructure.
+
+Directus does not expose SMTP credentials or the reset URL allowlist through the
+metadata API. Verify the Directus server environment manually without printing
+secrets. For local development, set `NEXT_PUBLIC_SITE_URL=http://localhost:3000`
+and allow only these callbacks (plus the equivalent production origin):
+
+```text
+http://localhost:3000/en/auth/callback
+http://localhost:3000/tr/auth/callback
+http://localhost:3000/ar/auth/callback
+http://localhost:3000/fa/auth/callback
+```
+
+For the local Directus Docker service, configure these server variables and
+restart the container. Supply real values from the selected SMTP provider; do
+not place them in the Next.js `.env.local` file:
+
+```text
+PUBLIC_URL=http://localhost:8055
+PASSWORD_RESET_URL_ALLOW_LIST=http://localhost:3000/en/auth/callback,http://localhost:3000/tr/auth/callback,http://localhost:3000/ar/auth/callback,http://localhost:3000/fa/auth/callback
+EMAIL_TRANSPORT=smtp
+EMAIL_SMTP_HOST=...
+EMAIL_SMTP_PORT=...
+EMAIL_SMTP_USER=...
+EMAIL_SMTP_PASSWORD=...
+EMAIL_SMTP_SECURE=...
+EMAIL_FROM=...
+```
+
+The application always constructs the reset callback from the trusted
+`NEXT_PUBLIC_SITE_URL`; it does not trust the browser's `Origin` header. Directus
+compares the callback by origin and pathname, so the localized allowlist entries
+above also cover the trusted `next` query parameter.
 
 ## Operational verification
 

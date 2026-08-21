@@ -19,6 +19,7 @@ vi.mock("@directus/sdk", () => ({
     collection,
     item
   }),
+  readUsers: (query: unknown) => ({ operation: "readUsers", query }),
   readItems: (collection: string, query: unknown) => ({
     operation: "readItems",
     collection,
@@ -36,27 +37,44 @@ import { getAdminUserActivity, recordAdminUserActivity } from "@/lib/directus/ad
 const administratorId = "11111111-1111-4111-8111-111111111111";
 const targetUserId = "22222222-2222-4222-8222-222222222222";
 const activityId = "33333333-3333-4333-8333-333333333333";
+const websiteRoleId = "44444444-4444-4444-8444-444444444444";
+const adminRoleId = "55555555-5555-4555-8555-555555555555";
 const previousToken = process.env.DIRECTUS_USER_MANAGEMENT_TOKEN;
+const previousWebsiteRoleId = process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
+const previousAdminRoleId = process.env.DIRECTUS_ADMIN_ROLE_ID;
 
 describe("admin user activity service", () => {
   afterAll(() => {
     if (previousToken === undefined) delete process.env.DIRECTUS_USER_MANAGEMENT_TOKEN;
     else process.env.DIRECTUS_USER_MANAGEMENT_TOKEN = previousToken;
+    if (previousWebsiteRoleId === undefined) delete process.env.DIRECTUS_WEBSITE_USER_ROLE_ID;
+    else process.env.DIRECTUS_WEBSITE_USER_ROLE_ID = previousWebsiteRoleId;
+    if (previousAdminRoleId === undefined) delete process.env.DIRECTUS_ADMIN_ROLE_ID;
+    else process.env.DIRECTUS_ADMIN_ROLE_ID = previousAdminRoleId;
   });
 
   beforeEach(() => {
     process.env.DIRECTUS_USER_MANAGEMENT_TOKEN = "management-service-token";
+    process.env.DIRECTUS_WEBSITE_USER_ROLE_ID = websiteRoleId;
+    process.env.DIRECTUS_ADMIN_ROLE_ID = adminRoleId;
     requireAdmin.mockReset().mockResolvedValue({ id: administratorId });
     getSession.mockReset().mockResolvedValue({ accessToken: "admin-session-token" });
-    request.mockReset();
+    request.mockReset().mockImplementation((input) => {
+      const command = input.command ?? input;
+      if (command.operation === "readUsers") {
+        return [
+          { id: administratorId, email: "admin@example.com", role: adminRoleId },
+          { id: targetUserId, email: "target@example.com", role: websiteRoleId }
+        ];
+      }
+      return { id: activityId };
+    });
     createClient.mockReset().mockReturnValue({ request });
     logDiagnostic.mockReset();
     noStore.mockReset();
   });
 
   it("writes an allowlisted audit event containing safe metadata only", async () => {
-    request.mockResolvedValue({ id: activityId });
-
     await expect(
       recordAdminUserActivity({
         action: "user.role_changed",
@@ -74,7 +92,23 @@ describe("admin user activity service", () => {
       })
     ).resolves.toBe(true);
 
-    const call = request.mock.calls[0][0];
+    expect(request.mock.calls[0][0]).toEqual({
+      token: "management-service-token",
+      command: {
+        operation: "readUsers",
+        query: {
+          fields: ["id", "email", "role"],
+          filter: {
+            _and: [
+              { id: { _in: [administratorId, targetUserId] } },
+              { role: { _in: [websiteRoleId, adminRoleId] } }
+            ]
+          },
+          limit: 2
+        }
+      }
+    });
+    const call = request.mock.calls[1][0];
     expect(call).toEqual({
       token: "management-service-token",
       command: {
@@ -161,6 +195,32 @@ describe("admin user activity service", () => {
         targetEmail: "target@example.com"
       })
     ).resolves.toBe(false);
+    expect(logDiagnostic).toHaveBeenCalledWith("admin-activity.write", expect.any(Error));
+  });
+
+  it("fails closed when either relation is not a server-validated managed identity", async () => {
+    request.mockResolvedValueOnce([
+      { id: administratorId, email: "admin@example.com", role: adminRoleId }
+    ]);
+
+    await expect(
+      recordAdminUserActivity({
+        action: "user.suspended",
+        administrator: {
+          id: administratorId,
+          email: "admin@example.com",
+          firstName: "Admin",
+          lastName: "User",
+          roleId: adminRoleId
+        },
+        targetUserId,
+        targetEmail: "target@example.com",
+        previousValue: "active",
+        newValue: "suspended"
+      })
+    ).resolves.toBe(false);
+
+    expect(request).toHaveBeenCalledTimes(1);
     expect(logDiagnostic).toHaveBeenCalledWith("admin-activity.write", expect.any(Error));
   });
 });

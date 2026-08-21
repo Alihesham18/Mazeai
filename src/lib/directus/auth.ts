@@ -175,6 +175,26 @@ export function directusAuthErrorCode(error: unknown): DirectusAuthErrorCode {
   return "serverFailure";
 }
 
+export function passwordResetRequestErrorCode(error: unknown): DirectusAuthErrorCode {
+  if (error instanceof TypeError) return "backendUnavailable";
+
+  const directusErrors = isDirectusError(error) ? error.errors : [];
+  const codes = directusErrors.map((entry) => String(entry.extensions?.code ?? "").toUpperCase());
+  const messages = directusErrors.map((entry) => entry.message).join(" ").toLowerCase();
+
+  // Directus rejects non-allowlisted callback URLs before user lookup or mail delivery.
+  if (
+    codes.includes("INVALID_PAYLOAD") ||
+    (messages.includes("url") && messages.includes("reset password"))
+  ) {
+    return "configuration";
+  }
+
+  // A reset-request failure is infrastructure/provider-side, not an end-user login failure.
+  // Deliberately do not surface provider messages or SMTP credentials to callers.
+  return "serverFailure";
+}
+
 export async function registerDirectusUser(input: {
   firstName: string;
   lastName: string;
@@ -356,7 +376,7 @@ export async function requestDirectusPasswordReset(email: string, resetUrl: stri
     await client.request(passwordRequest(email, resetUrl));
     return { ok: true as const };
   } catch (caught) {
-    return { ok: false as const, error: directusAuthErrorCode(caught) };
+    return { ok: false as const, error: passwordResetRequestErrorCode(caught) };
   }
 }
 

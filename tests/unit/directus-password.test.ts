@@ -36,8 +36,11 @@ import {
   changeCurrentDirectusPassword,
   directusAccessTokenCookie,
   directusExpiresAtCookie,
-  directusRefreshTokenCookie
+  directusRefreshTokenCookie,
+  passwordResetRequestErrorCode,
+  requestDirectusPasswordReset
 } from "@/lib/directus/auth";
+import { createTrustedPasswordResetUrl } from "@/lib/auth/password-reset-url";
 
 function authenticatedCookies() {
   cookieGet.mockImplementation((name: string) => {
@@ -123,5 +126,53 @@ describe("authenticated Directus password change", () => {
       })
     ).resolves.toEqual({ ok: false, error: "sessionExpired" });
     expect(request).not.toHaveBeenCalled();
+  });
+});
+
+describe("Directus password reset requests", () => {
+  beforeEach(() => {
+    request.mockReset();
+  });
+
+  it("classifies a rejected reset callback allowlist as configuration, not credentials", async () => {
+    const error = {
+      errors: [
+        {
+          message: "URL can't be used to reset password",
+          extensions: { code: "INVALID_PAYLOAD", status: 400 }
+        }
+      ]
+    };
+    request.mockRejectedValue(error);
+
+    await expect(
+      requestDirectusPasswordReset(
+        "target@example.com",
+        "http://localhost:3000/en/auth/callback?next=%2Fen%2Fupdate-password"
+      )
+    ).resolves.toEqual({ ok: false, error: "configuration" });
+    expect(passwordResetRequestErrorCode(error)).toBe("configuration");
+  });
+
+  it("normalizes provider failures without returning SMTP credentials or raw messages", async () => {
+    request.mockRejectedValue(
+      new Error("SMTP authentication failed for smtp-user with password provider-secret")
+    );
+
+    const result = await requestDirectusPasswordReset(
+      "target@example.com",
+      "http://localhost:3000/en/auth/callback?next=%2Fen%2Fupdate-password"
+    );
+
+    expect(result).toEqual({ ok: false, error: "serverFailure" });
+    expect(JSON.stringify(result)).not.toMatch(/smtp-user|provider-secret|target@example\.com/i);
+  });
+
+  it("builds callbacks only from the configured trusted site origin", () => {
+    expect(createTrustedPasswordResetUrl("tr", "http://localhost:3000/app/path")).toBe(
+      "http://localhost:3000/tr/auth/callback?next=%2Ftr%2Fupdate-password"
+    );
+    expect(createTrustedPasswordResetUrl("en", "javascript:alert(1)")).toBeNull();
+    expect(createTrustedPasswordResetUrl("en", "https://user:secret@example.com")).toBeNull();
   });
 });
