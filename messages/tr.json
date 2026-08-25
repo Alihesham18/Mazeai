@@ -820,6 +820,89 @@
         "description": "Uygulamalı yapay zeka fırsatlarını keşfetmek için MazeAI ile ortaklık kurun.",
         "action": "Araştırma Ortaklığı"
       }
+    },
+    "partnerships": {
+      "overline": "Araştırma İş Birliği",
+      "title": "Ortak soruları uygulamalı araştırmaya dönüştürmek.",
+      "description": "MazeAI; araştırma problemlerini incelemek, akıllı sistemler geliştirmek ve umut vadeden fikirleri pratik uygulamaya yaklaştırmak için üniversiteler, kurumlar ve teknoloji partnerleriyle çalışır.",
+      "header": {
+        "consoleLabel": "Ar-Ge / İş birliği ağı",
+        "visualAriaLabel": "MazeAI'yi dört olası araştırma partneri grubuna bağlayan teknik iş birliği haritası",
+        "primaryAction": "Araştırma Görüşmesi Başlatın",
+        "secondaryAction": "Araştırma Projelerini Keşfedin"
+      },
+      "audiences": {
+        "eyebrow": "İş Birliği Grupları",
+        "title": "MazeAI ile kimler iş birliği yapabilir",
+        "description": "Araştırma görüşmeleri akademik, teknik, kurumsal ve uygulamalı inovasyon bağlamlarında başlayabilir.",
+        "items": {
+          "universities": { "title": "Üniversiteler", "description": "Araştırma iş birliği, öğrenci ve akademisyen katılımı ile uygulamalı yapay zeka çalışmaları." },
+          "researchGroups": { "title": "Araştırma Grupları", "description": "Teknik soruların, yöntemlerin ve deneysel sistemlerin ortaklaşa incelenmesi." },
+          "organizations": { "title": "Şirketler ve Kurumlar", "description": "Pratik iş, operasyon veya kurum problemlerine yönelik uygulamalı araştırma." },
+          "technologyPartners": { "title": "Teknoloji Partnerleri", "description": "Ortak prototipleme, entegrasyon araştırması ve odaklı teknik deneyler." }
+        }
+      },
+      "models": {
+        "eyebrow": "İş Birliği Modelleri",
+        "title": "Birlikte çalışmanın olası yolları",
+        "description": "Olası iş birliği modelleri; her görüşmenin bağlamına göre şekillenen odaklı araştırma, uygulamalı geliştirme, bilgi paylaşımı ve eğitim çalışmalarını içerir.",
+        "items": {
+          "jointResearch": { "title": "Ortak Araştırma", "description": "Bir araştırma sorusunu, metodolojiyi, deneyi veya prototipi birlikte geliştirin." },
+          "appliedAI": { "title": "Uygulamalı Yapay Zeka Projeleri", "description": "Gerçek bir operasyonel veya teknik problem etrafında yapay zeka yaklaşımlarını inceleyin." },
+          "knowledgeExchange": { "title": "Bilgi Paylaşımı", "description": "Atölyeler, araştırma görüşmeleri, teknik oturumlar veya ortak keşif çalışmaları." },
+          "education": { "title": "Eğitim İş Birliği", "description": "Uygulamalı öğrenme, eğitim, öğrenci projeleri veya akademi-sanayi etkileşimi." }
+        }
+      },
+      "scope": {
+        "eyebrow": "Ortaklık Kapsamı",
+        "title": "Bir ortaklık neleri içerebilir",
+        "description": "Projeye bağlı olarak bir ortaklık, seçilmiş araştırma, mühendislik, değerlendirme ve bilgi paylaşımı çalışmalarını içerebilir.",
+        "briefLabel": "Araştırma özeti / Olası unsurlar",
+        "conditionalLabel": "Kapsama göre belirlenir",
+        "listLabel": "Olası araştırma ortaklığı unsurları",
+        "items": {
+          "problemFraming": "Problem çerçeveleme",
+          "researchPlanning": "Araştırma planlama",
+          "feasibilityAnalysis": "Fizibilite analizi",
+          "technicalAssessment": "Veri ve teknik değerlendirme",
+          "prototypeDevelopment": "Model veya prototip geliştirme",
+          "validation": "Doğrulama",
+          "documentation": "Teknik dokümantasyon",
+          "knowledgeTransfer": "Bilgi aktarımı",
+          "recommendations": "Sonraki adım önerileri"
+        }
+      },
+      "process": {
+        "eyebrow": "İş Birliği Süreci",
+        "title": "Araştırma görüşmeleri için açık bir yol",
+        "description": "Her görüşme kendi bağlamına göre şekillenir; yapılandırılmış süreç ise uyumu, kapsamı ve sorumlu sonraki adımları netleştirir.",
+        "stages": {
+          "discuss": { "title": "Görüş", "description": "Problemi, bağlamı ve araştırma hedeflerini anlayın." },
+          "align": { "title": "Hizalan", "description": "Kapsamı, sorumlulukları, veriyi, kısıtları ve beklenen çıktıları netleştirin." },
+          "researchBuild": { "title": "Araştır ve Geliştir", "description": "Araştırma, deney, prototipleme veya teknik geliştirme yürütün." },
+          "review": { "title": "İncele", "description": "Bulguları değerlendirin ve sonraki adımlara karar verin." },
+          "continue": { "title": "Devam Et", "description": "Uygun olduğunda daha uzun süreli bir araştırma, uygulama veya eğitim iş birliğine ilerleyin." }
+        }
+      },
+      "ecosystem": {
+        "eyebrow": "İş Birliği Ekosistemi",
+        "title": "Kurumsal bağlamlar arasında araştırma",
+        "description": "İş birliği; üniversiteleri, araştırma gruplarını, şirketleri ve teknoloji kurumlarını içerebilir. Her ilişkinin biçimi ortak soruya ve kararlaştırılan kapsama bağlıdır.",
+        "listLabel": "Olası araştırma iş birliği grupları",
+        "groups": {
+          "universities": "Üniversiteler",
+          "researchGroups": "Araştırma grupları",
+          "organizations": "Şirketler ve kurumlar",
+          "technologyOrganizations": "Teknoloji kurumları"
+        }
+      },
+      "final": {
+        "eyebrow": "Bir Görüşme Başlatın",
+        "title": "Araştırmaya değer bir probleminiz mi var?",
+        "description": "Problemi, araştırma bağlamını ve olası iş birliği yolunu görüşmek için MazeAI ile iletişime geçin.",
+        "primaryAction": "Araştırma Görüşmesi Başlatın",
+        "secondaryAction": "Araştırma Projelerini Görüntüleyin"
+      }
     }
   },
   "pages": {

@@ -1,19 +1,16 @@
-import {
-  createPageMetadata,
-  StandalonePage,
-  type StandalonePageConfig
-} from "@/components/pages/StandalonePage";
+import { ResearchPartnershipsPage as ResearchPartnershipsExperience } from "@/components/pages/ResearchPartnershipsPage/ResearchPartnershipsPage";
+import { createPageMetadata, type StandalonePageConfig } from "@/components/pages/StandalonePage";
 import type { Locale } from "@/i18n/routing";
 
 const page: StandalonePageConfig = {
   path: "research/partnerships",
-  titleKey: "navigation.researchPartnerships",
-  descriptionKey: "pages.placeholder.description",
-  sections: ["Partnership models", "Who we work with", "Process", "CTA"]
+  titleKey: "research.partnerships.title",
+  descriptionKey: "research.partnerships.description",
+  sections: ["Collaboration audiences", "Collaboration models", "Partnership scope", "Process", "Ecosystem", "CTA"]
 };
 
 export const generateMetadata = createPageMetadata(page);
 
-export default function ResearchPartnershipsPage({ params }: { params: { locale: Locale } }) {
-  return <StandalonePage locale={params.locale} page={page} />;
+export default async function ResearchPartnershipsPage({ params }: { params: { locale: Locale } }) {
+  return ResearchPartnershipsExperience({ locale: params.locale });
 }

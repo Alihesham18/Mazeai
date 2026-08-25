@@ -820,6 +820,89 @@
         "description": "Partner with MazeAI to explore applied artificial intelligence opportunities.",
         "action": "Research Partnership"
       }
+    },
+    "partnerships": {
+      "overline": "Research Collaboration",
+      "title": "Turning shared questions into applied research.",
+      "description": "MazeAI works with universities, organizations, and technology partners to explore research challenges, develop intelligent systems, and move promising ideas toward practical application.",
+      "header": {
+        "consoleLabel": "R&D / Collaboration network",
+        "visualAriaLabel": "Technical collaboration map connecting MazeAI with four possible research-partner groups",
+        "primaryAction": "Start a Research Discussion",
+        "secondaryAction": "Explore Research Projects"
+      },
+      "audiences": {
+        "eyebrow": "Collaboration Audiences",
+        "title": "Who can collaborate with MazeAI",
+        "description": "Research discussions can begin across academic, technical, organizational, and applied innovation contexts.",
+        "items": {
+          "universities": { "title": "Universities", "description": "Research collaboration, student and academic engagement, and applied AI studies." },
+          "researchGroups": { "title": "Research Groups", "description": "Joint exploration of technical questions, methods, and experimental systems." },
+          "organizations": { "title": "Companies & Organizations", "description": "Applied research around practical business, operational, or institutional challenges." },
+          "technologyPartners": { "title": "Technology Partners", "description": "Joint prototyping, integration research, and focused technical experimentation." }
+        }
+      },
+      "models": {
+        "eyebrow": "Collaboration Models",
+        "title": "Possible ways to work together",
+        "description": "Possible collaboration models include focused research, applied development, knowledge exchange, and educational engagement, shaped around the context of each discussion.",
+        "items": {
+          "jointResearch": { "title": "Joint Research", "description": "Co-develop a research question, methodology, experiment, or prototype." },
+          "appliedAI": { "title": "Applied AI Projects", "description": "Explore AI approaches around a real operational or technical challenge." },
+          "knowledgeExchange": { "title": "Knowledge Exchange", "description": "Workshops, research discussions, technical sessions, or shared exploration." },
+          "education": { "title": "Educational Collaboration", "description": "Applied learning, training, student projects, or academic-industry engagement." }
+        }
+      },
+      "scope": {
+        "eyebrow": "Partnership Scope",
+        "title": "What a partnership may include",
+        "description": "Depending on the project, a partnership may include selected research, engineering, evaluation, and knowledge-sharing activities.",
+        "briefLabel": "Research brief / Possible elements",
+        "conditionalLabel": "Defined by scope",
+        "listLabel": "Possible research partnership elements",
+        "items": {
+          "problemFraming": "Problem framing",
+          "researchPlanning": "Research planning",
+          "feasibilityAnalysis": "Feasibility analysis",
+          "technicalAssessment": "Data and technical assessment",
+          "prototypeDevelopment": "Model or prototype development",
+          "validation": "Validation",
+          "documentation": "Technical documentation",
+          "knowledgeTransfer": "Knowledge transfer",
+          "recommendations": "Next-step recommendations"
+        }
+      },
+      "process": {
+        "eyebrow": "Collaboration Process",
+        "title": "A clear path for research discussions",
+        "description": "Each discussion is shaped by its context, while a structured process helps clarify fit, scope, and responsible next steps.",
+        "stages": {
+          "discuss": { "title": "Discuss", "description": "Understand the challenge, context, and research goals." },
+          "align": { "title": "Align", "description": "Clarify scope, responsibilities, data, constraints, and expected outputs." },
+          "researchBuild": { "title": "Research & Build", "description": "Conduct research, experimentation, prototyping, or technical development." },
+          "review": { "title": "Review", "description": "Evaluate findings and decide on next steps." },
+          "continue": { "title": "Continue", "description": "Where appropriate, move into a longer research, implementation, or educational collaboration." }
+        }
+      },
+      "ecosystem": {
+        "eyebrow": "Collaboration Ecosystem",
+        "title": "Research across institutional contexts",
+        "description": "Collaboration may involve universities, research groups, companies, and technology organizations. The form of each relationship depends on the shared question and agreed scope.",
+        "listLabel": "Possible research collaboration groups",
+        "groups": {
+          "universities": "Universities",
+          "researchGroups": "Research groups",
+          "organizations": "Companies and organizations",
+          "technologyOrganizations": "Technology organizations"
+        }
+      },
+      "final": {
+        "eyebrow": "Start a Discussion",
+        "title": "Have a research challenge worth exploring?",
+        "description": "Start a conversation with MazeAI to discuss the problem, research context, and possible collaboration path.",
+        "primaryAction": "Start a Research Discussion",
+        "secondaryAction": "View Research Projects"
+      }
     }
   },
   "pages": {
