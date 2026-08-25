@@ -1005,6 +1005,48 @@
     }
   },
   "events": {
+    "overview": {
+      "header": {
+        "overline": "MazeAI events",
+        "title": "Events & Programs",
+        "description": "Research events, workshops, and technology programs connecting artificial intelligence, industry, and education.",
+        "consoleLabel": "MazeAI event program console"
+      },
+      "programLabel": "Event program",
+      "errorTitle": "Program unavailable",
+      "emptyTitle": "No upcoming events",
+      "emptyDescription": "No upcoming events are currently scheduled. New programs will appear here when they are published.",
+      "featured": {
+        "overline": "Next on the program",
+        "description": "The nearest published event in the MazeAI program.",
+        "status": "Upcoming event"
+      },
+      "upcoming": {
+        "overline": "Program schedule",
+        "title": "Upcoming events"
+      },
+      "archive": {
+        "overline": "Program archive",
+        "title": "Past events",
+        "description": "Previously published events and programs from the MazeAI calendar."
+      },
+      "meta": {
+        "time": "Time",
+        "location": "Location",
+        "format": "Format"
+      },
+      "actions": {
+        "view": "View event",
+        "viewNamed": "View {title}",
+        "registerNamed": "Register for {title}"
+      },
+      "cta": {
+        "overline": "Event collaboration",
+        "title": "Build the next program with MazeAI",
+        "description": "Talk with us about a research, technology, or education event collaboration.",
+        "action": "Start a conversation"
+      }
+    },
     "event": "Event",
     "register": "Register",
     "registerForEvent": "Register for event",

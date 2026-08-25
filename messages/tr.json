@@ -1005,6 +1005,48 @@
     }
   },
   "events": {
+    "overview": {
+      "header": {
+        "overline": "MazeAI etkinlikleri",
+        "title": "Etkinlikler ve Programlar",
+        "description": "Yapay zekâ, endüstri ve eğitimi bir araya getiren araştırma etkinlikleri, atölyeler ve teknoloji programları.",
+        "consoleLabel": "MazeAI etkinlik programı konsolu"
+      },
+      "programLabel": "Etkinlik programı",
+      "errorTitle": "Programa ulaşılamıyor",
+      "emptyTitle": "Yaklaşan etkinlik yok",
+      "emptyDescription": "Şu anda planlanmış bir etkinlik bulunmuyor. Yeni programlar yayımlandığında burada görünecek.",
+      "featured": {
+        "overline": "Programdaki sıradaki etkinlik",
+        "description": "MazeAI programında yayımlanmış en yakın tarihli etkinlik.",
+        "status": "Yaklaşan etkinlik"
+      },
+      "upcoming": {
+        "overline": "Program takvimi",
+        "title": "Yaklaşan etkinlikler"
+      },
+      "archive": {
+        "overline": "Program arşivi",
+        "title": "Geçmiş etkinlikler",
+        "description": "MazeAI takviminde daha önce yayımlanan etkinlik ve programlar."
+      },
+      "meta": {
+        "time": "Saat",
+        "location": "Konum",
+        "format": "Format"
+      },
+      "actions": {
+        "view": "Etkinliği görüntüle",
+        "viewNamed": "{title} etkinliğini görüntüle",
+        "registerNamed": "{title} etkinliğine kayıt ol"
+      },
+      "cta": {
+        "overline": "Etkinlik iş birliği",
+        "title": "Sıradaki programı MazeAI ile oluşturun",
+        "description": "Bir araştırma, teknoloji veya eğitim etkinliği iş birliği için bizimle görüşün.",
+        "action": "Görüşme başlatın"
+      }
+    },
     "event": "Etkinlik",
     "register": "Kayıt Ol",
     "registerForEvent": "Etkinliğe kayıt ol",
