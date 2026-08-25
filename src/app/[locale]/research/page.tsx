@@ -11,6 +11,6 @@ const page: StandalonePageConfig = {
 
 export const generateMetadata = createPageMetadata(page);
 
-export default function ResearchPage({ params }: { params: { locale: Locale } }) {
-  return <ResearchOverviewPage locale={params.locale} />;
+export default async function ResearchPage({ params }: { params: { locale: Locale } }) {
+  return ResearchOverviewPage({ locale: params.locale });
 }

@@ -583,6 +583,68 @@
       "ctaSecondary": "Hizmetlere Dön"
     }
   },
+  "research": {
+    "overview": {
+      "header": {
+        "eyebrow": "MazeAI Araştırma Birimi",
+        "title": "Araştırma ve Geliştirme Laboratuvarı",
+        "description": "Akıllı modelleri, mühendislik sistemlerini ve pratik teknoloji sorunlarını inceleyen uygulamalı bir yapay zeka araştırma ortamı.",
+        "metadata": {
+          "program": { "label": "Program", "value": "Uygulamalı Zeka" },
+          "mode": { "label": "Çalışma Biçimi", "value": "Araştırma + Mühendislik" },
+          "portfolio": { "label": "Portföy", "value": "Aktif Projeler" }
+        }
+      },
+      "visual": {
+        "ariaLabel": "Araştırma veri düğümlerine bağlı bir yapay zeka çekirdeğinin teknik görselleştirmesi",
+        "core": "Zeka çekirdeği",
+        "signal": "Sinyal aktif",
+        "model": "Model sentezi"
+      },
+      "domains": {
+        "eyebrow": "Araştırma Alanları",
+        "title": "Zekanın yetkinliğe dönüştüğü alanlar.",
+        "description": "Odaklanmış araştırma alanlarımız, gelişmiş yapay zeka yöntemlerini iyileştirmek üzere tasarlandıkları sistemler, kararlar ve ortamlarla buluşturur.",
+        "items": {
+          "machineLearning": { "title": "Makine Öğrenmesi", "points": { "one": "Tahmine dayalı sistemler", "two": "Akıllı modeller", "three": "Veri odaklı çözümler" } },
+          "computerVision": { "title": "Bilgisayarlı Görü", "points": { "one": "Görüntü anlama", "two": "Görsel zeka", "three": "Otomatik analiz" } },
+          "aiSystems": { "title": "Yapay Zeka Sistemleri", "points": { "one": "Akıllı ajanlar", "two": "Karar sistemleri", "three": "Sistem entegrasyonu" } },
+          "appliedAIResearch": { "title": "Uygulamalı Yapay Zeka Araştırması", "points": { "one": "Gerçek dünya araştırması", "two": "Teknik prototipleme", "three": "Ortak geliştirme" } }
+        }
+      },
+      "projects": {
+        "eyebrow": "Aktif Araştırmalar",
+        "title": "Öne çıkan araştırma projeleri",
+        "description": "Biyolojik keşif, kentsel sistemler, çevre koruma, otonom navigasyon ve eğitimi kapsayan uygulamalı araştırmalar.",
+        "featuredLabel": "01 / Öne çıkan proje",
+        "projectLabel": "Proje",
+        "viewProject": "{project} projesini görüntüle"
+      },
+      "approach": {
+        "eyebrow": "Araştırma Yaklaşımı",
+        "title": "Açık sorulardan çalışan sistemlere.",
+        "description": "Disiplinli bir yol; araştırmayı, mühendisliği, doğrulamayı ve pratik uygulamayı birbirine bağlar.",
+        "stages": {
+          "discover": { "title": "Keşfet", "description": "Araştırma problemlerini ve fırsatlarını belirleyin." },
+          "develop": { "title": "Geliştir", "description": "Modeller ve teknik çözümler oluşturun." },
+          "validate": { "title": "Doğrula", "description": "Yaklaşımları test edin ve iyileştirin." },
+          "deploy": { "title": "Uygula", "description": "Araştırmayı pratik uygulamalara dönüştürün." }
+        }
+      },
+      "partnerships": {
+        "eyebrow": "Araştırma Ortaklıkları",
+        "title": "İş birliğine dayalı bir araştırma ortamı.",
+        "description": "MazeAI, anlamlı yapay zeka sorunlarını incelemek için akademik, kurumsal ve teknik bağlamlarda çalışır.",
+        "groups": {
+          "universities": { "title": "Üniversiteler", "description": "Akademik araştırmayı, teknik deneyleri ve uygulamalı araştırma programlarını buluşturun." },
+          "organizations": { "title": "Kurumlar", "description": "Karmaşık operasyon ve teknoloji sorularını yapılandırılmış yapay zeka araştırmalarıyla inceleyin." },
+          "collaboration": { "title": "Araştırma İş Birliği", "description": "Ortak araştırma yönleri, prototipler ve pratik uygulamaya uzanan yollar geliştirin." }
+        },
+        "action": "Araştırma Ortaklıkları",
+        "contact": "Bize Ulaşın"
+      }
+    }
+  },
   "pages": {
     "services": {
       "title": "Hizmetler",

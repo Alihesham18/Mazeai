@@ -583,6 +583,68 @@
       "ctaSecondary": "Back to Services"
     }
   },
+  "research": {
+    "overview": {
+      "header": {
+        "eyebrow": "MazeAI Research Division",
+        "title": "Research and Development Laboratory",
+        "description": "An applied AI research environment for investigating intelligent models, engineered systems, and practical technology challenges.",
+        "metadata": {
+          "program": { "label": "Program", "value": "Applied Intelligence" },
+          "mode": { "label": "Mode", "value": "Research + Engineering" },
+          "portfolio": { "label": "Portfolio", "value": "Active Projects" }
+        }
+      },
+      "visual": {
+        "ariaLabel": "Technical visualization of an artificial intelligence core connected to research data nodes",
+        "core": "Intelligence core",
+        "signal": "Signal active",
+        "model": "Model synthesis"
+      },
+      "domains": {
+        "eyebrow": "Research Domains",
+        "title": "Where intelligence becomes capability.",
+        "description": "Focused research domains connect advanced AI methods with the systems, decisions, and environments they are designed to improve.",
+        "items": {
+          "machineLearning": { "title": "Machine Learning", "points": { "one": "Predictive systems", "two": "Intelligent models", "three": "Data-driven solutions" } },
+          "computerVision": { "title": "Computer Vision", "points": { "one": "Image understanding", "two": "Visual intelligence", "three": "Automated analysis" } },
+          "aiSystems": { "title": "Artificial Intelligence Systems", "points": { "one": "Intelligent agents", "two": "Decision systems", "three": "System integration" } },
+          "appliedAIResearch": { "title": "Applied AI Research", "points": { "one": "Real-world investigation", "two": "Technical prototyping", "three": "Collaborative development" } }
+        }
+      },
+      "projects": {
+        "eyebrow": "Active Research",
+        "title": "Featured research projects",
+        "description": "Applied investigations spanning biological discovery, urban systems, environmental protection, autonomous navigation, and education.",
+        "featuredLabel": "01 / Featured project",
+        "projectLabel": "Project",
+        "viewProject": "View {project}"
+      },
+      "approach": {
+        "eyebrow": "Research Approach",
+        "title": "From open questions to working systems.",
+        "description": "A disciplined pathway connects investigation, engineering, validation, and practical application.",
+        "stages": {
+          "discover": { "title": "Discover", "description": "Research problems and opportunities." },
+          "develop": { "title": "Develop", "description": "Build models and technical solutions." },
+          "validate": { "title": "Validate", "description": "Test and refine approaches." },
+          "deploy": { "title": "Deploy", "description": "Transform research into practical applications." }
+        }
+      },
+      "partnerships": {
+        "eyebrow": "Research Partnerships",
+        "title": "A collaborative research environment.",
+        "description": "MazeAI works across academic, organizational, and technical contexts to investigate meaningful AI challenges.",
+        "groups": {
+          "universities": { "title": "Universities", "description": "Connect academic inquiry, technical experimentation, and applied research programs." },
+          "organizations": { "title": "Organizations", "description": "Explore complex operational and technology questions through structured AI research." },
+          "collaboration": { "title": "Research Collaboration", "description": "Develop shared research directions, prototypes, and pathways toward practical application." }
+        },
+        "action": "Research Partnerships",
+        "contact": "Contact Us"
+      }
+    }
+  },
   "pages": {
     "services": {
       "title": "Services",
