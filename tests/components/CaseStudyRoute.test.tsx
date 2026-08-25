@@ -7,13 +7,18 @@ const { getBySlug, notFound } = vi.hoisted(() => ({
 }));
 
 vi.mock("next/navigation", () => ({ notFound }));
+vi.mock("next-intl/server", () => ({
+  getTranslations: vi.fn(async () => (key: string) =>
+    key === "detail.metadataDescription" ? "Localized internal demonstration metadata" : key
+  )
+}));
 vi.mock("@/lib/directus/case-studies", () => ({ getPublishedCaseStudyBySlug: getBySlug }));
 vi.mock("@/components/pages/CaseStudyDetailPage", () => ({
   CaseStudyDetailPage: ({ caseStudy }: { caseStudy: { title: string } }) => <p>{caseStudy.title}</p>,
   CaseStudyLoadError: () => <p role="alert">safe-error</p>
 }));
 
-import CaseStudyPage from "@/app/[locale]/case-studies/[slug]/page";
+import CaseStudyPage, { generateMetadata } from "@/app/[locale]/case-studies/[slug]/page";
 
 describe("Case Study detail route", () => {
   beforeEach(() => {
@@ -40,5 +45,25 @@ describe("Case Study detail route", () => {
     getBySlug.mockResolvedValue({ ok: false, error: "requestFailed" });
     render(await CaseStudyPage({ params: { locale: "en", slug: "unavailable" } }));
     expect(screen.getByRole("alert")).toHaveTextContent("safe-error");
+  });
+
+  it("describes the internal demonstration accurately in metadata", async () => {
+    getBySlug.mockResolvedValue({
+      ok: true,
+      data: {
+        title: "AI Document Automation Platform",
+        slug: "ai-document-automation",
+        client: "SynergyMazeAI Demo",
+        shortDescription: "Generic project description"
+      }
+    });
+
+    await expect(
+      generateMetadata({ params: { locale: "en", slug: "ai-document-automation" } })
+    ).resolves.toMatchObject({
+      title: "AI Document Automation Platform | SynergyMazeAI",
+      description: "Localized internal demonstration metadata",
+      alternates: { canonical: "/en/case-studies/ai-document-automation" }
+    });
   });
 });

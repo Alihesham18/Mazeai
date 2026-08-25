@@ -8,6 +8,12 @@
     linear-gradient(145deg, rgba(18, 18, 23, 0.94), rgba(7, 7, 9, 0.98));
 }
 
+:global([data-theme="light"]) .visual {
+  background:
+    radial-gradient(circle at 68% 42%, rgba(98, 70, 181, 0.08), transparent 34%),
+    linear-gradient(145deg, var(--color-surface), var(--color-background-elevated));
+}
+
 .visual::before {
   content: "";
   position: absolute;
@@ -60,6 +66,10 @@
   fill: rgba(13, 13, 17, 0.92);
   stroke: var(--maze-border-gold);
   stroke-width: 1;
+}
+
+:global([data-theme="light"]) .decisionBlocks rect {
+  fill: var(--color-surface);
 }
 
 .cornerMarks path {

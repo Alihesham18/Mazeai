@@ -78,6 +78,7 @@
 
   /* Backward-compatible aliases for incremental page migration */
   --color-background: var(--maze-bg);
+  --color-background-elevated: var(--maze-bg-elevated);
   --color-background-secondary: var(--maze-bg-elevated);
   --color-surface: var(--maze-surface);
   --color-surface-raised: var(--maze-surface-hover);

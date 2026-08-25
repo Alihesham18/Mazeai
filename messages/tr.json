@@ -919,8 +919,8 @@
       "description": "Yaklaşan atölyeleri, yuvarlak masaları, eğitimleri ve araştırma etkinliklerini bulun."
     },
     "caseStudies": {
-      "title": "Vaka Çalışmaları",
-      "description": "Yapay zeka, araştırma ve eğitim çalışmalarının nasıl yapılandırılıp değerlendirilebileceğini gösteren şeffaf konsept çalışmalarını inceleyin."
+      "title": "Seçilmiş Çalışmalar",
+      "description": "MazeAI'ın yapay zekâ, otomasyon, araştırma ve pratik teknoloji sorunlarına yaklaşımını gösteren kurum içi demoları ve seçilmiş çalışmaları inceleyin."
     },
     "blog": {
       "title": "Blog",
@@ -1101,22 +1101,65 @@
     "sessionExpired": "Bu etkinliğe kayıt olmak için giriş yapın."
   },
   "caseStudies": {
-    "eyebrow": "Çalışmalarımız",
-    "collectionEyebrow": "Vaka çalışması koleksiyonu",
-    "collectionTitle": "Vaka çalışmalarımızı keşfedin",
-    "featured": "Öne çıkan",
+    "eyebrow": "Seçilmiş Çalışmalar",
+    "pageTitle": "Uygulamada keşfedilen fikirler.",
+    "collectionEyebrow": "Konsept Gösterimleri",
+    "collectionTitle": "Uygulamalı teknoloji konseptleri",
+    "collectionDescription": "Pratik sistemleri, iş akışlarını ve teknik fikirleri keşfetmek için geliştirilen kurum içi demoların ve seçilmiş çalışmaların odaklı bir kaydı.",
+    "featured": "Öne çıkan çalışma",
+    "selectedEntry": "Seçilmiş kayıt",
     "client": "Müşteri",
+    "projectType": "Proje türü",
+    "domain": "Alan",
+    "projectTypes": {
+      "internalDemonstration": "Kurum İçi Demo",
+      "selectedWork": "Seçilmiş Çalışma"
+    },
     "technologies": "Teknolojiler",
     "readCaseStudy": "{title} çalışmasını okuyun",
-    "back": "Vaka çalışmalarına dön",
+    "viewDemonstration": "Demoyu İncele",
+    "exploreProject": "Projeyi İncele",
+    "visualLabel": "{title} için kavramsal belge otomasyonu iş akışı",
+    "disclosure": "Mevcut kayıtlar kurum içi demoları ve seçilmiş uygulamalı konseptleri içerir. Müşteri vaka çalışmaları yalnızca paylaşımın uygun olduğu durumlarda yayımlanacaktır.",
+    "workflow": {
+      "input": "Belge girişi",
+      "analyze": "Yapay zekâ analizi",
+      "structure": "Yapılandırılmış bilgi",
+      "automate": "İş akışı çıktısı"
+    },
+    "back": "Seçilmiş Çalışmalara dön",
     "challenge": "Zorluk",
     "solution": "Çözüm",
     "results": "Sonuçlar",
     "overview": "Genel bakış",
-    "empty": "Henüz yayınlanmış bir vaka çalışması bulunmuyor.",
-    "unableToLoad": "Vaka çalışmaları yüklenemedi. Lütfen tekrar deneyin.",
-    "detailUnavailableTitle": "Vaka çalışması kullanılamıyor",
-    "detailUnavailable": "Bu vaka çalışması yüklenemedi. Lütfen tekrar deneyin."
+    "detail": {
+      "projectOverview": "Projeye Genel Bakış",
+      "metadataDescription": "Yapay zekâ destekli belge analizi ve otomasyonu araştıran kurum içi bir konsept demosu.",
+      "problemOpportunity": "Sorun / Fırsat",
+      "conceptApproach": "Konsept / Yaklaşım",
+      "systemLabel": "Konsept Mimarisi",
+      "systemFlow": "Belge iş akışı",
+      "systemFlowDescription": "Belge girişinden yapay zekâ destekli analize ve yapılandırılmış iş akışı çıktısına uzanan demo akışının üst düzey görünümü.",
+      "technologyLabel": "Sistem Bileşenleri",
+      "technologies": "Teknoloji altyapısı",
+      "scopeLabel": "Şeffaflık Notu",
+      "demonstrationScope": "Demo Kapsamı",
+      "demonstrationScopeDescription": "Bu proje, yapay zekâ destekli belge iş akışları için olası bir mimariyi gösterir. Yayımlanmış bir müşteri uygulaması değil, kurum içi bir konsept demosu olarak sunulmaktadır.",
+      "ctaTitle": "Benzer bir teknoloji sorununuz mu var?",
+      "ctaDescription": "MazeAI'ın pratik yapay zekâ, otomasyon ve dijital sistem fikirlerine nasıl yaklaştığını keşfedin.",
+      "startConversation": "Görüşme Başlat"
+    },
+    "cta": {
+      "eyebrow": "Bir Fikri Keşfedin",
+      "title": "Keşfetmeye değer bir sorununuz mu var?",
+      "description": "MazeAI, fikirleri pratik çözümlere dönüştürmek için yapay zekâ, araştırma ve dijital sistemler alanlarında çalışır.",
+      "services": "Hizmetleri İncele",
+      "contact": "Bize Ulaşın"
+    },
+    "empty": "Henüz yayımlanmış seçilmiş çalışma yok.",
+    "unableToLoad": "Seçilmiş çalışmalar yüklenemedi. Lütfen tekrar deneyin.",
+    "detailUnavailableTitle": "Seçilmiş çalışmaya ulaşılamıyor",
+    "detailUnavailable": "Bu seçilmiş çalışma kaydı yüklenemedi. Lütfen tekrar deneyin."
   },
   "blog": {
     "eyebrow": "İçgörüler",

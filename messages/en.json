@@ -919,8 +919,8 @@
       "description": "Find upcoming workshops, roundtables, training sessions, and research events."
     },
     "caseStudies": {
-      "title": "Case Studies",
-      "description": "Explore transparent concept demonstrations showing how AI, research, and education engagements can be structured and evaluated."
+      "title": "Selected Work",
+      "description": "Explore internal demonstrations and selected work showing how MazeAI approaches AI, automation, research, and practical technology challenges."
     },
     "blog": {
       "title": "Blog",
@@ -1101,22 +1101,65 @@
     "sessionExpired": "Please log in to register for this event."
   },
   "caseStudies": {
-    "eyebrow": "Our work",
-    "collectionEyebrow": "Case study collection",
-    "collectionTitle": "Explore our case studies",
-    "featured": "Featured",
+    "eyebrow": "Selected Work",
+    "pageTitle": "Applied ideas, explored in practice.",
+    "collectionEyebrow": "Concept Demonstrations",
+    "collectionTitle": "Applied technology concepts",
+    "collectionDescription": "A focused record of internal demonstrations and selected work developed to explore practical systems, workflows, and technical ideas.",
+    "featured": "Featured work",
+    "selectedEntry": "Selected entry",
     "client": "Client",
+    "projectType": "Project type",
+    "domain": "Domain",
+    "projectTypes": {
+      "internalDemonstration": "Internal Demonstration",
+      "selectedWork": "Selected Work"
+    },
     "technologies": "Technologies",
     "readCaseStudy": "Read {title}",
-    "back": "Back to case studies",
+    "viewDemonstration": "View Demonstration",
+    "exploreProject": "Explore Project",
+    "visualLabel": "Conceptual document automation workflow for {title}",
+    "disclosure": "Current entries include internal demonstrations and selected applied concepts. Client case studies will be published only where disclosure is appropriate.",
+    "workflow": {
+      "input": "Document input",
+      "analyze": "AI analysis",
+      "structure": "Structured information",
+      "automate": "Workflow output"
+    },
+    "back": "Back to Selected Work",
     "challenge": "Challenge",
     "solution": "Solution",
     "results": "Results",
     "overview": "Overview",
-    "empty": "No published case studies are available yet.",
-    "unableToLoad": "Unable to load case studies. Please try again.",
-    "detailUnavailableTitle": "Case study unavailable",
-    "detailUnavailable": "This case study could not be loaded. Please try again."
+    "detail": {
+      "projectOverview": "Project Overview",
+      "metadataDescription": "An internal concept demonstration exploring AI-assisted document analysis and automation.",
+      "problemOpportunity": "Problem / Opportunity",
+      "conceptApproach": "Concept / Approach",
+      "systemLabel": "Concept Architecture",
+      "systemFlow": "Document workflow",
+      "systemFlowDescription": "A high-level view of the demonstration flow, from document input through AI-assisted analysis and structured workflow output.",
+      "technologyLabel": "System Components",
+      "technologies": "Technology stack",
+      "scopeLabel": "Transparency Note",
+      "demonstrationScope": "Demonstration Scope",
+      "demonstrationScopeDescription": "This project demonstrates a possible architecture for AI-assisted document workflows. It is presented as an internal concept demonstration rather than a published client deployment.",
+      "ctaTitle": "Have a similar technology challenge?",
+      "ctaDescription": "Explore how MazeAI approaches practical AI, automation, and digital-system ideas.",
+      "startConversation": "Start a Conversation"
+    },
+    "cta": {
+      "eyebrow": "Explore an Idea",
+      "title": "Have a challenge worth exploring?",
+      "description": "MazeAI works across AI, research, and digital systems to turn ideas into practical solutions.",
+      "services": "Explore Services",
+      "contact": "Contact Us"
+    },
+    "empty": "No selected work is published yet.",
+    "unableToLoad": "Unable to load selected work. Please try again.",
+    "detailUnavailableTitle": "Selected work unavailable",
+    "detailUnavailable": "This selected-work entry could not be loaded. Please try again."
   },
   "blog": {
     "eyebrow": "Insights",

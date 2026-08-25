@@ -63,7 +63,7 @@ export function TrainingCatalog({
 
       {programs.length ? (
         <div className={styles.programGrid} aria-live="polite">
-          {programs.map((program) => {
+          {programs.map((program, index) => {
             const detailPath = localizedPath(locale, `/training/${program.slug}`);
             const applicationPath = `${detailPath}#application`;
             const preregistrationPath = authenticated
@@ -83,6 +83,7 @@ export function TrainingCatalog({
                     className={styles.poster}
                     src={program.image}
                     alt={program.imageAlt ?? ""}
+                    priority={index === 0}
                     sizes="(min-width: 800px) 33vw, 100vw"
                   >
                     <span className={styles.posterFallback} aria-hidden="true">

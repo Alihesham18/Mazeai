@@ -92,6 +92,10 @@
   box-shadow: var(--maze-shadow-card);
 }
 
+:global([data-theme="light"]) .projectVisual {
+  background: var(--color-surface);
+}
+
 .visualHeader,
 .visualMetadata {
   display: flex;

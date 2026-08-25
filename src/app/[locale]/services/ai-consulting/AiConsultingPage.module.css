@@ -130,6 +130,10 @@
   background: rgba(13, 13, 17, 0.72);
 }
 
+:global([data-theme="light"]) .process {
+  background: var(--color-background-elevated);
+}
+
 .processLayout {
   display: grid;
   gap: clamp(2rem, 6vw, 6rem);
@@ -213,6 +217,10 @@
   background: rgba(13, 13, 17, 0.78);
 }
 
+:global([data-theme="light"]) .audience {
+  background: var(--color-surface);
+}
+
 .audienceCorner {
   position: absolute;
   inset-block-start: 0;
@@ -246,6 +254,10 @@
   background: rgba(13, 13, 17, 0.76);
 }
 
+:global([data-theme="light"]) .ctaSection {
+  background: var(--color-background-elevated);
+}
+
 .cta {
   position: relative;
   display: grid;
@@ -254,6 +266,10 @@
   padding: clamp(2rem, 5vw, 4rem);
   border: 1px solid var(--maze-border-gold);
   background: rgba(7, 7, 9, 0.55);
+}
+
+:global([data-theme="light"]) .cta {
+  background: var(--color-surface);
 }
 
 .cta h2 {

@@ -5,6 +5,10 @@
   box-shadow: var(--maze-shadow-card);
 }
 
+:global([data-theme="light"]) .console {
+  background: var(--color-surface);
+}
+
 .header {
   display: flex;
   align-items: center;

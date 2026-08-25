@@ -12,12 +12,23 @@ vi.mock("@/components/training/TrainingProgramImage", () => ({
   TrainingProgramImage: ({
     alt,
     children,
+    priority,
     src
   }: {
     alt: string;
     children: React.ReactNode;
+    priority?: boolean;
     src: string | null;
-  }) => <div data-testid="training-image" data-alt={alt} data-src={src}>{children}</div>
+  }) => (
+    <div
+      data-testid="training-image"
+      data-alt={alt}
+      data-priority={String(Boolean(priority))}
+      data-src={src}
+    >
+      {children}
+    </div>
+  )
 }));
 
 function program(title: string): PublicTrainingProgram {
@@ -89,5 +100,24 @@ describe("TrainingCatalog", () => {
       "data-alt",
       "Türkçe kapak açıklaması"
     );
+    expect(screen.getByTestId("training-image")).toHaveAttribute("data-priority", "true");
+  });
+
+  it("prioritizes only the first visible poster", () => {
+    render(
+      <TrainingCatalog
+        locale="en"
+        programs={[
+          { ...program("First program"), slug: "first-program" },
+          { ...program("Second program"), slug: "second-program" }
+        ]}
+        authenticated
+      />
+    );
+
+    expect(screen.getAllByTestId("training-image").map((image) => image.dataset.priority)).toEqual([
+      "true",
+      "false"
+    ]);
   });
 });
