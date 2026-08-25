@@ -258,6 +258,7 @@
     "customPrograms": "Özel Programlar",
     "researchOverview": "Ar-Ge Genel Bakış",
     "researchAreas": "Araştırma Alanları",
+    "researchProjects": "Araştırma Projeleri",
     "currentProjects": "Güncel Projeler",
     "completedProjects": "Tamamlanan Projeler",
     "publications": "Yayınlar",
@@ -641,6 +642,111 @@
           "collaboration": { "title": "Araştırma İş Birliği", "description": "Ortak araştırma yönleri, prototipler ve pratik uygulamaya uzanan yollar geliştirin." }
         },
         "action": "Araştırma Ortaklıkları",
+        "contact": "Bize Ulaşın"
+      }
+    },
+    "projects": {
+      "eyebrow": "Ar-Ge Portföyü",
+      "title": "Araştırma Projeleri",
+      "description": "Araştırma ve mühendislik yoluyla pratik çözümleri inceleyen uygulamalı yapay zeka projeleri portföyü.",
+      "console": {
+        "ariaLabel": "BioPredict, UrbanFlow-RL, Poseidon, NavAI ve CodeAI projelerini birbirine bağlayan araştırma portföyü konsolu",
+        "label": "Araştırma portföyü dizini",
+        "status": "Aktif araştırma"
+      },
+      "categories": {
+        "eyebrow": "Portföy Sınıflandırması",
+        "title": "Araştırma kategorileri",
+        "ariaLabel": "Araştırma projesi kategorileri",
+        "items": {
+          "all": "Tüm Projeler",
+          "machineLearning": "Makine Öğrenmesi",
+          "computerVision": "Bilgisayarlı Görü",
+          "aiSystems": "Yapay Zeka Sistemleri",
+          "appliedAI": "Uygulamalı Yapay Zeka Araştırması"
+        }
+      },
+      "featured": {
+        "eyebrow": "Öne Çıkan Araştırma Projesi",
+        "title": "Birincil araştırma vitrini",
+        "description": "Portföyün öne çıkan uygulamalı araştırma projesine ayrıntılı bir bakış.",
+        "recordLabel": "Öne çıkan araştırma kaydı",
+        "focus": "Sağlıkta Yapay Zeka",
+        "action": "Proje Ayrıntılarını Görüntüle"
+      },
+      "labels": {
+        "field": "Araştırma alanı",
+        "focus": "Odak",
+        "technologies": "Teknoloji altyapısı"
+      },
+      "portfolio": {
+        "eyebrow": "Araştırma Veritabanı",
+        "title": "Aktif proje portföyü",
+        "description": "Gelecekteki aktif ve tamamlanmış çalışmalar için genişletilebilir bir portföy olarak belgelenen güncel uygulamalı araştırmalar.",
+        "entry": "Kayıt {index}",
+        "viewProject": "{project} projesini görüntüle"
+      },
+      "collaboration": {
+        "eyebrow": "Araştırma İş Birliği",
+        "title": "Yapay zeka araştırmalarında iş birliği yapmak ister misiniz?",
+        "description": "MazeAI ile bir araştırma sorusunu, uygulamalı yapay zeka fırsatını veya ortak mühendislik programını görüşün.",
+        "audiences": {
+          "universities": "Üniversiteler",
+          "organizations": "Kurumlar",
+          "partners": "Araştırma ortakları"
+        },
+        "discussion": "Araştırma Görüşmesi Başlatın",
+        "partnerships": "Araştırma Ortaklıklarını Keşfedin"
+      }
+    },
+    "detail": {
+      "visualAriaLabel": "{project} için teknik araştırma diyagramı",
+      "overview": {
+        "eyebrow": "Proje Genel Bakışı",
+        "title": "Genel Bakış",
+        "question": "Bu proje nedir?"
+      },
+      "labels": {
+        "field": "Araştırma alanı",
+        "program": "Program",
+        "status": "Araştırma durumu"
+      },
+      "challenge": {
+        "eyebrow": "Araştırma Problemi",
+        "title": "Araştırma odağı",
+        "introduction": "{project} için belgelenen hedefler, projenin incelediği araştırma sorularını ve pratik alanları tanımlar."
+      },
+      "methodology": {
+        "eyebrow": "Araştırma Çerçevesi",
+        "title": "Yaklaşım ve metodoloji",
+        "description": "Bu çerçeve, MazeAI'nin uygulamalı araştırmayı nasıl yapılandırdığını açıklar. Her aşamanın tamamlandığı anlamına gelmez.",
+        "stages": {
+          "research": { "title": "Araştırma", "description": "Belgelenen problemi, bağlamı ve araştırma hedeflerini inceleyin." },
+          "development": { "title": "Geliştirme", "description": "Araştırma yönünü modellere, sistemlere veya teknik prototiplere dönüştürün." },
+          "validation": { "title": "Doğrulama", "description": "Yaklaşımları projenin tanımlı hedefleri ve mevcut kanıtlar doğrultusunda değerlendirin." },
+          "application": { "title": "Uygulama", "description": "Araştırma çalışmasından pratik kullanıma uzanan sorumlu yolları inceleyin." }
+        }
+      },
+      "technology": {
+        "eyebrow": "Teknik Tanım",
+        "title": "Teknoloji ve teknik ayrıntılar",
+        "stack": "Mevcut teknolojiler"
+      },
+      "status": {
+        "eyebrow": "Araştırma Durumu",
+        "title": "Güncel proje durumu",
+        "description": "{project} şu anda aktif MazeAI araştırma portföyünde yer almaktadır."
+      },
+      "related": {
+        "eyebrow": "Araştırma Arşivi",
+        "title": "İlgili araştırma projeleri",
+        "description": "MazeAI araştırma portföyündeki diğer aktif kayıtları inceleyin."
+      },
+      "collaboration": {
+        "eyebrow": "Araştırma İş Birliği",
+        "title": "Yapay zeka araştırmalarında iş birliği yapmak ister misiniz?",
+        "description": "MazeAI ile bir araştırma sorusunu, uygulamalı yapay zeka fırsatını veya ortak mühendislik programını görüşün.",
+        "partnerships": "Araştırma Ortaklıkları",
         "contact": "Bize Ulaşın"
       }
     }

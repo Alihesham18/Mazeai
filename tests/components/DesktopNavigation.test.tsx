@@ -27,10 +27,13 @@ describe("DesktopNavigation", () => {
     expect(research).toHaveAttribute("aria-expanded", "false");
     fireEvent.click(research);
     expect(research).toHaveAttribute("aria-expanded", "true");
-    expect(screen.getByRole("link", { name: "Current Projects" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "Research Projects" })).toHaveAttribute(
       "aria-current",
       "page"
     );
+    expect(screen.queryByRole("link", { name: "Completed Projects" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Publications" })).toBeNull();
+    expect(screen.queryByRole("link", { name: "Innovation Lab" })).toBeNull();
   });
 
   it("shows only the three ready services and the Services overview", () => {

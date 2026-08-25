@@ -258,6 +258,7 @@
     "customPrograms": "Custom Programs",
     "researchOverview": "R&D Overview",
     "researchAreas": "Research Areas",
+    "researchProjects": "Research Projects",
     "currentProjects": "Current Projects",
     "completedProjects": "Completed Projects",
     "publications": "Publications",
@@ -641,6 +642,111 @@
           "collaboration": { "title": "Research Collaboration", "description": "Develop shared research directions, prototypes, and pathways toward practical application." }
         },
         "action": "Research Partnerships",
+        "contact": "Contact Us"
+      }
+    },
+    "projects": {
+      "eyebrow": "R&D Portfolio",
+      "title": "Research Projects",
+      "description": "A portfolio of applied artificial intelligence projects exploring practical solutions through research and engineering.",
+      "console": {
+        "ariaLabel": "Research portfolio console connecting BioPredict, UrbanFlow-RL, Poseidon, NavAI, and CodeAI",
+        "label": "Research portfolio index",
+        "status": "Active research"
+      },
+      "categories": {
+        "eyebrow": "Portfolio Taxonomy",
+        "title": "Research categories",
+        "ariaLabel": "Research project categories",
+        "items": {
+          "all": "All Projects",
+          "machineLearning": "Machine Learning",
+          "computerVision": "Computer Vision",
+          "aiSystems": "AI Systems",
+          "appliedAI": "Applied AI Research"
+        }
+      },
+      "featured": {
+        "eyebrow": "Featured Research Project",
+        "title": "Primary research showcase",
+        "description": "A detailed view of the portfolio's featured applied research project.",
+        "recordLabel": "Featured research record",
+        "focus": "Healthcare AI",
+        "action": "View Project Details"
+      },
+      "labels": {
+        "field": "Research field",
+        "focus": "Focus",
+        "technologies": "Technology stack"
+      },
+      "portfolio": {
+        "eyebrow": "Research Database",
+        "title": "Active project portfolio",
+        "description": "Current applied research entries documented as an expandable portfolio for future active and completed work.",
+        "entry": "Entry {index}",
+        "viewProject": "View {project}"
+      },
+      "collaboration": {
+        "eyebrow": "Research Collaboration",
+        "title": "Interested in collaborating on AI research?",
+        "description": "Discuss a research question, applied AI opportunity, or collaborative engineering program with MazeAI.",
+        "audiences": {
+          "universities": "Universities",
+          "organizations": "Organizations",
+          "partners": "Research partners"
+        },
+        "discussion": "Start a Research Discussion",
+        "partnerships": "Explore Research Partnerships"
+      }
+    },
+    "detail": {
+      "visualAriaLabel": "Technical research diagram for {project}",
+      "overview": {
+        "eyebrow": "Project Overview",
+        "title": "Overview",
+        "question": "What is this project?"
+      },
+      "labels": {
+        "field": "Research field",
+        "program": "Program",
+        "status": "Research status"
+      },
+      "challenge": {
+        "eyebrow": "Research Challenge",
+        "title": "Research focus",
+        "introduction": "The documented objectives for {project} define the research questions and practical areas explored by the project."
+      },
+      "methodology": {
+        "eyebrow": "Research Framework",
+        "title": "Approach and methodology",
+        "description": "This framework describes how MazeAI structures applied research. It does not imply that every stage has been completed.",
+        "stages": {
+          "research": { "title": "Research", "description": "Examine the documented problem, context, and research objectives." },
+          "development": { "title": "Development", "description": "Translate the research direction into models, systems, or technical prototypes." },
+          "validation": { "title": "Validation", "description": "Evaluate approaches against the project's defined objectives and available evidence." },
+          "application": { "title": "Application", "description": "Explore responsible pathways from research work toward practical use." }
+        }
+      },
+      "technology": {
+        "eyebrow": "Technical Specification",
+        "title": "Technology and technical details",
+        "stack": "Available technologies"
+      },
+      "status": {
+        "eyebrow": "Research Status",
+        "title": "Current project status",
+        "description": "{project} is currently listed in the active MazeAI research portfolio."
+      },
+      "related": {
+        "eyebrow": "Research Archive",
+        "title": "Related research projects",
+        "description": "Continue through other active entries in the MazeAI research portfolio."
+      },
+      "collaboration": {
+        "eyebrow": "Research Collaboration",
+        "title": "Interested in collaborating on AI research?",
+        "description": "Discuss a research question, applied AI opportunity, or collaborative engineering program with MazeAI.",
+        "partnerships": "Research Partnerships",
         "contact": "Contact Us"
       }
     }

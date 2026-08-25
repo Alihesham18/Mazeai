@@ -243,10 +243,10 @@ export const activeResearchProjects: readonly ActiveResearchProject[] = [
 
 export const researchPageCopy = {
   back: {
-    en: "Back to R&D",
-    tr: "Ar-Ge'ye dön",
-    ar: "العودة إلى البحث والتطوير",
-    fa: "بازگشت به تحقیق و توسعه"
+    en: "Back to Research Projects",
+    tr: "Araştırma Projelerine dön",
+    ar: "العودة إلى مشاريع البحث",
+    fa: "بازگشت به پروژه‌های پژوهشی"
   },
   eyebrow: {
     en: "Active R&D portfolio",
