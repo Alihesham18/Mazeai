@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import ar from "../../messages/ar.json";
 import en from "../../messages/en.json";
 
@@ -21,6 +21,10 @@ vi.mock("next-intl/server", () => ({
 import { Footer } from "@/components/layout/Footer/Footer";
 
 describe("Footer", () => {
+  afterEach(() => {
+    document.documentElement.dataset.theme = "dark";
+  });
+
   it("renders verified contact data and the four localized route groups", async () => {
     render(await Footer({ locale: "en" }));
 
@@ -91,6 +95,30 @@ describe("Footer", () => {
     expect(screen.getByRole("link", { name: ar.navigation.partner })).toHaveAttribute(
       "href",
       "/ar/contact"
+    );
+  });
+
+  it("preserves the shared semantic footer and mobile disclosures in light theme", async () => {
+    document.documentElement.dataset.theme = "light";
+    render(await Footer({ locale: "en" }));
+
+    const footer = screen.getByRole("contentinfo");
+    expect(document.documentElement).toHaveAttribute("data-theme", "light");
+    expect(within(footer).getByRole("region", { name: "SynergyMazeAI" })).toBeInTheDocument();
+    expect(within(footer).getByRole("region", { name: en.footer.getInTouch })).toBeInTheDocument();
+    expect(within(footer).getByText(en.footer.copyright)).toBeInTheDocument();
+
+    const mobileNavigation = within(footer).getByRole("navigation", {
+      name: en.footer.mobileNavigationLabel
+    });
+    const resourcesToggle = within(mobileNavigation).getByRole("button", {
+      name: en.footer.resources
+    });
+    fireEvent.click(resourcesToggle);
+    expect(resourcesToggle).toHaveAttribute("aria-expanded", "true");
+    expect(within(mobileNavigation).getByRole("link", { name: en.navigation.events })).toHaveAttribute(
+      "href",
+      "/en/events"
     );
   });
 });

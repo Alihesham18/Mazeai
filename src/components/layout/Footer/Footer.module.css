@@ -1,12 +1,36 @@
 .footer {
+  --maze-footer-background: #09070b;
+  --maze-footer-background-raised: #0f0b12;
+  --maze-footer-frame: rgba(15, 12, 17, 0.72);
+  --maze-footer-panel: rgba(10, 8, 12, 0.66);
+  --maze-footer-glow: rgba(125, 74, 168, 0.1);
+  --maze-footer-accent-wash: rgba(217, 175, 62, 0.055);
+  --maze-footer-highlight: rgba(255, 255, 255, 0.025);
+  --maze-footer-shadow: rgba(0, 0, 0, 0.22);
   position: relative;
   isolation: isolate;
   overflow: hidden;
   border-block-start: 1px solid var(--maze-border-gold);
   background:
-    radial-gradient(circle at 82% 8%, rgba(125, 74, 168, 0.1), transparent 30rem),
-    linear-gradient(180deg, #0f0b12 0%, #09070b 100%);
+    radial-gradient(circle at 82% 8%, var(--maze-footer-glow), transparent 30rem),
+    linear-gradient(
+      180deg,
+      var(--maze-footer-background-raised) 0%,
+      var(--maze-footer-background) 100%
+    );
+  color: var(--maze-text);
   padding-block: clamp(2.5rem, 4vw, 3rem) 1.25rem;
+}
+
+:global([data-theme="light"]) .footer {
+  --maze-footer-background: #eae5da;
+  --maze-footer-background-raised: #f4f0e7;
+  --maze-footer-frame: rgba(250, 248, 242, 0.82);
+  --maze-footer-panel: rgba(250, 248, 242, 0.9);
+  --maze-footer-glow: rgba(98, 70, 181, 0.045);
+  --maze-footer-accent-wash: rgba(155, 112, 28, 0.07);
+  --maze-footer-highlight: rgba(255, 255, 255, 0.58);
+  --maze-footer-shadow: rgba(49, 40, 22, 0.08);
 }
 
 .dotField {
@@ -25,10 +49,10 @@
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--maze-gold) 46%, transparent);
   border-radius: var(--maze-radius-xl);
-  background: rgba(15, 12, 17, 0.72);
+  background: var(--maze-footer-frame);
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, 0.025),
-    0 24px 80px rgba(0, 0, 0, 0.22);
+    inset 0 1px var(--maze-footer-highlight),
+    0 24px 80px var(--maze-footer-shadow);
 }
 
 .frameCorner {
@@ -135,8 +159,8 @@
   border: 1px solid var(--maze-border-gold);
   border-radius: var(--maze-radius-md);
   background:
-    linear-gradient(145deg, rgba(217, 175, 62, 0.055), transparent 58%),
-    rgba(10, 8, 12, 0.66);
+    linear-gradient(145deg, var(--maze-footer-accent-wash), transparent 58%),
+    var(--maze-footer-panel);
 }
 
 .contactCorner {
