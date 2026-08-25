@@ -1,11 +1,8 @@
 .form {
+  inline-size: 100%;
   max-inline-size: 48rem;
   display: grid;
   gap: 1rem;
-  padding: clamp(1.25rem, 4vw, 2rem);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  background: var(--gradient-card);
 }
 
 .field { display: grid; gap: 0.45rem; }
@@ -22,7 +19,7 @@
 .field textarea:focus { border-color: var(--color-primary-hover); outline: 0; }
 .form > button,
 .loginAction {
-  width: fit-content;
+  inline-size: fit-content;
   min-block-size: 46px;
   display: inline-flex;
   align-items: center;
@@ -33,7 +30,40 @@
   color: var(--color-on-primary);
   font-weight: 850;
 }
+.form > button:hover:not(:disabled),
+.loginAction:hover {
+  background: var(--color-primary-hover);
+}
+.form > button:focus-visible,
+.loginAction:focus-visible {
+  outline: 2px solid var(--color-gold-soft);
+  outline-offset: 4px;
+}
 .form > button:disabled { cursor: wait; opacity: 0.7; }
+.closedNotice {
+  min-block-size: 8rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: center;
+  align-items: center;
+  gap: 0.85rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--maze-radius-md);
+  background: var(--color-background-secondary-72);
+}
+.closedNotice > span {
+  inline-size: 0.65rem;
+  block-size: 0.65rem;
+  border: 1px solid var(--color-text-muted);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-text-muted) 10%, transparent);
+}
+.closedNotice p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
 .successNotice,
 .errorNotice {
   margin: 0;

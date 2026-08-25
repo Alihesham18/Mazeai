@@ -1047,6 +1047,42 @@
         "action": "ابدأ محادثة"
       }
     },
+    "detail": {
+      "back": "العودة إلى الفعاليات",
+      "header": {
+        "overline": "موجز الفعالية"
+      },
+      "status": {
+        "upcoming": "قادمة",
+        "completed": "مكتملة"
+      },
+      "visualAriaLabel": "عرض جدول البرنامج لفعالية {title}",
+      "meta": {
+        "time": "الوقت",
+        "location": "الموقع",
+        "format": "النمط",
+        "capacity": "السعة",
+        "registration": "التسجيل"
+      },
+      "about": {
+        "overline": "موجز الفعالية",
+        "title": "عن الفعالية"
+      },
+      "registration": {
+        "overline": "المشاركة",
+        "title": "التسجيل",
+        "open": "التسجيل مفتوح",
+        "closed": "التسجيل مغلق"
+      },
+      "other": {
+        "overline": "دليل البرنامج",
+        "title": "فعاليات أخرى",
+        "view": "عرض الفعالية",
+        "viewNamed": "عرض {title}"
+      },
+      "closingNavigation": "التنقل بين الفعاليات",
+      "viewAll": "عرض جميع الفعاليات"
+    },
     "event": "فعالية",
     "register": "تسجيل",
     "registerForEvent": "التسجيل في الفعالية",

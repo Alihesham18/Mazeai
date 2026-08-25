@@ -41,7 +41,12 @@ export function EventRegistrationForm({
   const loginPath = `${localizedPath(locale, "/login")}?next=${encodeURIComponent(returnPath)}`;
 
   if (!registrationOpen) {
-    return <p className={styles.errorNotice}>{labels.registrationClosed}</p>;
+    return (
+      <div className={styles.closedNotice} role="status">
+        <span aria-hidden="true" />
+        <p>{labels.registrationClosed}</p>
+      </div>
+    );
   }
   if (!user) {
     return <Link className={styles.loginAction} href={loginPath}>{labels.register}</Link>;

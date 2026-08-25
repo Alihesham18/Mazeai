@@ -1047,6 +1047,42 @@
         "action": "Start a conversation"
       }
     },
+    "detail": {
+      "back": "Back to Events",
+      "header": {
+        "overline": "Event briefing"
+      },
+      "status": {
+        "upcoming": "Upcoming",
+        "completed": "Completed"
+      },
+      "visualAriaLabel": "Program schedule visual for {title}",
+      "meta": {
+        "time": "Time",
+        "location": "Location",
+        "format": "Format",
+        "capacity": "Capacity",
+        "registration": "Registration"
+      },
+      "about": {
+        "overline": "Event briefing",
+        "title": "About the Event"
+      },
+      "registration": {
+        "overline": "Participation",
+        "title": "Registration",
+        "open": "Registration open",
+        "closed": "Registration closed"
+      },
+      "other": {
+        "overline": "Program index",
+        "title": "Other Events",
+        "view": "View event",
+        "viewNamed": "View {title}"
+      },
+      "closingNavigation": "Event navigation",
+      "viewAll": "View All Events"
+    },
     "event": "Event",
     "register": "Register",
     "registerForEvent": "Register for event",

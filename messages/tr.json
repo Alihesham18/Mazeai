@@ -1047,6 +1047,42 @@
         "action": "Görüşme başlatın"
       }
     },
+    "detail": {
+      "back": "Etkinliklere Dön",
+      "header": {
+        "overline": "Etkinlik brifingi"
+      },
+      "status": {
+        "upcoming": "Yaklaşan",
+        "completed": "Tamamlandı"
+      },
+      "visualAriaLabel": "{title} için program takvimi görseli",
+      "meta": {
+        "time": "Saat",
+        "location": "Konum",
+        "format": "Format",
+        "capacity": "Kapasite",
+        "registration": "Kayıt"
+      },
+      "about": {
+        "overline": "Etkinlik brifingi",
+        "title": "Etkinlik Hakkında"
+      },
+      "registration": {
+        "overline": "Katılım",
+        "title": "Kayıt",
+        "open": "Kayıtlar açık",
+        "closed": "Kayıtlar kapalı"
+      },
+      "other": {
+        "overline": "Program dizini",
+        "title": "Diğer Etkinlikler",
+        "view": "Etkinliği görüntüle",
+        "viewNamed": "{title} etkinliğini görüntüle"
+      },
+      "closingNavigation": "Etkinlik navigasyonu",
+      "viewAll": "Tüm Etkinlikleri Görüntüle"
+    },
     "event": "Etkinlik",
     "register": "Kayıt Ol",
     "registerForEvent": "Etkinliğe kayıt ol",

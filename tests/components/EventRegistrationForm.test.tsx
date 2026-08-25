@@ -53,7 +53,8 @@ describe("EventRegistrationForm", () => {
       />
     );
 
-    expect(screen.getByText("Registration closed")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveTextContent("Registration closed");
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     expect(screen.queryByRole("link", { name: "Register" })).not.toBeInTheDocument();
   });
 });

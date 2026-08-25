@@ -14,13 +14,9 @@ import { TechnicalDetail, TechnicalLabel } from "@/components/ui/TechnicalDetail
 import type { Locale } from "@/i18n/routing";
 import { getPublishedEvents } from "@/lib/directus/events";
 import type { DirectusEvent } from "@/lib/directus/types";
+import { partitionEvents } from "@/lib/events/presentation";
 import { localizedPath } from "@/lib/utilities/localize";
 import styles from "./EventsOverviewPage.module.css";
-
-function timestamp(value: string) {
-  const parsed = Date.parse(value);
-  return Number.isNaN(parsed) ? null : parsed;
-}
 
 function eventDate(value: string, locale: Locale) {
   const parsed = new Date(value);
@@ -117,12 +113,7 @@ export async function EventsOverviewPage({ locale }: { locale: Locale }) {
 
   const now = Date.now();
   const events = result.ok ? result.data : [];
-  const upcomingEvents = events
-    .filter((event) => (timestamp(event.event_date) ?? Number.NEGATIVE_INFINITY) >= now)
-    .sort((a, b) => (timestamp(a.event_date) ?? 0) - (timestamp(b.event_date) ?? 0));
-  const pastEvents = events
-    .filter((event) => (timestamp(event.event_date) ?? Number.POSITIVE_INFINITY) < now)
-    .sort((a, b) => (timestamp(b.event_date) ?? 0) - (timestamp(a.event_date) ?? 0));
+  const { upcoming: upcomingEvents, completed: pastEvents } = partitionEvents(events, now);
   const featuredEvent = upcomingEvents[0];
   const scheduledEvents = upcomingEvents.slice(1);
   const metaLabels = {
