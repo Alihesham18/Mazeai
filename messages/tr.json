@@ -749,6 +749,77 @@
         "partnerships": "Araştırma Ortaklıkları",
         "contact": "Bize Ulaşın"
       }
+    },
+    "areas": {
+      "overline": "Araştırma Alanları",
+      "title": "Akıllı sistemlerin temellerini keşfetmek",
+      "description": "Gerçek dünya sorunlarını çözmeye odaklanan makine öğrenmesi, bilgisayarlı görü ve uygulamalı yapay zeka araştırmaları.",
+      "header": {
+        "registry": "Ar-Ge / Alan dizini",
+        "visualAriaLabel": "Makine öğrenmesi, bilgisayarlı görü, yapay zeka sistemleri ve uygulamalı yapay zeka araştırmalarını bağlayan teknik alan haritası"
+      },
+      "domains": {
+        "eyebrow": "Araştırma Alanları",
+        "title": "İnceleme alanları",
+        "description": "Temel yöntemlerden pratik uygulamaya uzanan dört bağlantılı alan, MazeAI'nin akıllı sistemleri nasıl araştırdığını şekillendirir.",
+        "domainLabel": "Araştırma alanı",
+        "focusLabel": "{domain} odak alanları",
+        "items": {
+          "machineLearning": {
+            "title": "Makine Öğrenmesi",
+            "description": "Örüntüleri keşfeden, kararları optimize eden ve veri odaklı yöntemlerle gelişen öğrenme sistemleri geliştiriyoruz.",
+            "tags": { "one": "Derin Öğrenme", "two": "Tahmine Dayalı Modeller", "three": "Pekiştirmeli Öğrenme" }
+          },
+          "computerVision": {
+            "title": "Bilgisayarlı Görü",
+            "description": "Ortamları, nesneleri ve karmaşık görsel bilgileri anlayabilen görsel zeka sistemleri oluşturuyoruz.",
+            "tags": { "one": "Görüntü Analizi", "two": "Tanıma Sistemleri", "three": "Görsel Yapay Zeka" }
+          },
+          "aiSystems": {
+            "title": "Yapay Zeka Sistemleri",
+            "description": "Akıl yürütme, otomasyon ve uyarlanabilir karar vermeyi birleştiren akıllı mimariler tasarlıyoruz.",
+            "tags": { "one": "Yapay Zeka Ajanları", "two": "Akıllı Otomasyon", "three": "Bilgi Sistemleri" }
+          },
+          "appliedAI": {
+            "title": "Uygulamalı Yapay Zeka Araştırması",
+            "description": "Yapay zeka araştırmalarını sanayi, eğitim ve toplum için pratik çözümlere dönüştürüyoruz.",
+            "tags": { "one": "Yapay Zeka Çözümleri", "two": "Araştırma Uygulamaları", "three": "İnovasyon" }
+          }
+        }
+      },
+      "methodology": {
+        "eyebrow": "Araştırma Metodolojisi",
+        "title": "Sorudan uygulamaya yapılandırılmış bir yol",
+        "description": "Teknik araştırma süreci; problem tanımını, sistem geliştirmeyi, değerlendirmeyi ve sorumlu uygulamayı birbirine bağlar.",
+        "stages": {
+          "discover": { "title": "Keşfet", "description": "Problemi anlayın ve araştırma hedeflerini tanımlayın." },
+          "develop": { "title": "Geliştir", "description": "Modeller, algoritmalar ve akıllı sistemler oluşturun." },
+          "validate": { "title": "Doğrula", "description": "Performansı, güvenilirliği ve etkiyi değerlendirin." },
+          "apply": { "title": "Uygula", "description": "Araştırmayı pratik ortamlara aktarın." }
+        }
+      },
+      "technology": {
+        "eyebrow": "Teknoloji Altyapısı",
+        "title": "Araştırma yetkinlik dizini",
+        "description": "Uygulamalı yapay zeka araştırması ve mühendisliğinde kullanılan temel teknik disiplinler.",
+        "consoleStatus": "Yetkinlik haritası",
+        "items": {
+          "machineLearning": "Makine Öğrenmesi",
+          "deepLearning": "Derin Öğrenme",
+          "computerVision": "Bilgisayarlı Görü",
+          "naturalLanguageProcessing": "Doğal Dil İşleme",
+          "reinforcementLearning": "Pekiştirmeli Öğrenme",
+          "dataScience": "Veri Bilimi",
+          "aiAutomation": "Yapay Zeka Otomasyonu",
+          "researchEngineering": "Araştırma Mühendisliği"
+        }
+      },
+      "collaboration": {
+        "eyebrow": "Araştırma İş Birliği",
+        "title": "Bir araştırma probleminiz mi var?",
+        "description": "Uygulamalı yapay zeka fırsatlarını keşfetmek için MazeAI ile ortaklık kurun.",
+        "action": "Araştırma Ortaklığı"
+      }
     }
   },
   "pages": {

@@ -1,0 +1,1 @@
+export { ResearchAreasPage } from "./ResearchAreasPage";

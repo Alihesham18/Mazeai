@@ -749,6 +749,77 @@
         "partnerships": "Research Partnerships",
         "contact": "Contact Us"
       }
+    },
+    "areas": {
+      "overline": "Research Domains",
+      "title": "Exploring the foundations of intelligent systems",
+      "description": "Machine learning, computer vision, and applied artificial intelligence research focused on solving real-world challenges.",
+      "header": {
+        "registry": "R&D / Domain index",
+        "visualAriaLabel": "Technical domain map connecting machine learning, computer vision, artificial intelligence systems, and applied AI research"
+      },
+      "domains": {
+        "eyebrow": "Research Domains",
+        "title": "Areas of investigation",
+        "description": "Four connected domains frame how MazeAI investigates intelligent systems, from foundational methods to practical application.",
+        "domainLabel": "Research domain",
+        "focusLabel": "Focus areas for {domain}",
+        "items": {
+          "machineLearning": {
+            "title": "Machine Learning",
+            "description": "Developing learning systems that discover patterns, optimize decisions, and improve through data-driven methods.",
+            "tags": { "one": "Deep Learning", "two": "Predictive Models", "three": "Reinforcement Learning" }
+          },
+          "computerVision": {
+            "title": "Computer Vision",
+            "description": "Creating visual intelligence systems capable of understanding environments, objects, and complex visual information.",
+            "tags": { "one": "Image Analysis", "two": "Recognition Systems", "three": "Visual AI" }
+          },
+          "aiSystems": {
+            "title": "Artificial Intelligence Systems",
+            "description": "Designing intelligent architectures that combine reasoning, automation, and adaptive decision-making.",
+            "tags": { "one": "AI Agents", "two": "Intelligent Automation", "three": "Knowledge Systems" }
+          },
+          "appliedAI": {
+            "title": "Applied AI Research",
+            "description": "Transforming AI research into practical solutions for industry, education, and society.",
+            "tags": { "one": "AI Solutions", "two": "Research Applications", "three": "Innovation" }
+          }
+        }
+      },
+      "methodology": {
+        "eyebrow": "Research Methodology",
+        "title": "A structured path from question to application",
+        "description": "A technical research process connects problem definition, system development, evaluation, and responsible application.",
+        "stages": {
+          "discover": { "title": "Discover", "description": "Understand the problem and define research objectives." },
+          "develop": { "title": "Develop", "description": "Build models, algorithms, and intelligent systems." },
+          "validate": { "title": "Validate", "description": "Evaluate performance, reliability, and impact." },
+          "apply": { "title": "Apply", "description": "Transfer research into practical environments." }
+        }
+      },
+      "technology": {
+        "eyebrow": "Technology Stack",
+        "title": "Research capability index",
+        "description": "Core technical disciplines used across applied artificial intelligence research and engineering.",
+        "consoleStatus": "Capability map",
+        "items": {
+          "machineLearning": "Machine Learning",
+          "deepLearning": "Deep Learning",
+          "computerVision": "Computer Vision",
+          "naturalLanguageProcessing": "Natural Language Processing",
+          "reinforcementLearning": "Reinforcement Learning",
+          "dataScience": "Data Science",
+          "aiAutomation": "AI Automation",
+          "researchEngineering": "Research Engineering"
+        }
+      },
+      "collaboration": {
+        "eyebrow": "Research Collaboration",
+        "title": "Have a research challenge?",
+        "description": "Partner with MazeAI to explore applied artificial intelligence opportunities.",
+        "action": "Research Partnership"
+      }
     }
   },
   "pages": {
