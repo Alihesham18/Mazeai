@@ -607,10 +607,34 @@
         "title": "Zekanın yetkinliğe dönüştüğü alanlar.",
         "description": "Odaklanmış araştırma alanlarımız, gelişmiş yapay zeka yöntemlerini iyileştirmek üzere tasarlandıkları sistemler, kararlar ve ortamlarla buluşturur.",
         "items": {
-          "machineLearning": { "title": "Makine Öğrenmesi", "points": { "one": "Tahmine dayalı sistemler", "two": "Akıllı modeller", "three": "Veri odaklı çözümler" } },
-          "computerVision": { "title": "Bilgisayarlı Görü", "points": { "one": "Görüntü anlama", "two": "Görsel zeka", "three": "Otomatik analiz" } },
-          "aiSystems": { "title": "Yapay Zeka Sistemleri", "points": { "one": "Akıllı ajanlar", "two": "Karar sistemleri", "three": "Sistem entegrasyonu" } },
-          "appliedAIResearch": { "title": "Uygulamalı Yapay Zeka Araştırması", "points": { "one": "Gerçek dünya araştırması", "two": "Teknik prototipleme", "three": "Ortak geliştirme" } }
+          "machineLearning": {
+            "title": "Makine Öğrenmesi",
+            "points": {
+              "one": "Tahmine dayalı sistemler",
+              "two": "Akıllı modeller",
+              "three": "Veri odaklı çözümler"
+            }
+          },
+          "computerVision": {
+            "title": "Bilgisayarlı Görü",
+            "points": { "one": "Görüntü anlama", "two": "Görsel zeka", "three": "Otomatik analiz" }
+          },
+          "aiSystems": {
+            "title": "Yapay Zeka Sistemleri",
+            "points": {
+              "one": "Akıllı ajanlar",
+              "two": "Karar sistemleri",
+              "three": "Sistem entegrasyonu"
+            }
+          },
+          "appliedAIResearch": {
+            "title": "Uygulamalı Yapay Zeka Araştırması",
+            "points": {
+              "one": "Gerçek dünya araştırması",
+              "two": "Teknik prototipleme",
+              "three": "Ortak geliştirme"
+            }
+          }
         }
       },
       "projects": {
@@ -626,10 +650,22 @@
         "title": "Açık sorulardan çalışan sistemlere.",
         "description": "Disiplinli bir yol; araştırmayı, mühendisliği, doğrulamayı ve pratik uygulamayı birbirine bağlar.",
         "stages": {
-          "discover": { "title": "Keşfet", "description": "Araştırma problemlerini ve fırsatlarını belirleyin." },
-          "develop": { "title": "Geliştir", "description": "Modeller ve teknik çözümler oluşturun." },
-          "validate": { "title": "Doğrula", "description": "Yaklaşımları test edin ve iyileştirin." },
-          "deploy": { "title": "Uygula", "description": "Araştırmayı pratik uygulamalara dönüştürün." }
+          "discover": {
+            "title": "Keşfet",
+            "description": "Araştırma problemlerini ve fırsatlarını belirleyin."
+          },
+          "develop": {
+            "title": "Geliştir",
+            "description": "Modeller ve teknik çözümler oluşturun."
+          },
+          "validate": {
+            "title": "Doğrula",
+            "description": "Yaklaşımları test edin ve iyileştirin."
+          },
+          "deploy": {
+            "title": "Uygula",
+            "description": "Araştırmayı pratik uygulamalara dönüştürün."
+          }
         }
       },
       "partnerships": {
@@ -637,9 +673,18 @@
         "title": "İş birliğine dayalı bir araştırma ortamı.",
         "description": "MazeAI, anlamlı yapay zeka sorunlarını incelemek için akademik, kurumsal ve teknik bağlamlarda çalışır.",
         "groups": {
-          "universities": { "title": "Üniversiteler", "description": "Akademik araştırmayı, teknik deneyleri ve uygulamalı araştırma programlarını buluşturun." },
-          "organizations": { "title": "Kurumlar", "description": "Karmaşık operasyon ve teknoloji sorularını yapılandırılmış yapay zeka araştırmalarıyla inceleyin." },
-          "collaboration": { "title": "Araştırma İş Birliği", "description": "Ortak araştırma yönleri, prototipler ve pratik uygulamaya uzanan yollar geliştirin." }
+          "universities": {
+            "title": "Üniversiteler",
+            "description": "Akademik araştırmayı, teknik deneyleri ve uygulamalı araştırma programlarını buluşturun."
+          },
+          "organizations": {
+            "title": "Kurumlar",
+            "description": "Karmaşık operasyon ve teknoloji sorularını yapılandırılmış yapay zeka araştırmalarıyla inceleyin."
+          },
+          "collaboration": {
+            "title": "Araştırma İş Birliği",
+            "description": "Ortak araştırma yönleri, prototipler ve pratik uygulamaya uzanan yollar geliştirin."
+          }
         },
         "action": "Araştırma Ortaklıkları",
         "contact": "Bize Ulaşın"
@@ -721,10 +766,22 @@
         "title": "Yaklaşım ve metodoloji",
         "description": "Bu çerçeve, MazeAI'nin uygulamalı araştırmayı nasıl yapılandırdığını açıklar. Her aşamanın tamamlandığı anlamına gelmez.",
         "stages": {
-          "research": { "title": "Araştırma", "description": "Belgelenen problemi, bağlamı ve araştırma hedeflerini inceleyin." },
-          "development": { "title": "Geliştirme", "description": "Araştırma yönünü modellere, sistemlere veya teknik prototiplere dönüştürün." },
-          "validation": { "title": "Doğrulama", "description": "Yaklaşımları projenin tanımlı hedefleri ve mevcut kanıtlar doğrultusunda değerlendirin." },
-          "application": { "title": "Uygulama", "description": "Araştırma çalışmasından pratik kullanıma uzanan sorumlu yolları inceleyin." }
+          "research": {
+            "title": "Araştırma",
+            "description": "Belgelenen problemi, bağlamı ve araştırma hedeflerini inceleyin."
+          },
+          "development": {
+            "title": "Geliştirme",
+            "description": "Araştırma yönünü modellere, sistemlere veya teknik prototiplere dönüştürün."
+          },
+          "validation": {
+            "title": "Doğrulama",
+            "description": "Yaklaşımları projenin tanımlı hedefleri ve mevcut kanıtlar doğrultusunda değerlendirin."
+          },
+          "application": {
+            "title": "Uygulama",
+            "description": "Araştırma çalışmasından pratik kullanıma uzanan sorumlu yolları inceleyin."
+          }
         }
       },
       "technology": {
@@ -752,38 +809,72 @@
     },
     "areas": {
       "overline": "Araştırma Alanları",
-      "title": "Akıllı sistemlerin temellerini keşfetmek",
+      "title": "Araştırma Alanları",
       "description": "Gerçek dünya sorunlarını çözmeye odaklanan makine öğrenmesi, bilgisayarlı görü ve uygulamalı yapay zeka araştırmaları.",
+      "hero": {
+        "statement": "Titiz ve sorumlu araştırmalarla akıllı sistemleri ileri taşıyoruz.",
+        "action": "Aktif Projeleri İnceleyin",
+        "imageAlt": "İnsan beyni biçiminde ışıldayan altın ve mor bir sinir ağı",
+        "breadcrumb": {
+          "label": "Sayfa yolu",
+          "research": "Araştırma",
+          "current": "Araştırma Alanları"
+        }
+      },
+      "metrics": {
+        "label": "Araştırma portföyü göstergeleri",
+        "areas": { "label": "Araştırma Alanları" },
+        "projects": { "label": "Aktif Projeler" },
+        "method": { "label": "Araştırma Yöntemi", "value": "Keşiften Uygulamaya" },
+        "partnerships": { "label": "Ortaklıklar", "value": "Açık İş Birliği" }
+      },
       "header": {
         "registry": "Ar-Ge / Alan dizini",
         "visualAriaLabel": "Makine öğrenmesi, bilgisayarlı görü, yapay zeka sistemleri ve uygulamalı yapay zeka araştırmalarını bağlayan teknik alan haritası"
       },
       "domains": {
         "eyebrow": "Araştırma Alanları",
-        "title": "İnceleme alanları",
+        "title": "Araştırmada Mükemmeliyet Alanları",
         "description": "Temel yöntemlerden pratik uygulamaya uzanan dört bağlantılı alan, MazeAI'nin akıllı sistemleri nasıl araştırdığını şekillendirir.",
         "domainLabel": "Araştırma alanı",
         "focusLabel": "{domain} odak alanları",
+        "mobileListLabel": "Araştırma alanları",
         "items": {
           "machineLearning": {
             "title": "Makine Öğrenmesi",
             "description": "Örüntüleri keşfeden, kararları optimize eden ve veri odaklı yöntemlerle gelişen öğrenme sistemleri geliştiriyoruz.",
-            "tags": { "one": "Derin Öğrenme", "two": "Tahmine Dayalı Modeller", "three": "Pekiştirmeli Öğrenme" }
+            "tags": {
+              "one": "Derin Öğrenme",
+              "two": "Tahmine Dayalı Modeller",
+              "three": "Pekiştirmeli Öğrenme"
+            }
           },
           "computerVision": {
             "title": "Bilgisayarlı Görü",
             "description": "Ortamları, nesneleri ve karmaşık görsel bilgileri anlayabilen görsel zeka sistemleri oluşturuyoruz.",
-            "tags": { "one": "Görüntü Analizi", "two": "Tanıma Sistemleri", "three": "Görsel Yapay Zeka" }
+            "tags": {
+              "one": "Görüntü Analizi",
+              "two": "Tanıma Sistemleri",
+              "three": "Görsel Yapay Zeka"
+            }
           },
           "aiSystems": {
             "title": "Yapay Zeka Sistemleri",
             "description": "Akıl yürütme, otomasyon ve uyarlanabilir karar vermeyi birleştiren akıllı mimariler tasarlıyoruz.",
-            "tags": { "one": "Yapay Zeka Ajanları", "two": "Akıllı Otomasyon", "three": "Bilgi Sistemleri" }
+            "tags": {
+              "one": "Yapay Zeka Ajanları",
+              "two": "Akıllı Otomasyon",
+              "three": "Bilgi Sistemleri"
+            }
           },
           "appliedAI": {
             "title": "Uygulamalı Yapay Zeka Araştırması",
             "description": "Yapay zeka araştırmalarını sanayi, eğitim ve toplum için pratik çözümlere dönüştürüyoruz.",
-            "tags": { "one": "Yapay Zeka Çözümleri", "two": "Araştırma Uygulamaları", "three": "İnovasyon" }
+            "tags": {
+              "one": "Yapay Zeka Çözümleri",
+              "two": "Araştırma Uygulamaları",
+              "three": "İnovasyon"
+            }
           }
         }
       },
@@ -792,9 +883,18 @@
         "title": "Sorudan uygulamaya yapılandırılmış bir yol",
         "description": "Teknik araştırma süreci; problem tanımını, sistem geliştirmeyi, değerlendirmeyi ve sorumlu uygulamayı birbirine bağlar.",
         "stages": {
-          "discover": { "title": "Keşfet", "description": "Problemi anlayın ve araştırma hedeflerini tanımlayın." },
-          "develop": { "title": "Geliştir", "description": "Modeller, algoritmalar ve akıllı sistemler oluşturun." },
-          "validate": { "title": "Doğrula", "description": "Performansı, güvenilirliği ve etkiyi değerlendirin." },
+          "discover": {
+            "title": "Keşfet",
+            "description": "Problemi anlayın ve araştırma hedeflerini tanımlayın."
+          },
+          "develop": {
+            "title": "Geliştir",
+            "description": "Modeller, algoritmalar ve akıllı sistemler oluşturun."
+          },
+          "validate": {
+            "title": "Doğrula",
+            "description": "Performansı, güvenilirliği ve etkiyi değerlendirin."
+          },
           "apply": { "title": "Uygula", "description": "Araştırmayı pratik ortamlara aktarın." }
         }
       },
@@ -813,6 +913,13 @@
           "aiAutomation": "Yapay Zeka Otomasyonu",
           "researchEngineering": "Araştırma Mühendisliği"
         }
+      },
+      "impact": {
+        "eyebrow": "Küresel Etki",
+        "title": "Amaç Odaklı Araştırma. Sorumlu Etki.",
+        "description": "Sorumlu yapay zeka araştırmalarını pratik bilgiye, sistemlere ve kalıcı toplumsal değere dönüştürmek için disiplinler ve sınırlar arasında iş birliği yapıyoruz.",
+        "action": "Araştırma Ortaklıklarını İnceleyin",
+        "imageAlt": "Altın ve mor araştırma ağlarıyla bağlanan ışıklı dünya haritası"
       },
       "collaboration": {
         "eyebrow": "Araştırma İş Birliği",
@@ -836,10 +943,22 @@
         "title": "MazeAI ile kimler iş birliği yapabilir",
         "description": "Araştırma görüşmeleri akademik, teknik, kurumsal ve uygulamalı inovasyon bağlamlarında başlayabilir.",
         "items": {
-          "universities": { "title": "Üniversiteler", "description": "Araştırma iş birliği, öğrenci ve akademisyen katılımı ile uygulamalı yapay zeka çalışmaları." },
-          "researchGroups": { "title": "Araştırma Grupları", "description": "Teknik soruların, yöntemlerin ve deneysel sistemlerin ortaklaşa incelenmesi." },
-          "organizations": { "title": "Şirketler ve Kurumlar", "description": "Pratik iş, operasyon veya kurum problemlerine yönelik uygulamalı araştırma." },
-          "technologyPartners": { "title": "Teknoloji Partnerleri", "description": "Ortak prototipleme, entegrasyon araştırması ve odaklı teknik deneyler." }
+          "universities": {
+            "title": "Üniversiteler",
+            "description": "Araştırma iş birliği, öğrenci ve akademisyen katılımı ile uygulamalı yapay zeka çalışmaları."
+          },
+          "researchGroups": {
+            "title": "Araştırma Grupları",
+            "description": "Teknik soruların, yöntemlerin ve deneysel sistemlerin ortaklaşa incelenmesi."
+          },
+          "organizations": {
+            "title": "Şirketler ve Kurumlar",
+            "description": "Pratik iş, operasyon veya kurum problemlerine yönelik uygulamalı araştırma."
+          },
+          "technologyPartners": {
+            "title": "Teknoloji Partnerleri",
+            "description": "Ortak prototipleme, entegrasyon araştırması ve odaklı teknik deneyler."
+          }
         }
       },
       "models": {
@@ -847,10 +966,22 @@
         "title": "Birlikte çalışmanın olası yolları",
         "description": "Olası iş birliği modelleri; her görüşmenin bağlamına göre şekillenen odaklı araştırma, uygulamalı geliştirme, bilgi paylaşımı ve eğitim çalışmalarını içerir.",
         "items": {
-          "jointResearch": { "title": "Ortak Araştırma", "description": "Bir araştırma sorusunu, metodolojiyi, deneyi veya prototipi birlikte geliştirin." },
-          "appliedAI": { "title": "Uygulamalı Yapay Zeka Projeleri", "description": "Gerçek bir operasyonel veya teknik problem etrafında yapay zeka yaklaşımlarını inceleyin." },
-          "knowledgeExchange": { "title": "Bilgi Paylaşımı", "description": "Atölyeler, araştırma görüşmeleri, teknik oturumlar veya ortak keşif çalışmaları." },
-          "education": { "title": "Eğitim İş Birliği", "description": "Uygulamalı öğrenme, eğitim, öğrenci projeleri veya akademi-sanayi etkileşimi." }
+          "jointResearch": {
+            "title": "Ortak Araştırma",
+            "description": "Bir araştırma sorusunu, metodolojiyi, deneyi veya prototipi birlikte geliştirin."
+          },
+          "appliedAI": {
+            "title": "Uygulamalı Yapay Zeka Projeleri",
+            "description": "Gerçek bir operasyonel veya teknik problem etrafında yapay zeka yaklaşımlarını inceleyin."
+          },
+          "knowledgeExchange": {
+            "title": "Bilgi Paylaşımı",
+            "description": "Atölyeler, araştırma görüşmeleri, teknik oturumlar veya ortak keşif çalışmaları."
+          },
+          "education": {
+            "title": "Eğitim İş Birliği",
+            "description": "Uygulamalı öğrenme, eğitim, öğrenci projeleri veya akademi-sanayi etkileşimi."
+          }
         }
       },
       "scope": {
@@ -877,11 +1008,26 @@
         "title": "Araştırma görüşmeleri için açık bir yol",
         "description": "Her görüşme kendi bağlamına göre şekillenir; yapılandırılmış süreç ise uyumu, kapsamı ve sorumlu sonraki adımları netleştirir.",
         "stages": {
-          "discuss": { "title": "Görüş", "description": "Problemi, bağlamı ve araştırma hedeflerini anlayın." },
-          "align": { "title": "Hizalan", "description": "Kapsamı, sorumlulukları, veriyi, kısıtları ve beklenen çıktıları netleştirin." },
-          "researchBuild": { "title": "Araştır ve Geliştir", "description": "Araştırma, deney, prototipleme veya teknik geliştirme yürütün." },
-          "review": { "title": "İncele", "description": "Bulguları değerlendirin ve sonraki adımlara karar verin." },
-          "continue": { "title": "Devam Et", "description": "Uygun olduğunda daha uzun süreli bir araştırma, uygulama veya eğitim iş birliğine ilerleyin." }
+          "discuss": {
+            "title": "Görüş",
+            "description": "Problemi, bağlamı ve araştırma hedeflerini anlayın."
+          },
+          "align": {
+            "title": "Hizalan",
+            "description": "Kapsamı, sorumlulukları, veriyi, kısıtları ve beklenen çıktıları netleştirin."
+          },
+          "researchBuild": {
+            "title": "Araştır ve Geliştir",
+            "description": "Araştırma, deney, prototipleme veya teknik geliştirme yürütün."
+          },
+          "review": {
+            "title": "İncele",
+            "description": "Bulguları değerlendirin ve sonraki adımlara karar verin."
+          },
+          "continue": {
+            "title": "Devam Et",
+            "description": "Uygun olduğunda daha uzun süreli bir araştırma, uygulama veya eğitim iş birliğine ilerleyin."
+          }
         }
       },
       "ecosystem": {

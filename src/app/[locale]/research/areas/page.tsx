@@ -6,7 +6,13 @@ const page: StandalonePageConfig = {
   path: "research/areas",
   titleKey: "research.areas.title",
   descriptionKey: "research.areas.description",
-  sections: ["Research domains", "Research methodology", "Technology stack", "Research partnership"]
+  sections: [
+    "Research metrics",
+    "Research domains",
+    "Research methodology",
+    "Technology stack",
+    "Global impact"
+  ]
 };
 
 export const generateMetadata = createPageMetadata(page);

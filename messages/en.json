@@ -607,10 +607,38 @@
         "title": "Where intelligence becomes capability.",
         "description": "Focused research domains connect advanced AI methods with the systems, decisions, and environments they are designed to improve.",
         "items": {
-          "machineLearning": { "title": "Machine Learning", "points": { "one": "Predictive systems", "two": "Intelligent models", "three": "Data-driven solutions" } },
-          "computerVision": { "title": "Computer Vision", "points": { "one": "Image understanding", "two": "Visual intelligence", "three": "Automated analysis" } },
-          "aiSystems": { "title": "Artificial Intelligence Systems", "points": { "one": "Intelligent agents", "two": "Decision systems", "three": "System integration" } },
-          "appliedAIResearch": { "title": "Applied AI Research", "points": { "one": "Real-world investigation", "two": "Technical prototyping", "three": "Collaborative development" } }
+          "machineLearning": {
+            "title": "Machine Learning",
+            "points": {
+              "one": "Predictive systems",
+              "two": "Intelligent models",
+              "three": "Data-driven solutions"
+            }
+          },
+          "computerVision": {
+            "title": "Computer Vision",
+            "points": {
+              "one": "Image understanding",
+              "two": "Visual intelligence",
+              "three": "Automated analysis"
+            }
+          },
+          "aiSystems": {
+            "title": "Artificial Intelligence Systems",
+            "points": {
+              "one": "Intelligent agents",
+              "two": "Decision systems",
+              "three": "System integration"
+            }
+          },
+          "appliedAIResearch": {
+            "title": "Applied AI Research",
+            "points": {
+              "one": "Real-world investigation",
+              "two": "Technical prototyping",
+              "three": "Collaborative development"
+            }
+          }
         }
       },
       "projects": {
@@ -626,10 +654,16 @@
         "title": "From open questions to working systems.",
         "description": "A disciplined pathway connects investigation, engineering, validation, and practical application.",
         "stages": {
-          "discover": { "title": "Discover", "description": "Research problems and opportunities." },
+          "discover": {
+            "title": "Discover",
+            "description": "Research problems and opportunities."
+          },
           "develop": { "title": "Develop", "description": "Build models and technical solutions." },
           "validate": { "title": "Validate", "description": "Test and refine approaches." },
-          "deploy": { "title": "Deploy", "description": "Transform research into practical applications." }
+          "deploy": {
+            "title": "Deploy",
+            "description": "Transform research into practical applications."
+          }
         }
       },
       "partnerships": {
@@ -637,9 +671,18 @@
         "title": "A collaborative research environment.",
         "description": "MazeAI works across academic, organizational, and technical contexts to investigate meaningful AI challenges.",
         "groups": {
-          "universities": { "title": "Universities", "description": "Connect academic inquiry, technical experimentation, and applied research programs." },
-          "organizations": { "title": "Organizations", "description": "Explore complex operational and technology questions through structured AI research." },
-          "collaboration": { "title": "Research Collaboration", "description": "Develop shared research directions, prototypes, and pathways toward practical application." }
+          "universities": {
+            "title": "Universities",
+            "description": "Connect academic inquiry, technical experimentation, and applied research programs."
+          },
+          "organizations": {
+            "title": "Organizations",
+            "description": "Explore complex operational and technology questions through structured AI research."
+          },
+          "collaboration": {
+            "title": "Research Collaboration",
+            "description": "Develop shared research directions, prototypes, and pathways toward practical application."
+          }
         },
         "action": "Research Partnerships",
         "contact": "Contact Us"
@@ -721,10 +764,22 @@
         "title": "Approach and methodology",
         "description": "This framework describes how MazeAI structures applied research. It does not imply that every stage has been completed.",
         "stages": {
-          "research": { "title": "Research", "description": "Examine the documented problem, context, and research objectives." },
-          "development": { "title": "Development", "description": "Translate the research direction into models, systems, or technical prototypes." },
-          "validation": { "title": "Validation", "description": "Evaluate approaches against the project's defined objectives and available evidence." },
-          "application": { "title": "Application", "description": "Explore responsible pathways from research work toward practical use." }
+          "research": {
+            "title": "Research",
+            "description": "Examine the documented problem, context, and research objectives."
+          },
+          "development": {
+            "title": "Development",
+            "description": "Translate the research direction into models, systems, or technical prototypes."
+          },
+          "validation": {
+            "title": "Validation",
+            "description": "Evaluate approaches against the project's defined objectives and available evidence."
+          },
+          "application": {
+            "title": "Application",
+            "description": "Explore responsible pathways from research work toward practical use."
+          }
         }
       },
       "technology": {
@@ -751,24 +806,42 @@
       }
     },
     "areas": {
-      "overline": "Research Domains",
-      "title": "Exploring the foundations of intelligent systems",
+      "overline": "Research Areas",
+      "title": "Research Areas",
       "description": "Machine learning, computer vision, and applied artificial intelligence research focused on solving real-world challenges.",
+      "hero": {
+        "statement": "Advancing intelligent systems through rigorous, responsible research.",
+        "action": "Explore Active Projects",
+        "imageAlt": "A luminous gold and violet neural network forming a human brain",
+        "breadcrumb": { "label": "Breadcrumb", "research": "Research", "current": "Research Areas" }
+      },
+      "metrics": {
+        "label": "Research portfolio metrics",
+        "areas": { "label": "Research Areas" },
+        "projects": { "label": "Active Projects" },
+        "method": { "label": "Research Method", "value": "Discover to Apply" },
+        "partnerships": { "label": "Partnerships", "value": "Open Collaboration" }
+      },
       "header": {
         "registry": "R&D / Domain index",
         "visualAriaLabel": "Technical domain map connecting machine learning, computer vision, artificial intelligence systems, and applied AI research"
       },
       "domains": {
-        "eyebrow": "Research Domains",
-        "title": "Areas of investigation",
+        "eyebrow": "Our Focus",
+        "title": "Areas of Research Excellence",
         "description": "Four connected domains frame how MazeAI investigates intelligent systems, from foundational methods to practical application.",
         "domainLabel": "Research domain",
         "focusLabel": "Focus areas for {domain}",
+        "mobileListLabel": "Research areas",
         "items": {
           "machineLearning": {
             "title": "Machine Learning",
             "description": "Developing learning systems that discover patterns, optimize decisions, and improve through data-driven methods.",
-            "tags": { "one": "Deep Learning", "two": "Predictive Models", "three": "Reinforcement Learning" }
+            "tags": {
+              "one": "Deep Learning",
+              "two": "Predictive Models",
+              "three": "Reinforcement Learning"
+            }
           },
           "computerVision": {
             "title": "Computer Vision",
@@ -778,7 +851,11 @@
           "aiSystems": {
             "title": "Artificial Intelligence Systems",
             "description": "Designing intelligent architectures that combine reasoning, automation, and adaptive decision-making.",
-            "tags": { "one": "AI Agents", "two": "Intelligent Automation", "three": "Knowledge Systems" }
+            "tags": {
+              "one": "AI Agents",
+              "two": "Intelligent Automation",
+              "three": "Knowledge Systems"
+            }
           },
           "appliedAI": {
             "title": "Applied AI Research",
@@ -792,10 +869,22 @@
         "title": "A structured path from question to application",
         "description": "A technical research process connects problem definition, system development, evaluation, and responsible application.",
         "stages": {
-          "discover": { "title": "Discover", "description": "Understand the problem and define research objectives." },
-          "develop": { "title": "Develop", "description": "Build models, algorithms, and intelligent systems." },
-          "validate": { "title": "Validate", "description": "Evaluate performance, reliability, and impact." },
-          "apply": { "title": "Apply", "description": "Transfer research into practical environments." }
+          "discover": {
+            "title": "Discover",
+            "description": "Understand the problem and define research objectives."
+          },
+          "develop": {
+            "title": "Develop",
+            "description": "Build models, algorithms, and intelligent systems."
+          },
+          "validate": {
+            "title": "Validate",
+            "description": "Evaluate performance, reliability, and impact."
+          },
+          "apply": {
+            "title": "Apply",
+            "description": "Transfer research into practical environments."
+          }
         }
       },
       "technology": {
@@ -813,6 +902,13 @@
           "aiAutomation": "AI Automation",
           "researchEngineering": "Research Engineering"
         }
+      },
+      "impact": {
+        "eyebrow": "Global Impact",
+        "title": "Research with Purpose. Impact with Responsibility.",
+        "description": "We collaborate across disciplines and borders to translate responsible artificial intelligence research into practical knowledge, systems, and lasting public value.",
+        "action": "Explore Research Partnerships",
+        "imageAlt": "An illuminated world map connected by gold and violet research networks"
       },
       "collaboration": {
         "eyebrow": "Research Collaboration",
@@ -836,10 +932,22 @@
         "title": "Who can collaborate with MazeAI",
         "description": "Research discussions can begin across academic, technical, organizational, and applied innovation contexts.",
         "items": {
-          "universities": { "title": "Universities", "description": "Research collaboration, student and academic engagement, and applied AI studies." },
-          "researchGroups": { "title": "Research Groups", "description": "Joint exploration of technical questions, methods, and experimental systems." },
-          "organizations": { "title": "Companies & Organizations", "description": "Applied research around practical business, operational, or institutional challenges." },
-          "technologyPartners": { "title": "Technology Partners", "description": "Joint prototyping, integration research, and focused technical experimentation." }
+          "universities": {
+            "title": "Universities",
+            "description": "Research collaboration, student and academic engagement, and applied AI studies."
+          },
+          "researchGroups": {
+            "title": "Research Groups",
+            "description": "Joint exploration of technical questions, methods, and experimental systems."
+          },
+          "organizations": {
+            "title": "Companies & Organizations",
+            "description": "Applied research around practical business, operational, or institutional challenges."
+          },
+          "technologyPartners": {
+            "title": "Technology Partners",
+            "description": "Joint prototyping, integration research, and focused technical experimentation."
+          }
         }
       },
       "models": {
@@ -847,10 +955,22 @@
         "title": "Possible ways to work together",
         "description": "Possible collaboration models include focused research, applied development, knowledge exchange, and educational engagement, shaped around the context of each discussion.",
         "items": {
-          "jointResearch": { "title": "Joint Research", "description": "Co-develop a research question, methodology, experiment, or prototype." },
-          "appliedAI": { "title": "Applied AI Projects", "description": "Explore AI approaches around a real operational or technical challenge." },
-          "knowledgeExchange": { "title": "Knowledge Exchange", "description": "Workshops, research discussions, technical sessions, or shared exploration." },
-          "education": { "title": "Educational Collaboration", "description": "Applied learning, training, student projects, or academic-industry engagement." }
+          "jointResearch": {
+            "title": "Joint Research",
+            "description": "Co-develop a research question, methodology, experiment, or prototype."
+          },
+          "appliedAI": {
+            "title": "Applied AI Projects",
+            "description": "Explore AI approaches around a real operational or technical challenge."
+          },
+          "knowledgeExchange": {
+            "title": "Knowledge Exchange",
+            "description": "Workshops, research discussions, technical sessions, or shared exploration."
+          },
+          "education": {
+            "title": "Educational Collaboration",
+            "description": "Applied learning, training, student projects, or academic-industry engagement."
+          }
         }
       },
       "scope": {
@@ -877,11 +997,26 @@
         "title": "A clear path for research discussions",
         "description": "Each discussion is shaped by its context, while a structured process helps clarify fit, scope, and responsible next steps.",
         "stages": {
-          "discuss": { "title": "Discuss", "description": "Understand the challenge, context, and research goals." },
-          "align": { "title": "Align", "description": "Clarify scope, responsibilities, data, constraints, and expected outputs." },
-          "researchBuild": { "title": "Research & Build", "description": "Conduct research, experimentation, prototyping, or technical development." },
-          "review": { "title": "Review", "description": "Evaluate findings and decide on next steps." },
-          "continue": { "title": "Continue", "description": "Where appropriate, move into a longer research, implementation, or educational collaboration." }
+          "discuss": {
+            "title": "Discuss",
+            "description": "Understand the challenge, context, and research goals."
+          },
+          "align": {
+            "title": "Align",
+            "description": "Clarify scope, responsibilities, data, constraints, and expected outputs."
+          },
+          "researchBuild": {
+            "title": "Research & Build",
+            "description": "Conduct research, experimentation, prototyping, or technical development."
+          },
+          "review": {
+            "title": "Review",
+            "description": "Evaluate findings and decide on next steps."
+          },
+          "continue": {
+            "title": "Continue",
+            "description": "Where appropriate, move into a longer research, implementation, or educational collaboration."
+          }
         }
       },
       "ecosystem": {
