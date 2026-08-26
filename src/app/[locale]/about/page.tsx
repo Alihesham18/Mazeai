@@ -65,29 +65,45 @@ export default async function AboutPage({ params }: AboutPageProps) {
   return (
     <div className={styles.page}>
       <section className={styles.hero} aria-labelledby="about-heading">
-        <Image
-          className={styles.heroImage}
-          src="/images/about-synergymazeai-team.png"
-          alt={t("hero.imageAlt")}
-          fill
-          priority
-          sizes="100vw"
-        />
+        <div className={styles.heroMedia} aria-hidden="true">
+          <Image
+            className={`${styles.heroImage} ${styles.heroImageLight}`}
+            src="/images/about/about-hero-light.png"
+            alt=""
+            fill
+            priority
+            quality={94}
+            sizes="100vw"
+          />
+
+          <Image
+            className={`${styles.heroImage} ${styles.heroImageDark}`}
+            src="/images/about/about-hero-dark.png"
+            alt=""
+            fill
+            priority
+            quality={94}
+            sizes="100vw"
+          />
+        </div>
+
         <div className={styles.heroShade} aria-hidden="true" />
 
         <div className={styles.container}>
           <div className={styles.heroContent}>
-            <p className={styles.eyebrow}>{t("hero.eyebrow")}</p>
-            <h1 id="about-heading" className={styles.title}>
-              {t("hero.title")}
-            </h1>
-            <p className={styles.lead}>{t("hero.lead")}</p>
-          </div>
+  <p className={styles.eyebrow}>{t("hero.eyebrow")}</p>
 
-          <p className={styles.location}>
-            <MapPin size={18} aria-hidden="true" />
-            {t("hero.location")}
-          </p>
+  <h1 id="about-heading" className={styles.title}>
+    {t("hero.title")}
+  </h1>
+
+  <p className={styles.lead}>{t("hero.lead")}</p>
+
+  <p className={styles.location}>
+    <MapPin size={18} aria-hidden="true" />
+    {t("hero.location")}
+  </p>
+</div>
         </div>
       </section>
 
@@ -96,9 +112,13 @@ export default async function AboutPage({ params }: AboutPageProps) {
           <div className={styles.introGrid}>
             <div className={styles.sectionHeading}>
               <UsersRound aria-hidden="true" />
+
               <div>
                 <p className={styles.sectionLabel}>{t("overview.label")}</p>
-                <h2 id="who-we-are-heading">{t("overview.title")}</h2>
+
+                <h2 id="who-we-are-heading">
+                  {t("overview.title")}
+                </h2>
               </div>
             </div>
 
@@ -119,11 +139,17 @@ export default async function AboutPage({ params }: AboutPageProps) {
                 <span className={styles.iconFrame} aria-hidden="true">
                   <Icon />
                 </span>
+
                 <h2>{t(`${key}.title`)}</h2>
               </div>
 
-              <p className={styles.rowDescription}>{t(`${key}.description`)}</p>
-              <p className={styles.rowDetail}>{detail}</p>
+              <p className={styles.rowDescription}>
+                {t(`${key}.description`)}
+              </p>
+
+              <p className={styles.rowDetail}>
+                {detail}
+              </p>
             </article>
           ))}
         </div>
@@ -134,12 +160,21 @@ export default async function AboutPage({ params }: AboutPageProps) {
           <div className={styles.ctaMark} aria-hidden="true">
             <Building2 />
           </div>
+
           <div className={styles.ctaCopy}>
             <p className={styles.sectionLabel}>{t("cta.label")}</p>
-            <h2 id="about-cta-heading">{t("cta.title")}</h2>
+
+            <h2 id="about-cta-heading">
+              {t("cta.title")}
+            </h2>
+
             <p>{t("cta.description")}</p>
           </div>
-          <a className={styles.ctaButton} href={localizedPath(params.locale, "/contact")}>
+
+          <a
+            className={styles.ctaButton}
+            href={localizedPath(params.locale, "/contact")}
+          >
             {t("cta.button")}
             <ArrowRight size={18} aria-hidden="true" />
           </a>

@@ -11,6 +11,10 @@
   margin-inline: auto;
 }
 
+/* =========================================================
+   HERO
+   ========================================================= */
+
 .hero {
   position: relative;
   min-height: min(560px, calc(100vh - 180px));
@@ -22,38 +26,102 @@
   background: var(--color-background-secondary);
 }
 
-.heroImage {
+/* Holds both light and dark hero images */
+.heroMedia {
+  position: absolute;
+  inset: 0;
   z-index: -2;
-  object-fit: cover;
-  object-position: center center;
+  overflow: hidden;
 }
 
+.heroImage {
+  object-fit: cover;
+  object-position: center center;
+  transition: opacity 250ms ease;
+}
+
+/* Dark mode is the fallback/default */
+.heroImageLight {
+  opacity: 0;
+}
+
+.heroImageDark {
+  opacity: 1;
+}
+
+/* Light theme */
+:global(:root[data-theme="light"]) .heroImageLight {
+  opacity: 1;
+}
+
+:global(:root[data-theme="light"]) .heroImageDark {
+  opacity: 0;
+}
+
+/* Dark theme */
+:global(:root[data-theme="dark"]) .heroImageLight {
+  opacity: 0;
+}
+
+:global(:root[data-theme="dark"]) .heroImageDark {
+  opacity: 1;
+}
+[dir="rtl"] .heroMedia {
+  transform: scaleX(-1);
+}
+/* Dark-mode text protection */
 .heroShade {
   position: absolute;
   inset: 0;
   z-index: -1;
+  pointer-events: none;
+
   background: linear-gradient(
     90deg,
     rgba(11, 7, 18, 0.94) 0%,
-    rgba(11, 7, 18, 0.78) 34%,
-    rgba(11, 7, 18, 0.28) 68%,
-    rgba(11, 7, 18, 0.14) 100%
+    rgba(11, 7, 18, 0.8) 32%,
+    rgba(11, 7, 18, 0.34) 58%,
+    rgba(11, 7, 18, 0.08) 76%,
+    transparent 100%
   );
 }
 
+/* Light-mode text protection */
+:global(:root[data-theme="light"]) .heroShade {
+  background: linear-gradient(
+    90deg,
+    rgba(245, 242, 234, 0.97) 0%,
+    rgba(245, 242, 234, 0.9) 30%,
+    rgba(245, 242, 234, 0.45) 52%,
+    rgba(245, 242, 234, 0.08) 68%,
+    transparent 82%
+  );
+}
+
+/* Mirror the overlay direction for Arabic/Farsi */
+[dir="rtl"] .heroShade {
+  transform: scaleX(-1);
+}
+
 .hero .container {
+  position: relative;
+  z-index: 2;
+
   min-height: inherit;
+
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 2rem;
-  padding-block: clamp(6rem, 12vh, 8.5rem) clamp(3rem, 8vh, 5rem);
+  align-items: center;
+
+  padding-block:
+    clamp(5rem, 10vh, 7.5rem)
+    clamp(3rem, 7vh, 4.5rem);
 }
 
 .heroContent {
-  max-width: 690px;
+  width: min(100%, 620px);
 }
 
+/* Default/dark mode text */
 .heroContent,
 .heroContent .lead {
   color: #ffffff;
@@ -61,6 +129,17 @@
 
 .heroContent .lead {
   opacity: 0.82;
+}
+
+/* Light mode text */
+:global(:root[data-theme="light"]) .heroContent {
+  color: var(--color-text);
+}
+
+:global(:root[data-theme="light"]) .heroContent .lead {
+  color: var(--color-text-muted);
+  opacity: 1;
+  text-shadow: none;
 }
 
 .eyebrow,
@@ -91,16 +170,54 @@
   line-height: 1.65;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
 }
+[dir="rtl"] .heroContent {
+  margin-inline-start: 0;
+  margin-inline-end: auto;
 
+  width: min(100%, 540px);
+
+  text-align: right;
+}
+
+[dir="rtl"] .title {
+  max-width: 580px;
+  font-size: clamp(3rem, 5.2vw, 5.3rem);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .lead {
+  max-width: 540px;
+  line-height: 1.8;
+}
+
+[dir="rtl"] .eyebrow {
+  letter-spacing: 0.04em;
+}
 .location {
+  width: fit-content;
+
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  margin: 0;
+
+  margin: 1.8rem 0 0;
+
   color: var(--color-gold-soft);
+
+  font-size: 0.9rem;
   font-weight: 650;
+
   white-space: nowrap;
 }
+
+.location svg {
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   WHO WE ARE
+   ========================================================= */
 
 .introduction {
   padding-block: clamp(2.75rem, 5vw, 5rem);
@@ -155,6 +272,10 @@
   margin-top: 1.35rem;
 }
 
+/* =========================================================
+   EXISTING FRAMEWORK
+   ========================================================= */
+
 .framework {
   border-bottom: 1px solid var(--color-border);
   background: var(--color-surface-72);
@@ -162,7 +283,10 @@
 
 .frameworkRow {
   display: grid;
-  grid-template-columns: minmax(240px, 0.8fr) minmax(0, 1.25fr) minmax(190px, 0.55fr);
+  grid-template-columns:
+    minmax(240px, 0.8fr)
+    minmax(0, 1.25fr)
+    minmax(190px, 0.55fr);
   gap: clamp(1.5rem, 4vw, 4.5rem);
   align-items: center;
   min-height: 178px;
@@ -231,6 +355,10 @@
   font-weight: 700;
 }
 
+/* =========================================================
+   EXISTING CTA
+   ========================================================= */
+
 .ctaSection {
   background: var(--color-background-secondary-82);
 }
@@ -292,21 +420,44 @@
   transform: translateY(-2px);
 }
 
-[dir="rtl"] .heroShade {
-  transform: scaleX(-1);
-}
+/* =========================================================
+   TABLET
+   ========================================================= */
 
 @media (max-width: 900px) {
   .hero {
     min-height: min(650px, calc(100svh - 145px));
   }
 
-  .heroImage {
-    object-position: 62% center;
+  /*
+    Do NOT replace the heroShade with a solid background.
+    The old CSS did that and would hide the new hero images.
+  */
+  .heroShade {
+    background: linear-gradient(
+      0deg,
+      rgba(11, 7, 18, 0.94) 0%,
+      rgba(11, 7, 18, 0.76) 38%,
+      rgba(11, 7, 18, 0.24) 72%,
+      transparent 100%
+    );
   }
 
-  .heroShade {
-    background: var(--color-background-72);
+  :global(:root[data-theme="light"]) .heroShade {
+    background: linear-gradient(
+      0deg,
+      rgba(245, 242, 234, 0.97) 0%,
+      rgba(245, 242, 234, 0.78) 38%,
+      rgba(245, 242, 234, 0.2) 72%,
+      transparent 100%
+    );
+  }
+
+  /*
+    On tablet we use the centre of the generated artwork.
+  */
+  .heroImage {
+    object-position: center center;
   }
 
   .hero .container {
@@ -349,6 +500,10 @@
   }
 }
 
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
 @media (max-width: 600px) {
   .container {
     width: min(100% - 1.25rem, 1180px);
@@ -359,11 +514,27 @@
   }
 
   .heroImage {
-    object-position: 63% center;
+    object-position: center center;
   }
 
   .heroShade {
-    background: var(--color-background-76);
+    background: linear-gradient(
+      0deg,
+      rgba(11, 7, 18, 0.97) 0%,
+      rgba(11, 7, 18, 0.82) 40%,
+      rgba(11, 7, 18, 0.25) 74%,
+      transparent 100%
+    );
+  }
+
+  :global(:root[data-theme="light"]) .heroShade {
+    background: linear-gradient(
+      0deg,
+      rgba(245, 242, 234, 0.98) 0%,
+      rgba(245, 242, 234, 0.84) 40%,
+      rgba(245, 242, 234, 0.28) 74%,
+      transparent 100%
+    );
   }
 
   .hero .container {
@@ -408,7 +579,15 @@
   }
 }
 
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
+  .heroImage {
+    transition: none;
+  }
+
   .ctaButton {
     transition: none;
   }
