@@ -724,6 +724,55 @@
     var(--research-alt) 100%
   );
 }
+
+@media (min-width: 768px) {
+  :global(:root[data-theme="light"]) .heroScrim {
+    background: linear-gradient(
+      90deg,
+      var(--research-black) 0%,
+      color-mix(in srgb, var(--research-black) 98%, transparent) 28%,
+      color-mix(in srgb, var(--research-black) 82%, transparent) 36%,
+      color-mix(in srgb, var(--research-black) 45%, transparent) 42%,
+      color-mix(in srgb, var(--research-black) 10%, transparent) 47%,
+      transparent 50%
+    );
+  }
+  :global(:root[data-theme="light"][dir="rtl"]) .heroScrim {
+    background: linear-gradient(
+      270deg,
+      var(--research-black) 0%,
+      color-mix(in srgb, var(--research-black) 98%, transparent) 28%,
+      color-mix(in srgb, var(--research-black) 82%, transparent) 36%,
+      color-mix(in srgb, var(--research-black) 45%, transparent) 42%,
+      color-mix(in srgb, var(--research-black) 10%, transparent) 47%,
+      transparent 50%
+    );
+  }
+  :global(:root[data-theme="light"]) .impactScrim {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 48%,
+      color-mix(in srgb, var(--research-alt) 35%, transparent) 55%,
+      color-mix(in srgb, var(--research-alt) 85%, transparent) 62%,
+      color-mix(in srgb, var(--research-alt) 98%, transparent) 68%,
+      var(--research-alt) 82%,
+      var(--research-alt) 100%
+    );
+  }
+  :global(:root[data-theme="light"][dir="rtl"]) .impactScrim {
+    background: linear-gradient(
+      270deg,
+      transparent 0%,
+      transparent 48%,
+      color-mix(in srgb, var(--research-alt) 35%, transparent) 55%,
+      color-mix(in srgb, var(--research-alt) 85%, transparent) 62%,
+      color-mix(in srgb, var(--research-alt) 98%, transparent) 68%,
+      var(--research-alt) 82%,
+      var(--research-alt) 100%
+    );
+  }
+}
 :global([dir="rtl"]) .timeline::before {
   background: linear-gradient(
     270deg,
