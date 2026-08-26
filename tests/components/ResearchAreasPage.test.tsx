@@ -47,6 +47,33 @@ describe("Research Areas page", () => {
     expect(impactImage.getAttribute("src")).toContain("q=92");
     expect(view.container.querySelectorAll("[data-network-node]")).toHaveLength(26);
     expect(view.container.querySelectorAll("svg[data-network]")).toHaveLength(2);
+    const heroMedia = heroImage.closest("[data-interactive-media]");
+    const impactMedia = impactImage.closest("[data-interactive-media]");
+    expect(heroMedia).toContainElement(view.container.querySelector('svg[data-network="hero"]'));
+    expect(impactMedia).toContainElement(view.container.querySelector('svg[data-network="impact"]'));
+    expect(heroMedia?.closest("section")?.querySelector(":scope > svg[data-network]")).toBeNull();
+    expect(impactMedia?.closest("section")?.querySelector(":scope > svg[data-network]")).toBeNull();
+    expect(view.container.querySelector('svg[data-network="hero"]')).toHaveAttribute(
+      "viewBox",
+      "0 0 1536 511"
+    );
+    expect(view.container.querySelector('svg[data-network="impact"]')).toHaveAttribute(
+      "viewBox",
+      "0 0 1536 510"
+    );
+    for (const node of view.container.querySelectorAll<SVGCircleElement>(
+      '[data-featured="true"]'
+    )) {
+      const overlay = node.closest("svg");
+      expect(Number(node.getAttribute("cx"))).toBeGreaterThanOrEqual(0);
+      expect(Number(node.getAttribute("cy"))).toBeGreaterThanOrEqual(0);
+      expect(Number(node.getAttribute("cx"))).toBeLessThanOrEqual(
+        Number(overlay?.dataset.sourceWidth)
+      );
+      expect(Number(node.getAttribute("cy"))).toBeLessThanOrEqual(
+        Number(overlay?.dataset.sourceHeight)
+      );
+    }
     expect(screen.getByRole("link", { name: en.research.areas.hero.action })).toHaveAttribute(
       "href",
       "/en/research/projects"

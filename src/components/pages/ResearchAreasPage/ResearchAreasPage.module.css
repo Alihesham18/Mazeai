@@ -62,15 +62,9 @@
 }
 
 .hero {
-  --research-gold: #c8a65a;
-  --research-gold-light: #ead18b;
-  --research-violet: #8d6ad8;
-  --research-text: #f5f1e8;
-  --research-soft: #b7b2aa;
-  --research-muted: #85818a;
-  min-block-size: clamp(42rem, 76vh, 54rem);
-  border-block-end: 1px solid rgb(200 166 90 / 24%);
-  background: #030304;
+  min-block-size: clamp(38rem, 64vw, 47rem);
+  border-block-end: 1px solid var(--research-border);
+  background: var(--research-black);
 }
 
 .heroGrid {
@@ -83,11 +77,14 @@
   mask-image: linear-gradient(to bottom, black, transparent 84%);
 }
 
-.heroImageLayer,
-.impactImageLayer {
-  position: absolute;
-  z-index: 0;
-  inset: -1rem;
+.heroMedia,
+.impactMedia {
+  position: relative;
+  min-inline-size: 0;
+  overflow: hidden;
+  border: 1px solid var(--research-border-gold);
+  background: rgb(3 3 4);
+  box-shadow: var(--maze-shadow-raised);
   transform: translate3d(var(--parallax-x), var(--parallax-y), 0);
   transition: transform 120ms linear;
   will-change: transform;
@@ -95,10 +92,16 @@
 
 .heroImage,
 .impactImage {
-  object-fit: cover;
-}
-.heroImage {
+  object-fit: contain;
   object-position: center;
+}
+
+.heroMedia {
+  grid-area: media;
+  inline-size: 100%;
+  aspect-ratio: 1536 / 511;
+  align-self: center;
+  justify-self: end;
 }
 
 .networkOverlay {
@@ -204,16 +207,7 @@
   z-index: 1;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      #030304 0%,
-      rgb(3 3 4 / 97%) 27%,
-      rgb(3 3 4 / 72%) 50%,
-      rgb(3 3 4 / 13%) 78%,
-      rgb(3 3 4 / 34%) 100%
-    ),
-    linear-gradient(180deg, rgb(3 3 4 / 25%), transparent 48%, #030304 100%);
+  background: linear-gradient(90deg, var(--research-black) 0%, transparent 24%);
 }
 
 .heroContainer {
@@ -221,11 +215,18 @@
   z-index: 3;
   min-block-size: inherit;
   display: grid;
-  align-content: start;
+  grid-template-columns: minmax(18rem, 0.72fr) minmax(30rem, 1.28fr);
+  grid-template-areas:
+    "crumb crumb"
+    "copy media";
+  gap: clamp(2rem, 5vw, 5rem);
+  align-content: center;
+  align-items: center;
   padding-block: clamp(2rem, 4vw, 3.5rem) clamp(4rem, 8vw, 7rem);
 }
 
 .breadcrumbs {
+  grid-area: crumb;
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -249,16 +250,16 @@
 }
 
 .heroCopy {
-  inline-size: min(43rem, 58%);
+  grid-area: copy;
+  min-inline-size: 0;
   align-self: center;
-  margin-block-start: clamp(4rem, 10vh, 7.5rem);
 }
 
 .heroCopy h1 {
   margin-block: 1rem 0;
-  color: #f5f1e8;
+  color: var(--research-text);
   font-family: var(--maze-font-editorial);
-  font-size: clamp(3.25rem, 6.7vw, 6.9rem);
+  font-size: clamp(3.25rem, 5.7vw, 5.8rem);
   font-weight: 500;
   letter-spacing: -0.055em;
   line-height: 0.94;
@@ -644,55 +645,43 @@
 }
 
 .impactSection {
-  --research-gold: #c8a65a;
-  --research-gold-light: #ead18b;
-  --research-violet: #8d6ad8;
-  --research-text: #f5f1e8;
-  --research-soft: #b7b2aa;
-  --research-muted: #85818a;
-  min-block-size: clamp(37rem, 68vw, 51rem);
-  background: #030304;
+  padding-block: clamp(4.5rem, 8vw, 7rem);
+  border-block-end: 1px solid var(--research-border);
+  background: var(--research-alt);
 }
-.impactImageLayer {
-  inset: -1.5rem;
-}
-.impactImage {
-  object-position: center;
+.impactMedia {
+  grid-area: media;
+  inline-size: 100%;
+  aspect-ratio: 1536 / 510;
+  align-self: center;
 }
 .impactScrim {
   position: absolute;
   z-index: 1;
   inset: 0;
   pointer-events: none;
-  background:
-    linear-gradient(
-      90deg,
-      rgb(3 3 4 / 5%) 0%,
-      rgb(3 3 4 / 36%) 45%,
-      rgb(3 3 4 / 94%) 69%,
-      #030304 100%
-    ),
-    linear-gradient(180deg, #030304 0%, transparent 18%, transparent 70%, #030304 100%);
+  background: linear-gradient(90deg, transparent 88%, var(--research-alt) 100%);
 }
 .impactContainer {
   position: relative;
   z-index: 3;
-  min-block-size: inherit;
-  display: flex;
-  justify-content: flex-end;
+  display: grid;
+  grid-template-columns: minmax(30rem, 1.3fr) minmax(18rem, 0.7fr);
+  grid-template-areas: "media copy";
+  gap: clamp(2rem, 5vw, 5rem);
   align-items: center;
-  padding-block: clamp(5rem, 10vw, 8rem);
 }
 .impactCopy {
-  inline-size: min(34rem, 48%);
+  grid-area: copy;
+  min-inline-size: 0;
   padding: clamp(1.75rem, 4vw, 3.5rem);
-  border-inline-start: 1px solid rgb(200 166 90 / 42%);
-  background: linear-gradient(90deg, rgb(6 6 8 / 84%), rgb(6 6 8 / 45%));
-  backdrop-filter: blur(3px);
+  border: 1px solid var(--research-border-gold);
+  background: var(--research-surface);
+  box-shadow: var(--maze-shadow-card);
 }
 .impactCopy h2 {
   margin-block: 1.1rem 0;
-  color: #f5f1e8;
+  color: var(--research-text);
   font-family: var(--maze-font-editorial);
   font-size: clamp(2.4rem, 4.6vw, 4.5rem);
   font-weight: 500;
@@ -711,27 +700,10 @@
   transform: scaleX(-1);
 }
 :global([dir="rtl"]) .heroScrim {
-  background:
-    linear-gradient(
-      270deg,
-      #030304 0%,
-      rgb(3 3 4 / 97%) 27%,
-      rgb(3 3 4 / 72%) 50%,
-      rgb(3 3 4 / 13%) 78%,
-      rgb(3 3 4 / 34%) 100%
-    ),
-    linear-gradient(180deg, rgb(3 3 4 / 25%), transparent 48%, #030304 100%);
+  background: linear-gradient(270deg, var(--research-black) 0%, transparent 24%);
 }
 :global([dir="rtl"]) .impactScrim {
-  background:
-    linear-gradient(
-      270deg,
-      rgb(3 3 4 / 5%) 0%,
-      rgb(3 3 4 / 36%) 45%,
-      rgb(3 3 4 / 94%) 69%,
-      #030304 100%
-    ),
-    linear-gradient(180deg, #030304 0%, transparent 18%, transparent 70%, #030304 100%);
+  background: linear-gradient(90deg, var(--research-alt) 0%, transparent 12%);
 }
 :global([dir="rtl"]) .timeline::before {
   background: linear-gradient(
@@ -743,8 +715,9 @@
 }
 
 @media (max-width: 1100px) {
-  .heroCopy {
-    inline-size: min(42rem, 66%);
+  .heroContainer {
+    grid-template-columns: minmax(16rem, 0.78fr) minmax(24rem, 1.22fr);
+    gap: 2rem;
   }
   .domainGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -752,48 +725,39 @@
   .domainCard {
     min-block-size: 27rem;
   }
-  .impactCopy {
-    inline-size: min(36rem, 58%);
+  .impactContainer {
+    grid-template-columns: minmax(24rem, 1.2fr) minmax(17rem, 0.8fr);
+    gap: 2rem;
   }
 }
 
 @media (max-width: 767px) {
   .hero {
-    min-block-size: 48rem;
-  }
-  .heroImageLayer {
-    inset: -0.75rem;
-    block-size: 52%;
-    transform: translate3d(var(--parallax-x), var(--parallax-y), 0);
-  }
-  .heroImage {
-    object-position: 63% center;
+    min-block-size: 0;
   }
   .heroScrim {
-    background: linear-gradient(
-      180deg,
-      rgb(3 3 4 / 15%) 0%,
-      rgb(3 3 4 / 35%) 25%,
-      rgb(3 3 4 / 91%) 50%,
-      #030304 70%
-    );
+    background: linear-gradient(180deg, transparent 76%, var(--research-black) 100%);
   }
   :global([dir="rtl"]) .heroScrim {
-    background: linear-gradient(
-      180deg,
-      rgb(3 3 4 / 15%) 0%,
-      rgb(3 3 4 / 35%) 25%,
-      rgb(3 3 4 / 91%) 50%,
-      #030304 70%
-    );
+    background: linear-gradient(180deg, transparent 76%, var(--research-black) 100%);
   }
   .heroContainer {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "crumb"
+      "media"
+      "copy";
+    gap: 2rem;
     padding-block: 1.5rem 3.5rem;
+  }
+  :global([dir="rtl"]) .heroContainer {
+    grid-template-areas:
+      "crumb"
+      "media"
+      "copy";
   }
   .heroCopy {
     inline-size: 100%;
-    align-self: end;
-    margin-block-start: 20rem;
   }
   .heroCopy h1 {
     font-size: clamp(3.1rem, 13vw, 5rem);
@@ -918,47 +882,34 @@
     margin-block-end: 0;
   }
   .impactSection {
-    min-block-size: 44rem;
-  }
-  .impactImageLayer {
-    block-size: 54%;
-  }
-  .networkOverlay[data-network="hero"],
-  .networkOverlay[data-network="impact"] {
-    block-size: 54%;
-  }
-  .impactImage {
-    object-position: center;
+    min-block-size: 0;
+    padding-block: 3.5rem;
   }
   .impactScrim,
   :global([dir="rtl"]) .impactScrim {
-    background: linear-gradient(
-      180deg,
-      rgb(3 3 4 / 8%) 0%,
-      rgb(3 3 4 / 35%) 30%,
-      rgb(3 3 4 / 94%) 53%,
-      #030304 74%
-    );
+    background: linear-gradient(180deg, transparent 78%, var(--research-alt) 100%);
   }
   .impactContainer {
-    align-items: flex-end;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "media"
+      "copy";
+    gap: 2rem;
+  }
+  :global([dir="rtl"]) .impactContainer {
+    grid-template-areas:
+      "media"
+      "copy";
   }
   .impactCopy {
     inline-size: 100%;
-    padding: 1.5rem 0 0;
-    border-inline-start: 0;
-    border-block-start: 1px solid rgb(200 166 90 / 42%);
-    background: none;
-    backdrop-filter: none;
+    padding: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
   .hero {
-    min-block-size: 46rem;
-  }
-  .heroCopy {
-    margin-block-start: 18rem;
+    min-block-size: 0;
   }
   .breadcrumbs {
     gap: 0.5rem;
@@ -980,8 +931,8 @@
 }
 
 @media (pointer: coarse) and (prefers-reduced-motion: no-preference) {
-  .heroImageLayer,
-  .impactImageLayer {
+  .heroMedia,
+  .impactMedia {
     animation: ambientMediaDrift 5s ease-in-out infinite alternate;
   }
   .goldIllumination {
@@ -1008,8 +959,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .heroGrid,
-  .heroImageLayer,
-  .impactImageLayer,
+  .heroMedia,
+  .impactMedia,
   .goldIllumination,
   .violetIllumination,
   .networkNodeGroup,

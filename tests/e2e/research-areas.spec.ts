@@ -21,7 +21,19 @@ test.describe("Research Areas redesign", () => {
       expect(
         await image.evaluate((element: HTMLImageElement) => element.naturalWidth)
       ).toBeGreaterThan(0);
+      await expect(image).toHaveCSS("object-fit", "contain");
     }
+
+    const heroMedia = page.getByTestId("hero-media");
+    const impactMedia = page.getByTestId("impact-media");
+    await expect(heroMedia.locator('svg[data-network="hero"]')).toHaveAttribute(
+      "viewBox",
+      "0 0 1536 511"
+    );
+    await expect(impactMedia.locator('svg[data-network="impact"]')).toHaveAttribute(
+      "viewBox",
+      "0 0 1536 510"
+    );
 
     for (const width of [1440, 1280, 1024, 768, 430, 390, 375]) {
       await page.setViewportSize({ width, height: width < 768 ? 844 : 900 });
@@ -68,6 +80,9 @@ test.describe("Research Areas redesign", () => {
       .getByRole("heading", { level: 1, name: "Research Areas" })
       .locator("xpath=ancestor::section[1]");
     const heroHeading = hero.getByRole("heading", { level: 1, name: "Research Areas" });
+    const heroMedia = page.getByTestId("hero-media");
+    const impactMedia = page.getByTestId("impact-media");
+    const impactCopy = page.locator("#research-impact-heading").locator("..");
     const darkPage = await pageRoot.evaluate(
       (element) => getComputedStyle(element).backgroundColor
     );
@@ -75,6 +90,15 @@ test.describe("Research Areas redesign", () => {
     const darkHero = await hero.evaluate((element) => getComputedStyle(element).backgroundColor);
     const darkHeroHeading = await heroHeading.evaluate(
       (element) => getComputedStyle(element).color
+    );
+    const darkHeroMedia = await heroMedia.evaluate(
+      (element) => getComputedStyle(element).backgroundColor
+    );
+    const darkImpactMedia = await impactMedia.evaluate(
+      (element) => getComputedStyle(element).backgroundColor
+    );
+    const darkImpactCopy = await impactCopy.evaluate(
+      (element) => getComputedStyle(element).backgroundColor
     );
 
     await page.getByRole("button", { name: "Toggle color theme" }).first().click();
@@ -88,11 +112,22 @@ test.describe("Research Areas redesign", () => {
     const lightHeroHeading = await heroHeading.evaluate(
       (element) => getComputedStyle(element).color
     );
+    const lightHeroMedia = await heroMedia.evaluate(
+      (element) => getComputedStyle(element).backgroundColor
+    );
+    const lightImpactMedia = await impactMedia.evaluate(
+      (element) => getComputedStyle(element).backgroundColor
+    );
+    const lightImpactCopy = await impactCopy.evaluate(
+      (element) => getComputedStyle(element).backgroundColor
+    );
     expect(lightPage).not.toBe(darkPage);
     expect(lightCard).not.toBe(darkCard);
-    expect(lightHero).toBe(darkHero);
-    expect(lightHeroHeading).toBe(darkHeroHeading);
-    expect(lightHeroHeading).toBe("rgb(245, 241, 232)");
+    expect(lightHero).not.toBe(darkHero);
+    expect(lightHeroHeading).not.toBe(darkHeroHeading);
+    expect(lightHeroMedia).toBe(darkHeroMedia);
+    expect(lightImpactMedia).toBe(darkImpactMedia);
+    expect(lightImpactCopy).not.toBe(darkImpactCopy);
   });
 
   test("keeps pointer illumination local and respects reduced motion", async ({
@@ -107,16 +142,18 @@ test.describe("Research Areas redesign", () => {
       .getByRole("heading", { level: 1, name: "Research Areas" })
       .locator("xpath=ancestor::section[1]");
     const bounds = await hero.boundingBox();
+    const mediaBounds = await page.getByTestId("hero-media").boundingBox();
     expect(bounds).not.toBeNull();
+    expect(mediaBounds).not.toBeNull();
     await page.mouse.move((bounds?.x ?? 0) + (bounds?.width ?? 0) * 0.72, (bounds?.y ?? 0) + 220);
     await expect(hero).toHaveAttribute("data-pointer-active", "true");
     await expect
       .poll(() => hero.evaluate((element) => element.style.getPropertyValue("--parallax-x")))
       .not.toBe("0px");
-    const targetNode = hero.locator("[data-network-node]").nth(2);
+    const targetNode = hero.locator('[data-network-node][data-featured="true"]').first();
     await page.mouse.move(
-      (bounds?.x ?? 0) + (bounds?.width ?? 0) * 0.676,
-      (bounds?.y ?? 0) + (bounds?.height ?? 0) * 0.218
+      (mediaBounds?.x ?? 0) + (mediaBounds?.width ?? 0) * (1003 / 1536),
+      (mediaBounds?.y ?? 0) + (mediaBounds?.height ?? 0) * (196 / 511)
     );
     await expect
       .poll(() =>
@@ -151,16 +188,47 @@ test.describe("Research Areas redesign", () => {
     );
   });
 
-  test("preserves RTL composition and localized routes", async ({ page }) => {
+  test("uses physical LTR and RTL media placement across every locale", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+
+    for (const { locale, direction } of [
+      { locale: "en", direction: "ltr" },
+      { locale: "tr", direction: "ltr" },
+      { locale: "ar", direction: "rtl" },
+      { locale: "fa", direction: "rtl" }
+    ] as const) {
+      await page.goto(`/${locale}/research/areas`);
+      await expect(page.locator("html")).toHaveAttribute("dir", direction);
+
+      const heroMedia = await page.getByTestId("hero-media").boundingBox();
+      const heroCopy = await page.getByRole("heading", { level: 1 }).locator("..").boundingBox();
+      const impactMedia = await page.getByTestId("impact-media").boundingBox();
+      const impactCopy = await page
+        .locator('section[aria-labelledby="research-impact-heading"] h2')
+        .locator("..")
+        .boundingBox();
+      expect(heroMedia).not.toBeNull();
+      expect(heroCopy).not.toBeNull();
+      expect(impactMedia).not.toBeNull();
+      expect(impactCopy).not.toBeNull();
+
+      if (direction === "ltr") {
+        expect(heroMedia!.x).toBeGreaterThan(heroCopy!.x);
+        expect(impactMedia!.x).toBeLessThan(impactCopy!.x);
+      } else {
+        expect(heroMedia!.x).toBeLessThan(heroCopy!.x);
+        expect(impactMedia!.x).toBeGreaterThan(impactCopy!.x);
+      }
+      await expect
+        .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
+        .toBe(true);
+    }
+
     await page.setViewportSize({ width: 430, height: 900 });
     await page.goto("/ar/research/areas");
-    await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
     await expect(page.getByRole("link", { name: "استكشف شراكات البحث" })).toHaveAttribute(
       "href",
       "/ar/research/partnerships"
     );
-    await expect
-      .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth))
-      .toBe(true);
   });
 });

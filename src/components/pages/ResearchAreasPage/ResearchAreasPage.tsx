@@ -19,6 +19,7 @@ import { localizedPath } from "@/lib/utilities/localize";
 import {
   InteractiveIllumination,
   MobileResearchAreas,
+  NetworkOverlay,
   type ResearchAreaItem
 } from "./ResearchAreasInteractive";
 import styles from "./ResearchAreasPage.module.css";
@@ -76,18 +77,6 @@ export async function ResearchAreasPage({ locale }: { locale: Locale }) {
         aria-labelledby="research-areas-title"
       >
         <TechnicalDetail variant="grid" className={styles.heroGrid} />
-        <div className={styles.heroImageLayer}>
-          <Image
-            src="/images/research/research-hero-brain.webp"
-            alt={t("hero.imageAlt")}
-            fill
-            priority
-            sizes="100vw"
-            quality={94}
-            className={styles.heroImage}
-          />
-        </div>
-        <div className={styles.heroScrim} aria-hidden="true" />
         <Container className={styles.heroContainer}>
           <nav className={styles.breadcrumbs} aria-label={t("hero.breadcrumb.label")}>
             <Link href={localizedPath(locale, "/research")}>{t("hero.breadcrumb.research")}</Link>
@@ -106,6 +95,19 @@ export async function ResearchAreasPage({ locale }: { locale: Locale }) {
               {t("hero.action")}
               <ArrowUpRight className={styles.directionalIcon} size={18} aria-hidden="true" />
             </Button>
+          </div>
+          <div className={styles.heroMedia} data-interactive-media data-testid="hero-media">
+            <Image
+              src="/images/research/research-hero-brain.webp"
+              alt={t("hero.imageAlt")}
+              fill
+              priority
+              sizes="(max-width: 767px) 100vw, (max-width: 1100px) 58vw, 62vw"
+              quality={94}
+              className={styles.heroImage}
+            />
+            <div className={styles.heroScrim} aria-hidden="true" />
+            <NetworkOverlay variant="hero" />
           </div>
         </Container>
       </InteractiveIllumination>
@@ -219,18 +221,19 @@ export async function ResearchAreasPage({ locale }: { locale: Locale }) {
         variant="impact"
         aria-labelledby="research-impact-heading"
       >
-        <div className={styles.impactImageLayer}>
-          <Image
-            src="/images/research/research-partnership-map.webp"
-            alt={t("impact.imageAlt")}
-            fill
-            sizes="100vw"
-            quality={92}
-            className={styles.impactImage}
-          />
-        </div>
-        <div className={styles.impactScrim} aria-hidden="true" />
         <Container className={styles.impactContainer}>
+          <div className={styles.impactMedia} data-interactive-media data-testid="impact-media">
+            <Image
+              src="/images/research/research-partnership-map.webp"
+              alt={t("impact.imageAlt")}
+              fill
+              sizes="(max-width: 767px) 100vw, (max-width: 1100px) 62vw, 68vw"
+              quality={92}
+              className={styles.impactImage}
+            />
+            <div className={styles.impactScrim} aria-hidden="true" />
+            <NetworkOverlay variant="impact" />
+          </div>
           <div className={styles.impactCopy}>
             <TechnicalLabel>{t("impact.eyebrow")}</TechnicalLabel>
             <h2 id="research-impact-heading">{t("impact.title")}</h2>
