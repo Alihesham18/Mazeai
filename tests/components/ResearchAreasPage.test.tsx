@@ -50,7 +50,9 @@ describe("Research Areas page", () => {
     const heroMedia = heroImage.closest("[data-interactive-media]");
     const impactMedia = impactImage.closest("[data-interactive-media]");
     expect(heroMedia).toContainElement(view.container.querySelector('svg[data-network="hero"]'));
-    expect(impactMedia).toContainElement(view.container.querySelector('svg[data-network="impact"]'));
+    expect(impactMedia).toContainElement(
+      view.container.querySelector('svg[data-network="impact"]')
+    );
     expect(heroMedia?.closest("section")?.querySelector(":scope > svg[data-network]")).toBeNull();
     expect(impactMedia?.closest("section")?.querySelector(":scope > svg[data-network]")).toBeNull();
     expect(view.container.querySelector('svg[data-network="hero"]')).toHaveAttribute(
@@ -61,6 +63,9 @@ describe("Research Areas page", () => {
       "viewBox",
       "0 0 1536 510"
     );
+    for (const overlay of view.container.querySelectorAll("svg[data-network]")) {
+      expect(overlay).toHaveAttribute("preserveAspectRatio", "xMidYMid slice");
+    }
     for (const node of view.container.querySelectorAll<SVGCircleElement>(
       '[data-featured="true"]'
     )) {

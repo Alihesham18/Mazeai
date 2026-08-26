@@ -169,8 +169,16 @@ export function InteractiveIllumination({
       targetX = Math.max(-1, Math.min(1, ((event.clientX - bounds.left) / bounds.width - 0.5) * 2));
       targetY = Math.max(-1, Math.min(1, ((event.clientY - bounds.top) / bounds.height - 0.5) * 2));
       const mediaBounds = media.getBoundingClientRect();
-      targetMediaX = (event.clientX - mediaBounds.left) / mediaBounds.width;
-      targetMediaY = (event.clientY - mediaBounds.top) / mediaBounds.height;
+      const coverScale = Math.max(
+        mediaBounds.width / source.width,
+        mediaBounds.height / source.height
+      );
+      const renderedWidth = source.width * coverScale;
+      const renderedHeight = source.height * coverScale;
+      const cropOffsetX = (mediaBounds.width - renderedWidth) / 2;
+      const cropOffsetY = (mediaBounds.height - renderedHeight) / 2;
+      targetMediaX = (event.clientX - mediaBounds.left - cropOffsetX) / coverScale / source.width;
+      targetMediaY = (event.clientY - mediaBounds.top - cropOffsetY) / coverScale / source.height;
       requestFrame();
     };
     const onPointerLeave = () => {
@@ -253,7 +261,7 @@ export function NetworkOverlay({ variant }: { variant: "hero" | "impact" }) {
       data-source-width={data.width}
       data-source-height={data.height}
       viewBox={`0 0 ${data.width} ${data.height}`}
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
       focusable="false"
     >
