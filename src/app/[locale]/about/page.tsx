@@ -1,12 +1,4 @@
-import {
-  ArrowRight,
-  Building2,
-  MapPin,
-  Network,
-  ShieldCheck,
-  UsersRound,
-  Workflow
-} from "lucide-react";
+import { ArrowRight, MapPin, Network, ShieldCheck, UsersRound, Workflow } from "lucide-react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { createPageMetadata, type StandalonePageConfig } from "@/components/pages/StandalonePage";
@@ -39,25 +31,29 @@ export default async function AboutPage({ params }: AboutPageProps) {
     {
       key: "connect",
       icon: Network,
-      accent: "violet",
+      accent: "gold",
+      number: "01",
       detail: t("connect.detail")
     },
     {
       key: "work",
       icon: Workflow,
-      accent: "cyan",
+      accent: "violet",
+      number: "02",
       detail: t("work.detail")
     },
     {
       key: "support",
       icon: UsersRound,
-      accent: "gold",
+      accent: "violet",
+      number: "03",
       detail: t("support.detail")
     },
     {
       key: "responsibility",
       icon: ShieldCheck,
-      accent: "cyan",
+      accent: "gold",
+      number: "04",
       detail: t("responsibility.detail")
     }
   ] as const;
@@ -91,38 +87,34 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
         <div className={styles.container}>
           <div className={styles.heroContent}>
-  <p className={styles.eyebrow}>{t("hero.eyebrow")}</p>
+            <p className={styles.eyebrow}>{t("hero.eyebrow")}</p>
 
-  <h1 id="about-heading" className={styles.title}>
-    {t("hero.title")}
-  </h1>
+            <h1 id="about-heading" className={styles.title}>
+              {t("hero.title")}
+            </h1>
 
-  <p className={styles.lead}>{t("hero.lead")}</p>
+            <p className={styles.lead}>{t("hero.lead")}</p>
 
-  <p className={styles.location}>
-    <MapPin size={18} aria-hidden="true" />
-    {t("hero.location")}
-  </p>
-</div>
+            <p className={styles.location}>
+              <MapPin size={18} aria-hidden="true" />
+              {t("hero.location")}
+            </p>
+          </div>
         </div>
       </section>
 
       <section className={styles.introduction} aria-labelledby="who-we-are-heading">
         <div className={styles.container}>
           <div className={styles.introGrid}>
-            <div className={styles.sectionHeading}>
-              <UsersRound aria-hidden="true" />
+            <div className={styles.introStatement}>
+              <p className={styles.sectionLabel}>{t("overview.label")}</p>
 
-              <div>
-                <p className={styles.sectionLabel}>{t("overview.label")}</p>
+              <h2 id="who-we-are-heading">{t("overview.title")}</h2>
 
-                <h2 id="who-we-are-heading">
-                  {t("overview.title")}
-                </h2>
-              </div>
+              <span className={styles.introRule} aria-hidden="true" />
             </div>
 
-            <div className={styles.copy}>
+            <div className={styles.introCopy}>
               <p>{t("overview.paragraphOne")}</p>
               <p>{t("overview.paragraphTwo")}</p>
               <p>{t("overview.paragraphThree")}</p>
@@ -133,51 +125,71 @@ export default async function AboutPage({ params }: AboutPageProps) {
 
       <section className={styles.framework} aria-label={t("frameworkLabel")}>
         <div className={styles.container}>
-          {sections.map(({ key, icon: Icon, accent, detail }) => (
-            <article className={styles.frameworkRow} key={key}>
-              <div className={styles.rowHeading} data-accent={accent}>
-                <span className={styles.iconFrame} aria-hidden="true">
-                  <Icon />
-                </span>
+          <div className={styles.frameworkHeader}>
+            <p className={styles.sectionLabel}>{t("frameworkLabel")}</p>
+            <span aria-hidden="true" />
+          </div>
+
+          <div className={styles.frameworkGrid}>
+            {sections.map(({ key, icon: Icon, accent, detail, number }) => (
+              <article className={styles.frameworkCard} data-accent={accent} key={key}>
+                <div className={styles.cardTop}>
+                  <span className={styles.cardNumber} aria-hidden="true">
+                    {number}
+                  </span>
+
+                  <span className={styles.cardIcon} aria-hidden="true">
+                    <Icon />
+                  </span>
+                </div>
 
                 <h2>{t(`${key}.title`)}</h2>
-              </div>
 
-              <p className={styles.rowDescription}>
-                {t(`${key}.description`)}
-              </p>
+                <p className={styles.cardDescription}>{t(`${key}.description`)}</p>
 
-              <p className={styles.rowDetail}>
-                {detail}
-              </p>
-            </article>
-          ))}
+                <p className={styles.cardDetail}>{detail}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className={styles.ctaSection} aria-labelledby="about-cta-heading">
-        <div className={styles.container}>
-          <div className={styles.ctaMark} aria-hidden="true">
-            <Building2 />
-          </div>
+        <div className={styles.ctaMedia} aria-hidden="true">
+          <Image
+            className={`${styles.ctaImage} ${styles.ctaImageLight}`}
+            src="/images/about/about-cta-light.png"
+            alt=""
+            fill
+            quality={94}
+            sizes="100vw"
+          />
 
+          <Image
+            className={`${styles.ctaImage} ${styles.ctaImageDark}`}
+            src="/images/about/about-cta-dark.png"
+            alt=""
+            fill
+            quality={94}
+            sizes="100vw"
+          />
+        </div>
+
+        <div className={styles.ctaShade} aria-hidden="true" />
+
+        <div className={styles.container}>
           <div className={styles.ctaCopy}>
             <p className={styles.sectionLabel}>{t("cta.label")}</p>
 
-            <h2 id="about-cta-heading">
-              {t("cta.title")}
-            </h2>
+            <h2 id="about-cta-heading">{t("cta.title")}</h2>
 
             <p>{t("cta.description")}</p>
-          </div>
 
-          <a
-            className={styles.ctaButton}
-            href={localizedPath(params.locale, "/contact")}
-          >
-            {t("cta.button")}
-            <ArrowRight size={18} aria-hidden="true" />
-          </a>
+            <a className={styles.ctaButton} href={localizedPath(params.locale, "/contact")}>
+              {t("cta.button")}
+              <ArrowRight size={18} aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </section>
     </div>
