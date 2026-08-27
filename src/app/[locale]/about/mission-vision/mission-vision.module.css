@@ -1,0 +1,1194 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: clip;
+  color: var(--maze-text);
+  background: var(--maze-bg);
+}
+
+.container {
+  width: min(var(--maze-container-wide), calc(100% - (2 * var(--maze-page-gutter))));
+  margin-inline: auto;
+}
+
+.eyebrow,
+.sectionLabel {
+  margin: 0;
+  color: var(--maze-gold-light);
+  font-family: var(--maze-font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.sectionHeader h2,
+.directionCopy h2,
+.ctaCopy h2 {
+  margin: 0;
+  font-family: var(--maze-font-editorial);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+[dir="rtl"] .eyebrow,
+[dir="rtl"] .sectionLabel,
+[dir="rtl"] .sectionHeader h2,
+[dir="rtl"] .directionCopy h2,
+[dir="rtl"] .ctaCopy h2 {
+  letter-spacing: 0;
+}
+
+.themeImage {
+  object-fit: cover;
+  transition: opacity var(--maze-transition-medium);
+}
+
+.lightImage {
+  opacity: 0;
+}
+
+.darkImage {
+  opacity: 1;
+}
+
+:global(:root[data-theme="light"]) .lightImage {
+  opacity: 1;
+}
+
+:global(:root[data-theme="light"]) .darkImage {
+  opacity: 0;
+}
+
+:global(:root[data-theme="dark"]) .lightImage {
+  opacity: 0;
+}
+
+:global(:root[data-theme="dark"]) .darkImage {
+  opacity: 1;
+}
+
+/* Hero */
+
+.hero {
+  position: relative;
+  min-height: clamp(38rem, 72vh, 48rem);
+  display: grid;
+  align-items: end;
+  isolation: isolate;
+  overflow: hidden;
+  border-block-end: 1px solid var(--maze-border-subtle);
+  background: var(--maze-bg-elevated);
+}
+
+.heroMedia,
+.ctaMedia,
+.heroShade,
+.heroGrid,
+.ctaShade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.heroMedia {
+  z-index: -3;
+}
+
+[dir="rtl"] .heroMedia {
+  transform: scaleX(-1);
+}
+
+.heroShade {
+  z-index: -2;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 7, 9, 0.98) 0%,
+    rgba(7, 7, 9, 0.88) 35%,
+    rgba(7, 7, 9, 0.34) 62%,
+    rgba(7, 7, 9, 0.06) 82%
+  );
+}
+
+:global(:root[data-theme="light"]) .heroShade {
+  background: linear-gradient(
+    90deg,
+    rgba(250, 248, 242, 0.99) 0%,
+    rgba(250, 248, 242, 0.92) 34%,
+    rgba(250, 248, 242, 0.48) 60%,
+    rgba(250, 248, 242, 0.06) 80%
+  );
+}
+
+[dir="rtl"] .heroShade {
+  transform: scaleX(-1);
+}
+
+.heroGrid {
+  z-index: -1;
+  opacity: 0.24;
+  background:
+    linear-gradient(90deg, transparent 49.8%, var(--maze-grid-line) 50%, transparent 50.2%),
+    linear-gradient(0deg, transparent 49.8%, var(--maze-grid-line) 50%, transparent 50.2%);
+  background-size: 8rem 8rem;
+  mask-image: linear-gradient(90deg, black, transparent 58%);
+}
+
+[dir="rtl"] .heroGrid {
+  transform: scaleX(-1);
+}
+
+.heroInner {
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(7rem, 13vh, 10rem) clamp(4rem, 8vh, 6rem);
+}
+
+.heroCopy {
+  width: min(100%, 44rem);
+}
+
+[dir="rtl"] .heroCopy {
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+  text-align: start;
+}
+
+.heroCopy h1 {
+  max-width: 11ch;
+  margin: 1.15rem 0 0;
+  font-family: var(--maze-font-editorial);
+  font-size: clamp(3.5rem, 6.1vw, 6.5rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+[dir="rtl"] .heroCopy h1 {
+  max-width: 12ch;
+  font-family: var(--maze-font-arabic);
+  font-size: clamp(3.2rem, 5.5vw, 5.8rem);
+  line-height: 1.13;
+  letter-spacing: 0;
+}
+
+.heroIntro {
+  max-width: 41rem;
+  margin: 1.75rem 0 0;
+  color: var(--maze-text-soft);
+  font-family: var(--maze-font-sans);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.7;
+}
+
+[dir="rtl"] .heroIntro {
+  line-height: 1.9;
+}
+
+/* Mission and vision */
+
+.intentSection {
+  position: relative;
+  padding-block: var(--maze-section-space);
+  background: var(--maze-bg);
+}
+
+.intentSection::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.42;
+  background:
+    linear-gradient(var(--maze-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--maze-grid-line) 1px, transparent 1px);
+  background-size: 7rem 7rem;
+  mask-image: linear-gradient(180deg, transparent, black 18%, transparent 92%);
+}
+
+.intentGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-block-start: 1px solid var(--maze-border-subtle);
+  border-inline-start: 1px solid var(--maze-border-subtle);
+}
+
+.intentPanel {
+  position: relative;
+  min-width: 0;
+  padding: clamp(2rem, 4vw, 4.25rem);
+  border-block-end: 1px solid var(--maze-border-subtle);
+  border-inline-end: 1px solid var(--maze-border-subtle);
+  background: color-mix(in srgb, var(--maze-surface) 88%, transparent);
+  color: var(--maze-gold);
+}
+
+.intentPanel[data-accent="violet"] {
+  color: var(--maze-violet);
+}
+
+.intentPanel::before {
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-start: -1px;
+  width: 7rem;
+  height: 1px;
+  content: "";
+  background: currentColor;
+}
+
+.intentHeader,
+.cardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.intentHeader .sectionLabel {
+  color: currentColor;
+}
+
+.intentIcon {
+  width: 3.2rem;
+  height: 3.2rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
+  border-radius: 50%;
+  background: color-mix(in srgb, currentColor 8%, transparent);
+}
+
+.intentIcon svg {
+  width: 1.55rem;
+  height: 1.55rem;
+  stroke-width: 1.4;
+}
+
+.intentPanel h2 {
+  max-width: 14ch;
+  min-height: 4.3em;
+  margin: clamp(2.5rem, 5vw, 4.5rem) 0 0;
+  color: var(--maze-text);
+  font-family: var(--maze-font-editorial);
+  font-size: clamp(2rem, 3.4vw, 3.5rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+[dir="rtl"] .intentPanel h2 {
+  max-width: 16ch;
+  min-height: 5em;
+  font-family: var(--maze-font-arabic);
+  line-height: 1.35;
+  letter-spacing: 0;
+}
+
+.accentRule {
+  width: min(100%, 11rem);
+  height: 1px;
+  display: block;
+  margin-block: 2.25rem;
+  background: currentColor;
+}
+
+.intentBody p {
+  margin: 0;
+  color: var(--maze-text-muted);
+  font-family: var(--maze-font-sans);
+  font-size: 1rem;
+  line-height: 1.82;
+}
+
+.intentBody p + p {
+  margin-block-start: 1.25rem;
+}
+
+[dir="rtl"] .intentBody p {
+  line-height: 1.95;
+}
+
+/* Shared section headings */
+
+.sectionHeader {
+  max-width: 50rem;
+  margin-block-end: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.sectionHeader h2,
+.directionCopy h2,
+.ctaCopy h2 {
+  margin-block-start: 0.9rem;
+  color: var(--maze-text);
+  font-size: clamp(2.65rem, 5vw, 5rem);
+  line-height: 0.98;
+}
+
+[dir="rtl"] .sectionHeader h2,
+[dir="rtl"] .directionCopy h2,
+[dir="rtl"] .ctaCopy h2 {
+  font-family: var(--maze-font-arabic);
+  line-height: 1.2;
+}
+
+/* Principles */
+
+.principlesSection {
+  position: relative;
+  padding-block: var(--maze-section-space);
+  border-block: 1px solid var(--maze-border-subtle);
+  background: var(--maze-bg-elevated);
+}
+
+.principlesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.principleCard {
+  position: relative;
+  min-height: 23rem;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.4rem, 2.2vw, 2rem);
+  overflow: hidden;
+  color: var(--maze-gold);
+  border: 1px solid var(--maze-border-subtle);
+  border-radius: var(--maze-radius-sm);
+  background: var(--maze-surface);
+  box-shadow: var(--maze-shadow-card);
+  transition:
+    transform var(--maze-transition-medium),
+    border-color var(--maze-transition-medium),
+    box-shadow var(--maze-transition-medium);
+}
+
+.principleCard[data-accent="violet"] {
+  color: var(--maze-violet);
+}
+
+.principleCard::before {
+  position: absolute;
+  inset-block-start: -1px;
+  inset-inline-start: -1px;
+  width: 4.5rem;
+  height: 4.5rem;
+  content: "";
+  border-block-start: 1px solid currentColor;
+  border-inline-start: 1px solid currentColor;
+}
+
+.cardMeta {
+  color: currentColor;
+  font-family: var(--maze-font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.cardMeta svg {
+  width: 2rem;
+  height: 2rem;
+  stroke-width: 1.35;
+}
+
+.principleCard h3,
+.processStep h3,
+.supportCard h3 {
+  margin: 0;
+  color: var(--maze-text);
+  font-family: var(--maze-font-editorial);
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+.principleCard h3 {
+  margin-block-start: auto;
+  font-size: clamp(1.65rem, 2.2vw, 2.15rem);
+  line-height: 1.08;
+}
+
+.principleCard p,
+.processStep p,
+.supportCard p {
+  margin: 1rem 0 0;
+  color: var(--maze-text-muted);
+  font-family: var(--maze-font-sans);
+  line-height: 1.72;
+}
+
+[dir="rtl"] .principleCard h3,
+[dir="rtl"] .processStep h3,
+[dir="rtl"] .supportCard h3 {
+  font-family: var(--maze-font-arabic);
+  line-height: 1.35;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .principleCard:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, currentColor 50%, var(--maze-border-subtle));
+    box-shadow: var(--maze-shadow-raised);
+  }
+}
+
+/* Research to impact */
+
+.processSection {
+  position: relative;
+  padding-block: var(--maze-section-space);
+  overflow: hidden;
+  background: var(--maze-bg);
+}
+
+.processSection::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 50% 76%,
+    color-mix(in srgb, var(--maze-violet) 10%, transparent),
+    transparent 34%
+  );
+}
+
+.processSection .container {
+  position: relative;
+}
+
+.processIntro {
+  display: grid;
+  grid-template-columns: minmax(17rem, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: start;
+}
+
+.processCopy {
+  padding-block-start: 0.5rem;
+  border-block-start: 1px solid var(--maze-border-gold);
+}
+
+.processCopy p,
+.directionCopy > p:not(.sectionLabel),
+.ctaCopy > p:not(.sectionLabel) {
+  margin: 0;
+  color: var(--maze-text-muted);
+  font-family: var(--maze-font-sans);
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  line-height: 1.82;
+}
+
+.processCopy p + p,
+.directionCopy > p + p {
+  margin-block-start: 1.25rem;
+}
+
+.processFlow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  margin: clamp(4rem, 8vw, 7rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.processFlow::before {
+  position: absolute;
+  inset-block-start: 2.35rem;
+  inset-inline: 10% 10%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, var(--maze-gold), var(--maze-violet), var(--maze-gold));
+  opacity: 0.56;
+}
+
+[dir="rtl"] .processFlow::before {
+  transform: scaleX(-1);
+}
+
+.processStep {
+  position: relative;
+  min-width: 0;
+  padding-inline: clamp(0.65rem, 1.6vw, 1.25rem);
+  text-align: center;
+}
+
+.processNode {
+  position: relative;
+  z-index: 1;
+  width: 4.75rem;
+  height: 4.75rem;
+  display: grid;
+  place-items: center;
+  margin-inline: auto;
+  color: var(--maze-gold-light);
+  border: 1px solid var(--maze-border-gold);
+  border-radius: 50%;
+  background: var(--maze-bg);
+  box-shadow: 0 0 0 0.55rem var(--maze-bg);
+}
+
+.processStep:nth-child(even) .processNode {
+  color: var(--maze-violet);
+  border-color: color-mix(in srgb, var(--maze-violet) 45%, transparent);
+}
+
+.processNode svg {
+  width: 1.65rem;
+  height: 1.65rem;
+  stroke-width: 1.35;
+}
+
+.stepNumber {
+  display: block;
+  margin-block-start: 1.5rem;
+  color: var(--maze-gold-light);
+  font-family: var(--maze-font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.processStep h3 {
+  margin-block-start: 0.55rem;
+  font-size: clamp(1.25rem, 1.65vw, 1.6rem);
+  line-height: 1.15;
+}
+
+.processStep p {
+  font-size: 0.9rem;
+}
+
+/* Support */
+
+.supportSection {
+  padding-block: var(--maze-section-space);
+  border-block: 1px solid var(--maze-border-subtle);
+  background: var(--maze-bg-elevated);
+}
+
+.supportGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block-start: 1px solid var(--maze-border-subtle);
+  border-inline-start: 1px solid var(--maze-border-subtle);
+}
+
+.supportCard {
+  min-width: 0;
+  padding: clamp(1.5rem, 2.7vw, 2.4rem);
+  border-block-end: 1px solid var(--maze-border-subtle);
+  border-inline-end: 1px solid var(--maze-border-subtle);
+  background: color-mix(in srgb, var(--maze-surface) 64%, transparent);
+}
+
+.supportCard > svg {
+  width: 2rem;
+  height: 2rem;
+  color: var(--maze-gold-light);
+  stroke-width: 1.35;
+}
+
+.supportCard:nth-child(2) > svg,
+.supportCard:nth-child(3) > svg {
+  color: var(--maze-violet);
+}
+
+.supportCard h3 {
+  min-height: 2.4em;
+  margin-block-start: 2.5rem;
+  font-size: clamp(1.45rem, 2vw, 1.9rem);
+  line-height: 1.15;
+}
+
+.supportCard p {
+  font-size: 0.95rem;
+}
+
+/* Direction */
+
+.directionSection {
+  position: relative;
+  padding-block: var(--maze-section-space);
+  overflow: hidden;
+  background: var(--maze-bg);
+}
+
+.directionSection::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 76% 50%,
+      color-mix(in srgb, var(--maze-violet) 12%, transparent),
+      transparent 30%
+    ),
+    linear-gradient(90deg, transparent 49.9%, var(--maze-grid-line) 50%, transparent 50.1%);
+  background-size:
+    auto,
+    8rem 8rem;
+}
+
+[dir="rtl"] .directionSection::before {
+  transform: scaleX(-1);
+}
+
+.directionGrid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(30rem, 1.14fr);
+  gap: clamp(3rem, 7vw, 8rem);
+  align-items: center;
+}
+
+.directionCopy h2 {
+  max-width: 12ch;
+}
+
+.directionCopy > p:not(.sectionLabel):first-of-type {
+  margin-block-start: 2rem;
+  color: var(--maze-text-soft);
+}
+
+.ecosystemVisual {
+  position: relative;
+  width: min(100%, 38rem);
+  aspect-ratio: 1;
+  justify-self: end;
+  color: var(--maze-gold);
+}
+
+[dir="rtl"] .ecosystemVisual {
+  justify-self: start;
+}
+
+.ecosystemVisual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.orbitOuter,
+.orbitMiddle,
+.orbitInner,
+.orbitPath,
+.orbitPathAlt {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1;
+}
+
+.orbitOuter {
+  opacity: 0.3;
+  stroke-dasharray: 4 12;
+}
+
+.orbitMiddle {
+  color: var(--maze-violet);
+  opacity: 0.55;
+}
+
+.orbitInner {
+  opacity: 0.55;
+  stroke-dasharray: 2 8;
+}
+
+.orbitPath {
+  opacity: 0.18;
+}
+
+.orbitPathAlt {
+  color: var(--maze-violet);
+  opacity: 0.22;
+}
+
+.ecosystemCore circle {
+  fill: color-mix(in srgb, var(--maze-surface) 78%, transparent);
+  stroke: var(--maze-border-gold);
+  stroke-width: 1;
+}
+
+.ecosystemCore path {
+  fill: none;
+  stroke: var(--maze-gold-light);
+  stroke-width: 1.3;
+}
+
+.visualNodes {
+  fill: var(--maze-gold-light);
+  filter: drop-shadow(0 0 8px color-mix(in srgb, var(--maze-gold) 52%, transparent));
+}
+
+.visualNodes circle:nth-child(even) {
+  fill: var(--maze-violet);
+}
+
+.coreLabel,
+.orbitLabel {
+  position: absolute;
+  z-index: 1;
+  color: var(--maze-text-soft);
+  font-family: var(--maze-font-mono);
+  font-size: clamp(0.66rem, 1vw, 0.8rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+[dir="rtl"] .coreLabel,
+[dir="rtl"] .orbitLabel {
+  letter-spacing: 0;
+}
+
+.coreLabel {
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  color: var(--maze-gold-light);
+  transform: translate(-50%, -50%);
+}
+
+[dir="rtl"] .coreLabel {
+  transform: translate(50%, -50%);
+}
+
+.labelResearch {
+  inset-block-start: 3%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+[dir="rtl"] .labelResearch {
+  transform: translateX(50%);
+}
+
+.labelInnovation {
+  inset-block-start: 27%;
+  inset-inline-end: 0;
+}
+
+.labelEducation {
+  inset-block-end: 24%;
+  inset-inline-end: -1%;
+}
+
+.labelIndustry {
+  inset-block-end: 4%;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+}
+
+[dir="rtl"] .labelIndustry {
+  transform: translateX(50%);
+}
+
+.labelImpact {
+  inset-block-end: 28%;
+  inset-inline-start: -1%;
+}
+
+/* CTA */
+
+.ctaSection {
+  position: relative;
+  min-height: clamp(34rem, 46vw, 42rem);
+  display: grid;
+  isolation: isolate;
+  overflow: hidden;
+  border-block-start: 1px solid var(--maze-border-subtle);
+  background: var(--maze-bg-elevated);
+}
+
+.ctaMedia {
+  z-index: -2;
+}
+
+.ctaMedia .themeImage {
+  object-position: center center;
+}
+
+.ctaShade {
+  z-index: -1;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 7, 9, 0.95) 0%,
+    rgba(7, 7, 9, 0.78) 38%,
+    rgba(7, 7, 9, 0.18) 68%,
+    rgba(7, 7, 9, 0.04) 100%
+  );
+}
+
+:global(:root[data-theme="light"]) .ctaShade {
+  background: linear-gradient(
+    90deg,
+    rgba(250, 248, 242, 0.96) 0%,
+    rgba(250, 248, 242, 0.86) 38%,
+    rgba(250, 248, 242, 0.22) 68%,
+    rgba(250, 248, 242, 0.03) 100%
+  );
+}
+
+[dir="rtl"] .ctaShade {
+  transform: scaleX(-1);
+}
+
+.ctaInner {
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(4rem, 7vw, 6.5rem);
+}
+
+.ctaCopy {
+  width: min(100%, 42rem);
+}
+
+[dir="rtl"] .ctaCopy {
+  width: min(46%, 37rem);
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+  text-align: start;
+}
+
+.ctaCopy h2 {
+  max-width: 12ch;
+}
+
+.ctaCopy > p:not(.sectionLabel) {
+  max-width: 39rem;
+  margin-block-start: 1.75rem;
+  color: var(--maze-text-soft);
+}
+
+.ctaButton {
+  width: fit-content;
+  min-height: 3.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-block-start: 2rem;
+  padding: 0.9rem 1.25rem;
+  color: var(--maze-on-gold);
+  border: 1px solid var(--maze-gold);
+  border-radius: var(--maze-radius-sm);
+  background: var(--maze-gold);
+  font-family: var(--maze-font-sans);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background-color var(--maze-transition-fast),
+    border-color var(--maze-transition-fast),
+    transform var(--maze-transition-fast);
+}
+
+.ctaButton svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+[dir="rtl"] .ctaButton svg {
+  transform: scaleX(-1);
+}
+
+.ctaButton:hover {
+  border-color: var(--maze-gold-hover);
+  background: var(--maze-gold-hover);
+  transform: translateY(-2px);
+}
+
+.ctaButton:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--maze-violet) 60%, transparent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 1100px) {
+  .principlesGrid,
+  .supportGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .principleCard {
+    min-height: 19rem;
+  }
+
+  .directionGrid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(26rem, 1.1fr);
+    gap: 3rem;
+  }
+
+  [dir="rtl"] .ctaCopy {
+    width: min(52%, 34rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 38rem;
+  }
+
+  .heroCopy {
+    width: min(100%, 38rem);
+  }
+
+  .intentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .intentPanel h2,
+  [dir="rtl"] .intentPanel h2 {
+    min-height: 0;
+  }
+
+  .processIntro,
+  .directionGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .processIntro {
+    gap: 1rem;
+  }
+
+  .processIntro .sectionHeader {
+    margin-block-end: 2rem;
+  }
+
+  .processFlow {
+    grid-template-columns: repeat(5, minmax(9.5rem, 1fr));
+    overflow-x: auto;
+    padding-block-end: 1rem;
+    scrollbar-width: thin;
+  }
+
+  .ecosystemVisual,
+  [dir="rtl"] .ecosystemVisual {
+    justify-self: center;
+  }
+
+  .directionCopy {
+    max-width: 42rem;
+  }
+
+  .ctaSection {
+    min-height: 36rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    width: min(100% - 2rem, var(--maze-container-wide));
+  }
+
+  .hero {
+    min-height: 40rem;
+    align-items: end;
+  }
+
+  .heroMedia .themeImage {
+    object-position: 63% center;
+  }
+
+  [dir="rtl"] .heroMedia .themeImage {
+    object-position: 63% center;
+  }
+
+  .heroShade,
+  :global(:root[data-theme="light"]) .heroShade {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--maze-bg) 18%, transparent) 0%,
+      color-mix(in srgb, var(--maze-bg) 70%, transparent) 46%,
+      var(--maze-bg) 85%
+    );
+  }
+
+  [dir="rtl"] .heroShade {
+    transform: none;
+  }
+
+  .heroGrid {
+    mask-image: linear-gradient(180deg, transparent, black 50%);
+  }
+
+  .heroInner {
+    align-items: end;
+    padding-block: 14rem 3.25rem;
+  }
+
+  .heroCopy h1,
+  [dir="rtl"] .heroCopy h1 {
+    max-width: 12ch;
+    font-size: clamp(2.85rem, 13vw, 4.3rem);
+  }
+
+  .principlesGrid,
+  .supportGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .principleCard {
+    min-height: 17rem;
+  }
+
+  .supportCard h3 {
+    min-height: 0;
+  }
+
+  .processFlow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .processFlow::before {
+    inset-block: 2.35rem 2.35rem;
+    inset-inline-start: 2.35rem;
+    width: 1px;
+    height: auto;
+    background: linear-gradient(180deg, var(--maze-gold), var(--maze-violet), var(--maze-gold));
+  }
+
+  [dir="rtl"] .processFlow::before {
+    transform: none;
+  }
+
+  .processStep {
+    min-height: 8rem;
+    display: grid;
+    grid-template-columns: 4.75rem minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    column-gap: 1.35rem;
+    padding: 0 0 2.25rem;
+    text-align: start;
+  }
+
+  .processNode {
+    grid-column: 1;
+    grid-row: 1 / -1;
+    margin: 0;
+  }
+
+  .stepNumber,
+  .processStep h3,
+  .processStep p {
+    grid-column: 2;
+  }
+
+  .stepNumber {
+    margin-block-start: 0.15rem;
+  }
+
+  .processStep h3 {
+    margin-block-start: 0.35rem;
+  }
+
+  .processStep p {
+    margin-block-start: 0.6rem;
+  }
+
+  .ecosystemVisual {
+    width: min(100%, 32rem);
+  }
+
+  .ctaSection {
+    min-height: 43rem;
+  }
+
+  .ctaMedia .themeImage {
+    object-position: 70% center;
+  }
+
+  .ctaShade,
+  :global(:root[data-theme="light"]) .ctaShade {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--maze-bg) 8%, transparent) 0%,
+      color-mix(in srgb, var(--maze-bg) 62%, transparent) 40%,
+      var(--maze-bg) 78%
+    );
+  }
+
+  [dir="rtl"] .ctaShade {
+    transform: none;
+  }
+
+  .ctaInner {
+    align-items: end;
+    padding-block: 15rem 3.25rem;
+  }
+
+  [dir="rtl"] .ctaCopy {
+    width: 100%;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+  }
+
+  .ctaCopy h2 {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .ctaButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .heroIntro {
+    font-size: 1rem;
+  }
+
+  .intentPanel {
+    padding: 1.5rem;
+  }
+
+  .intentPanel h2 {
+    margin-block-start: 2.5rem;
+    font-size: 2rem;
+  }
+
+  .sectionHeader h2,
+  .directionCopy h2 {
+    font-size: clamp(2.35rem, 11.5vw, 3.3rem);
+  }
+
+  .orbitLabel {
+    font-size: 0.6rem;
+  }
+
+  .labelInnovation,
+  .labelEducation {
+    inset-inline-end: 1%;
+  }
+
+  .labelImpact {
+    inset-inline-start: 1%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .themeImage,
+  .principleCard,
+  .ctaButton {
+    transition: none;
+  }
+
+  .principleCard:hover,
+  .ctaButton:hover {
+    transform: none;
+  }
+}

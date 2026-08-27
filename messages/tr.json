@@ -1117,6 +1117,124 @@
         "button": "Bir görüşme başlat"
       }
     },
+    "missionVision": {
+      "title": "Misyon ve Vizyon",
+      "description": "SynergyMazeAI'ın sorumlu ve akıllı ilerlemeye yönelik misyonunu, vizyonunu, yol gösteren ilkelerini ve yönünü keşfedin.",
+      "intentAriaLabel": "SynergyMazeAI misyonu ve vizyonu",
+      "hero": {
+        "eyebrow": "Misyon ve Vizyon",
+        "title": "Amaca odaklı akıllı ilerleme inşa ediyoruz.",
+        "intro": "SynergyMazeAI; kurumların ve insanların fikirlerden anlamlı sonuçlara ulaşmasına yardımcı olmak için yapay zekayı, araştırmayı, eğitimi ve pratik uygulamayı bir araya getirir."
+      },
+      "mission": {
+        "label": "Misyonumuz",
+        "statement": "Yapay zekayı, araştırmayı ve gelişmekte olan teknolojileri pratik, sorumlu ve erişilebilir kılmak.",
+        "paragraphOne": "Karmaşık zorlukları net fırsatlara dönüştürmek için işletmeler, üniversiteler, kurumlar, eğitimciler, profesyoneller ve öğrencilerle çalışıyoruz.",
+        "paragraphTwo": "Misyonumuz; yapay zeka danışmanlığı, akıllı otomasyon, uygulamalı araştırma, eğitim ve iş birlikçi programlar aracılığıyla teknik uzmanlığı gerçek ihtiyaçlarla buluşturmaktır.",
+        "paragraphThree": "Yalnızca yenilikçi değil, aynı zamanda faydalı, anlaşılır, sürdürülebilir ve onları kullanacak insanlar için tasarlanmış çözümler üretmeyi amaçlıyoruz."
+      },
+      "vision": {
+        "label": "Vizyonumuz",
+        "statement": "Akıllı teknolojinin insanları, kurumları ve toplulukları güçlendirdiği bir gelecek.",
+        "paragraphOne": "SynergyMazeAI'ı sanayi, akademi, araştırma, teknoloji ve eğitim arasında bir köprü olarak görüyoruz.",
+        "paragraphTwo": "Amacımız; kurumların yapay zekayı güvenle benimseyebildiği, araştırmacıların fikirleri pratik çalışmalara dönüştürebildiği ve öğrenenlerin yapay zeka odaklı bir gelecek için gerekli becerileri geliştirebildiği bir ekosisteme katkıda bulunmaktır.",
+        "paragraphThree": "İlerlemenin; inovasyon bilgi, sorumluluk ve iş birliğiyle birleştiğinde en güçlü haline ulaştığına inanıyoruz."
+      },
+      "principles": {
+        "label": "Bize Yön Verenler",
+        "title": "Anlamlı ilerleme için ilkeler.",
+        "items": {
+          "practicalImpact": {
+            "title": "Pratik Etki",
+            "description": "Fikirlerin ötesine geçerek gerçek ortamlarda ölçülebilir değer yaratabilecek çalışmalara odaklanıyoruz."
+          },
+          "responsibleInnovation": {
+            "title": "Sorumlu İnovasyon",
+            "description": "Yapay zekaya etik, gizlilik, şeffaflık, güvenlik ve uzun vadeli etkiyi gözeterek yaklaşıyoruz."
+          },
+          "collaboration": {
+            "title": "İş Birliğiyle Bilgi",
+            "description": "Daha güçlü sonuçların araştırmacıları, mühendisleri, eğitimcileri, kurumları, işletmeleri ve toplulukları bir araya getirmekten doğduğuna inanıyoruz."
+          },
+          "continuousLearning": {
+            "title": "Sürekli Öğrenme",
+            "description": "Teknoloji hızla değişiyor. Araştırma, deney, eğitim ve sürekli gelişim kültürü oluşturuyoruz."
+          }
+        }
+      },
+      "process": {
+        "eyebrow": "Araştırmadan Gerçek Dünya Değerine",
+        "title": "Bilgiyi uygulamayla buluşturuyoruz.",
+        "paragraphOne": "Çalışmalarımız araştırma ile uygulamanın kesişiminde yer alır.",
+        "paragraphTwo": "Gelişmekte olan teknolojileri inceler, pratik kavramlar geliştirip test eder, kurumların yapay zekanın nerede değer yaratabileceğini anlamasına destek olur ve insanları akıllı sistemlerle güvenle çalışmaya hazırlayan eğitim deneyimleri tasarlarız.",
+        "paragraphThree": "Bu yaklaşım, SynergyMazeAI'ın öğrenme ve keşiften geliştirme ve uygulamaya kadar tüm yolculuğu desteklemesini sağlar.",
+        "flowAriaLabel": "Araştırmadan öğrenmeye uzanan beş adımlı süreç",
+        "steps": {
+          "research": {
+            "title": "Araştırma",
+            "description": "Sorunları ve gelişmekte olan olasılıkları keşfedin."
+          },
+          "experimentation": {
+            "title": "Deney",
+            "description": "Fikirleri test edin, prototipler oluşturun ve kavramları doğrulayın."
+          },
+          "development": {
+            "title": "Geliştirme",
+            "description": "Pratik yapay zeka çözümleri tasarlayın, geliştirin ve iyileştirin."
+          },
+          "implementation": {
+            "title": "Uygulama",
+            "description": "Sorumlu biçimde devreye alın ve gerçek ortamlara entegre edin."
+          },
+          "learning": {
+            "title": "Öğrenme",
+            "description": "Bilgiyi paylaşın, beceriler geliştirin ve büyümeyi güçlendirin."
+          }
+        }
+      },
+      "support": {
+        "eyebrow": "Desteklemeyi Amaçladıklarımız",
+        "title": "İlerleme paylaşılmalıdır.",
+        "items": {
+          "organizations": {
+            "title": "Kurumlar",
+            "description": "İşletmelerin ve kurumların akıllı çözümleri anlamasına, tasarlamasına ve uygulamasına yardımcı oluyoruz."
+          },
+          "researchers": {
+            "title": "Araştırmacılar ve Üniversiteler",
+            "description": "Uygulamalı araştırmayı, çok disiplinli iş birliğini ve akademik fikirlerden pratik prototiplere uzanan yolları destekliyoruz."
+          },
+          "educators": {
+            "title": "Eğitimciler ve Öğrenenler",
+            "description": "Pratik ve geleceğe hazır beceriler kazandıran eğitim deneyimleri oluşturuyoruz."
+          },
+          "communities": {
+            "title": "Partnerler ve Topluluklar",
+            "description": "Teknoloji, eğitim, araştırma ve ortak gelişim etrafında uzun vadeli ilişkiler kuruyoruz."
+          }
+        }
+      },
+      "direction": {
+        "eyebrow": "Yönümüz",
+        "title": "Yalnızca tekil projeler değil, bir ekosistem inşa ediyoruz.",
+        "paragraphOne": "SynergyMazeAI; araştırma, teknoloji, eğitim ve sanayinin birbirini güçlendirdiği bağlantılı bir ortam için çalışıyor.",
+        "paragraphTwo": "Büyürken odağımız; araştırma ortaklıklarını derinleştirmek, pratik yapay zeka yetkinliklerini genişletmek, yüksek kaliteli eğitim programları geliştirmek ve kurumlarla insanların sorumlu teknolojik ilerlemeye katılması için daha fazla fırsat oluşturmaktır.",
+        "visualAriaLabel": "Araştırma, inovasyon, eğitim, sanayi ve etkiyi birbirine bağlayan ekosistem",
+        "labels": {
+          "research": "Araştırma",
+          "innovation": "İnovasyon",
+          "education": "Eğitim",
+          "industry": "Sanayi",
+          "impact": "Etki"
+        }
+      },
+      "cta": {
+        "eyebrow": "Geleceği Bizimle İnşa Edin",
+        "title": "Ortak hedefleri anlamlı ilerlemeye dönüştürün.",
+        "description": "İster bir yapay zeka fırsatını araştırıyor, ister bir araştırma girişimi geliştiriyor, yeni beceriler kazanıyor veya uzun vadeli bir teknoloji partneri arıyor olun, iş birliğine hazırız.",
+        "button": "Bizimle Partner Olun"
+      }
+    },
     "team": {
       "title": "Ekibimiz",
       "description": "SynergyMazeAI'ın çok disiplinli rollerini keşfedin. Kesinleşen isimler ve profiller görevler netleştikçe eklenecektir."

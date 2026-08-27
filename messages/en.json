@@ -1106,6 +1106,124 @@
         "button": "Start a conversation"
       }
     },
+    "missionVision": {
+      "title": "Mission & Vision",
+      "description": "Discover SynergyMazeAI's mission, vision, guiding principles, and direction for responsible intelligent progress.",
+      "intentAriaLabel": "SynergyMazeAI mission and vision",
+      "hero": {
+        "eyebrow": "Mission & Vision",
+        "title": "Building intelligent progress with purpose.",
+        "intro": "SynergyMazeAI brings together artificial intelligence, research, education, and practical implementation to help organizations and people move from ideas to meaningful outcomes."
+      },
+      "mission": {
+        "label": "Our Mission",
+        "statement": "To make artificial intelligence, research, and emerging technology practical, responsible, and accessible.",
+        "paragraphOne": "We work with businesses, universities, institutions, educators, professionals, and students to turn complex challenges into clear opportunities.",
+        "paragraphTwo": "Our mission is to connect technical expertise with real needs through AI consulting, intelligent automation, applied research, training, and collaborative programs.",
+        "paragraphThree": "We aim to create solutions that are not only innovative, but also useful, understandable, sustainable, and designed for the people who will use them."
+      },
+      "vision": {
+        "label": "Our Vision",
+        "statement": "A future where intelligent technology strengthens people, organizations, and communities.",
+        "paragraphOne": "We envision SynergyMazeAI as a bridge between industry, academia, research, technology, and education.",
+        "paragraphTwo": "Our goal is to contribute to an ecosystem where organizations can adopt artificial intelligence with confidence, researchers can transform ideas into practical work, and learners can develop the skills needed for an AI-driven future.",
+        "paragraphThree": "We believe progress is strongest when innovation is combined with knowledge, responsibility, and collaboration."
+      },
+      "principles": {
+        "label": "What Guides Us",
+        "title": "Principles for meaningful progress.",
+        "items": {
+          "practicalImpact": {
+            "title": "Practical Impact",
+            "description": "We focus on work that can move beyond ideas and create measurable value in real environments."
+          },
+          "responsibleInnovation": {
+            "title": "Responsible Innovation",
+            "description": "We approach artificial intelligence with attention to ethics, privacy, transparency, safety, and long-term impact."
+          },
+          "collaboration": {
+            "title": "Knowledge Through Collaboration",
+            "description": "We believe stronger outcomes come from bringing together researchers, engineers, educators, institutions, businesses, and communities."
+          },
+          "continuousLearning": {
+            "title": "Continuous Learning",
+            "description": "Technology changes quickly. We build a culture of research, experimentation, education, and continuous improvement."
+          }
+        }
+      },
+      "process": {
+        "eyebrow": "From Research to Real-World Value",
+        "title": "Connecting knowledge with implementation.",
+        "paragraphOne": "Our work sits at the intersection of research and execution.",
+        "paragraphTwo": "We explore emerging technologies, develop and test practical concepts, support organizations in understanding where AI can create value, and design educational experiences that prepare people to work confidently with intelligent systems.",
+        "paragraphThree": "This allows SynergyMazeAI to support the full journey from learning and discovery to development and implementation.",
+        "flowAriaLabel": "Five-step process from research to learning",
+        "steps": {
+          "research": {
+            "title": "Research",
+            "description": "Explore problems and emerging possibilities."
+          },
+          "experimentation": {
+            "title": "Experimentation",
+            "description": "Test ideas, build prototypes, and validate concepts."
+          },
+          "development": {
+            "title": "Development",
+            "description": "Design, engineer, and refine practical AI solutions."
+          },
+          "implementation": {
+            "title": "Implementation",
+            "description": "Deploy responsibly and integrate into real environments."
+          },
+          "learning": {
+            "title": "Learning",
+            "description": "Share knowledge, build skills, and empower growth."
+          }
+        }
+      },
+      "support": {
+        "eyebrow": "Who We Aim to Support",
+        "title": "Progress should be shared.",
+        "items": {
+          "organizations": {
+            "title": "Organizations",
+            "description": "Helping businesses and institutions understand, design, and implement intelligent solutions."
+          },
+          "researchers": {
+            "title": "Researchers & Universities",
+            "description": "Supporting applied research, multidisciplinary collaboration, and pathways from academic ideas to practical prototypes."
+          },
+          "educators": {
+            "title": "Educators & Learners",
+            "description": "Creating training experiences that build practical, future-ready skills."
+          },
+          "communities": {
+            "title": "Partners & Communities",
+            "description": "Building long-term relationships around technology, education, research, and shared development."
+          }
+        }
+      },
+      "direction": {
+        "eyebrow": "Our Direction",
+        "title": "Building an ecosystem, not just individual projects.",
+        "paragraphOne": "SynergyMazeAI is working toward a connected environment where research, technology, education, and industry strengthen one another.",
+        "paragraphTwo": "As we grow, our focus is to deepen research partnerships, expand practical AI capabilities, develop high-quality education and training programs, and create more opportunities for organizations and people to participate in responsible technological progress.",
+        "visualAriaLabel": "Connected ecosystem linking research, innovation, education, industry, and impact",
+        "labels": {
+          "research": "Research",
+          "innovation": "Innovation",
+          "education": "Education",
+          "industry": "Industry",
+          "impact": "Impact"
+        }
+      },
+      "cta": {
+        "eyebrow": "Build the Future With Us",
+        "title": "Turn shared ambition into meaningful progress.",
+        "description": "Whether you are exploring an AI opportunity, developing a research initiative, building new skills, or looking for a long-term technology partner, we are ready to collaborate.",
+        "button": "Partner With Us"
+      }
+    },
     "team": {
       "title": "Our Team",
       "description": "Meet the multidisciplinary roles behind SynergyMazeAI. Confirmed names and profiles will be added as assignments are finalized."
