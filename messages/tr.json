@@ -1237,7 +1237,49 @@
     },
     "team": {
       "title": "Ekibimiz",
-      "description": "SynergyMazeAI'ın çok disiplinli rollerini keşfedin. Kesinleşen isimler ve profiller görevler netleştikçe eklenecektir."
+      "description": "MazeAI'ın yapay zeka, araştırma, teknoloji ve eğitim alanlarındaki çalışmalarına yön veren ekiple tanışın.",
+      "breadcrumb": {
+        "label": "Sayfa yolu",
+        "home": "Ana Sayfa",
+        "about": "Hakkımızda",
+        "current": "Ekibimiz"
+      },
+      "hero": {
+        "eyebrow": "Ekibimiz",
+        "title": "MazeAI'ın Arkasındaki Zihinler",
+        "description": "Teknoloji liderliğini, akademik birikimi ve uygulamalı yapay zekayı bir araya getiren odaklı bir ekip."
+      },
+      "directory": {
+        "eyebrow": "İnsanlar ve Bakış Açıları",
+        "title": "Ekibimizle Tanışın",
+        "description": "Liderlik, araştırma ve sorumlu teknoloji uygulamalarıyla MazeAI'ın yönünü şekillendiren kişiler."
+      },
+      "categories": {
+        "leadership": "Liderlik",
+        "research_advisory": "Araştırma ve Danışmanlık",
+        "research": "Araştırma",
+        "engineering": "Mühendislik",
+        "education": "Eğitim",
+        "operations": "Operasyon"
+      },
+      "linkedin": {
+        "label": "LinkedIn Profilini Görüntüle",
+        "ariaLabel": "{name} LinkedIn profilini görüntüle"
+      },
+      "empty": {
+        "title": "Ekip profilleri hazırlanıyor.",
+        "description": "Yayınlanan ekip profilleri hazır olduğunda burada görünecektir."
+      },
+      "failure": {
+        "title": "Ekip profillerine şu anda erişilemiyor.",
+        "description": "Lütfen daha sonra tekrar deneyin veya ekibimize ulaşmak için bizimle iletişime geçin."
+      },
+      "cta": {
+        "eyebrow": "MazeAI ile Çalışın",
+        "title": "Ekibimizle çalışmak ister misiniz?",
+        "description": "Araştırma, teknoloji veya eğitim hedeflerinizi paylaşın ve MazeAI ile bir görüşme başlatın.",
+        "button": "Bize Ulaşın"
+      }
     },
     "partners": {
       "title": "Partnerlerimiz",

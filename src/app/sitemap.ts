@@ -13,6 +13,7 @@ const paths = [
   "case-studies",
   "blog",
   "about",
+  "about/team",
   "contact",
   "privacy",
   "cookies",
