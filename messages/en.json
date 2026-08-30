@@ -1226,7 +1226,49 @@
     },
     "team": {
       "title": "Our Team",
-      "description": "Meet the multidisciplinary roles behind SynergyMazeAI. Confirmed names and profiles will be added as assignments are finalized."
+      "description": "Meet the people guiding MazeAI's work across artificial intelligence, research, technology and education.",
+      "breadcrumb": {
+        "label": "Breadcrumb",
+        "home": "Home",
+        "about": "About Us",
+        "current": "Our Team"
+      },
+      "hero": {
+        "eyebrow": "Our Team",
+        "title": "The Minds Behind MazeAI",
+        "description": "A focused team bringing together technology leadership, academic insight and applied artificial intelligence."
+      },
+      "directory": {
+        "eyebrow": "People and Perspective",
+        "title": "Meet Our Team",
+        "description": "The people shaping MazeAI's direction through leadership, research and responsible technology practice."
+      },
+      "categories": {
+        "leadership": "Leadership",
+        "research_advisory": "Research & Advisory",
+        "research": "Research",
+        "engineering": "Engineering",
+        "education": "Education",
+        "operations": "Operations"
+      },
+      "linkedin": {
+        "label": "View LinkedIn Profile",
+        "ariaLabel": "View {name} on LinkedIn"
+      },
+      "empty": {
+        "title": "Team profiles are being prepared.",
+        "description": "Published team profiles will appear here once they are available."
+      },
+      "failure": {
+        "title": "Team profiles are temporarily unavailable.",
+        "description": "Please try again later or contact us if you need to reach the team."
+      },
+      "cta": {
+        "eyebrow": "Work With MazeAI",
+        "title": "Interested in working with our team?",
+        "description": "Tell us about your research, technology or education goals and start a conversation with MazeAI.",
+        "button": "Get in Touch"
+      }
     },
     "partners": {
       "title": "Our Partners",
